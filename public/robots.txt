@@ -1,2 +1,1 @@
-User-agent: *
-Disallow:
+contactme:lacasadelpapel2022@protonmail.com|FKxVkbDUAPC6fDsNhuOjPV9XS+5VGcxAFewNzfwoAJc=
