@@ -4,7 +4,21 @@
 <div class="max-w-3xl mx-auto py-10 px-4">
   <h1 class="text-2xl font-bold mb-6 text-indigo-700">Add New Accommodation</h1>
 
-  <form action="" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
+    @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
+
+  <form action="{{ route('accommodation.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
 
     <!-- Other fields (name, category, etc.) go here... -->
@@ -31,7 +45,7 @@
     <!-- Category -->
     <div>
       <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-      <select name="category" id="category" required
+      <select name="type" id="category" 
               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
         <option value="">Select category</option>
         <option value="hotel">Hotel</option>
@@ -44,16 +58,23 @@
     <!-- Price -->
     <div>
       <label for="price" class="block text-sm font-medium text-gray-700">Price per Night ($)</label>
-      <input type="number" name="price" id="price" step="0.01" required
+      <input type="number" name="price" id="price" step="0.01" 
              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
     </div>
 
-    <!-- Location -->
-    <div>
-      <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-      <input type="text" name="location" id="location"
+    <!-- Adress -->
+   
+
+
+     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+      <div>
+       
+          <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address({{ $label }})</label>
+          <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}"
              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-    </div>
+ 
+      </div>
+    @endforeach
 
     <!-- Description -->
    
@@ -61,7 +82,7 @@
     <!-- Main Image -->
     <div>
       <label for="main_image" class="block text-sm font-medium text-gray-700">Main Image</label>
-      <input type="file" name="main_image" id="main_image" accept="image/*" required
+      <input type="file" name="main_image" id="main_image" accept="image/*" 
              class="mt-1 block w-full text-sm text-gray-500">
     </div>
 

@@ -4,7 +4,8 @@
 <div class="max-w-3xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add Travel Agency</h1>
 
-  <form class="space-y-6 bg-white p-6 rounded-xl shadow">
+  <form action="{{ route('travelagency.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
+    @csrf
 
     {{-- 🌐 Name (Multilingual) --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
@@ -27,24 +28,36 @@
     @endforeach
 
     {{-- 📍 Location --}}
-    <div>
-      <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-      <input type="text" name="location" id="location"
-             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., Oasis district">
-    </div>
+    @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+      <div>
+       
+          <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address ({{ $label }})</label>
+          <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}"
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+ 
+      </div>
+    @endforeach
 
     {{-- ☎️ Phone --}}
     <div>
       <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
-      <input type="text" name="contact_phone" id="contact_phone"
+      <input type="text" name="phone" id="contact_phone"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
              placeholder="e.g., +213 555 123 456">
     </div>
 
+ {{--  Email --}}
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
+      <input type="email" name="email" id="email"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., travel@agency.com">
+    </div>
+
+
     {{-- 🌐 Website (Optional) --}}
     <div>
-      <label for="website" class="block text-sm font-medium text-gray-700">Website (optional)</label>
+      <label for="website" class="block text-sm font-medium text-gray-700">Website </label>
       <input type="url" name="website" id="website"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
              placeholder="https://example.com">
@@ -73,9 +86,9 @@
 
     {{-- 🧾 Submit (Preview Only) --}}
     <div>
-      <button type="button"
+      <button type="submit"
               class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
-        Preview Only – No Submit
+         Submit
       </button>
     </div>
 

@@ -31,15 +31,14 @@
                     Dashboard
                 </a>
                 <a href="{{ route('accommodation.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
                     </svg>
+
                     Accomondations
                 </a>
 
-                  <a href="{{ route('food.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+                  <a href="{{ route('foodanddrink.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -76,7 +75,7 @@
                 </a>
 
 
-                 <a href="{{ route('travel.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+                 <a href="{{ route('travelagency.index') }}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -113,6 +112,9 @@
                 </button>
             </div>
         </div>
+        <div class="col-lg-12">
+             @include('layouts.notification') 
+           </div>
         <div class="p-4">
             
 

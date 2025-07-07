@@ -3,8 +3,22 @@
 
 <div class="max-w-3xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add Food & Drink Place</h1>
+   @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
-  <form class="space-y-6 bg-white p-6 rounded-xl shadow">
+  <form action="{{ route('foodanddrink.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
+    @csrf
 
         {{-- 🌐 Name Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
@@ -29,7 +43,7 @@
     <!-- Category -->
     <div>
       <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-      <select name="category" id="category"
+      <select name="type" id="category"
               class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
         <option value="">Select category</option>
         <option value="restaurant">Restaurant</option>
@@ -42,12 +56,15 @@
     
 
     <!-- Location -->
-    <div>
-      <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-      <input type="text" name="location" id="location"
-             placeholder="e.g., Oasis neighborhood"
-             class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-    </div>
+    @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+      <div>
+       
+          <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address ({{ $label }})</label>
+          <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}"
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+ 
+      </div>
+    @endforeach
 
     <!-- Main Image Upload -->
     <div>
@@ -73,9 +90,9 @@
 
     <!-- Submit (Non-functional) -->
     <div>
-      <button type="button"
-              class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
-        Preview Only – No Submit
+         <button type="submit"
+              class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
+        Add Food&Drink
       </button>
     </div>
 

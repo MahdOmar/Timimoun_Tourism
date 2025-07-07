@@ -45,10 +45,31 @@
         </a>
       </div>
       <div>
-        <a href="" class="text-slate-200">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        <div class="relative inline-block text-left">
+    <button type="button"
+        class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+        id="langMenuButton">
+        {{ strtoupper(app()->getLocale()) }}
+        <svg class="-mr-1 ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 7l3-3 3 3m0 6l-3 3-3-3" />
         </svg>
+    </button>
+
+    <div id="langMenu" class="hidden absolute z-50 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div class="py-1 text-sm">
+            @foreach(['en' => 'English', 'fr' => 'Français', 'ar' => 'العربية'] as $locale => $label)
+                <a href=""
+                   class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-sm 
+                          {{ app()->getLocale() === $locale ? 'font-semibold text-indigo-600' : '' }}">
+                    {{ $label }}
+                </a>
+            @endforeach
+        </div>
+    </div>
+</div>
+        
 
         </a>
       </div>
@@ -224,6 +245,24 @@
     current = (current + 1) % slides.length;
     showSlide(current);
   }, 3000); // change every 5s
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('langMenuButton');
+    const menu = document.getElementById('langMenu');
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', () => {
+        if (!menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+        }
+    });
+});
 </script>
   
 </body>

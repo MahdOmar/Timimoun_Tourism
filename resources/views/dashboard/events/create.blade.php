@@ -4,7 +4,8 @@
 <div class="max-w-3xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add New Event</h1>
 
-  <form class="space-y-6 bg-white p-6 rounded-xl shadow">
+  <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
+    @csrf
 
     {{-- 🌐 Multilingual Name --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
@@ -27,24 +28,27 @@
     @endforeach
 
     {{-- 📍 Location --}}
-    <div>
-      <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
-      <input type="text" name="location" id="location"
-             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., Cultural Palace">
-    </div>
+      @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+      <div>
+       
+          <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address({{ $label }})</label>
+          <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}"
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+ 
+      </div>
+    @endforeach
 
     {{-- 🕒 Start Date/Time --}}
     <div>
       <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date & Time</label>
-      <input type="datetime-local" name="start_date" id="start_date"
+      <input type="date" name="start_date" id="start_date"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
     </div>
 
     {{-- 🕓 End Date/Time --}}
     <div>
       <label for="end_date" class="block text-sm font-medium text-gray-700">End Date & Time (optional)</label>
-      <input type="datetime-local" name="end_date" id="end_date"
+      <input type="date" name="end_date" id="end_date"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
     </div>
 
@@ -71,9 +75,9 @@
 
     {{-- 🧾 Submit (Preview Only) --}}
     <div>
-      <button type="button"
+      <button type="submit"
               class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
-        Preview Only – No Submit
+         Submit
       </button>
     </div>
 
