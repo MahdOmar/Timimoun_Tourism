@@ -199,4 +199,15 @@ public function removeGalleryImage($id, $imageId)
 
     return response()->json(['message' => 'Gallery image removed']);
 }
+
+
+  public function allTours(){
+    $tours = Tour::latest()->get();
+    return view('tours.index', compact('tours')); 
+  }
+
+  public function showTour($id){
+   $tour = Tour::findOrFail($id);
+    return view('tours.details', compact('tour'));
+  }
 }

@@ -66,16 +66,24 @@
 
             <!-- Hotel Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @for ($i = 1; $i <= 6; $i++)
-                    <div class="bg-white border rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-                        <img src="{{ asset('./images/gourara.jpg') }}" alt="Hotel {{ $i }}" class="w-full h-48 object-cover">
+             
+                
+                @foreach ($accommodations as $item)
+                <div class="bg-white border rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+                        <img src="{{ asset('storage/'.$item->main_image) }}" alt="" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-800">Hotel Timimoun {{ $i }}</h3>
-                            <p class="text-sm text-gray-500 mt-1">Guest House • ${{ rand(50, 200) }}/night</p>
-                            <a href="#" class="mt-3 inline-block text-sm text-indigo-600 hover:underline">View Details</a>
+                            <h3 class="text-lg font-semibold text-gray-800">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
+                            <p class="text-sm text-gray-500 mt-1"><span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium px-3 py-1 rounded-full">
+          <i class="fas fa-map-marker-alt mr-1"></i> {{ $item->type }}
+        </span>  • ${{  $item->price_range}}/night</p>
+                            <a href="{{ route("accommodation.show",$item->id) }}" class="mt-3 inline-block text-sm text-indigo-600 hover:underline">View Details</a>
                         </div>
                     </div>
-                @endfor
+                    
+                @endforeach
+
+
+
             </div>
         </main>
     </form>

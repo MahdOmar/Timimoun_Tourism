@@ -196,5 +196,17 @@ public function removeGalleryImage($id, $imageId)
 }
 
 
+public function allTravels(){
+    $travels = TravelAgency::latest()->get();
+    return view('travel.index', compact('travels')); 
+  }
+
+  public function showTravel($id){
+   $travel = TravelAgency::findOrFail($id);
+   $relatedAgencies = TravelAgency::latest()->get();
+
+    return view('travel.details', compact(['travel', 'relatedAgencies']));
+  }
+
 
 }

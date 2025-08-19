@@ -34,11 +34,12 @@ export default {
             '100%'   :  { transform: 'translateX(-300%)'},
         
               },
+              
 
         
               },
-             
               
+             
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },

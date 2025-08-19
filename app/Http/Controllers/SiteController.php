@@ -70,7 +70,8 @@ class SiteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $site = Site::with('gallery')->findOrFail($id);
+        return view('sites.details', compact('site'));
     }
 
     /**
@@ -194,4 +195,20 @@ public function removeGalleryImage($id, $imageId)
 
     return response()->json(['message' => 'Gallery image removed']);
 }
+
+ public function allSites()
+ {
+    $sites = Site::all();
+    return view('sites.index', compact('sites'));
+    
+ }
+
+ public function showSite($id){
+   $travel = Site::findOrFail($id);
+   $relatedAgencies = Site::latest()->get();
+
+    return view('sites.details', compact(['Site', 'related']));
+  }
+
+
 }

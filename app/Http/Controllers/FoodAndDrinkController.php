@@ -197,4 +197,24 @@ public function removeGalleryImage($id, $imageId)
 
     return response()->json(['message' => 'Gallery image removed']);
 }
+
+public function allFood(){
+    $food = FoodAndDrink::latest()->get();
+    return view('food.index', compact('food')); 
+  }
+
+  public function showFood($id){
+   $food = FoodAndDrink::findOrFail($id);
+   $related = FoodAndDrink::latest()->get();
+
+    return view('food.details', compact(['food', 'related']));
+  }
+
+
+
+
+
+
+
+
 }

@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class . '@index')->name('home');
 
-Route::get('/hotels', function () {
-    return view('hotels.index');
-});
+// Dashboard routes
 
 Route::get('/dashboarde', function () {
     return view('dashboard.index');
-});
+
+})->middleware(['auth', 'verified'])->name('dashboard');;
 
 Route::group(['prefix' => 'dashboard'], function () {
 
@@ -36,23 +35,47 @@ Route::group(['prefix' => 'dashboard'], function () {
 
 });
 
+// accommodations routes
+
+Route::get('/accommodations', [AccommodationController::class, 'allAccommodations'])->name('accommodations.all');
 
 
+// services routes
 
+Route::get('/services', function () {
+    return view('Services.index');
+});
 
+// sites routes
 
-
-
-
-
-
-
-
-
+Route::get('/sites', [SiteController::class, 'allSites'])->name('sites.all');
 
 Route::get('/sites/details', function () {
     return view('sites.details');
 });
+
+// tours routes
+Route::get('/tours', [TourController::class, 'allTours'])->name('tours.all');
+Route::get('/tours/{id}', [TourController::class, 'showTour'])->name('tour.show');
+
+Route::get('/sites/details', function () {
+    return view('sites.details');
+});
+
+
+// Events routes
+Route::get('/events', [EventlController::class, 'allEvents'])->name('events.all');
+Route::get('/events/{id}', [EventlController::class, 'showEvent'])->name('event.show');
+
+// FoodAndDrinks routes
+Route::get('/food', [FoodAndDrinkController::class, 'allFood'])->name('food.all');
+Route::get('/food/{id}', [FoodAndDrinkController::class, 'showFood'])->name('food.show');
+
+// Travel Agency routes
+Route::get('/travels', [TravelController::class, 'allTravels'])->name('travel.all');
+Route::get('/travel/{id}', [TravelController::class, 'showTravel'])->name('travel.show');
+
+
 
 
 
@@ -66,11 +89,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// Middleware for authenticated users
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+//      DELETE ROUTES FOR IMAGES
 
 Route::delete('/accommodations/{id}/remove-main-image', [AccommodationController::class, 'removeMainImage'])->name('accommodations.remove-main-image');
 Route::delete('/accommodations/{id}/gallery/{imageId}/remove', [AccommodationController::class, 'removeGalleryImage'])->name('accommodations.remove-gallery-image');

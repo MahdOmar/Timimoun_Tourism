@@ -203,4 +203,22 @@ public function removeGalleryImage($id, $imageId)
 
     return response()->json(['message' => 'Gallery image removed']);
 }
+
+
+public function allEvents(){
+    $events = Event::latest()->get();
+    return view('events.index', compact('events')); 
+  }
+
+  public function showEvent($id){
+   $event = Event::findOrFail($id);
+    return view('events.details', compact('event'));
+  }
+
+
+
+
+
+
+
 }

@@ -75,7 +75,8 @@ class AccommodationController extends Controller
      */
     public function show(string $id)
     {
-        
+        $accommodation = Accommodation::with('gallery')->findOrFail($id);
+        return view('hotels.details', compact('accommodation'));
     }
 
     /**
@@ -205,4 +206,12 @@ public function removeGalleryImage($id, $imageId)
 
     return response()->json(['message' => 'Gallery image removed']);
 }
+
+ public function allAccommodations()
+ {
+    $accommodations = Accommodation::all();
+    return view('hotels.index', compact('accommodations'));
+    
+ }
+
 }
