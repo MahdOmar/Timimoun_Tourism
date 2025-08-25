@@ -18,6 +18,9 @@
                 <th class="px-4 py-2">Description</th>
                 <th class="px-4 py-2">Address</th>
                 <th class="px-4 py-2">Type</th>
+                <th class="px-4 py-2">Price_range</th>
+                <th class="px-4 py-2">Phone</th>
+                <th class="px-4 py-2">Email</th>
                 <th class="px-4 py-2">Options</th>
             </tr>
         </thead>
@@ -54,6 +57,9 @@
                               @endforeach
                             </ul></td>
                         <td class="border px-4 py-2">{{ $foodanddrink->type }}</td>
+                        <td class="border px-4 py-2">{{ $foodanddrink->min_price }} - {{ $foodanddrink->max_price }} DA</td>
+                        <td class="border px-4 py-2">{{ $foodanddrink->phone }}</td>
+                        <td class="border px-4 py-2">{{ $foodanddrink->email }}</td>
                        
                         <td class="border px-4 py-2">
                             <a href="{{ route('foodanddrink.edit', $foodanddrink->id) }}" class="text-blue-500 hover:underline">Edit</a>

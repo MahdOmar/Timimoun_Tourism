@@ -11,10 +11,16 @@ class Tour extends Model
      use HasTranslations;
 
     protected $fillable = [
-        'name', 'description', 'includes', 'duration', 'price', 'phone', 'main_image'
+        'name', 'description', 'includes', 'duration_days','duration_nights', 'price','stops','phone','email','start_latitude','start_longitude','end_latitude','end_longitude','category', 'main_image'
     ];
 
     public $translatable = ['name', 'description', 'includes'];
+     protected $casts = [
+    'name'        => 'array',
+    'description' => 'array',
+    'includes'     => 'array',
+   
+];
 
     public function gallery()
     {

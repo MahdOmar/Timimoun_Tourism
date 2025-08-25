@@ -10,8 +10,14 @@ class TravelAgency extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'name', 'description', 'address', 'phone', 'email', 'website', 'main_image'
+        'name', 'description', 'address', 'phone', 'email', 'website','latitude','longitude', 'main_image'
     ];
+    protected $casts = [
+    'name'        => 'array',
+    'description' => 'array',
+    'includes'     => 'array',
+   
+];
 
     public $translatable = ['name', 'description', 'address'];
 

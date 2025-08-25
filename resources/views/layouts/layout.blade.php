@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
                     @vite(['resources/css/app.css', 'resources/js/app.js'])
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.js"></script>
                    
 
 </head>
@@ -85,14 +87,14 @@
     </div>
   </div>
   <div class="mx-auto max-w-screen-xl flex items-center w-full justify-between">
-    <a href="" class="font-bold text-3xl text-white">Timimoun</a>
+    <a href="{{ route('home') }}" class="font-bold text-3xl text-white">Timimoun</a>
     <nav class="flex gap-12">
       
       <a href="{{ route('home') }}" class="text-white uppercase relative pr-6">Home
        
       </a>
       
-        <div x-data="{ open: false }" class="relative">
+        {{-- <div x-data="{ open: false }" class="relative">
           <button @click="open = !open" class="text-white focus:outline-none">
             Where to Stay 
           </button>
@@ -108,9 +110,11 @@
           </div>
          
    
-        </div>
+        </div> --}}
         
-  
+          <a href="{{ route('accommodations.all') }}" class="text-white uppercase relative pr-6">Where to Stay
+        
+      </a>
                   
       
 
@@ -126,20 +130,20 @@
           <div x-show="open" @click.away="open = false"
                x-transition
                class="absolute bg-white border rounded shadow-md py-2 mt-2 w-48 z-50">
-            <a href="" class="block px-4 py-2 hover:bg-gray-100">Events</a>
-            <a href="" class="block px-4 py-2 hover:bg-gray-100">Sites</a>
+            <a href="{{ route('events.all') }}" class="block px-4 py-2 hover:bg-gray-100">Events</a>
+            <a href="{{ route('sites.all') }}" class="block px-4 py-2 hover:bg-gray-100">Sites</a>
           
           </div>
          
    
         </div>
-      <a href="" class="text-white uppercase relative pr-6">Food & Drink
+      <a href="{{ route('food.all') }}" class="text-white uppercase relative pr-6">Food & Drink
         
       </a>
-      <a href="" class="text-white uppercase relative pr-6">Travel Agencies
+      <a href="{{ route('travel.all') }}" class="text-white uppercase relative pr-6">Travel Agencies
        
       </a>
-      <a href="" class="text-white uppercase relative pr-6">Tours
+      <a href="{{ route('tours.all') }}" class="text-white uppercase relative pr-6">Tours
         
       </a>
       <a href="/services" class="text-white uppercase relative pr-6">Essential Services

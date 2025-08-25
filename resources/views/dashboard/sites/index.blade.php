@@ -17,8 +17,9 @@
                <th class="px-4 py-2">Name</th>
                 <th class="px-4 py-2">Description</th>
                 <th class="px-4 py-2">Address</th>
-                <th class="px-4 py-2">Longitude</th>
-                <th class="px-4 py-2">Latitude</th>
+                <th class="px-4 py-2">Opening Hours</th>
+                <th class="px-4 py-2">Type</th>
+                <th class="px-4 py-2">Amenities</th>
                 <th class="px-4 py-2">Options</th>
             </tr>
         </thead>
@@ -35,7 +36,7 @@
       
                               @endforeach
                             </ul></td>
-                        <td class="border px-4 py-2"><ul class="max-w-md space-y-1  list-disc list-inside dark:text-gray-400"">
+                        <td class="border px-4 py-2"><ul class="max-w-md space-y-1  list-disc list-inside dark:text-gray-400">
                             @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
      
         
@@ -45,7 +46,7 @@
                               @endforeach
                             </ul></td>
 
-                            <td class="border px-4 py-2"><ul class="max-w-md space-y-1  list-disc list-inside dark:text-gray-400"">
+                            <td class="border px-4 py-2"><ul class="max-w-md space-y-1  list-disc list-inside dark:text-gray-400">
                             @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
      
         
@@ -54,8 +55,23 @@
       
                               @endforeach
                             </ul></td>
-                        <td class="border px-4 py-2">{{ $site->longitude }}</td>
-                        <td class="border px-4 py-2">{{ $site->latitude }}</td>
+                       <td class="border px-4 py-2"><ul class="max-w-md space-y-1  list-disc list-inside dark:text-gray-400">
+                            @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+     
+        
+                                <li>{{ $site->getTranslation('opening_hours', $locale) }}</li>
+      
+      
+                              @endforeach
+                            </ul></td>
+                        <td class="border px-4 py-2">{{ $site->type }}</td>
+                          <td class="border px-4 py-2"><ul class="mx-2 my-2">
+                            @foreach ($site->amenities as $item)
+                              
+                                <li class="m-2"><span class=" bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold my-2">{{ $item }}</span></li>
+                              
+                            @endforeach
+                        </ul>  </td>
                         <td class="border px-4 py-2">
                             <a href="{{ route('site.edit', $site->id) }}" class="text-blue-500 hover:underline">Edit</a>
                             <form action="{{ route('site.destroy', $site->id) }}" method="POST" style="display:inline;">

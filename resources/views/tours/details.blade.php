@@ -28,15 +28,15 @@
         <!-- Duration + Type -->
         <div class="flex items-center gap-6 mb-6">
           <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-            Duration: {{ $tour->duration }} days
+            Duration: {{ $tour->duration_days }} days / {{ $tour->duration_nights }} nights
           </span>
           <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium capitalize">
-            {{ $tour->type }}
+            {{ $tour->category }}
           </span>
         </div>
 
         <!-- Reviews -->
-        <div class="flex items-center mb-6">
+        {{-- <div class="flex items-center mb-6">
           <div class="flex text-yellow-400">
             <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
             <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
@@ -45,7 +45,23 @@
             <svg class="w-5 h-5 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
           </div>
           <span class="ml-2 text-sm text-gray-500">(24 reviews)</span>
-        </div>
+        </div> --}}
+       <div class="">
+        <h3 class="text-lg font-semibold mb-3 ">Contact Information</h3>
+
+        <p class="text-sm text-gray-600 mb-2">For assistance booking and info, you can contact:</p>
+        <ul class="text-gray-700 text-sm space-y-2">
+          @if($tour->phone)
+            <li>📞 <a href="tel:{{ $tour->phone }}" class="hover:underline">{{ $tour->phone }}</a></li>
+          @endif
+          @if($tour->email)
+            <li>📧 <a href="mailto:{{ $tour->email }}" class="hover:underline">{{ $tour->email }}</a></li>
+          @endif
+          @if($tour->website)
+            <li>🌐 <a href="{{ $tour->website }}" target="_blank" class="text-indigo-600 hover:underline">Visit Website</a></li>
+          @endif
+        </ul>
+      </div>
       </div>
 
       <!-- CTA -->

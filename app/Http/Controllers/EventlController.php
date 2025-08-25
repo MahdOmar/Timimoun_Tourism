@@ -41,10 +41,12 @@ class EventlController extends Controller
             'description' => 'required|array',
             'address' => 'nullable|array',
             'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'category' =>'required|in:festival,concert,cultural,exhibition,sports,other',
             'start_date'=> 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
-            'lat' => 'nullable|numeric',
-            'lng' => 'nullable|numeric',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'price' => 'nullable|numeric',
             'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
 
@@ -100,10 +102,12 @@ class EventlController extends Controller
             'description' => 'required|array',
             'address' => 'nullable|array',
             'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'category' =>'required|in:festival,concert,cultural,exhibition,sports,other',
             'start_date'=> 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
-            'lat' => 'nullable|numeric',
-            'lng' => 'nullable|numeric',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'price' => 'nullable|numeric',
             'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
 
@@ -111,10 +115,12 @@ class EventlController extends Controller
         'name',
         'description',
         'address',
+        'category',
         'start_date',
         'end_date',
-        'lat',
-        'lng',
+        'price',
+        'latitude',
+        'longitude',
     ));
 
     // Handle main image upload

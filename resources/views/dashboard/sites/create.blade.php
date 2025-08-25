@@ -1,15 +1,30 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add Site</h1>
+  
+    @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
   <form action="{{ route('site.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
 
+    <div class="grid md:grid-cols-3 gap-2">
         {{-- 🌐 Name Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mb-4">
         <label for="name_{{ $locale }}" class="block text-sm font-medium text-gray-700">Name ({{ $label }})</label>
         <input type="text" name="name[{{ $locale }}]" id="name_{{ $locale }}"
                placeholder="Enter name in {{ $label }}"
@@ -19,10 +34,20 @@
 
     {{-- 🌐 Description Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mb-4">
         <label for="description_{{ $locale }}" class="block text-sm font-medium text-gray-700">Description ({{ $label }})</label>
         <textarea name="description[{{ $locale }}]" id="description_{{ $locale }}" rows="3"
                   placeholder="Write description in {{ $label }}"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+      </div>
+    @endforeach
+
+    {{-- 🌐 Opening hours --}}
+    @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+      <div class="mb-4">
+        <label for="opening_{{ $locale }}" class="block text-sm font-medium text-gray-700">Opening Hours ({{ $label }})</label>
+        <textarea name="opening_hours[{{ $locale }}]" id="opening_{{ $locale }}" rows="3"
+                  placeholder="Write opening_hours in {{ $label }}"
                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
       </div>
     @endforeach
@@ -34,7 +59,7 @@
 
     <!-- Location -->
      @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mb-4">
        
           <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address({{ $label }})</label>
           <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}"
@@ -42,6 +67,52 @@
  
       </div>
     @endforeach
+
+    
+     <div class="mb-4">
+      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+      <select name="type" id="category" 
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">Select Tpye</option>
+        <option value="monument">monument</option>
+        <option value="museum">museum </option>
+        <option value="natural">natural</option>
+        <option value="historical">historical</option>
+        <option value="religious">religious</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+  
+    <!-- Location -->
+   
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+
+    </div>
+      <!-- Amenities -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Amenities</label>
+        <div class="space-y-2">
+            @foreach(['parking','guided tours','restrooms','cafeteria'] as $amenity)
+                <label class="flex items-center">
+                    <input type="checkbox" name="amenities[]" value="{{ $amenity }}" 
+                           class="rounded border-gray-300 text-indigo-600 shadow-sm"
+                           {{ isset($site) && in_array($amenity, $site->amenities ?? []) ? 'checked' : '' }}>
+                    <span class="ml-2 capitalize">{{ $amenity }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
 
     <!-- Main Image Upload -->
     <div>

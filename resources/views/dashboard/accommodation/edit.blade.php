@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-2xl font-bold mb-6 text-indigo-700">Edit Accommodation</h1>
 
     @if ($errors->any())
@@ -23,7 +23,7 @@
     @method('PUT')
 
    <input type="text" name="id" value="{{ $accommodation->id }}" hidden>
-
+ <div class="grid md:grid-cols-3 gap-2">
     <!-- Other fields (name, category, etc.) go here... -->
 
        {{-- 🌐 Name Fields --}}
@@ -57,18 +57,17 @@
       </select>
     </div>
 
-    <!-- Price -->
-    <div>
-      <label for="price" class="block text-sm font-medium text-gray-700">Price per Night ($)</label>
-      <input type="text" name="price_range" id="price" 
-             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" vzl
-             value="{{ $accommodation->price_range }}">
-    </div>
+    <div class="mb-4">
+    <label for="stars" class="block text-gray-700 font-medium">Number of Stars</label>
+    <select name="stars" id="stars" class="w-full border-gray-300 rounded mt-1">
+        <option value="">-- Select --</option>
+        @for ($i = 1; $i <= 5; $i++)
+            <option value="{{ $i }}" {{ $accommodation->stars ===  $i  ? 'selected' : '' }}>{{ $i }} ⭐</option>
+        @endfor
+    </select>
+</div>
 
-    <!-- Adress -->
-   
-
-
+    {{-- 🌐 Address Fields --}}
      @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
       <div>
        
@@ -79,7 +78,76 @@
       </div>
     @endforeach
 
-    <!-- Description -->
+
+
+    <!-- Price -->
+    <div class="mb-4">
+      <label for="min_price" class="block text-sm font-medium text-gray-700">Min Price per Night ($)</label>
+      <input type="number" name="min_price" id="min_price" step="0.01" 
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 " value="{{ $accommodation->min_price }}">
+    </div>
+     <div class="mb-4">
+      <label for="max_price" class="block text-sm font-medium text-gray-700">Max Price per Night ($)</label>
+      <input type="number" name="max_price" id="max_price" step="0.01" 
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value="{{ $accommodation->max_price }}">
+    </div>
+
+   {{-- ☎️ Phone --}}
+    <div>
+      <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
+      <input type="text" name="phone" id="contact_phone"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., +213 555 123 456" value="{{ $accommodation->phone }}">
+    </div>
+
+ {{--  Email --}}
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
+      <input type="email" name="email" id="email"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., travel@agency.com" value="{{ $accommodation->email }}">
+    </div>
+
+
+    {{-- 🌐 Website (Optional) --}}
+    <div>
+      <label for="website" class="block text-sm font-medium text-gray-700">Website </label>
+      <input type="url" name="website" id="website"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="https://example.com" value="{{ $accommodation->website }}">
+    </div>
+  <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $accommodation->latitude }}">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $accommodation->longitude }}">
+        </div>
+
+   
+    <!-- Amenities -->
+    <div class="mb-6">
+        <h3 class="font-medium text-gray-800 mb-3">Amenities</h3>
+        <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+            @php
+                $allAmenities = ['wifi', 'pool', 'parking', 'restaurant', 'air_conditioning', 'breakfast', 'gym', 'spa'];
+                $selectedAmenities = old('amenities', $accommodation->amenities ??[]);
+            @endphp
+
+            @foreach($allAmenities as $amenity)
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" name="amenities[]" value="{{ $amenity }}"
+                        @if(in_array($amenity, $selectedAmenities)) checked @endif
+                        class="accent-indigo-600 rounded">
+                    <span class="capitalize">{{ str_replace('_', ' ', $amenity) }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+</div>
    
 
     <!-- Main Image -->
@@ -111,7 +179,10 @@
 </div>
 
     <!-- Gallery Images -->
-    <div>
+     <label for="gallery_images" class="block text-sm font-medium text-gray-700">Gallery Images</label>
+    <div class="grid grid-cols-8 gap-2 mb-4">
+     
+      
      @foreach ($accommodation->gallery as $image)
     <div id="gallery-image-{{ $image->id }}" class="relative w-max">
         <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-24 object-cover rounded">
@@ -123,9 +194,11 @@
         >✕</button>
     </div>
 @endforeach
-      <input type="file" name="gallery_images[]" id="gallery_images" accept="image/*" multiple
-             class="mt-1 block w-full text-sm text-gray-500">
+       
+      
     </div>
+    <input type="file" name="gallery_images[]" id="gallery_images" accept="image/*" multiple
+             class="mt-1 block w-full text-sm text-gray-500">
    <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="galleryPreview"></div>
 
 

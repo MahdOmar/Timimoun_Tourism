@@ -1,11 +1,27 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add New Event</h1>
+  
+    @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
   <form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
+
+     <div class="grid md:grid-cols-3 gap-2">
 
     {{-- 🌐 Multilingual Name --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
@@ -39,6 +55,21 @@
     @endforeach
 
     {{-- 🕒 Start Date/Time --}}
+
+    <div class="mb-4">
+      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+      <select name="category" id="category" 
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">Select category</option>
+        <option value="festival">Festival</option>
+        <option value="concert">Concert </option>
+        <option value="cultural">Cultural</option>
+        <option value="exhibition">Exhibition</option>
+        <option value="sports">Sports</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
     <div>
       <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date & Time</label>
       <input type="date" name="start_date" id="start_date"
@@ -51,6 +82,27 @@
       <input type="date" name="end_date" id="end_date"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
     </div>
+
+     <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+
+        {{-- 💰 Price --}}
+         <div>
+                <label class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="number" step="0.01" name="price" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 25000">
+        </div>
+
+
+
+ </div>
 
     {{-- 🖼️ Main Image --}}
     <div>

@@ -45,8 +45,8 @@
       
                               @endforeach
                             </ul></td>
-                        <td class="border px-4 py-2">{{ $accommodation->type }}</td>
-                        <td class="border px-4 py-2">{{ $accommodation->price_range }}</td>
+                        <td class="border px-4 py-2">{{ $accommodation->type }} {{ $accommodation->stars }} stars</td>
+                        <td class="border px-4 py-2">{{ $accommodation->min_price }} - {{ $accommodation->max_price }} </td>
                         <td class="border px-4 py-2">{{ $accommodation->phone }}</td>
                         <td class="border px-4 py-2">{{ $accommodation->email }}</td>
                         <td class="border px-4 py-2">

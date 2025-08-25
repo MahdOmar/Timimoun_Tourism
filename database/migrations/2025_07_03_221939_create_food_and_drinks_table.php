@@ -18,6 +18,22 @@ return new class extends Migration
             $table->json('address')->nullable();
             $table->enum('type', ['restaurant', 'cafe', 'snack', 'traditional'])->default('restaurant');
 
+             // Contact Info
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+
+            // Average price range (per person)
+            $table->decimal('min_price', 10, 2)->nullable();
+            $table->decimal('max_price', 10, 2)->nullable();
+
+            // Ratings
+            $table->decimal('average_rating', 3, 2)->default(0); // e.g. 4.5 stars
+
+            // Location
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+
             $table->string('main_image')->nullable();
             $table->timestamps();
         });

@@ -33,27 +33,32 @@ class AccommodationController extends Controller
      */
     public function store(Request $request)
     {
+       
         $data = $request->validate([
             'type' => 'required|in:hotel,villa,guest_house,campsite',
             'name' => 'required|array',
             'description' => 'required|array',
             'address' => 'nullable|array',
-            'price_range' => 'nullable|string',
+            'stars' => 'nullable|integer',
+            'min_price' => 'nullable|numeric',
+            'max_price' => 'nullable|numeric',
             'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'phone' => 'nullable|string',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
-            'lat' => 'nullable|numeric',
-            'lng' => 'nullable|numeric',
-             'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'amenities' => 'nullable|array',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
 
+        $data['amenities'] = $request->has('amenities') ? $request->amenities : [];
         // Handle image
         if ($request->hasFile('main_image')) {
             $data['main_image'] = $request->file('main_image')->store('accommodations', 'public');
         }
 
-
+     
        $accommodation =  Accommodation::create($data);
         if ($request->hasFile('gallery_images')) {
             error_log('Gallery images found: ' . count($request->file('gallery_images')));
@@ -76,7 +81,13 @@ class AccommodationController extends Controller
     public function show(string $id)
     {
         $accommodation = Accommodation::with('gallery')->findOrFail($id);
-        return view('hotels.details', compact('accommodation'));
+         $relatedAccommodations = Accommodation::where('type', $accommodation->type)
+        ->where('id', '!=', $accommodation->id)
+        ->inRandomOrder()
+        ->take(3)
+        ->get();
+        
+        return view('hotels.details', compact([ 'accommodation', 'relatedAccommodations' ]));
     }
 
     /**
@@ -101,14 +112,17 @@ class AccommodationController extends Controller
             'name' => 'required|array',
             'description' => 'required|array',
             'address' => 'nullable|array',
-            'price_range' => 'nullable|string',
+            'stars' => 'nullable|integer',
+            'min_price' => 'nullable|numeric',
+            'max_price' => 'nullable|numeric',
             'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'phone' => 'nullable|string',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
-            'lat' => 'nullable|numeric',
-            'lng' => 'nullable|numeric',
-             'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+            'amenities' => 'nullable|array',
+            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
     ]);
 
     // Update fields
@@ -116,9 +130,19 @@ class AccommodationController extends Controller
         'name',
         'description',
         'address',
+        'stars',
         'type',
-        'price_range'
-    ));
+        'min_price',
+        'max_price',
+        'main_image' ,
+        'phone' ,
+        'email' ,
+        'website',
+        'latitude',
+        'longitude' ,    
+    ));    
+
+    $accommodation->amenities = $request->has('amenities') ? $request->amenities : [];
 
     // Handle main image upload
     if ($request->hasFile('main_image')) {
@@ -210,6 +234,32 @@ public function removeGalleryImage($id, $imageId)
  public function allAccommodations()
  {
     $accommodations = Accommodation::all();
+    return view('hotels.index', compact('accommodations'));
+    
+ }
+
+  public function Filter(Request $request)
+ {
+    $accommodations = Accommodation::all();
+
+    // Apply filters if any
+    if ($request->has('type')) {
+        $accommodations = $accommodations->where('type', $request->input('type'));
+    }
+
+    if ($request->has('prices')) {
+        $prices = $request->input('prices');
+        if (in_array('under_5000', $prices)) {
+            $accommodations = $accommodations->where('price_range', '<', 5000);
+        }
+        if (in_array('5000_10000', $prices)) {
+            $accommodations = $accommodations->whereBetween('price_range', [5000, 10000]);
+        }
+        if (in_array('10000_20000', $prices)) {
+            $accommodations = $accommodations->whereBetween('price_range', [10000, 20000]);
+        }
+    }
+
     return view('hotels.index', compact('accommodations'));
     
  }

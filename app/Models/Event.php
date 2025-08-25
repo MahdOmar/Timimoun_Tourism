@@ -11,8 +11,14 @@ class Event extends Model
       use HasTranslations;
 
     protected $fillable = [
-        'name', 'description', 'address', 'start_date', 'end_date', 'main_image', 'category',
+        'name', 'description', 'address','category','start_date', 'end_date', 'main_image', 'latitude', 'longitude','price'
     ];
+    protected $casts = [
+    'name'        => 'array',
+    'description' => 'array',
+    'address'     => 'array',
+   
+];
 
     public $translatable = ['name', 'description', 'address'];
 

@@ -1,8 +1,22 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Edit Event</h1>
+  
+    @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
   <form action="{{ route('event.update', $event->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
@@ -10,8 +24,9 @@
 
      <input type="text" name="id" value="{{ $event->id }}" hidden>
     {{-- 🌐 Multilingual Name --}}
+     <div class="grid md:grid-cols-3 gap-2">
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mt-4">
         <label for="name_{{ $locale }}" class="block text-sm font-medium text-gray-700">Name ({{ $label }})</label>
         <input type="text" name="name[{{ $locale }}]" id="name_{{ $locale }}"  value="{{ $event->getTranslation('name', $locale) }}"
                class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -21,7 +36,7 @@
 
     {{-- 🌐 Multilingual Description --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mt-4">
         <label for="description_{{ $locale }}" class="block text-sm font-medium text-gray-700">Description ({{ $label }})</label>
         <textarea name="description[{{ $locale }}]" id="description_{{ $locale }}" rows="3"
                   class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
@@ -31,7 +46,7 @@
 
     {{-- 📍 Location --}}
       @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mt-4">
        
           <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address({{ $label }})</label>
           <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}" value="{{ $event->getTranslation('address', $locale) }}"
@@ -40,20 +55,55 @@
       </div>
     @endforeach
 
+     <div class="mb-4">
+      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+      <select name="category" id="category" 
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">Select category</option>
+        <option value="festival" {{ $event->category === "festival" ? 'selected' : ''}}>Festival</option>
+        <option value="concert" {{ $event->category === "concert" ? 'selected' : ''}}>Concert </option>
+        <option value="cultural" {{ $event->category === "cultural" ? 'selected' : ''}}>Cultural</option>
+        <option value="exhibition" {{ $event->category === "exhibition" ? 'selected' : ''}}>Exhibition</option>
+        <option value="sports" {{ $event->category === "sports" ? 'selected' : ''}}>Sports</option>
+        <option value="other" {{ $event->category === "other" ? 'selected' : ''}}>Other</option>
+      </select>
+    </div>
+
+
     {{-- 🕒 Start Date/Time --}}
-    <div>
+    <div class="mt-4">
       <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date & Time</label>
       <input type="date" name="start_date" id="start_date" value="{{ $event->start_date }}"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
     </div>
 
     {{-- 🕓 End Date/Time --}}
-    <div>
+    <div class="mt-4">
       <label for="end_date" class="block text-sm font-medium text-gray-700">End Date & Time (optional)</label>
       <input type="date" name="end_date" id="end_date"  value="{{ $event->end_date }}"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
     </div>
 
+     <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $event->latitude }}">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $event->longitude }}">
+        </div>
+
+        {{-- 💰 Price --}}
+         <div>
+                <label class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="number" step="0.01" name="price" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 25000" value="{{ $event->price }}">
+        </div>
+
+    </div>
+  
+  
     {{--  Main Image --}}
      <div>
       <label for="main_image" class="block text-sm font-medium text-gray-700">Main Image</label>

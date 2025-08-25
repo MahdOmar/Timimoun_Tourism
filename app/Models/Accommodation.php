@@ -14,15 +14,24 @@ class Accommodation extends Model
         'name',
         'description',
         'address',
-        'price_range',
+        'stars',
+        'min_price',
+        'max_price',
+        'amenities',
         'main_image',
         'phone',
         'email',
         'website',
-        'lat',
-        'lng',
+        'latitude',
+        'longitude',
     ];
-
+protected $casts = [
+    'amenities'   => 'array',
+    'name'        => 'array',
+    'description' => 'array',
+    'address'     => 'array',
+    'stars'       => 'integer',
+];
     public $translatable = ['name', 'description', 'address'];
 
     public function gallery()

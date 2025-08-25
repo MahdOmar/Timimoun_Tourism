@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-2xl font-bold mb-6 text-indigo-700">Add New Accommodation</h1>
 
     @if ($errors->any())
@@ -22,10 +22,10 @@
     @csrf
 
     <!-- Other fields (name, category, etc.) go here... -->
-
+ <div class="grid md:grid-cols-3 gap-2">
        {{-- 🌐 Name Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mb-4">
         <label for="name_{{ $locale }}" class="block text-sm font-medium text-gray-700">Name ({{ $label }})</label>
         <input type="text" name="name[{{ $locale }}]" id="name_{{ $locale }}"
                placeholder="Enter name in {{ $label }}"
@@ -35,34 +35,15 @@
 
     {{-- 🌐 Description Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
+      <div class="mb-4">
         <label for="description_{{ $locale }}" class="block text-sm font-medium text-gray-700">Description ({{ $label }})</label>
         <textarea name="description[{{ $locale }}]" id="description_{{ $locale }}" rows="3"
                   placeholder="Write description in {{ $label }}"
                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
       </div>
     @endforeach
-    <!-- Category -->
-    <div>
-      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-      <select name="type" id="category" 
-              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-        <option value="">Select category</option>
-        <option value="hotel">Hotel</option>
-        <option value="guest_house">Guest House</option>
-        <option value="mini_villa">Mini Villa</option>
-        <option value="campsite">Campsite</option>
-      </select>
-    </div>
 
-    <!-- Price -->
-    <div>
-      <label for="price" class="block text-sm font-medium text-gray-700">Price per Night ($)</label>
-      <input type="number" name="price" id="price" step="0.01" 
-             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-    </div>
-
-    <!-- Adress -->
+     <!-- Adress -->
    
 
 
@@ -76,7 +57,101 @@
       </div>
     @endforeach
 
-    <!-- Description -->
+    
+    <!-- Category -->
+    <div class="mb-4">
+      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+      <select name="type" id="category" 
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">Select category</option>
+        <option value="hotel">Hotel</option>
+        <option value="guest_house">Guest House</option>
+        <option value="mini_villa">Mini Villa</option>
+        <option value="campsite">Campsite</option>
+      </select>
+    </div>
+
+
+    <div class="mb-4">
+    <label for="stars" class="block text-gray-700 font-medium">Number of Stars</label>
+    <select name="stars" id="stars" class="w-full border-gray-300 rounded mt-1">
+        <option value="">-- Select --</option>
+        @for ($i = 1; $i <= 5; $i++)
+            <option value="{{ $i }}">{{ $i }} ⭐</option>
+        @endfor
+    </select>
+</div>
+
+    <!-- Price -->
+    <div class="mb-4">
+      <label for="min_price" class="block text-sm font-medium text-gray-700">Min Price per Night ($)</label>
+      <input type="number" name="min_price" id="min_price" step="0.01" 
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+     <div class="mb-4">
+      <label for="max_price" class="block text-sm font-medium text-gray-700">Max Price per Night ($)</label>
+      <input type="number" name="max_price" id="max_price" step="0.01" 
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+
+   
+
+    {{-- ☎️ Phone --}}
+    <div>
+      <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
+      <input type="text" name="phone" id="contact_phone"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., +213 555 123 456">
+    </div>
+
+ {{--  Email --}}
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
+      <input type="email" name="email" id="email"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., travel@agency.com">
+    </div>
+
+
+    {{-- 🌐 Website (Optional) --}}
+    <div>
+      <label for="website" class="block text-sm font-medium text-gray-700">Website </label>
+      <input type="url" name="website" id="website"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="https://example.com">
+    </div>
+  <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+
+   
+    <!-- Amenities -->
+    <div class="mb-6">
+        <h3 class="font-medium text-gray-800 mb-3">Amenities</h3>
+        <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+            @php
+                $allAmenities = ['wifi', 'pool', 'parking', 'restaurant', 'air_conditioning', 'breakfast', 'gym', 'spa'];
+                $selectedAmenities = old('amenities', $accommodation->amenities ?? []);
+            @endphp
+
+            @foreach($allAmenities as $amenity)
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" name="amenities[]" value="{{ $amenity }}"
+                        @if(in_array($amenity, $selectedAmenities)) checked @endif
+                        class="accent-indigo-600 rounded">
+                    <span class="capitalize">{{ str_replace('_', ' ', $amenity) }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+</div>
    
 
     <!-- Main Image -->
@@ -112,6 +187,7 @@
         Add Accommodation
       </button>
     </div>
+  
   </form>
 </div>
 

@@ -34,10 +34,14 @@ class FoodAndDrinkController extends Controller
         $data =  $request->validate([
         'name' => 'required|array',
         'description' => 'required|array',
-
         'address' => 'required|array',
-       
-
+        'phone' => 'nullable|string',
+        'email' => 'nullable|email',
+        'website' => 'nullable|url',
+        'min_price' => 'nullable|numeric',
+        'max_price' => 'nullable|numeric',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
         'type' => 'required|in:restaurant,cafe,snack,traditional',
         'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
@@ -94,10 +98,14 @@ class FoodAndDrinkController extends Controller
         $request->validate([
         'name' => 'required|array',
         'description' => 'required|array',
-
         'address' => 'required|array',
-       
-
+        'phone' => 'nullable|string',
+        'email' => 'nullable|email',
+        'website' => 'nullable|url',
+        'min_price' => 'nullable|numeric',
+        'max_price' => 'nullable|numeric',
+        'latitude' => 'nullable|numeric',
+        'longitude' => 'nullable|numeric',
         'type' => 'required|in:restaurant,cafe,snack,traditional',
         'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
@@ -109,7 +117,14 @@ class FoodAndDrinkController extends Controller
         'name',
         'description',
         'address',
-        'type'
+        'type',
+        'phone',
+        'email',
+        'website',
+        'min_price',
+        'max_price',
+        'latitude',
+        'longitude'
     ));
    
     if ($request->hasFile('main_image')) {

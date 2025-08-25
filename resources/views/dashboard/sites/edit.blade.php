@@ -1,14 +1,29 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Edit Site</h1>
+    @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
   <form action="{{ route('site.update',$site->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
     @method('PUT')
 
    <input type="text" name="id" value="{{ $site->id }}" hidden>
+       <div class="grid md:grid-cols-3 gap-2">
+
         {{-- 🌐 Name Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
       <div>
@@ -29,7 +44,15 @@
       </div>
     @endforeach
 
-    
+     {{-- 🌐 Opening hours --}}
+    @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
+      <div class="mb-4">
+        <label for="opening_{{ $locale }}" class="block text-sm font-medium text-gray-700">Opening Hours ({{ $label }})</label>
+        <textarea name="opening_hours[{{ $locale }}]" id="opening_{{ $locale }}" rows="3"
+                  placeholder="Write opening_hours in {{ $label }}"
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">{{ $site->getTranslation('opening_hours', $locale) }}</textarea>
+      </div>
+    @endforeach
  
 
     
@@ -44,6 +67,53 @@
  
       </div>
     @endforeach
+
+ <div class="mb-4">
+      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+      <select name="type" id="category" 
+              class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">Select Tpye</option>
+        <option value="monument" {{ $site->type === "monument" ? 'selected' : ""}}>monument</option>
+        <option value="museum" {{ $site->type === "museum" ? 'selected' : ""}}>museum </option>
+        <option value="natural" {{ $site->type === "natural" ? 'selected' : ""}}>natural</option>
+        <option value="historical" {{ $site->type === "historical" ? 'selected' : ""}}>historical</option>
+        <option value="religious" {{ $site->type === "religious" ? 'selected' : ""}}>religious</option>
+        <option value="other" {{ $site->type === "other" ? 'selected' : ""}}>Other</option>
+      </select>
+    </div>
+
+  
+    <!-- Location -->
+   
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $site->latitude }}">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $site->longitude }}">
+        </div>
+
+    </div>
+      <!-- Amenities -->
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Amenities</label>
+        <div class="space-y-2">
+            @foreach(['parking','guided tours','restrooms','cafeteria'] as $amenity)
+                <label class="flex items-center">
+                    <input type="checkbox" name="amenities[]" value="{{ $amenity }}" 
+                           class="rounded border-gray-300 text-indigo-600 shadow-sm"
+                           {{ isset($site) && in_array($amenity, $site->amenities ?? []) ? 'checked' : '' }}>
+                    <span class="ml-2 capitalize">{{ $amenity }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
+
+
+
 
     <!-- Main Image Upload -->
      <div>

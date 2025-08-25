@@ -4,7 +4,7 @@
 
 <div class="bg-gray-50 min-h-screen p-4">
   <div class="max-w-7xl mx-auto">
-    <h1 class="text-3xl font-bold text-center mb-8">📍 Places to Visit in Timimoun</h1>
+    <h1 class="text-3xl font-bold text-center mb-8"> Places to Visit in Timimoun</h1>
 
     <!-- Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -13,7 +13,7 @@
       
     
         <div class="bg-white  shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-          <img src="{{ asset('storage/'.$site->main_image) }}" alt="" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500" />
+          <img src="{{ asset('storage/'.$site->main_image) }}" alt="" class="w-full h-96 object-cover hover:scale-105 transition-transform duration-500" />
           
           <div class="p-4">
             <h2 class="text-xl font-semibold mb-2">{{ $site->getTranslation('name', app()->getLocale()) }}</h2>

@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 @section('main')
 
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add Food & Drink Place</h1>
    @if ($errors->any())
           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -19,6 +19,9 @@
 
   <form action="{{ route('foodanddrink.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
+
+     <div class="grid md:grid-cols-3 gap-2">
+
 
         {{-- 🌐 Name Fields --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
@@ -40,18 +43,7 @@
       </div>
     @endforeach
 
-    <!-- Category -->
-    <div>
-      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-      <select name="type" id="category"
-              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-        <option value="">Select category</option>
-        <option value="restaurant">Restaurant</option>
-        <option value="cafe">Café</option>
-        <option value="snack">Snack</option>
-        <option value="traditional">Traditional Cuisine</option>
-      </select>
-    </div>
+  
 
     
 
@@ -65,6 +57,70 @@
  
       </div>
     @endforeach
+
+      <!-- Category -->
+    <div>
+      <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+      <select name="type" id="category"
+              class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        <option value="">Select category</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="cafe">Café</option>
+        <option value="snack">Snack</option>
+        <option value="traditional">Traditional Cuisine</option>
+      </select>
+    </div>
+
+     <!-- Price -->
+    <div class="mb-4">
+      <label for="min_price" class="block text-sm font-medium text-gray-700">Min Price </label>
+      <input type="number" name="min_price" id="min_price" step="0.01" 
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+     <div class="mb-4">
+      <label for="max_price" class="block text-sm font-medium text-gray-700">Max Price </label>
+      <input type="number" name="max_price" id="max_price" step="0.01" 
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+
+    {{-- ☎️ Phone --}}
+    <div>
+      <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
+      <input type="text" name="phone" id="contact_phone"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., +213 555 123 456">
+    </div>
+
+ {{--  Email --}}
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
+      <input type="email" name="email" id="email"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="e.g., travel@agency.com">
+    </div>
+
+
+    {{-- 🌐 Website (Optional) --}}
+    <div>
+      <label for="website" class="block text-sm font-medium text-gray-700">Website </label>
+      <input type="url" name="website" id="website"
+             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             placeholder="https://example.com">
+    </div>
+
+
+       <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude" value="{{ old('latitude', $site->latitude ?? '') }}" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude" value="{{ old('longitude', $site->longitude ?? '') }}" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+
+      </div>
 
     <!-- Main Image Upload -->
     <div>

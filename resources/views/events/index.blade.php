@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">All Events</h2>
+  <div class="max-w-9xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Local Events</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <!-- Filters -->
@@ -48,8 +48,8 @@
           @endphp
 
           <!-- Reuse the modern event card we styled -->
-          <div class="relative bg-white rounded-xl overflow-hidden shadow-md group hover:shadow-2xl transition transform hover:-translate-y-1 flex flex-col">
-            <div class="relative h-56">
+          <div class="relative bg-white overflow-hidden shadow-md group hover:shadow-2xl transition transform hover:-translate-y-1 flex flex-col">
+            <div class="relative h-96">
               <img src="{{ asset('storage/' . $event->main_image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
               <div class="absolute top-4 left-4 bg-white shadow-md rounded-lg px-3 py-2 text-center">
@@ -63,7 +63,7 @@
               </h3>
               <p class="text-gray-600 text-sm mb-4 flex-1">{{ Str::limit($event->getTranslation('description', app()->getLocale()), 90) }}</p>
               <span class="text-xs text-gray-500 mb-3">Duration: {{ $days }} day(s)</span>
-              <a href="{{ route('event.show', $event->id) }}" class="mt-auto inline-block text-center bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition font-medium">
+              <a href="{{ route('event.show', $event->id) }}" class="mt-auto inline-block text-center bg-red-600 text-white px-4 py-2  hover:bg-red-500 transition font-medium">
                 View Details
               </a>
             </div>

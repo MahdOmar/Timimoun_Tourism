@@ -36,10 +36,17 @@ class TourController extends Controller
         'name' => 'required|array',
         'description' => 'required|array',
         'includes' => 'nullable|array',
-        'duration' => 'nullable|numeric',
+        'duration_days' => 'nullable|numeric',
+        'duration_nights' => 'nullable|numeric',
         'price' => 'nullable|numeric',
+        'stops' => 'nullable|integer',
         'phone' => 'nullable|string',
-
+        'email' => 'nullable|email',
+        'start_latitude' => 'nullable|numeric',
+        'start_longitude' => 'nullable|numeric',
+        'end_latitude' => 'nullable|numeric',
+        'end_longitude' => 'nullable|numeric',
+        'category' => 'nullable|in:cars,quads,camels',
         'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
     ]);
@@ -91,13 +98,20 @@ class TourController extends Controller
         $tour = Tour::findOrFail($id);
         
         $request->validate([
-        'name' => 'required|array',
+         'name' => 'required|array',
         'description' => 'required|array',
         'includes' => 'nullable|array',
-        'duration' => 'nullable|numeric',
+        'duration_days' => 'nullable|numeric',
+        'duration_nights' => 'nullable|numeric',
         'price' => 'nullable|numeric',
+        'stops' => 'nullable|integer',
         'phone' => 'nullable|string',
-
+        'email' => 'nullable|email',
+        'start_latitude' => 'nullable|numeric',
+        'start_longitude' => 'nullable|numeric',
+        'end_latitude' => 'nullable|numeric',
+        'end_longitude' => 'nullable|numeric',
+        'category' => 'nullable|in:cars,quads,camels',
         'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
     ]);
@@ -106,9 +120,17 @@ class TourController extends Controller
         'name',
         'description',
         'includes',
-        'duration',
+        'duration_days',
+        'duration_nights',
         'price',
+        'stops',
         'phone',
+        'email',
+        'start_latitude',
+        'start_longitude',
+        'end_latitude',
+        'end_longitude',
+        'category'
      
     ));
  // Handle main image upload

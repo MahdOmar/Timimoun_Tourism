@@ -1,12 +1,26 @@
 @extends('dashboard.index')
 
 @section('main')
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="max-w-7xl mx-auto py-10 px-4">
   <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add Travel Agency</h1>
+   @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
   <form action="{{ route('travelagency.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
 
+    <div class="grid md:grid-cols-3 gap-2">
     {{-- 🌐 Name (Multilingual) --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
       <div>
@@ -63,6 +77,18 @@
              placeholder="https://example.com">
     </div>
 
+    <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Latitude</label>
+            <input type="text" name="latitude"   
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Longitude</label>
+            <input type="text" name="longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+        </div>
+
+    </div>
     {{-- 🖼️ Main Image --}}
     <div>
       <label for="main_image" class="block text-sm font-medium text-gray-700">Main Image</label>

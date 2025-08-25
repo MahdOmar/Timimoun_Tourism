@@ -17,6 +17,7 @@
                 <th class="px-4 py-2">Name</th>
                 <th class="px-4 py-2">Description</th>
                 <th class="px-4 py-2">Address</th>
+                <th class="px-4 py-2">Category</th>
                 <th class="px-4 py-2">Start Date</th>
                 <th class="px-4 py-2">End Date</th>
                 <th class="px-4 py-2">Options</th>
@@ -54,6 +55,7 @@
       
                               @endforeach
                             </ul></td>
+                        <td class="border px-4 py-2">{{ $event->category }}</td>
                         <td class="border px-4 py-2">{{ $event->start_date }}</td>
                         <td class="border px-4 py-2">
                             @if ($event->end_date == null)

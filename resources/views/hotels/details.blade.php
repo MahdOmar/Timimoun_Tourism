@@ -60,7 +60,7 @@
   <div class="container mx-auto px-4 py-8">
     <div class="flex flex-wrap -mx-4">
       <!-- Product Images -->
-      <div class="w-full md:w-1/2 px-4 mb-8">
+      <div class="w-full md:w-1/2 px-4 mb-8 ">
        
          <img src=" {{ asset('storage/'.$accommodation->main_image) }} " alt="Product"
                     class="w-full h-[500px] rounded-lg shadow-md mb-4 object-cover" id="mainImage"  >
@@ -80,13 +80,13 @@
         
       </div>
 
-      <!-- Product Details -->
-      <div class="w-full md:w-1/2 px-4">
+      <!-- Hotel Details -->
+      <div class="w-full md:w-1/2 px-4 bg-white rounded-lg shadow overflow-hidden py-4">
         <h2 class="text-3xl font-bold mb-2">{{ $accommodation->getTranslation('name', app()->getLocale()) }}</h2>
         <p class="text-gray-600 mb-4">{{ $accommodation->type }}</p>
         <div class="mb-4">
-          <span class="text-2xl font-bold mr-2">{{ $accommodation->price_range }}</span>
-          <span class="text-gray-500 line-through">{{ $accommodation->price_range }}</span>
+          <span class="text-2xl font-bold mr-2">{{ $accommodation->min_price }} - {{ $accommodation->max_price }} DA </span>
+          {{-- <span class="text-gray-500 line-through">{{ $accommodation->max_price }}</span> --}}
         </div>
         <div class="flex items-center mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -123,36 +123,86 @@
         </div>
         <p class="text-gray-700 mb-6">{{ $accommodation->getTranslation('description', app()->getLocale()) }}</p>
 
-        <div class="mb-6">
-          <h3 class="text-lg font-semibold mb-2">Color:</h3>
-          <div class="flex space-x-2">
-            <button
-                            class="w-8 h-8 bg-black rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"></button>
-            <button
-                            class="w-8 h-8 bg-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300"></button>
-            <button
-                            class="w-8 h-8 bg-blue-500 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"></button>
-          </div>
-        </div>
+       
 
-        <div class="mb-6">
-          <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity:</label>
-         
-        </div>
+       
 
       
         <div>
           <h3 class="text-lg font-semibold mb-2">Key Features:</h3>
           <ul class="list-disc list-inside text-gray-700">
-            <li>Industry-leading noise cancellation</li>
-            <li>30-hour battery life</li>
-            <li>Touch sensor controls</li>
-            <li>Speak-to-chat technology</li>
+            @foreach ($accommodation->amenities as $item)
+            <li>{{ $item }}</li>
+                
+            @endforeach
+            
+            
           </ul>
         </div>
+        <!-- Contact Info + Map Below -->
+    <div class="grid md:grid-cols-2 gap-6 mt-10">
+      
+      <!-- Contact Info -->
+      <div class="bg-white rounded-lg shadow-lg p-5">
+        <h3 class="text-lg font-semibold mb-3 ">Contact Information</h3>
+        <ul class="text-gray-700 text-sm space-y-2">
+          @if($accommodation->phone)
+            <li>📞 <a href="tel:{{ $accommodation->phone }}" class="hover:underline">{{ $accommodation->phone }}</a></li>
+          @endif
+          @if($accommodation->email)
+            <li>📧 <a href="mailto:{{ $accommodation->email }}" class="hover:underline">{{ $accommodation->email }}</a></li>
+          @endif
+          @if($accommodation->website)
+            <li>🌐 <a href="{{ $accommodation->website }}" target="_blank" class="text-indigo-600 hover:underline">Visit Website</a></li>
+          @endif
+        </ul>
+      </div>
+
+      <!-- Map -->
+      @if($accommodation->latitude && $accommodation->longitude)
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <h3 class="text-lg font-semibold p-4">Location</h3>
+        <iframe 
+          width="100%" 
+          height="250" 
+          frameborder="0" 
+          style="border:0"
+          src="https://www.google.com/maps?q={{ $accommodation->latitude }},{{ $accommodation->longitude }}&hl=en&z=14&output=embed"
+          allowfullscreen>
+        </iframe>
+      </div>
+      @endif
+
+    </div>
+  </div>
       </div>
     </div>
   </div>
+
+  <!-- Related Accommodations -->
+    @if(isset($relatedAccommodations) && $relatedAccommodations->count() > 0)
+    <div class="mt-12 px-6 py-6 bg-white rounded-xl shadow m-4">
+      <h2 class="text-2xl font-bold mb-6">Related Accommodations</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        @foreach($relatedAccommodations as $related)
+          <a href="{{ route('accommodations.show', $related->id) }}" 
+             class="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+            <img src="{{ asset('storage/'.$related->main_image) }}" 
+                 alt="{{ $related->getTranslation('name', app()->getLocale()) }}"
+                 class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-800">
+                {{ $related->getTranslation('name', app()->getLocale()) }}
+              </h3>
+              <p class="text-sm text-gray-600 capitalize">{{ $related->type }}</p>
+              <p class="text-indigo-600 font-bold mt-2">{{ $related->min_price }} - {{ $related->max_price }} DA</p>
+            </div>
+          </a>
+        @endforeach
+      </div>
+    </div>
+    @endif
+  
 
   <script>
     function changeImage(src) {

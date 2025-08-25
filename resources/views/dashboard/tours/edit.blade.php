@@ -1,14 +1,31 @@
 @extends('dashboard.index')
 
 @section('main')
-<div class="max-w-3xl mx-auto py-10 px-4">
-  <h1 class="text-3xl font-bold mb-6 text-indigo-700">Add New Tour</h1>
+<div class="max-w-7xl mx-auto py-10 px-4">
+  <h1 class="text-3xl font-bold mb-6 text-indigo-700">Edit New Tour</h1>
+  
+    @if ($errors->any())
+          <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{$error}}</li>
+                      
+                  @endforeach
+              </ul>
+  
+          </div>
+         
+              
+          @endif
 
   <form action="{{ route('tour.update',$tour->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
     @method('PUT') {{-- Use PUT method for updates --}}
 
            <input type="text" name="id" value="{{ $tour->id }}" hidden>
+
+  <div class="grid md:grid-cols-3 gap-2">
+
 
     {{-- 🌐 Title --}}
     @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
@@ -32,40 +49,82 @@
 
    
 
-    {{-- ⏱️ Duration --}}
-    <div>
-      <label for="duration_days" class="block text-sm font-medium text-gray-700">Duration (days)</label>
-      <input type="number" name="duration" id="duration_days" min="1"  value="{{ $tour->duration }}"
-             class="mt-1 block w-full border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., 3">
-    </div>
+   
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Days</label>
+                <input type="number" name="duration_days" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 7" value="{{ $tour->duration_days }}">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Nights</label>
+                <input type="number" name="duration_nights" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 6" value="{{ $tour->duration_nights }}">
+            </div>
+     
 
-    {{-- 💰 Price --}}
-    <div>
-      <label for="price" class="block text-sm font-medium text-gray-700">Price (DZD)</label>
-      <input type="number" name="price" id="price" min="0"  value="{{ $tour->price }}"
-             class="mt-1 block w-full border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., 15000">
-    </div>
-    <div>
-      <label for="phone" class="block text-sm font-medium text-gray-700">Phone </label>
-      <input type="text" name="phone" id="phone"  value="{{ $tour->phone }}"
-             class="mt-1 block w-full border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., 0666666666">
-    </div>
+        {{-- Price --}}
+       
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="number" step="0.01" name="price" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 25000" value="{{ $tour->price }}">
+            </div>
 
-    {{-- 📍 Location --}}
+            
+         {{-- STOPS --}}
+             <div>
+                <label class="block text-sm font-medium text-gray-700">Stops</label>
+                <input type="number" step="1" name="stops" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 3" value="{{ $tour->stops }}">
+            </div>
+            
+         
+        
+
+        {{-- Contact Info --}}
+      
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Phone</label>
+                <input type="text" name="phone" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" value="{{ $tour->phone }}">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" value="{{ $tour->email }}">
+            </div>
+          
+        
+
+        {{-- Category --}}
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Category</label>
+            <select name="category" class="w-full border-gray-300 rounded-lg shadow-sm mt-1">
+               <option value="" >Select Category</option>
+                <option value="cars" {{ $tour->category ==="cars" ? 'selected' : "" }}>4x4 Cars</option>
+                <option value="quads" {{ $tour->category ==="quads" ? 'selected' : "" }}>Quads</option>
+                <option value="camels" {{ $tour->category ==="camels" ? 'selected' : "" }}>Camels</option>
+              
+            </select>
+        </div>
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Start Latitude</label>
+            <input type="text" name="start_latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $tour->start_latitude }}">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Start Longitude</label>
+            <input type="text" name="start_longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $tour->start_longitude }}">
+        </div>
+         <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">End Latitude</label>
+            <input type="text" name="end_latitude" 
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $tour->end_latitude }}">
+        </div>
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">End Longitude</label>
+            <input type="text" name="end_longitude"  
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $tour->end_longitude }}">
+        </div>
    
 
-    {{-- ✅ Includes --}}
-    @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
-      <div>
-        <label for="includes_{{ $locale }}" class="block text-sm font-medium text-gray-700">What's Included ({{ $label }})</label>
-        <textarea name="includes[{{ $locale }}]" id="includes_{{ $locale }}" rows="2"
-                  class="mt-1 block w-full border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Meals, transportation, guide... in {{ $label }}">{{ $tour->getTranslation('includes', $locale) }}</textarea>
-      </div>
-    @endforeach
+  </div>
+
 
     <!-- Main Image Upload -->
     <div>

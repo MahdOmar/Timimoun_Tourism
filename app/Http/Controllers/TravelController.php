@@ -40,6 +40,8 @@ class TravelController extends Controller
             'phone' => 'nullable|string',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
          if ($request->hasFile('main_image')) {
@@ -88,13 +90,15 @@ class TravelController extends Controller
         $travelagency = TravelAgency::findOrFail($id);
           $request->validate([
            
-            'name' => 'required|array',
+             'name' => 'required|array',
             'description' => 'required|array',
             'address' => 'nullable|array',
             'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             'phone' => 'nullable|string',
             'email' => 'nullable|email',
             'website' => 'nullable|url',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
             'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         ]);
      $travelagency->fill($request->only(
@@ -104,6 +108,8 @@ class TravelController extends Controller
         'phone',
         'website',
         'email',
+        'latitude',
+        'longitude'
 
      
     ));

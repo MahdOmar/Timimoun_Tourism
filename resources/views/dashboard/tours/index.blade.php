@@ -18,6 +18,7 @@
                 <th class="px-4 py-2">Description</th>
                 <th class="px-4 py-2">Includes</th>
                 <th class="px-4 py-2">Duration</th>
+                <th class="px-4 py-2">Stops</th>
                 <th class="px-4 py-2">Price</th>
                 <th class="px-4 py-2">Phone</th>
                 <th class="px-4 py-2">Options</th>
@@ -55,7 +56,8 @@
       
                               @endforeach
                             </ul></td>
-                        <td class="border px-4 py-2">{{ $tour->duration }} Days</td>
+                        <td class="border px-4 py-2">{{ $tour->duration_days }} Days / {{ $tour->duration_nights }} Nights</td>
+                        <td class="border px-4 py-2">{{ $tour->stops }} stops</td>
                         <td class="border px-4 py-2">{{ $tour->price }} DA/person</td>
                          <td class="border px-4 py-2">{{ $tour->phone }}</td>
                         <td class="border px-4 py-2">

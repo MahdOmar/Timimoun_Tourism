@@ -4,47 +4,55 @@
 
 <div>
 <!-- Hotel Listings Page -->
-<div class="max-w-7xl mx-auto px-4 py-10">
+<div class="max-w-9xl mx-auto px-4 py-10">
     <form method="GET" action="" class="flex flex-col lg:flex-row gap-8">
+      @csrf
 
         <!-- Sidebar Filters -->
         <aside class="w-full lg:w-1/4 bg-white border rounded-lg p-5 shadow">
             <h2 class="text-xl font-semibold mb-4 text-indigo-700">Filter Your Stay</h2>
 
-            <!-- Category Filter -->
-            <div class="mb-6">
-                <h3 class="font-medium text-gray-800 mb-3">Category</h3>
-                <div class="space-y-2 text-sm text-gray-600">
-                    @foreach(['hotel', 'guest-house', 'mini-villa', 'campsite'] as $category)
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="categories[]" value="{{ $category }}" class="accent-indigo-600 rounded">
-                            <span class="capitalize">{{ str_replace('-', ' ', $category) }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </div>
+           <!-- Category Filter -->
+    <div class="mb-6">
+        <h3 class="font-medium text-gray-800 mb-3">Category</h3>
+        <div class="space-y-2 text-sm text-gray-600">
+            @foreach(['hotel', 'guest-house', 'mini-villa', 'campsite'] as $category)
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                           name="categories[]" 
+                           value="{{ $category }}" 
+                           {{ in_array($category, request()->categories ?? []) ? 'checked' : '' }}
+                           class="accent-indigo-600 rounded">
+                    <span class="capitalize">{{ str_replace('-', ' ', $category) }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
 
-            <!-- Price Filter -->
-            <div>
-                <h3 class="font-medium text-gray-800 mb-3">Price Range</h3>
-                <div class="space-y-2 text-sm text-gray-600">
-                    @foreach([
-                        'under_50' => 'Under $50',
-                        '50_100' => '$50 - $100',
-                        '100_200' => '$100 - $200',
-                        'over_200' => 'Over $200'
-                    ] as $value => $label)
-                        <label class="flex items-center space-x-2">
-                            <input type="checkbox" name="prices[]" value="{{ $value }}" class="accent-indigo-600 rounded">
-                            <span>{{ $value }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </div>
+    <!-- Price Filter -->
+    <div>
+        <h3 class="font-medium text-gray-800 mb-3">Price Range</h3>
+        <div class="space-y-2 text-sm text-gray-600">
+            @foreach([
+                'under_5000' => 'Under 5000 DA',
+                '5000_10000' => '5000 - 10000 DA',
+                '10000_20000' => '10000 - 20000 DA',
+            ] as $value => $label)
+                <label class="flex items-center space-x-2">
+                    <input type="checkbox" 
+                           name="prices[]" 
+                           value="{{ $value }}" 
+                           {{ in_array($value, request()->prices ?? []) ? 'checked' : '' }}
+                           class="accent-indigo-600 rounded">
+                    <span>{{ $label }}</span>
+                </label>
+            @endforeach
+        </div>
+    </div>
 
-            <button type="submit" class="mt-6 w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
-                Apply Filters
-            </button>
+    <button type="submit" class="mt-6 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+        Apply Filters
+    </button>
         </aside>
 
         <!-- Main Content -->
@@ -70,7 +78,7 @@
                 
                 @foreach ($accommodations as $item)
                 <div class="bg-white border rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-                        <img src="{{ asset('storage/'.$item->main_image) }}" alt="" class="w-full h-48 object-cover">
+                        <img src="{{ asset('storage/'.$item->main_image) }}" alt="" class="w-full h-96 object-cover">
                         <div class="p-4">
                             <h3 class="text-lg font-semibold text-gray-800">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
                             <p class="text-sm text-gray-500 mt-1"><span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium px-3 py-1 rounded-full">

@@ -159,11 +159,7 @@
         
         @foreach ($sites as $site)
           <div class="shadow-md hover:shadow-lg transition-all relative bg-white border border-solid border-white">
-          <a href="{{ route('site.show', $site->id) }}"><div class="rate flex gap-1 absolute z-40 m-4 right-0">
-          
-           
-            
-          </div>
+          <a href="{{ route('site.show', $site->id) }}">
           <div class="bg-white min-h-80 ">
             <div class="overflow-hidden h-80">
               <div class="block h-full relative before:block before:absolute before:bg-black before:h-full before:w-full before:top-0 before:z-20 before:opacity-45">
@@ -172,7 +168,7 @@
             </div>
           </div>
           <div class="flex items-center flex-col justify-center pb-5 pt-2 relative bg-white">
-            <a href="" class="absolute top-0 left-0 h-full w-full cursor-pointer"></a>
+           
             <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ Str::upper($site->name )}}</h3>
             <span class="text-sky-700">{{ Str::upper($site->address) }}</span>
           </div></a>
@@ -597,7 +593,7 @@
     </div>
 </div> --}}
 
-<div class="relative max-w-4xl mx-auto rounded-lg shadow-lg flex overflow-hidden bg-[#1a1a1a]">
+ <a href="{{ route('food.show',$item->id) }}"><div class="relative max-w-4xl mx-auto rounded-lg shadow-lg flex overflow-hidden bg-[#1a1a1a]">
 
     <!-- Top-left orange corner -->
     <div class="absolute top-0 left-0 w-14 h-14 bg-orange-500 rotate-45 origin-top-left z-20"></div>
@@ -645,7 +641,7 @@
         </ul>
 
     </div>
-</div>
+</div></a>
 
 
 
@@ -665,12 +661,13 @@
 
     <div class="grid sm:grid-cols-1 md:grid-cols-6 gap-6">
       @foreach($travels as $agency)
-        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 flex gap-4 shadow hover:shadow-md transition">
+        <div class="bg-gray-50 border border-gray-200 rounded-xl  flex gap-4 shadow hover:shadow-md transition"
+       >
 
           {{-- Optional Logo --}}
           @if($agency->main_image)
-            <img src="{{ asset('storage/' . $agency->main_image) }}"
-                 class="w-full h-full object-contain rounded-md border" alt="Agency Logo">
+            <a href="{{ route('travel.show',$agency->id) }}"><img src="{{ asset('storage/' . $agency->main_image) }}"
+                 class="w-full h-full object-contain rounded-md border" alt="Agency Logo"></a>
           @else
             <div class="w-20 h-20 bg-gray-200 rounded-md flex items-center justify-center text-gray-500 text-sm">
               No Logo

@@ -31,18 +31,21 @@ class SiteController extends Controller
      */
     public function store(Request $request)
     {
-        
+       
         $data = $request->validate([
         'name' => 'required|array',
         'description' => 'required|array',
         'address' => 'nullable|array',
+        'type' => 'nullable|string|in:monument,museum,natural,historical,religious,other',
+        'opening_hours' => 'nullable|array',
+        'amenities' => 'nullable|array',
         'latitude' => 'nullable|numeric|between:-90,90',
         'longitude' => 'nullable|numeric|between:-180,180',
 
         'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp',
         'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp',
     ]);
-
+          $data['amenities'] = $request->has('amenities') ? $request->amenities : [];
      // Handle image
         if ($request->hasFile('main_image')) {
             $data['main_image'] = $request->file('main_image')->store('sites', 'public');
@@ -93,6 +96,9 @@ class SiteController extends Controller
         'name' => 'required|array',
         'description' => 'required|array',
         'address' => 'nullable|array',
+        'type' => 'nullable|string|in:monument,museum,natural,historical,religious,other',
+        'opening_hours' => 'nullable|array',
+        'amenities' => 'nullable|array',
         'latitude' => 'nullable|numeric|between:-90,90',
         'longitude' => 'nullable|numeric|between:-180,180',
 
@@ -104,6 +110,9 @@ class SiteController extends Controller
         'name',
         'description',
         'address',
+        'opening_hours',
+        'amenities',
+        'type',
         'latitude',
         'longitude'
     ));
@@ -204,10 +213,13 @@ public function removeGalleryImage($id, $imageId)
  }
 
  public function showSite($id){
-   $travel = Site::findOrFail($id);
-   $relatedAgencies = Site::latest()->get();
+   $site = Site::findOrFail($id);
+    $relatedSites = Site::where('id', '!=', $site->id)
+        ->inRandomOrder()
+        ->take(3)
+        ->get();
 
-    return view('sites.details', compact(['Site', 'related']));
+    return view('sites.details', compact(['site', 'relatedSites']));
   }
 
 

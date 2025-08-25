@@ -19,7 +19,7 @@ Route::get('/', HomeController::class . '@index')->name('home');
 Route::get('/dashboarde', function () {
     return view('dashboard.index');
 
-})->middleware(['auth', 'verified'])->name('dashboard');;
+});
 
 Route::group(['prefix' => 'dashboard'], function () {
 
@@ -49,18 +49,15 @@ Route::get('/services', function () {
 // sites routes
 
 Route::get('/sites', [SiteController::class, 'allSites'])->name('sites.all');
+Route::get('/sites/{id}', [SiteController::class, 'showSite'])->name('site.show');
 
-Route::get('/sites/details', function () {
-    return view('sites.details');
-});
+
 
 // tours routes
 Route::get('/tours', [TourController::class, 'allTours'])->name('tours.all');
 Route::get('/tours/{id}', [TourController::class, 'showTour'])->name('tour.show');
 
-Route::get('/sites/details', function () {
-    return view('sites.details');
-});
+
 
 
 // Events routes

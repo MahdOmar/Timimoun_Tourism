@@ -16,10 +16,24 @@ return new class extends Migration
             $table->json('name');
             $table->json('description')->nullable();
             $table->json('address')->nullable();
+
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
+
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+
+            $table->enum('category', [
+                'festival',
+                'concert',
+                'cultural',
+                'exhibition',
+                'sports',
+                'other'
+            ])->default('other');
+            $table->decimal('price', 10, 2)->nullable(); // null = free
+
+
             $table->string('main_image')->nullable();
             $table->timestamps();
         });
