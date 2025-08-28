@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<section class="max-w-7xl mx-auto px-6 py-16">
+{{-- <section class="max-w-7xl mx-auto px-6 py-16">
   <h2 class="text-3xl font-bold text-gray-800 mb-10 text-center">Travel Agencies</h2>
 
   <div class="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-8">
@@ -34,6 +34,157 @@
 
 
 </section>
+ --}}
+
+   <header class="page-header">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        
+        <div class="container mx-auto px-4 relative">
+            <h1 class="page-title">Find Your Travel Agency</h1>
+            <p class="page-subtitle">Discover the best travel agencies to plan your next adventure</p>
+            
+            <div class="search-container">
+                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
+                    <input type="text" placeholder="Search agencies, destinations, or specialties..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
+                    <button class="bg-accent hover:bg-amber-600 px-8 py-4 text-white font-semibold">
+                        <i class="fas fa-search mr-2"></i>Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-grid">
+            <div class="filter-group">
+                <label class="filter-label">Destination</label>
+                <select class="filter-select">
+                    <option>All Destinations</option>
+                    <option>Europe</option>
+                    <option>Asia</option>
+                    <option>North America</option>
+                    <option>South America</option>
+                    <option>Africa</option>
+                    <option>Oceania</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Specialty</label>
+                <select class="filter-select">
+                    <option>All Specialties</option>
+                    <option>Adventure</option>
+                    <option>Luxury</option>
+                    <option>Family</option>
+                    <option>Cultural</option>
+                    <option>Beach</option>
+                    <option>Wildlife</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Price Range</label>
+                <select class="filter-select">
+                    <option>Any Price Range</option>
+                    <option>Budget</option>
+                    <option>Mid-range</option>
+                    <option>Luxury</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Sort By</label>
+                <select class="filter-select">
+                    <option>Recommended</option>
+                    <option>Highest Rated</option>
+                    <option>Most Popular</option>
+                    <option>Newest</option>
+                </select>
+            </div>
+            
+            <div class="filter-group flex items-end">
+                <button class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Header -->
+    <div class="results-header">
+        <div class="results-count">Showing 8 of 42 agencies</div>
+        <div class="view-options">
+            <button class="view-option active">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="view-option">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="view-option">
+                <i class="fas fa-map-marker-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Agencies Grid -->
+    <div class="grid-container">
+        <!-- Agency Card 1 -->
+        @foreach ($travels as $item)
+             <div class="agency-card">
+            <div class="card-image">
+                <img src="{{ asset('storage/' . $item->main_image) }}" 
+                     alt="World Explorers Travel" class="w-full h-full object-cover">
+                
+                <div class="card-wishlist">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
+                <div class="card-location">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    <span>{{ $item->getTranslation('address', app()->getLocale()) }}</span>
+                </div>
+                <p class="card-description">{{ $item->getTranslation('description', app()->getLocale()) }}</p>
+                
+                <div class="card-rating">
+                    <div class="flex text-yellow-400 mr-2">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span>4.8 (324 reviews)</span>
+                </div>
+                
+                <div class="agency-stats">
+                    <div class="stat">
+                        <span class="stat-value">12+</span>
+                        <span class="stat-label">Years</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">54</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">5K+</span>
+                        <span class="stat-label">Travelers</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <div class="card-button">View Details</div>
+                </div>
+            </div>
+        </div>
+
+        @endforeach
+       
+      
+    </div>
 
 
 @endsection

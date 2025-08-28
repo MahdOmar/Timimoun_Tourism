@@ -8540,6 +8540,9 @@ a[data-toggle="collapse"] {
     transform: translateY(-100%);
     opacity: 0;
     }
+
+     
+   
 /* CSS animation effect */
 @keyframes slideIn {
   100% {

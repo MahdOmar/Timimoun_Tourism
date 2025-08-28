@@ -17,9 +17,11 @@ Route::get('/', HomeController::class . '@index')->name('home');
 // Dashboard routes
 
 Route::get('/dashboarde', function () {
-    return view('dashboard.index');
+    return view('dashboard.stats.index');
 
-});
+})->name('dashboarde');
+
+
 
 Route::group(['prefix' => 'dashboard'], function () {
 

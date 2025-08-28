@@ -1,6 +1,6 @@
 @extends('dashboard.index')
 @section('main')
-<div class="container bg-white mx-auto px-4 sm:px-6 lg:px-8 py-8">
+{{-- <div class="container bg-white mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <div class="flex my-4">
  <h2 class="text-2xl font-bold mb-4">Accommodation</h2>
     <div class="ml-auto">
@@ -69,6 +69,69 @@
             <!-- Add more rows as needed -->
         </tbody>
     </table>
+</div> --}}
+
+<div class="bg-gray-50 min-h-screen py-10 px-6">
+  <div class="max-w-9xl mx-auto">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Accommodations</h1>
+      <a href="{{ route('accommodation.create') }}" 
+         class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+        + Add New Accommodation
+      </a>
+    </div>
+
+    <!-- Search -->
+    <div class="mb-6">
+      <input type="text" placeholder="Search..." 
+             class="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto bg-white rounded-xl shadow p-4">
+      <table id="example" class="min-w-full text-sm text-gray-700 ">
+  <thead class="bg-gray-50">
+    <tr>
+      <th class="px-6 py-3">Name</th>
+      <th class="px-6 py-3">Description</th>
+      <th class="px-6 py-3">Type</th>
+      <th class="px-6 py-3">Price Range</th>
+      <th class="px-6 py-3">Phone</th>
+      <th class="px-6 py-3">Email</th>
+      <th class="px-6 py-3 text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($accommodations as $item)
+    <tr>
+      <td class="px-6 py-4">{{ $item->getTranslation('name', app()->getLocale()) }}</td>
+      <td class="px-6 py-4">{{ Str::limit($item->getTranslation('description', app()->getLocale()), 40) }}</td>
+      <td class="px-6 py-4">{{ $item->type }}</td>
+      <td class="px-6 py-4">{{ $item->min_price }} - {{ $item->max_price }} DA</td>
+      <td class="px-6 py-4">{{ $item->phone }}</td>
+      <td class="px-6 py-4">{{ $item->email }}</td>
+      <td class="px-6 py-4 text-center">
+        <a href="{{ route('accommodation.edit', $item->id) }}" class="text-indigo-600 hover:underline">Edit</a>
+        <span class="mx-2">|</span>
+        <form action="{{ route('accommodation.destroy', $item->id) }}" method="POST" class="inline">
+          @csrf
+          @method('DELETE')
+          <button type="submit" class="text-red-600 hover:underline">Delete</button>
+        </form>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+    </div>
+
+    <!-- Pagination -->
+    {{-- <div class="mt-6">
+      {{ $accommodations->links() }}
+    </div> --}}
+  </div>
 </div>
 
 @endsection

@@ -2,59 +2,7 @@
 
 @section('content')
 
-
-{{-- <div class="max-w-5xl mx-auto px-4 py-8">
-  <!-- Title & Location -->
-  <div class="mb-6">
-    <h1 class="text-3xl font-bold text-gray-800"></h1>
-    <p class="text-gray-500"></p>
-  </div>
-
-  <!-- Image Gallery -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-    <img src="{{ asset('./images/gourara.jpg' ) }}" alt="Main photo" class="w-full h-64 object-cover rounded-lg shadow">
-    <div class="grid grid-cols-2 gap-2">
-    
-        <img src="{{ asset('./images/dar-el-hakim-2.png' ) }}" alt="Gallery" class="w-full h-32 object-cover rounded-lg">
-  
-    </div>
-  </div>
-
-  <!-- Description -->
-  <div class="mb-6">
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">About this place</h2>
-    <p class="text-gray-700 leading-relaxed"></p>
-  </div>
-
-  <!-- Amenities -->
-  <div class="mb-6">
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">Amenities</h2>
-    <ul class="flex flex-wrap gap-4 text-gray-600">
-     
-        <li class="bg-gray-100 px-3 py-1 rounded"></li>
-
-    </ul>
-  </div>
-
-  <!-- Map -->
-  <div class="mb-8">
-    <h2 class="text-xl font-semibold text-gray-800 mb-2">Location</h2>
-    <iframe
-      src="https://www.google.com/maps?q=&output=embed"
-      class="w-full h-64 rounded-lg shadow"
-      allowfullscreen
-      loading="lazy">
-    </iframe>
-  </div>
-
-  <!-- CTA Button -->
-  <div class="text-center">
-    <a href="#" class="inline-block bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700">
-      Book Now
-    </a>
-  </div>
-</div> --}}
-
+{{-- 
 
 <div class="bg-gray-100">
   <div class="container mx-auto px-4 py-8">
@@ -86,8 +34,8 @@
         <p class="text-gray-600 mb-4">{{ $accommodation->type }}</p>
         <div class="mb-4">
           <span class="text-2xl font-bold mr-2">{{ $accommodation->min_price }} - {{ $accommodation->max_price }} DA </span>
-          {{-- <span class="text-gray-500 line-through">{{ $accommodation->max_price }}</span> --}}
-        </div>
+           <span class="text-gray-500 line-through">{{ $accommodation->max_price }}</span> --}}
+      {{--  </div>
         <div class="flex items-center mb-4">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
             class="size-6 text-yellow-500">
@@ -210,6 +158,392 @@
             document.getElementById('mainImage').src = src;
         }
   </script>
-</div>
+</div> --}}
+
+
+  <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Hotel Header -->
+        <div class="flex flex-col lg:flex-row gap-8 mb-12">
+            <div class="lg:w-full">
+                <div class="rounded-2xl overflow-hidden shadow-xl h-96 relative">
+                    <img src="{{ asset('storage/'.$accommodation->main_image) }}" 
+                         alt="Luxury Heights Hotel" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                    <div class="absolute bottom-8 left-8 text-white">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-2 heading-font ">{{ $accommodation->getTranslation('name', app()->getLocale()) }}</h1>
+                        <div class="flex items-center space-x-4">
+                            <span class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span>4.9 (1,428 reviews)</span>
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-blue-300 mr-1"></i>
+                                <span>Algeria, Timimoun</span>
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-award text-green-400 mr-1"></i>
+                                <span>Luxury Collection</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {{-- <div class="lg:w-1/3">
+                <div class="bg-white p-8 rounded-2xl shadow-lg h-full">
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-primary">$299</span>
+                        <span class="text-gray-600">/ night</span>
+                    </div>
+                    
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2">Check-in</label>
+                                <input type="date" class="w-full p-3 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2">Check-out</label>
+                                <input type="date" class="w-full p-3 border border-gray-300 rounded-lg">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 mb-2">Guests</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg">
+                                <option>1 Adult</option>
+                                <option>2 Adults</option>
+                                <option>2 Adults, 1 Child</option>
+                                <option>2 Adults, 2 Children</option>
+                                <option>3+ Adults</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 mb-2">Room Type</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg">
+                                <option>Ocean View Room</option>
+                                <option>Beachfront Villa</option>
+                                <option>Presidential Suite</option>
+                                <option>Family Suite</option>
+                            </select>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-gray-200">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-600">$299 x 5 nights</span>
+                                <span class="font-semibold">$1,495</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-600">Service fee</span>
+                                <span class="font-semibold">$49</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-gray-600">Taxes</span>
+                                <span class="font-semibold">$112</span>
+                            </div>
+                            <div class="flex justify-between font-bold text-lg pt-2 border-t border-gray-200">
+                                <span>Total</span>
+                                <span>$1,656</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4">
+                            <i class="fas fa-calendar-check mr-2"></i>Book Now
+                        </button>
+                    </form>
+                </div>
+            </div> --}}
+        </div>
+
+        <!-- Hotel Description -->
+        <section class="mb-16">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-orange-500 mb-6 heading-font">About {{ $accommodation->getTranslation('name', app()->getLocale()) }}</h2>
+                <p class="text-lg text-gray-700 mb-8">
+                   {{ $accommodation->getTranslation('description', app()->getLocale()) }}
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">Hotel Features</h2>
+            <p class="text-gray-600 text-center mb-12">Experience unparalleled luxury and comfort</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              @foreach ($accommodation->amenities as $item)
+                  
+              @if ($item == 'Pool')
+              <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="amenity-icon mx-auto mb-4">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Infinity Pools</h3>
+                    <p class="text-gray-600">Three stunning infinity pools with panoramic ocean views</p>
+                </div>
+                @elseif ($item == 'wifi')
+                  <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="amenity-icon mx-auto mb-4">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fine Dining</h3>
+                    <p class="text-gray-600">5 restaurants offering international and local cuisine</p>
+                </div>
+
+                 @elseif ($item == 'restaurant')
+
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="amenity-icon mx-auto mb-4">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fine Dining</h3>
+                    <p class="text-gray-600">5 restaurants offering international and local cuisine</p>
+                </div>
+
+                  @elseif ($item == 'spa')
+
+   
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="amenity-icon mx-auto mb-4">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Luxury Spa</h3>
+                    <p class="text-gray-600">Award-winning spa with traditional treatments</p>
+                </div>
+                
+
+                   @elseif ($item == 'gym')
+
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="amenity-icon mx-auto mb-4">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fitness Center</h3>
+                    <p class="text-gray-600">24/7 fitness center with professional trainers</p>
+                </div>
+
+                   @elseif ($item == 'parking')
+
+                   <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                    <div class="amenity-icon mx-auto mb-4">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Parking</h3>
+                    <p class="text-gray-600">24/7 Parking with professional sécurity</p>
+                </div>
+                
+              @endif
+                
+                
+              
+             
+                
+                 @endforeach
+            </div>
+        </section>
+
+        {{-- <!-- Rooms & Suites -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-dark mb-2 text-center heading-font">Rooms & Suites</h2>
+            <p class="text-gray-600 text-center mb-8">Luxurious accommodations for every need</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="room-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" 
+                             alt="Ocean View Room" class="w-full h-64 object-cover">
+                        <div class="price-tag">
+                            $299/night
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Ocean View Room</h3>
+                        <p class="text-gray-600 mb-4">Spacious rooms with stunning views of the Indian Ocean</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span class="mr-4">2 Adults</span>
+                            <i class="fas fa-bed mr-2"></i>
+                            <span>1 King Bed</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-primary font-semibold">View Details</button>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="room-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGhvdGVsJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" 
+                             alt="Beachfront Villa" class="w-full h-64 object-cover">
+                        <div class="price-tag">
+                            $499/night
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Beachfront Villa</h3>
+                        <p class="text-gray-600 mb-4">Private villas with direct beach access and personal pools</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span class="mr-4">4 Adults</span>
+                            <i class="fas fa-bed mr-2"></i>
+                            <span>2 King Beds</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button class="text-primary font-semibold">View Details</button>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> --}}
+
+        <!-- Gallery Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">Hotel Gallery</h2>
+            <p class="text-gray-600 text-center mb-8">Take a visual tour of our luxury resort</p>
+            
+            <div class="gallery-grid">
+              @foreach ($accommodation->gallery as $item)
+                  
+              @endforeach
+                <div class="gallery-item rounded-xl overflow-hidden">
+                    <img src="{{ asset('storage/'.$item->path) }}" 
+                         alt="Hotel Lobby" class="w-full h-full object-cover">
+                </div>
+               
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        {{-- <section class="mb-16">
+            <h2 class="text-3xl font-bold text-dark mb-2 text-center heading-font">Guest Reviews</h2>
+            <p class="text-gray-600 text-center mb-8">What our guests say about their stay</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card p-6 text-white">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBvcnRyYWl0fGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60" 
+                             alt="Guest" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Michael Johnson</h4>
+                            <p class="text-blue-100">Stayed 5 nights</p>
+                        </div>
+                    </div>
+                    <p class="italic">"The most breathtaking hotel I've ever stayed at. The service was impeccable and the views were absolutely stunning. We'll definitely be returning next year!"</p>
+                    <div class="flex text-yellow-300 mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvcnRyYWl0fGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60" 
+                             alt="Guest" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah Williams</h4>
+                            <p class="text-gray-600">Honeymoon Stay</p>
+                        </div>
+                    </div>
+                    <p class="italic text-gray-700">"Our honeymoon was absolutely perfect thanks to Luxury Heights. The staff went above and beyond to make our stay special. The private dinner on the beach was magical!"</p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60" 
+                             alt="Guest" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Robert Chen</h4>
+                            <p class="text-gray-600">Family Vacation</p>
+                        </div>
+                    </div>
+                    <p class="italic text-gray-700">"We traveled with our two young children and the hotel was extremely accommodating. The family suite was spacious and the kids loved the children's pool and activities."</p>
+                    <div class="flex text-yellow-400 mt-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </section> --}}
+
+        <!-- Location & Contact -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">Location & Contact</h2>
+            <p class="text-gray-600 text-center mb-8">Find us and get in touch</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Address</h4>
+                                <p class="text-gray-600">{{ $accommodation->getTranslation('address', app()->getLocale()) }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-phone text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Phone</h4>
+                                <p class="text-gray-600">{{ $accommodation->phone }}</p>
+                               
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-envelope text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <p class="text-gray-600">{{ $accommodation->email }}</p>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Front Desk</h4>
+                                <p class="text-gray-600">Open 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-200 rounded-xl shadow-md overflow-hidden">
+                    <iframe  src="https://maps.google.com/maps?q={{ $accommodation->latitude }},{{ $accommodation->longitude }}&z=15&output=embed" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
 
 @endsection

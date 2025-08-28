@@ -1,17 +1,19 @@
 @extends('dashboard.index')
 @section('main')
-<div class="container bg-white mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="flex my-4">
- <h2 class="text-2xl font-bold mb-4">Sites</h2>
-    <div class="ml-auto">
-        <a href="{{ route('site.create') }}"><button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Add New Site
-        </button>
-        </a>
+<div class="bg-gray-50 min-h-screen py-10 px-6">
+  <div class="max-w-9xl mx-auto">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-800"> Sites</h1>
+      <a href="{{ route('site.create') }}" 
+         class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
+        + Add New Site
+      </a>
     </div>
-  </div>
+   <div class="overflow-x-auto bg-white rounded-xl shadow p-4">
    
-    <table id="example" class="table-auto w-full">
+    <table id="example" class="min-w-full text-sm text-gray-700 ">
         <thead>
             <tr>
                <th class="px-4 py-2">Name</th>
@@ -74,6 +76,7 @@
                         </ul>  </td>
                         <td class="border px-4 py-2">
                             <a href="{{ route('site.edit', $site->id) }}" class="text-blue-500 hover:underline">Edit</a>
+                            <span class="mx-2">|</span>
                             <form action="{{ route('site.destroy', $site->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
@@ -90,6 +93,8 @@
             <!-- Add more rows as needed -->
         </tbody>
     </table>
+     </div>
+      </div>
 </div>
 
 @endsection

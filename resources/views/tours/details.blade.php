@@ -30,10 +30,23 @@
           <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
             Duration: {{ $tour->duration_days }} days / {{ $tour->duration_nights }} nights
           </span>
-          <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium capitalize">
-            {{ $tour->category }}
+         
+           <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium capitalize">
+            @if ($tour->category == "cars") 4x4 @endif {{ $tour->category }}
           </span>
+            
+          
+         
         </div>
+
+        <div class="mb-6">
+        <h3 class="text-lg font-semibold mb-3 ">What includes ?</h3>
+
+       
+        
+        <p> {{ $tour->getTranslation('includes', app()->getLocale()) }}</p>
+        
+      </div>
 
         <!-- Reviews -->
         {{-- <div class="flex items-center mb-6">
@@ -46,7 +59,7 @@
           </div>
           <span class="ml-2 text-sm text-gray-500">(24 reviews)</span>
         </div> --}}
-       <div class="">
+       <div class="mb-6">
         <h3 class="text-lg font-semibold mb-3 ">Contact Information</h3>
 
         <p class="text-sm text-gray-600 mb-2">For assistance booking and info, you can contact:</p>
@@ -101,7 +114,7 @@
   </div> --}}
 
   <!-- Map -->
-  @if($tour->latitude && $tour->longitude)
+  {{-- @if($tour->latitude && $tour->longitude)
   <div class="mt-12">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Location</h2>
     <iframe 
@@ -110,7 +123,43 @@
       class="rounded-lg shadow">
     </iframe>
   </div>
-  @endif
+  @endif --}}
+
+  <div id="map" class="w-full h-96 rounded-lg shadow-md"></div>
+
+
+
+
 </section>
 
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+       var s_lat = {{ $tour->start_latitude ?? 0 }};
+        var s_lng = {{ $tour->start_longitude ?? 0 }};
+        var e_lat = {{ $tour->end_latitude ?? 0 }};
+        var e_lng = {{ $tour->end_longitude ?? 0 }};
+
+              var map = L.map('map').setView([s_lat, s_lng], 13);
+
+        // Add tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add routing control
+        L.Routing.control({
+            waypoints: [
+                L.latLng(s_lat, s_lng),       // accommodation
+                L.latLng(e_lat, e_lng) // related site
+            ],
+            routeWhileDragging: true,
+            lineOptions: {
+                styles: [{color: 'blue', opacity: 0.7, weight: 5}]
+            }
+        }).addTo(map);
+
+    });
+</script>

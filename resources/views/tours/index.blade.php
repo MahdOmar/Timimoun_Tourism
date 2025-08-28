@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<section class="py-20 bg-gray-50">
+{{-- <section class="py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-4xl font-bold text-center text-gray-800 mb-14">
       Unforgettable Desert Tours
@@ -79,7 +79,180 @@
       @endforeach
     </div>
   </div>
-</section>
+</section> --}}
+
+ <header class="page-header">
+        <div class="container mx-auto px-4 relative">
+            <h1 class="page-title">Discover Amazing Tours</h1>
+            <p class="page-subtitle">Explore the world with our carefully curated adventure tours and experiences</p>
+            
+            <div class="search-container">
+                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
+                    <input type="text" placeholder="Search destinations, tours, or activities..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
+                    <button class="bg-secondary hover:bg-orange-600 px-8 py-4 text-white font-semibold">
+                        <i class="fas fa-search mr-2"></i>Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-grid">
+            <div class="filter-group">
+                <label class="filter-label">Destination</label>
+                <select class="filter-select">
+                    <option>All Destinations</option>
+                    <option>Europe</option>
+                    <option>Asia</option>
+                    <option>North America</option>
+                    <option>South America</option>
+                    <option>Africa</option>
+                    <option>Oceania</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Tour Type</label>
+                <select class="filter-select">
+                    <option>All Tour Types</option>
+                    <option>Adventure</option>
+                    <option>Cultural</option>
+                    <option>Beach</option>
+                    <option>Wildlife</option>
+                    <option>City Tours</option>
+                    <option>Hiking</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Duration</label>
+                <select class="filter-select">
+                    <option>Any Duration</option>
+                    <option>1-3 Days</option>
+                    <option>4-7 Days</option>
+                    <option>8-14 Days</option>
+                    <option>2+ Weeks</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Price Range</label>
+                <select class="filter-select">
+                    <option>Any Price</option>
+                    <option>Under $500</option>
+                    <option>$500 - $1000</option>
+                    <option>$1000 - $2000</option>
+                    <option>Over $2000</option>
+                </select>
+            </div>
+            
+            <div class="filter-group flex items-end">
+                <button class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Header -->
+    <div class="results-header">
+        <div class="results-count">Showing 24 of 128 tours</div>
+        <div class="view-options">
+            <button class="view-option active">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="view-option">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="view-option">
+                <i class="fas fa-map-marker-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tours Grid -->
+    <div class="tour-grid">
+        <!-- Tour Card 1 -->
+        @foreach ($tours as $item)
+            <div class="tour-card">
+            <div class="tour-image">
+                <img src="{{ asset('storage/' . $item->main_image) }}" 
+                     alt="Alpine Adventure" class="w-full h-full object-cover">
+                <div class="tour-badge">
+                    <span class="type-adventure">{{ $item->category }}</span>
+                   
+                </div>
+                <div class="tour-price">{{ $item->price }}</div>
+            </div>
+            <div class="tour-content">
+                <h3 class="tour-title">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
+                <div class="tour-location">
+                    <i class="fas fa-map-marker-alt mr-2"></i>
+                    <span></span>
+                </div>
+                <p class="text-gray-600 text-sm">{{ $item->getTranslation('description', app()->getLocale()) }}</p>
+                
+                <div class="tour-footer">
+                    
+                    <div class="tour-rating">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <span>4.8 (124)</span>
+                    </div>
+                </div>
+                
+                <div class="tour-meta">
+                    <div class="tour-duration">
+                        <i class="far fa-clock mr-2"></i>
+                        <span>{{ $item->duration_days }} Days</span>
+                    </div>
+                    <button class="tour-button">View Tour</button>
+                </div>
+            </div>
+        </div>
+
+        @endforeach
+        
+        
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-12 mb-16">
+        <nav class="flex items-center space-x-2">
+            <a href="#" class="px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <a href="#" class="px-4 py-2 text-white bg-primary rounded-lg font-semibold">1</a>
+            <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">2</a>
+            <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">3</a>
+            <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">4</a>
+            <span class="px-2 py-2 text-gray-500">...</span>
+            <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">10</a>
+            <a href="#" class="px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </nav>
+    </div>
 
 
 @endsection
+
+ <script>
+        // Simple animation for cards when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.tour-card');
+            
+            cards.forEach((card, index) => {
+                // Add slight delay for staggered animation
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+        });
+    </script>

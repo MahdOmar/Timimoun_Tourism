@@ -12,6 +12,13 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                        primary: '#2563EB',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
               keyframes: {
        'zoom-in-out': {
           '0%': { transform: 'scale(0.8)', opacity: '0' },

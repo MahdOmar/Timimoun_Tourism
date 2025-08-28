@@ -3,7 +3,7 @@
 @section('content')
 
 <section class="bg-gray-50 py-12">
-  <div class="max-w-5xl mx-auto px-4">
+  <div class="max-w-6xl mx-auto px-4">
 
     <!-- HEADER -->
     <div class="relative mb-10">
@@ -30,11 +30,23 @@
     </div>
 
     <!-- CONTENT -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-3 gap-8 bg-white shadow-md rounded-lg p-6" >
       
       <!-- LEFT COLUMN: INFO -->
       <div class="md:col-span-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">About the Event</h2>
+        <div class="flex justify-between">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">About the Event</h2>
+      <div class=" bg-green-600 text-white px-6 py-2 rounded-lg shadow-lg text-center">
+        <div class="text-xl font-bold">@if ($event->price == 0) Free
+            
+        @else
+            {{ number_format($event->price, 2) }} DA
+            
+        @endif</div>
+        
+      </div>
+        </div>
+        
         <p class="text-gray-600 leading-relaxed mb-6">
           {{ $event->getTranslation('description', app()->getLocale()) }}
         </p>
@@ -75,8 +87,9 @@
       <div class="bg-white shadow-md rounded-lg p-6">
         <h3 class="text-xl font-bold text-gray-800 mb-4">Event Info</h3>
         <ul class="space-y-3 text-gray-700">
-          <li><strong>Date:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('l, d M Y H:i') }}</li>
-          <li><strong>Location:</strong> {{ $event->location ?? 'Timimoun, Algeria' }}</li>
+          <li><strong>Start Date:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('l, d M Y H:i') }}</li>
+           <li><strong>End Date:</strong> {{ \Carbon\Carbon::parse($event->end_date)->format('l, d M Y H:i') }}</li>
+          <li><strong>Location:</strong> {{ $event->getTranslation('address', app()->getLocale()).' Timimoun, Algeria' ?? 'Timimoun, Algeria' }}</li>
           <li><strong>Category:</strong> {{ $event->category ?? 'Festival' }}</li>
         </ul>
 
