@@ -5,28 +5,41 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class TravelAgency extends Model
+
+class Rental extends Model
 {
+ 
     use HasTranslations;
 
     protected $fillable = [
-        'name', 'description', 'address', 'phone', 'email', 'website','latitude','longitude', 'main_image'
+        'name',
+        'description', 
+        'price',
+        'type',
+        'unit',
+        'address',
+        'amenities',
+        'phone',
+        'email',
+        'latitude',
+        'longitude',
+        'main_image',
+       
     ];
-    protected $casts = [
+protected $casts = [
     'name'        => 'array',
     'description' => 'array',
-    'includes'     => 'array',
-   
+    'address'     => 'array',
+    'amenities'     => 'array',
+  
 ];
-
     public $translatable = ['name', 'description', 'address'];
 
     public function gallery()
-    {
-        return $this->hasMany(TravelAgencyImage::class);
-    }
-
-     public function reviews()
+{
+    return $this->hasMany(RentalImage::class);
+}
+ public function reviews()
     {
         return $this->morphMany(Review::class, 'reviewable');
     }

@@ -52,7 +52,7 @@
               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 <option value="hotel" {{ $accommodation->type === 'hotel' ? 'selected' : '' }}>Hotel</option>
                 <option value="guest_house" {{ $accommodation->type === 'guest_house' ? 'selected' : '' }}>Guest House</option>
-                <option value="mini_villa" {{ $accommodation->type === 'mini_villa' ? 'selected' : '' }}>Mini Villa</option>
+                <option value="villa" {{ $accommodation->type === 'villa' ? 'selected' : '' }}> Villa</option>
                 <option value="camping" {{ $accommodation->type === 'camping' ? 'selected' : '' }}>Camping</option>
       </select>
     </div>

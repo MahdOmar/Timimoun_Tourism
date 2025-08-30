@@ -200,6 +200,21 @@
                                 Travel Agencies
                             </a>
                         </li>
+                         <li>
+                            <a href="{{ route('craft.index') }}" class="flex items-center py-3 px-4  rounded-lg transition-colors group {{ request()->is('dashboard/craft*') 
+                            ? 'bg-blue-700 text-white' 
+                            : 'text-blue-200 hover:bg-blue-700' }}">
+                                <i class="fas fa-building mr-3"></i>
+                                Crafts
+                            </a>
+
+                            <a href="{{ route('rental.index') }}" class="flex items-center py-3 px-4  rounded-lg transition-colors group {{ request()->is('dashboard/craft*') 
+                            ? 'bg-blue-700 text-white' 
+                            : 'text-blue-200 hover:bg-blue-700' }}">
+                                <i class="fas fa-building mr-3"></i>
+                                Rentals
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

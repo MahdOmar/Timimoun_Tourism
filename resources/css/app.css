@@ -1846,4 +1846,16 @@
             color: #2563EB;
         }
 
-        
+           .craft-card {
+            transition: all 0.3s ease;
+        }
+        .craft-card .info-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .craft-card:hover .info-overlay {
+            opacity: 1;
+        }
+        .craft-card:hover {
+            transform: translateY(-5px);
+        }

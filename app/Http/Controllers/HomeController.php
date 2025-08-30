@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accommodation;
+use App\Models\Craft;
 use App\Models\Event;
 use App\Models\FoodAndDrink;
 use App\Models\Site;
@@ -23,7 +24,8 @@ class HomeController extends Controller
         $tours = Tour::all();
         $events = Event::orderBy('start_date')->get();
         $travels =  TravelAgency::all();
-        return view('home', compact(['sites', 'accommodations','foodAndDrinks', 'tours', 'events', 'travels']));
+        $crafts = Craft::all();
+        return view('home', compact(['sites', 'accommodations','foodAndDrinks', 'tours', 'events', 'travels','crafts']));
     }
 
     /**

@@ -46,8 +46,12 @@
         
       </div>
         </div>
+         <span class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span>{{ round($event->averageRating()) }} ({{ count($event->reviews) }} reviews)</span>
+          </span>
         
-        <p class="text-gray-600 leading-relaxed mb-6">
+        <p class="text-gray-600 leading-relaxed mb-6 mt-2">
           {{ $event->getTranslation('description', app()->getLocale()) }}
         </p>
 
@@ -121,5 +125,128 @@
   </div>
 </section>
 
+  <!-- Reviews -->
+  <section class=" py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
+            @foreach ($event->reviews as $item)
+                 
+            <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-neutral">By {{ $item->name }}</h3>
+
+                        <div class="flex text-yellow-400 mt-1">
+                          @for( $i=0; $i < $item->rating; $i++ )
+                            <i class="fas fa-star"></i>
+                           
+                            @endfor
+                        </div>
+                    </div>
+                    <span class="text-gray-500 text-sm mt-2 md:mt-0">On {{ $item->created_at->format('d-M-Y') }}</span>
+                </div>
+                <p class="text-gray-700">
+                    {{ $item->comment }}
+                </p>
+            </div>
+            @endforeach
+           
+            
+           
+            <div class="text-center mt-8">
+                <button class="px-6 py-3 border-2 border-primary text-primary rounded-full font-medium hover:bg-primary hover:text-white transition">
+                    Load More Reviews
+                </button>
+            </div>
+        </div>
+    </section>
+
+  
+    
+
+<section class="py-16 bg-gray-50">
+  <div class="max-w-3xl mx-auto px-6">
+    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">Leave a Review</h2>
+
+    <form action="{{ route('review.store') }}" method="POST" class="bg-white shadow-xl rounded-2xl p-8 space-y-6">
+      @csrf
+
+       <input type="hidden" name="reviewable_type" value="{{ get_class($event) }}">
+      <input type="hidden" name="reviewable_id" value="{{ $event->id }}">
+      
+      <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+        <input type="text" id="name" name="name" required
+          class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
+          placeholder="John Doe">
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+        <input type="email" id="email" name="email" required
+          class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
+          placeholder="johndoe@email.com">
+      </div>
+
+      <!-- Star Rating -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Your Rating</label>
+        <div class="flex items-center mt-2 space-x-2" id="starRating">
+          <!-- Stars will be interactive -->
+          <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
+            ★
+          </button>
+          <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
+            ★
+          </button>
+          <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
+            ★
+          </button>
+          <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
+            ★
+          </button>
+          <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
+            ★
+          </button>
+        </div>
+        <!-- Hidden field to store rating -->
+        <input type="hidden" id="rating" name="rating" value="0">
+      </div>
+
+      <!-- Review -->
+      <div>
+        <label for="review" class="block text-sm font-medium text-gray-700">Your Review</label>
+        <textarea id="review" name="comment" rows="4" required
+          class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
+          placeholder="Share your experience..."></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit"
+          class="w-full bg-orange-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-orange-600 transition">
+          Submit Review
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<script>
+  // ⭐ Star Rating Script
+  const stars = document.querySelectorAll('#starRating .star');
+  const ratingInput = document.getElementById('rating');
+
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+      ratingInput.value = index + 1;
+      stars.forEach((s, i) => {
+        s.classList.toggle('text-orange-500', i <= index);
+        s.classList.toggle('text-gray-300', i > index);
+      });
+    });
+  });
+</script>
 
 @endsection('content')  

@@ -151,14 +151,14 @@
                 <p class="card-description">{{ $item->getTranslation('description', app()->getLocale()) }}</p>
                 
                 <div class="card-rating">
-                    <div class="flex text-yellow-400 mr-2">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span>4.8 (124 reviews)</span>
+                     <div class="flex text-yellow-400 mr-2">
+                            @for ( $i=0; $i < round($item->averageRating()); $i++ )
+                                 <i class="fas fa-star"></i>
+                            @endfor
+                           
+                           
+                        </div>
+                        <span class="text-gray-600">({{ count($item->reviews) }} reviews)</span>
                 </div>
                 
                 <div class="card-footer">

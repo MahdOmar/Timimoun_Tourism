@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CraftController;
 use App\Http\Controllers\EventlController;
 use App\Http\Controllers\FoodAndDrinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RentalController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TravelController;
@@ -31,6 +34,10 @@ Route::group(['prefix' => 'dashboard'], function () {
    Route::resource('event', EventlController::class);
    Route::resource('tour', TourController::class);
    Route::resource('travelagency', TravelController::class);
+   Route::resource('craft', CraftController::class);
+   Route::resource('rental', RentalController::class);
+   Route::resource('review', ReviewController::class);
+
 
 
 
@@ -74,7 +81,13 @@ Route::get('/food/{id}', [FoodAndDrinkController::class, 'showFood'])->name('foo
 Route::get('/travels', [TravelController::class, 'allTravels'])->name('travel.all');
 Route::get('/travel/{id}', [TravelController::class, 'showTravel'])->name('travel.show');
 
+//crafts routes
+Route::get('/crafts', [CraftController::class, 'allCrafts'])->name('crafts.all');
+Route::get('/craft/{id}', [CraftController::class, 'showCraft'])->name('craft.show');
 
+//rentals routes
+Route::get('/rentals', [RentalController::class, 'allRentals'])->name('rentals.all');
+Route::get('/rental/{id}', [RentalController::class, 'showRental'])->name('rental.show');
 
 
 
@@ -119,6 +132,12 @@ Route::delete('/tours/{id}/gallery/{imageId}/remove', [TourController::class, 'r
 
 Route::delete('/travelagency/{id}/remove-main-image', [TravelController::class, 'removeMainImage'])->name('travelagency.remove-main-image');
 Route::delete('/travelagency/{id}/gallery/{imageId}/remove', [TravelController::class, 'removeGalleryImage'])->name('travelagency.remove-gallery-image');
+
+Route::delete('/crafts/{id}/remove-main-image', [CraftController::class, 'removeMainImage'])->name('craft.remove-main-image');
+Route::delete('/crafts/{id}/gallery/{imageId}/remove', [CraftController::class, 'removeGalleryImage'])->name('craft.remove-gallery-image');
+
+Route::delete('/rentals/{id}/remove-main-image', [RentalController::class, 'removeMainImage'])->name('craft.remove-main-image');
+Route::delete('/rentals/{id}/gallery/{imageId}/remove', [RentalController::class, 'removeGalleryImage'])->name('craft.remove-gallery-image');
 
 
 

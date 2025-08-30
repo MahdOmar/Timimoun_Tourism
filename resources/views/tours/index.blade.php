@@ -176,7 +176,7 @@
     <div class="tour-grid">
         <!-- Tour Card 1 -->
         @foreach ($tours as $item)
-            <div class="tour-card">
+         <a href="{{ route('tour.show',$item->id) }}">   <div class="tour-card">
             <div class="tour-image">
                 <img src="{{ asset('storage/' . $item->main_image) }}" 
                      alt="Alpine Adventure" class="w-full h-full object-cover">
@@ -198,7 +198,7 @@
                     
                     <div class="tour-rating">
                         <i class="fas fa-star text-yellow-400 mr-1"></i>
-                        <span>4.8 (124)</span>
+                        <span>{{ round($item->averageRating()) }} ({{ count($item->reviews) }} reviews)</span>
                     </div>
                 </div>
                 
@@ -210,7 +210,7 @@
                     <button class="tour-button">View Tour</button>
                 </div>
             </div>
-        </div>
+        </div></a>
 
         @endforeach
         

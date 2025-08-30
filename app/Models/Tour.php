@@ -26,4 +26,13 @@ class Tour extends Model
     {
         return $this->hasMany(TourImage::class);
     }
+     public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
 }

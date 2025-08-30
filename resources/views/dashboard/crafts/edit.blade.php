@@ -2,7 +2,7 @@
 @section('main')
 
 <div class="max-w-7xl mx-auto py-10 px-4">
-  <h1 class="text-2xl font-bold mb-6 text-indigo-700">Add New Accommodation</h1>
+  <h1 class="text-2xl font-bold mb-6 text-indigo-700">Add New Craft</h1>
 
     @if ($errors->any())
           <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -18,8 +18,10 @@
               
           @endif
 
-  <form action="{{ route('accommodation.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
+  <form action="{{ route('craft.update',$craft->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6 bg-white p-6 rounded-lg shadow">
     @csrf
+    @method('PUT')
+
 
     <!-- Other fields (name, category, etc.) go here... -->
  <div class="grid md:grid-cols-3 gap-2">
@@ -29,7 +31,7 @@
         <label for="name_{{ $locale }}" class="block text-sm font-medium text-gray-700">Name ({{ $label }})</label>
         <input type="text" name="name[{{ $locale }}]" id="name_{{ $locale }}"
                placeholder="Enter name in {{ $label }}"
-               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value="{{ $craft->getTranslation('name', $locale) }}">
       </div>
     @endforeach
 
@@ -39,7 +41,7 @@
         <label for="description_{{ $locale }}" class="block text-sm font-medium text-gray-700">Description ({{ $label }})</label>
         <textarea name="description[{{ $locale }}]" id="description_{{ $locale }}" rows="3"
                   placeholder="Write description in {{ $label }}"
-                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                  class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">{{ $craft->getTranslation('description', $locale) }}</textarea>
       </div>
     @endforeach
 
@@ -50,9 +52,9 @@
      @foreach(['ar' => 'Arabic', 'en' => 'English', 'fr' => 'French'] as $locale => $label)
       <div>
        
-          <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Address({{ $label }})</label>
-          <input type="text" name="address[{{ $locale }}]" id="location_{{ $locale }}"
-             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+          <label for="location_{{ $locale }}" class="block text-sm font-medium text-gray-700">Location({{ $label }})</label>
+          <input type="text" name="location[{{ $locale }}]" id="location_{{ $locale }}"
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value="{{ $craft->getTranslation('location', $locale) }}">
  
       </div>
     @endforeach
@@ -61,37 +63,33 @@
     <!-- Category -->
     <div class="mb-4">
       <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-      <select name="type" id="category" 
+      <select name="category" id="category" 
               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-        <option value="">Select category</option>
-        <option value="hotel">Hotel</option>
-        <option value="guest_house">Guest House</option>
-        <option value="villa"> Villa</option>
-        <option value="campsite">Campsite</option>
+        <option value="">Select Category</option>
+        <option value="textiles" {{ $craft->category === "textiles" ? 'selected' : '' }}>Textiles</option>
+        <option value="pottery" {{ $craft->category === "pottery" ? 'selected' : '' }}>Pottery</option>
+        <option value="jewelry" {{ $craft->category === "jewelry" ? 'selected' : '' }}>Jewelry</option>
+        <option value="woodwork" {{ $craft->category === "woodwork" ? 'selected' : '' }}>Woodwork</option>
+        <option value="leather" {{ $craft->category === "leather" ? 'selected' : '' }}>Leather</option>
+        <option value="metalwork" {{ $craft->category === "metalwork" ? 'selected' : '' }}>Metalwork</option>
+        <option value="other" {{ $craft->category === "other" ? 'selected' : '' }}>Other</option>
       </select>
     </div>
 
 
-    <div class="mb-4">
-    <label for="stars" class="block text-gray-700 font-medium">Number of Stars</label>
-    <select name="stars" id="stars" class="w-full border-gray-300 rounded mt-1">
-        <option value="">-- Select --</option>
-        @for ($i = 1; $i <= 5; $i++)
-            <option value="{{ $i }}">{{ $i }} ⭐</option>
-        @endfor
-    </select>
-</div>
+  
 
     <!-- Price -->
     <div class="mb-4">
-      <label for="min_price" class="block text-sm font-medium text-gray-700">Min Price per Night ($)</label>
+      <label for="min_price" class="block text-sm font-medium text-gray-700">Min Price  </label>
       <input type="number" name="min_price" id="min_price" step="0.01" 
-             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+             value="{{ $craft->min_price }}">
     </div>
      <div class="mb-4">
-      <label for="max_price" class="block text-sm font-medium text-gray-700">Max Price per Night ($)</label>
+      <label for="max_price" class="block text-sm font-medium text-gray-700">Max Price </label>
       <input type="number" name="max_price" id="max_price" step="0.01" 
-             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" value="{{ $craft->max_price }}">
     </div>
 
    
@@ -101,7 +99,7 @@
       <label for="contact_phone" class="block text-sm font-medium text-gray-700">Contact Phone</label>
       <input type="text" name="phone" id="contact_phone"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., +213 555 123 456">
+             placeholder="e.g., +213 555 123 456" value="{{ $craft->phone }}">
     </div>
 
  {{--  Email --}}
@@ -109,54 +107,43 @@
       <label for="email" class="block text-sm font-medium text-gray-700">Contact Email</label>
       <input type="email" name="email" id="email"
              class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="e.g., travel@agency.com">
+             placeholder="e.g., travel@agency.com" value="{{ $craft->email }}">
     </div>
 
 
-    {{-- 🌐 Website (Optional) --}}
-    <div>
-      <label for="website" class="block text-sm font-medium text-gray-700">Website </label>
-      <input type="url" name="website" id="website"
-             class="mt-1 block w-full rounded border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-             placeholder="https://example.com">
-    </div>
+ 
   <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700">Latitude</label>
             <input type="text" name="latitude" 
-                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $craft->latitude }}">
         </div>
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700">Longitude</label>
             <input type="text" name="longitude"  
-                   class="mt-1 block w-full rounded border-gray-300 shadow-sm">
+                   class="mt-1 block w-full rounded border-gray-300 shadow-sm" value="{{ $craft->longitude }}">
         </div>
 
    
-    <!-- Amenities -->
-    <div class="mb-6">
-        <h3 class="font-medium text-gray-800 mb-3">Amenities</h3>
-        <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
-            @php
-                $allAmenities = ['wifi', 'pool', 'parking', 'restaurant', 'air_conditioning', 'breakfast', 'gym', 'spa'];
-                $selectedAmenities = old('amenities', $accommodation->amenities ?? []);
-            @endphp
-
-            @foreach($allAmenities as $amenity)
-                <label class="flex items-center space-x-2">
-                    <input type="checkbox" name="amenities[]" value="{{ $amenity }}"
-                        @if(in_array($amenity, $selectedAmenities)) checked @endif
-                        class="accent-indigo-600 rounded">
-                    <span class="capitalize">{{ str_replace('_', ' ', $amenity) }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
+    
 </div>
    
 
+   
     <!-- Main Image -->
     <div>
       <label for="main_image" class="block text-sm font-medium text-gray-700">Main Image</label>
+        @if($craft->main_image)
+    <div id="main-image-wrapper" class="relative w-max">
+        <img src="{{ asset('storage/' . $craft->main_image) }}" alt="Main Image" class="w-40 h-32 object-cover mb-2 rounded">
+
+        <button
+            type="button"
+            class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs hover:bg-red-700"
+            onclick="removeMainImage({{ $craft->id }})"
+        >✕</button>
+    </div>
+@endif
+          
       <input type="file" name="main_image" id="main_image" accept="image/*" 
              class="mt-1 block w-full text-sm text-gray-500">
     </div>
@@ -171,20 +158,32 @@
 </div>
 
     <!-- Gallery Images -->
-    <div>
-      <label for="gallery_images[]" class="block text-sm font-medium text-gray-700">Gallery Images</label>
-      <input type="file" name="gallery_images[]" id="gallery_images" accept="image/*" multiple
-             class="mt-1 block w-full text-sm text-gray-500">
+     <label for="gallery_images" class="block text-sm font-medium text-gray-700">Gallery Images</label>
+    <div class="grid grid-cols-8 gap-2 mb-4">
+     
+      
+     @foreach ($craft->gallery as $image)
+    <div id="gallery-image-{{ $image->id }}" class="relative w-max">
+        <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-24 object-cover rounded">
+
+        <button
+            type="button"
+            class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 text-xs hover:bg-red-700"
+            onclick="removeGalleryImage({{ $craft->id }}, {{ $image->id }})"
+        >✕</button>
     </div>
+@endforeach
+       
+      
+    </div>
+    <input type="file" name="gallery_images[]" id="gallery_images" accept="image/*" multiple
+             class="mt-1 block w-full text-sm text-gray-500">
    <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="galleryPreview"></div>
 
-
-    
-
-    <div>
+   
       <button type="submit"
               class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition">
-        Add Accommodation
+        Update Craft
       </button>
     </div>
   
@@ -270,4 +269,42 @@ function updateInputFiles() {
 }
 });
   
+</script>
+
+<script>
+    async function removeMainImage(carftId) {
+        if (!confirm('Are you sure you want to remove the main image?')) return;
+
+        const response = await fetch(`/crafts/${carftId}/remove-main-image`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            document.getElementById('main-image-wrapper').remove();
+        } else {
+            alert('Failed to remove image.');
+        }
+    }
+
+    async function removeGalleryImage(craftId, imageId) {
+        if (!confirm('Are you sure you want to remove this gallery image?')) return;
+
+        const response = await fetch(`/crafts/${craftId}/gallery/${imageId}/remove`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            document.getElementById(`gallery-image-${imageId}`).remove();
+        } else {
+            alert('Failed to remove image.');
+        }
+    }
 </script>

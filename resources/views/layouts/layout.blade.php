@@ -15,6 +15,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
                     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
              <!-- Leaflet CSS -->
@@ -90,7 +91,7 @@
       </div>
     </div>
   </div>
-  <div class="mx-auto max-w-screen-xl flex items-center w-full justify-between">
+  <div class="mx-auto max-w-screen-2xl flex items-center w-full justify-between">
     <a href="{{ route('home') }}" class="font-bold text-3xl text-white">Timimoun</a>
     <nav class="flex gap-12">
       
@@ -148,6 +149,10 @@
        
       </a>
       <a href="{{ route('tours.all') }}" class="text-white uppercase relative pr-6">Tours
+        
+      </a>
+
+      <a href="{{ route('rentals.all') }}" class="text-white uppercase relative pr-6">Rentals
         
       </a>
       <a href="/services" class="text-white uppercase relative pr-6">Essential Services

@@ -263,7 +263,7 @@
                             <img src="{{ asset('storage/'.$accommodation->main_image) }}" 
                                  alt="Grand Plaza Hotel" class="w-full h-48 object-cover">
                             <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
-                                4.8
+                                {{ round($accommodation->averageRating()) }}
                             </div>
                             <div class="absolute top-4 left-4 bg-white text-primary text-sm font-semibold px-3 py-1 rounded-full">
                                 <i class="fas fa-map-marker-alt mr-1"></i> Timimoun
@@ -273,17 +273,16 @@
                             <div class="flex justify-between items-start mb-2">
                                 <h3 class="text-xl font-bold"> {{ $accommodation->getTranslation('name', app()->getLocale()) }}</h3>
                                 <div class="flex text-yellow-400">
+                                   @for ($i = 0; $i < $accommodation->stars; $i++)
                                     <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                   
+                                    @endfor
                                 </div>
                             </div>
                             <p class="text-gray-600 mb-4">{{ $accommodation->getTranslation('description', app()->getLocale()) }}</p>
                             <div class="flex flex-wrap items-center text-gray-500 mb-4">
                               @foreach ($accommodation->amenities as $item)
-                                   <span class="mr-4">{{ $item }}</span>
+                                   <span class="tag tag-beach ">{{ $item }}</span>
                               @endforeach
                                 
                                

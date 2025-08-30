@@ -28,4 +28,13 @@ class Site extends Model
     {
         return $this->hasMany(SiteImage::class);
     }
+     public function reviews()
+    {
+        return $this->morphMany(Review::class, 'reviewable');
+    }
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
 }

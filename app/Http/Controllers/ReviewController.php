@@ -28,7 +28,25 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $request->validate([
+        'name'            => 'required|string|max:255',
+        'email'           => 'required|email|max:255',
+        'reviewable_type' => 'required|string',
+        'reviewable_id'   => 'required|integer',
+        'rating'          => 'required|integer|min:1|max:5',
+        'comment'         => 'nullable|string'
+    ]);
+
+    Review::create([
+        'name'            => $request->name,
+        'email'           => $request->email,
+        'reviewable_type' => $request->reviewable_type,
+        'reviewable_id'   => $request->reviewable_id,
+        'rating'          => $request->rating,
+        'comment'         => $request->comment,
+    ]);
+
+    return back()->with('success', 'Review submitted successfully.');
     }
 
     /**

@@ -115,11 +115,12 @@
       <td class="px-6 py-4 text-center">
         <a href="{{ route('accommodation.edit', $item->id) }}" class="text-indigo-600 hover:underline">Edit</a>
         <span class="mx-2">|</span>
-        <form action="{{ route('accommodation.destroy', $item->id) }}" method="POST" class="inline">
-          @csrf
-          @method('DELETE')
-          <button type="submit" class="text-red-600 hover:underline">Delete</button>
-        </form>
+          <form action="{{ route('accommodation.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <a data-toggle='tooltip' title="delete" data-id="{{ $item->id }}"  data-placement="bottom" class="dltBtn text-red-500 hover:underline">Delete</a>
+                               
+                            </form>
       </td>
     </tr>
     @endforeach

@@ -132,7 +132,7 @@
     <div class="grid-container">
         <!-- Agency Card 1 -->
         @foreach ($travels as $item)
-             <div class="agency-card">
+            <a href="{{ route('travel.show',$item->id) }}"> <div class="agency-card">
             <div class="card-image">
                 <img src="{{ asset('storage/' . $item->main_image) }}" 
                      alt="World Explorers Travel" class="w-full h-full object-cover">
@@ -151,13 +151,13 @@
                 
                 <div class="card-rating">
                     <div class="flex text-yellow-400 mr-2">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span>4.8 (324 reviews)</span>
+                            @for ( $i=0; $i < round($item->averageRating()); $i++ )
+                                 <i class="fas fa-star"></i>
+                            @endfor
+                           
+                           
+                        </div>
+                        <span class="text-gray-600">({{ count($item->reviews) }} reviews)</span>
                 </div>
                 
                 <div class="agency-stats">
@@ -179,7 +179,7 @@
                     <div class="card-button">View Details</div>
                 </div>
             </div>
-        </div>
+        </div></a>
 
         @endforeach
        

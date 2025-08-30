@@ -312,7 +312,7 @@
   </div>
 </div>
 
-<section class="py-16 bg-white " data-aos="fade-up">
+{{-- <section class="py-16 bg-white " data-aos="fade-up">
   <div class="max-w-7xl mx-auto my-10 px-6">
      <h2 class="font-extrabold text-5xl text-center text-orange-500 my-10">Local Craftsmanship</h2>
 
@@ -365,6 +365,44 @@
     </div>
   </div>
 </section>
+ --}}
+
+ <section class="py-20 bg-white" data-aos="fade-up">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="font-extrabold text-5xl text-center text-orange-500 mb-12">Local Crafts</h2>
+
+    <div class="relative">
+      <!-- Carousel Container -->
+      <div id="cardCarousel" class="flex gap-6 overflow-x-auto scroll-smooth hide-scrollbar snap-x snap-mandatory">
+       @foreach ($crafts as $item)
+           
+      
+      <a href="{{ route('craft.show',$item->id) }}">  <div class="snap-center min-w-[350px] h-[400px] bg-cover bg-center rounded-2xl shadow-xl flex items-end p-6 text-white relative" 
+             style="background-image: url('{{ asset('storage/'.$item->main_image) }}');">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl"></div>
+          <h3 class="relative z-10 font-bold text-xl">{{   $item->getTranslation('name', app()->getLocale()) }}</h3>
+        </div></a>
+        @endforeach
+      
+      </div>
+
+      <!-- Navigation Buttons -->
+      <button id="prevBtn" 
+              class="absolute top-1/2 -left-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-orange-500 hover:text-white transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button id="nextBtn" 
+              class="absolute top-1/2 -right-6 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg hover:bg-orange-500 hover:text-white transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
 
 
 
@@ -372,13 +410,13 @@
 
 
 <div class="bg-gray-200 " >
-  <div class="main max-w-screen-4xl  py-24"  >
+  <div class="main max-w-screen-7xl  py-24"  >
   <div class="popular">
     <header class="flex flex-col items-center mb-24">
       <span class="block text-orange-500 font-medium mb-2">WHERE TO STAY</span>
       <h2 class="font-extrabold text-5xl text-orange-500">POPULAR HOTELS / CAMPINGS</h2>
     </header>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 m-4 " data-aos="fade-up">
+    {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-8 m-4 " data-aos="fade-up">
     @foreach ($accommodations as $accommodation)
         <div class="group bg-gray-900 shadow-md hover:shadow-lg rounded-lg overflow-hidden transition">
             <div class="grid grid-cols-1 sm:grid-cols-2">
@@ -437,9 +475,67 @@
             </div>
         </div>
     @endforeach
-</div>
+</div> --}}
 
+  <div class="max-w-7xl w-full  mx-auto    overflow-hidden ">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 m-4 w-full " data-aos="fade-up">
+    @foreach ($accommodations as $accommodation)
+        
     
+        <div class="flex flex-col md:flex-row bg-white h-64 w-full shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+            <!-- Image Section -->
+            <div class="md:w-2/5">
+                <img class="h-48 md:h-full w-full object-cover" src="{{ asset('storage/'.$accommodation->main_image) }}" alt="Gourara Hotel Room">
+            </div>
+            
+            <!-- Content Section -->
+            <div class="md:w-3/5 p-6">
+                <!-- Header -->
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wider">{{ $accommodation->min_price }} DA / person</div>
+                        <h2 class="text-xl font-bold text-gray-800 mt-1">{{ $accommodation->name  }}</h2>
+                    </div>
+                    <div class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">4.2/5</div>
+                </div>
+                
+                <!-- Reviews -->
+                <div class="flex items-center text-sm text-gray-600 mb-4">
+                    <div class="flex text-yellow-400 mr-1">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span>(17 reviews)</span>
+                </div>
+                
+                <!-- Hotel Description -->
+                <p class="text-gray-600 text-sm mb-5">
+                    {{ $accommodation->description }} 
+                </p>
+                
+                <!-- Location -->
+                <div class="flex items-center text-sm text-gray-700 mb-6">
+                    <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                    <span>{{ $accommodation->address }} </span>
+                </div>
+                
+                <!-- Footer -->
+                <div class="flex justify-between items-center">
+                    <div class="text-sm text-gray-500">
+                        <span class="font-medium text-gray-700">{{ $accommodation->stars }} </span>Stars
+                    </div>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    </div>
    
   </div>
    <a href="{{ route("accommodations.all") }}"><button class="text-white h-12 bg-orange-500 w-60 mx-auto block mt-14 hover:bg-sky-600 transition-all">
@@ -698,6 +794,9 @@
   </div>
 </section>
 
+
+
+
 {{-- <section class="bg-gray-100 py-20">
   <div class="max-w-7xl mx-auto px-4">
     <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
@@ -754,6 +853,21 @@ const container = document.getElementById("cardCarousel");
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     // Initialize map centered on Timimoun
+
+
+    
+  const carousel = document.getElementById('cardCarousel');
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+
+  nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: 400, behavior: 'smooth' });
+  });
+
+  prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -400, behavior: 'smooth' });
+  });
+
     var map = L.map('map').setView([29.2639, 0.2300], 12);
 
     // Load tiles

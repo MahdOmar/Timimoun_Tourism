@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             // Reviewer
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
 
             // Polymorphic relation: reviewable_id + reviewable_type
             $table->morphs('reviewable');
