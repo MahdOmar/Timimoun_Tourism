@@ -100,56 +100,53 @@
     <!-- Filter Section -->
     <div class="filter-section">
         <div class="filter-grid">
-            <div class="filter-group">
-                <label class="filter-label">Destination</label>
-                <select class="filter-select">
-                    <option>All Destinations</option>
-                    <option>Europe</option>
-                    <option>Asia</option>
-                    <option>North America</option>
-                    <option>South America</option>
-                    <option>Africa</option>
-                    <option>Oceania</option>
-                </select>
-            </div>
+            
             
             <div class="filter-group">
                 <label class="filter-label">Tour Type</label>
-                <select class="filter-select">
-                    <option>All Tour Types</option>
-                    <option>Adventure</option>
-                    <option>Cultural</option>
-                    <option>Beach</option>
-                    <option>Wildlife</option>
-                    <option>City Tours</option>
-                    <option>Hiking</option>
+                <select class="filter-select" id="category">
+                    <option value="all">All Tour Types</option>
+                    <option value="cars"> 4x4 Cars</option>
+                    <option value="quads">Quads</option>
+                    <option value="camels">Camels</option>
+                  
                 </select>
             </div>
             
             <div class="filter-group">
                 <label class="filter-label">Duration</label>
-                <select class="filter-select">
-                    <option>Any Duration</option>
-                    <option>1-3 Days</option>
-                    <option>4-7 Days</option>
-                    <option>8-14 Days</option>
-                    <option>2+ Weeks</option>
+                <select class="filter-select" id="duration">
+                    <option value="any">Any Duration</option>
+                    <option value="1">01 Day</option>
+                    <option value="2">02 Days</option>
+                    <option value="3">03 Days</option>
+                    <option value=">3"> 04 Days and more</option>
                 </select>
             </div>
             
             <div class="filter-group">
                 <label class="filter-label">Price Range</label>
-                <select class="filter-select">
-                    <option>Any Price</option>
-                    <option>Under $500</option>
-                    <option>$500 - $1000</option>
-                    <option>$1000 - $2000</option>
-                    <option>Over $2000</option>
+                <select class="filter-select" id="price">
+                    <option value="all">Any Price</option>
+                    <option value="10000">Under 10000</option>
+                    <option value="10000-15000">10000 - 15000</option>
+                    <option value="15000-20000">15000 - 20000</option>
+                    <option value=">20000">Over 20000</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Sort By</label>
+                <select class="filter-select" id="sort">
+                    <option value="default">Default</option>
+                    <option value="Newest">Newest</option>
+                    <option value="Rating">Rating</option>
+                   
                 </select>
             </div>
             
             <div class="filter-group flex items-end">
-                <button class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-semibold">
+                <button type="button" class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onclick="sort()">
                     Apply Filters
                 </button>
             </div>
@@ -157,8 +154,8 @@
     </div>
 
     <!-- Results Header -->
-    <div class="results-header">
-        <div class="results-count">Showing 24 of 128 tours</div>
+    <div class="results-header" id="app" data-locale="{{ app()->getLocale() }}">
+        <div class="results-count" id="total">Showing 24 of 128 tours</div>
         <div class="view-options">
             <button class="view-option active">
                 <i class="fas fa-th-large"></i>
@@ -173,7 +170,7 @@
     </div>
 
     <!-- Tours Grid -->
-    <div class="tour-grid">
+    <div class="tour-grid" id="tours-list">
         <!-- Tour Card 1 -->
         @foreach ($tours as $item)
          <a href="{{ route('tour.show',$item->id) }}">   <div class="tour-card">
@@ -188,10 +185,7 @@
             </div>
             <div class="tour-content">
                 <h3 class="tour-title">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
-                <div class="tour-location">
-                    <i class="fas fa-map-marker-alt mr-2"></i>
-                    <span></span>
-                </div>
+               
                 <p class="text-gray-600 text-sm">{{ $item->getTranslation('description', app()->getLocale()) }}</p>
                 
                 <div class="tour-footer">
@@ -255,4 +249,121 @@
                 }, 100 + (index * 100));
             });
         });
+
+
+          function getAverageRating(reviews) {
+    if (!reviews || reviews.length === 0) return 0; // prevent division by zero
+    
+    const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return sum / reviews.length;
+}
+
+
+async function sort(){
+
+   
+   const container = document.getElementById("tours-list");
+
+        let category = document.getElementById("category").value
+        let duration = document.getElementById("duration").value
+        let price = document.getElementById("price").value;
+        let sort = document.getElementById("sort").value;
+
+      
+
+        // build query
+        let params = new URLSearchParams({
+            category:category,
+            duration:duration,
+            price: price,
+            sort: sort,
+           
+        });
+
+
+        console.log(params.toString());
+       
+
+
+
+      
+        
+         const response = await fetch(`/tours/sort/filter?${params.toString()}`, {
+            method: 'get',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+             const container = document.getElementById('tours-list');
+             const total = document.getElementById('total');
+            // total.textContent = data.tours.length + ' Tours Found';
+             console.log(data);
+            const locale = document.getElementById('app').dataset.locale;
+             console.log(locale);
+            container.innerHTML = '';
+            
+        
+           data.tours.forEach(tour => {
+             // Generate stars
+        let stars = "";
+        for (let i = 0; i < getAverageRating(tour.reviews); i++) {
+            stars += `<i class="fas fa-star text-yellow-400"></i>`;
+        }
+
+      
+       
+
+                      container.innerHTML +=  `
+                  <a href="/tours/${tour.id}">
+                    <div class="tour-card">
+                      <div class="tour-image">
+                        <img src="storage/${tour.main_image}" alt="${tour.name[locale]}" class="w-full h-full object-cover">
+                        <div class="tour-badge">
+                          <span class="type-adventure">${tour.category}</span>
+                        </div>
+                        <div class="tour-price">${tour.price}</div>
+                      </div>
+                      <div class="tour-content">
+                        <h3 class="tour-title">${tour.name[locale]}</h3>
+                        
+                        <p class="text-gray-600 text-sm">${tour.description[locale]}</p>
+                        <div class="tour-footer">
+                          <div class="tour-rating">
+                            <i class="fas fa-star text-yellow-400 mr-1"></i>
+                            <span>${Math.round(getAverageRating(tour.reviews))} (${tour.reviews.length} reviews)</span>
+                          </div>
+                        </div>
+                        <div class="tour-meta">
+                          <div class="tour-duration">
+                            <i class="far fa-clock mr-2"></i>
+                            <span>${tour.duration_days} Days</span>
+                          </div>
+                          <button class="tour-button">View tour</button>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                `;
+
+                
+           });
+           
+            
+            // console.log(data);
+            // Update the accommodations list in the DOM
+            // You would typically re-render the accommodations here
+           
+            
+        } else {
+            alert('Failed ');
+        }
+         
+  
+    }
+
+        
     </script>

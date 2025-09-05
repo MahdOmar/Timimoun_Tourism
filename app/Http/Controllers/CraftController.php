@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Craft;
 use App\Models\CraftImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CraftController extends Controller
@@ -230,6 +231,73 @@ public function allCrafts()
     return view('Craftsmanship.details', compact([  'craft', 'related' ]));
   }
 
+
+  public function filterCrafts($category,$filter)
+  {
+     $query = Craft::query();
+
+   
+    
+     if ($category === 'All') {
+          
+            if ($filter === 'Rating') {
+            $query->leftJoin('reviews', function ($join) {
+                $join->on('crafts.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', Craft::class);
+            })
+            ->select('crafts.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating'))
+            ->groupBy('crafts.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('avg_rating')
+            ->get();
+            
+    error_log($query->get());
+ 
+             
+          } elseif ($filter === 'Newest') {
+            $query->orderBy('created_at','desc');
+          } 
+          elseif ($filter === 'Price') {
+              $query->orderBy('price', 'desc');
+          }
+
+          else{
+             $query->latest();
+          }
+            $crafts = $query->with('reviews')->get();
+            return response()->json($crafts);
+
+        }
+
+     
+            $query->with('reviews')->where('category',strtolower($category) );
+
+        
+
+
+
+         
+          
+        
+
+         if ($filter === 'Rating') {
+           
+           $query->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating','desc');
+             
+
+             
+          } elseif ($filter === 'Price') {
+              $query->orderBy('min_price', 'asc');
+          }
+          
+    
+
+    error_log('++');
+      $crafts = $query->get();
+     
+
+      return response()->json($crafts);
+  }
 
 
 

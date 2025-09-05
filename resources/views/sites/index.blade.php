@@ -62,42 +62,51 @@
     <!-- Category Section -->
     <div class="category-section">
         <div class="category-grid">
-            <div class="category-item">
+
+             <div class="category-item active " >
                 <div class="category-icon">
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <div class="category-name">Monument</div>
+                <div class="category-name " >All</div>
+            </div>
+
+
+            <div class="category-item " >
+                <div class="category-icon">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="category-name " >Monument</div>
             </div>
             
-            <div class="category-item">
+            <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-mountain"></i>
                 </div>
-                <div class="category-name">Museum</div>
+                <div class="category-name" >Museum</div>
             </div>
             
-            <div class="category-item">
+            <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-city"></i>
                 </div>
-                <div class="category-name">Natural</div>
+                <div class="category-name" >Natural</div>
             </div>
             
-            <div class="category-item">
+            <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-monument"></i>
                 </div>
-                <div class="category-name">Historical</div>
+                <div class="category-name" >Historical</div>
             </div>
             
-            <div class="category-item">
+            <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-hiking"></i>
                 </div>
                 <div class="category-name">Religious</div>
             </div>
             
-            <div class="category-item">
+            <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-tree"></i>
                 </div>
@@ -112,21 +121,21 @@
     <h2 class="section-title">Featured Destinations</h2>
     
     <div class="view-options">
-        <div class="view-option active">All</div>
-        <div class="view-option">Popular</div>
-        <div class="view-option">New</div>
-        <div class="view-option">Recommended</div>
+        <div class="view-option active" >All</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >New</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >Rating</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >Recommended</div>
     </div>
     
-    <div class="results-header">
-        <div class="results-count">Showing 12 of 84 destinations</div>
+    <div class="results-header" id="app" data-locale="{{ app()->getLocale() }}">
+        <div class="results-count" id="total">{{ count($sites) }} Destinations found</div>
         <div class="filter-button">
             <i class="fas fa-filter mr-2"></i>Filters
         </div>
     </div>
 
     <!-- Destinations Grid -->
-    <div class="grid-container">
+    <div class="grid-container" id="destinations">
         <!-- Destination Card 1 -->
         @foreach ($sites as $item)
       <a href="{{ route('site.show',$item->id) }}">   <div class="destination-card">
@@ -231,4 +240,158 @@
                 });
             });
         });
+
+ document.addEventListener('DOMContentLoaded', function() {
+         const grid = document.querySelector('.category-grid');
+        let  category = null
+       let filter = null
+
+    grid.addEventListener('click', (e) => {
+        const item = e.target.closest('.category-item');
+        if (!item) return; // ignore clicks outside .category-item
+
+        // Remove active class from all
+        grid.querySelectorAll('.category-item').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add active class to clicked
+        item.classList.add('active');
+
+        // Example: get the category name
+         category = item.querySelector('.category-name').textContent.trim();
+         filter = document.querySelector('.view-option.active').textContent.trim();
+        
+          sort(category,filter);
+        
+    });
+
+         const viewOptions = document.querySelector('.view-options');
+
+        viewOptions.addEventListener('click', (e) => {
+        const option = e.target.closest('.view-option');
+        if (!option) return; // click happened outside
+
+        // Remove active from all
+        viewOptions.querySelectorAll('.view-option').forEach(opt => {
+            opt.classList.remove('active');
+        });
+
+        // Set clicked one active
+        option.classList.add('active');
+
+          filter = option.textContent.trim();
+          category = document.querySelector('.category-item.active').textContent.trim();
+          sort(category,filter);
+       
+        });
+
+         });
+
+         function getAverageRating(reviews) {
+    if (!reviews || reviews.length === 0) return 0; // prevent division by zero
+    
+    const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return sum / reviews.length;
+}
+
+
+
+
+      async function sort(category,filter) {
+      
+
+    
+
+         const response = await fetch(`/sites/`+category+`/`+filter, {
+            method: 'get',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+           
+            const data = await response.json();
+            const container = document.getElementById('destinations');
+            const total = document.getElementById('total');
+             total.textContent = data.length + ' Destinations Found';
+            console.log(data);
+           const locale = document.getElementById('app').dataset.locale;
+            console.log(locale);
+            container.innerHTML = '';
+            if(data.length == 0){
+                container.innerHTML = '<p class="text-gray-600">No events found in this category.</p>';
+                return;
+            }
+            
+
+            data.forEach(item => {
+           const card = `
+                    <a href="/sites/${item.id}">
+                        <div class="destination-card">
+                            <div class="card-image">
+                                <img src="/storage/${item.main_image}" 
+                                     alt="${item.name.en}" class="w-full h-full object-cover">
+                                <div class="card-badge">
+                                    <span class="tag tag-beach">${item.type}</span>
+                                </div>
+                                <div class="card-wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">${item.name[locale]}</h3>
+                                <div class="card-location">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>${item.address[locale]}</span>
+                                </div>
+                                <p class="card-description">${item.description[locale]}</p>
+                                
+                                <div class="card-rating">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        ${'<i class="fas fa-star"></i>'.repeat(Math.round(getAverageRating(item.reviews)))}
+                                    </div>
+                                    <span class="text-gray-600">(${item.reviews.length} reviews)</span>
+                                </div>
+                                
+                                <div class="card-footer">
+                                    <div class="card-price">
+                                       Free
+                                    </div>
+                                    <button class="card-button">Explore</button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                  container.innerHTML += card;
+        
+
+                
+            });
+           
+            
+            console.log(data);
+          //  Update the accommodations list in the DOM
+            //You would typically re-render the accommodations here
+           
+            
+        } else {
+            alert('Failed ');
+        }
+         
+  
+    }
+
+
+
+
+
+
+
+
+
+
     </script>

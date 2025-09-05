@@ -55,7 +55,7 @@
         </div>
     </header>
 
-    <!-- Filter Section -->
+    {{-- <!-- Filter Section -->
     <div class="filter-section">
         <div class="filter-grid">
             <div class="filter-group">
@@ -110,7 +110,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Results Header -->
     <div class="results-header">

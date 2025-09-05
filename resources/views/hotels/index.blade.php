@@ -120,141 +120,113 @@
         <!-- Main Content -->
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Filters Sidebar -->
-            <div class="w-full lg:w-1/4">
-                <div class="bg-white p-6 rounded-xl shadow-lg sticky top-4">
-                    <h2 class="text-xl font-bold mb-6 text-dark">Filters</h2>
-                    
-                    <!-- Price Range -->
-                    <div class="mb-8">
-                        <h3 class="font-semibold mb-4">Price Range</h3>
-                        <input type="range" min="50" max="1000" value="500" class="price-range w-full mb-4">
-                        <div class="flex justify-between text-gray-600">
-                            <span>$50</span>
-                            <span>$1000</span>
-                        </div>
-                        <div class="mt-2 text-center font-medium text-primary">Up to $500</div>
-                    </div>
-                    
-                    <!-- Star Rating -->
-                    <div class="mb-8">
-                        <h3 class="font-semibold mb-4">Star Rating</h3>
-                        <div class="space-y-2 star-rating">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="rating5" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="rating5" class="ml-2">
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="rating4" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="rating4" class="ml-2">
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="rating3" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="rating3" class="ml-2">
-                                    <div class="flex text-yellow-400">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Property Type -->
-                    <div class="mb-8">
-                        <h3 class="font-semibold mb-4">Property Type</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="hotel" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="hotel" class="ml-2 text-gray-700">Hotel</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="resort" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="resort" class="ml-2 text-gray-700">Resort</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="villa" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="villa" class="ml-2 text-gray-700">Villa</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="apartment" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="apartment" class="ml-2 text-gray-700">Apartment</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Amenities -->
-                    <div class="mb-8">
-                        <h3 class="font-semibold mb-4">Amenities</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="wifi" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="wifi" class="ml-2 text-gray-700">Free WiFi</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="pool" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="pool" class="ml-2 text-gray-700">Swimming Pool</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="spa" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="spa" class="ml-2 text-gray-700">Spa</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="breakfast" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="breakfast" class="ml-2 text-gray-700">Breakfast Included</label>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="gym" class="checkbox h-5 w-5 text-primary rounded">
-                                <label for="gym" class="ml-2 text-gray-700">Fitness Center</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-700">
-                        Apply Filters
-                    </button>
-                    <button class="w-full mt-3 border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-100">
-                        Reset Filters
-                    </button>
-                </div>
+           <div class="w-full lg:w-1/4">
+    {{-- <form action="{{ route('accommodations.filter') }}" method="GET" class="bg-white p-6 rounded-xl shadow-lg sticky top-4"> --}}
+        <h2 class="text-xl font-bold mb-6 text-dark">Filters</h2>
+
+        <!-- Price Range -->
+        <div class="mb-8">
+            <h3 class="font-semibold mb-4">Price Range</h3>
+            <input type="range" 
+                   name="price" 
+                   id="price-range"
+                   min="{{ round($accommodations->isNotEmpty() ? $accommodations->min('min_price') : 3000 ) }}"
+                   max="{{ round($accommodations->isNotEmpty() ? $accommodations->max('max_price') : 15000) }}"
+                   value="{{ request('price', $accommodations->isNotEmpty() ? $accommodations->max('max_price') : 1000) }}"
+                   class="price-range w-full mb-4"
+                   onchange="document.getElementById('price-value').textContent = 'Up to ' + this.value + ' DA'">
+            <div class="flex justify-between text-gray-600">
+                <span>{{ round($accommodations->isNotEmpty() ? $accommodations->min('min_price') : 3000 ) }}</span>
+                <span>{{ round($accommodations->isNotEmpty() ? $accommodations->max('max_price') : 15000) }}</span>
             </div>
+            <div class="mt-2 text-center font-medium text-primary" id="price-value">
+                Up to {{ request('price', round($accommodations->max('max_price'))) }} DA
+            </div>
+        </div>
+
+        <!-- Star Rating -->
+        <div class="mb-8">
+            <h3 class="font-semibold mb-4">Star Rating</h3>
+            <div class="space-y-2 star-rating">
+                @for ($i = 5; $i >= 3; $i--)
+                    <div class="flex items-center">
+                        <input type="checkbox" 
+                               name="stars[]" 
+                               value="{{ $i }}" 
+                               id="rating{{ $i }}" 
+                               class="checkbox h-5 w-5 text-primary rounded"
+                               {{ in_array($i, request()->get('stars', [])) ? 'checked' : '' }}>
+                        <label for="rating{{ $i }}" class="ml-2 flex text-yellow-400">
+                            @for ($j = 1; $j <= 5; $j++)
+                                <i class="{{ $j <= $i ? 'fas fa-star' : 'far fa-star' }}"></i>
+                            @endfor
+                        </label>
+                    </div>
+                @endfor
+            </div>
+        </div>
+
+        <!-- Property Type -->
+        <div class="mb-8">
+            <h3 class="font-semibold mb-4">Property Type</h3>
+            @foreach (['hotel', 'resort', 'villa', 'apartment'] as $type)
+                <div class="flex items-center">
+                    <input type="checkbox" 
+                           name="type[]" 
+                           value="{{ $type }}" 
+                           id="{{ $type }}" 
+                           class="checkbox h-5 w-5 text-primary rounded"
+                           {{ in_array($type, request()->get('type', [])) ? 'checked' : '' }}>
+                    <label for="{{ $type }}" class="ml-2 text-gray-700 capitalize">{{ $type }}</label>
+                </div>
+            @endforeach
+        </div>
+
+        <!-- Amenities -->
+        <div class="mb-8">
+            <h3 class="font-semibold mb-4">Amenities</h3>
+            @foreach (['wifi' => 'Free WiFi', 'pool' => 'Swimming Pool', 'spa' => 'Spa', 'breakfast' => 'Breakfast Included', 'gym' => 'Fitness Center'] as $key => $label)
+                <div class="flex items-center">
+                    <input type="checkbox" 
+                           name="amenities[]" 
+                           value="{{ $key }}" 
+                           id="{{ $key }}" 
+                           class="checkbox h-5 w-5 text-primary rounded"
+                           {{ in_array($key, request()->get('amenities', [])) ? 'checked' : '' }}>
+                    <label for="{{ $key }}" class="ml-2 text-gray-700">{{ $label }}</label>
+                </div>
+            @endforeach
+        </div>
+
+         <button type="button" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-700" onclick="sort()">
+            Apply Filters
+        </button>
+        <a href="{{ route('accommodations.all') }}" 
+           class="block w-full mt-3 border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold text-center hover:bg-gray-100">
+            Reset Filters
+        </a> 
+   
+</div>
+
 
             <!-- Hotel Listings -->
-            <div class="w-full lg:w-3/4">
+            <div class="w-full lg:w-3/4" id="app" data-locale="{{ app()->getLocale() }}">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-dark">{{ count($accommodations) }} Hotels Found</h2>
+                    <h2 id="total" class="text-2xl font-bold text-dark">{{ count($accommodations) }} Hotels Found</h2>
                     <div class="flex items-center">
                         <span class="text-gray-600 mr-3">Sort by:</span>
-                        <select class="border border-gray-300 rounded-lg px-4 py-2">
-                            <option>Recommended</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                            <option>Rating</option>
-                            <option>Distance</option>
+                        <select class="border border-gray-300 rounded-lg px-4 py-2" id="sort-select" >
+                            <option value="default" selected>Default</option>
+                            <option value="lowtohigh">Price: Low to High</option>
+                            <option value="hightolow">Price: High to Low</option>
+                            <option value="rating">Rating</option>
+                           
                         </select>
                     </div>
                 </div>
-
+ </form>
                 <!-- Hotel Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6" id="accommodations-list">
                    @foreach ($accommodations as $accommodation)
                        
                    
@@ -341,3 +313,127 @@
 </div>
 
 @endsection
+@verbatim
+<script>
+    async function sort(){
+
+     const filters = document.querySelectorAll(".checkbox, #price-range, #sort-select");
+    const container = document.getElementById("accommodations-list");
+
+  
+     
+        let price = document.getElementById("price-range").value;
+        let sort = document.getElementById("sort-select").value;
+
+        // collect stars, type, amenities
+        let stars = Array.from(document.querySelectorAll('input[name="stars[]"]:checked')).map(el => el.value);
+        let types = Array.from(document.querySelectorAll('input[name="type[]"]:checked')).map(el => el.value);
+        let amenities = Array.from(document.querySelectorAll('input[name="amenities[]"]:checked')).map(el => el.value);
+
+        // build query
+        let params = new URLSearchParams({
+            price: price,
+            sort: sort,
+            stars: stars,
+            type: types,
+            amenities: amenities,
+        });
+stars.forEach(s => params.append('stars[]', s));
+types.forEach(s => params.append('type[]', s));
+amenities.forEach(s => params.append('amenities[]', s));
+
+        console.log(params.toString());
+        console.log(params.toString());
+
+
+
+      
+        
+         const response = await fetch(`/accommodations/filter?${params.toString()}`, {
+            method: 'get',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const container = document.getElementById('accommodations-list');
+            const total = document.getElementById('total');
+            total.textContent = data.accommodations.length + ' Hotels Found';
+            console.log(data);
+           const locale = document.getElementById('app').dataset.locale;
+            console.log(locale);
+            container.innerHTML = '';
+            
+
+           data.accommodations.forEach(accommodation => {
+             // Generate stars
+        let stars = "";
+        for (let i = 0; i < accommodation.stars; i++) {
+            stars += `<i class="fas fa-star text-yellow-400"></i>`;
+        }
+
+        // Generate amenities
+        let amenities = "";
+        if (accommodation.amenities) {
+            accommodation.amenities.forEach(item => {
+                amenities += `<span class="tag tag-beach">${item}</span>`;
+            });
+        }
+
+        container.innerHTML += `
+            <a href="/dashboard/accommodation/${accommodation.id}">
+                <div class="hotel-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="/storage/${accommodation.main_image}" 
+                             alt="${accommodation.name}" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
+                            ${Math.round(accommodation.reviews_avg_rating ?? 0)}
+                        </div>
+                        <div class="absolute top-4 left-4 bg-white text-primary text-sm font-semibold px-3 py-1 rounded-full">
+                            <i class="fas fa-map-marker-alt mr-1"></i> Timimoun
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold">${accommodation.name[locale]}</h3>
+                            <div class="flex">${stars}</div>
+                        </div>
+                        <p class="text-gray-600 mb-4">${accommodation.description[locale] ?? ""}</p>
+                        <div class="flex flex-wrap items-center text-gray-500 mb-4">
+                            ${amenities}
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-2xl font-bold text-primary">${accommodation.min_price}</span>
+                                <span class="text-gray-600">/night</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        `;
+
+                
+           });
+           
+            
+            // console.log(data);
+            // Update the accommodations list in the DOM
+            // You would typically re-render the accommodations here
+           
+            
+        } else {
+            alert('Failed ');
+        }
+         
+  
+    }
+
+       
+   
+
+</script>
+@endverbatim

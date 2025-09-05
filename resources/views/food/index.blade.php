@@ -103,54 +103,45 @@
     <!-- Category Section -->
     <div class="category-section">
         <div class="category-grid">
+             <div class="category-item active " >
+                <div class="category-icon">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="category-name " >All</div>
+            </div>
+
+
             <div class="category-item">
                 <div class="category-icon">
                     <i class="fas fa-utensils"></i>
                 </div>
-                <div class="category-name">Fine Dining</div>
+                <div class="category-name">Restaurant</div>
             </div>
             
             <div class="category-item">
                 <div class="category-icon">
                     <i class="fas fa-pizza-slice"></i>
                 </div>
-                <div class="category-name">Casual</div>
+                <div class="category-name">Snack</div>
             </div>
-            
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-seedling"></i>
-                </div>
-                <div class="category-name">Vegetarian</div>
-            </div>
-            
+           
             <div class="category-item">
                 <div class="category-icon">
                     <i class="fas fa-fish"></i>
                 </div>
-                <div class="category-name">Seafood</div>
+                <div class="category-name">Traditional</div>
             </div>
             
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-ice-cream"></i>
-                </div>
-                <div class="category-name">Desserts</div>
-            </div>
+           
             
             <div class="category-item">
                 <div class="category-icon">
                     <i class="fas fa-mug-hot"></i>
                 </div>
-                <div class="category-name">Cafés</div>
+                <div class="category-name">Cafe</div>
             </div>
             
-            <div class="category-item">
-                <div class="category-icon">
-                    <i class="fas fa-cheese"></i>
-                </div>
-                <div class="category-name">Bars</div>
-            </div>
+          
         </div>
     </div>
 
@@ -159,13 +150,13 @@
     
     <div class="view-options">
         <div class="view-option active">All</div>
-        <div class="view-option">Popular</div>
-        <div class="view-option">New</div>
-        <div class="view-option">Recommended</div>
+        <div class="view-option hover:bg-primary hover:text-white">Price: Low to High</div>
+        <div class="view-option hover:bg-primary hover:text-white">Price: High to Low</div>
+        <div class="view-option hover:bg-primary hover:text-white">Rating</div>
     </div>
     
-    <div class="results-header">
-        <div class="results-count">Showing 12 of 64 restaurants</div>
+    <div class="results-header"  id="app" data-locale="{{ app()->getLocale() }}">
+        <div class="results-count" id="total"> {{ count($food) }} Elements Found</div>
         <div class="filter-button">
             <i class="fas fa-filter mr-2"></i>Filters
         </div>
@@ -173,7 +164,7 @@
 
     <!-- Style 1: Rounded cards with badges -->
     <h3 class="card-style-title">Rounded Cards</h3>
-    <div class="grid-container">
+    <div class="grid-container" id="food">
         <!-- Restaurant Card 1 -->
         @foreach ($food as $item)
        <a href="{{ route('food.show',$item->id) }}"> <div class="restaurant-card-1">
@@ -271,6 +262,164 @@
                 });
             });
         });
+        
+         document.addEventListener('DOMContentLoaded', function() {
+         const grid = document.querySelector('.category-grid');
+        let  category = null
+       let filter = null
+
+    grid.addEventListener('click', (e) => {
+        const item = e.target.closest('.category-item');
+        if (!item) return; // ignore clicks outside .category-item
+
+        // Remove active class from all
+        grid.querySelectorAll('.category-item').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // Add active class to clicked
+        item.classList.add('active');
+
+        // Example: get the category name
+         category = item.querySelector('.category-name').textContent.trim();
+         filter = document.querySelector('.view-option.active').textContent.trim();
+        
+          sort(category,filter);
+        
+        
+    });
+
+         const viewOptions = document.querySelector('.view-options');
+
+        viewOptions.addEventListener('click', (e) => {
+        const option = e.target.closest('.view-option');
+        if (!option) return; // click happened outside
+
+        // Remove active from all
+        viewOptions.querySelectorAll('.view-option').forEach(opt => {
+            opt.classList.remove('active');
+        });
+
+        // Set clicked one active
+        option.classList.add('active');
+
+          filter = option.textContent.trim();
+          category = document.querySelector('.category-item.active').textContent.trim();
+          sort(category,filter);
+
+       
+        });
+
+         });
+
+            function getAverageRating(reviews) {
+    if (!reviews || reviews.length === 0) return 0; // prevent division by zero
+    
+    const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
+    return sum / reviews.length;
+}
+
+
+
+   async function sort(category,filter) {
+      
+
+    
+
+         const response = await fetch(`/food/`+category+`/`+filter, {
+            method: 'get',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+           
+            const data = await response.json();
+            const container = document.getElementById('food');
+            const total = document.getElementById('total');
+             total.textContent = data.length + ' Destinations Found';
+            console.log(data);
+           const locale = document.getElementById('app').dataset.locale;
+            console.log(locale);
+            container.innerHTML = '';
+            if(data.length == 0){
+                container.innerHTML = '<p class="text-gray-600">No events found in this category.</p>';
+                return;
+            }
+            
+
+            data.forEach(item => {
+             let stars = '';
+        for (let i = 0; i < Math.round(getAverageRating(item.reviews)); i++) {
+            stars += `<i class="fas fa-star"></i>`;
+        }
+
+        // Card HTML
+        const card = `
+        <a href="/foods/${item.id}">
+            <div class="restaurant-card-1">
+                <div class="card-image">
+                    <img src="/storage/${item.main_image}" 
+                         alt="${item.name[locale]}" class="w-full h-full object-cover">
+                    <div class="card-badge">
+                        <span class="tag tag-italian">${item.type}</span>
+                    </div>
+                    <div class="card-wishlist">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="card-style-label"></div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">${item.name[locale]}</h3>
+                    <div class="card-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>${item.address[locale]}</span>
+                    </div>
+                    <p class="card-description">${item.description[locale]}</p>
+                    
+                    <div class="card-rating">
+                        <div class="flex text-yellow-400 mr-2">${Math.round(getAverageRating(item.reviews))} ${stars}</div>
+                        <span class="text-gray-600">(${item.reviews.length} reviews)</span>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <div class="card-price">${item.min_price} - ${item.max_price} DA</div>
+                        <button class="card-button">Reserve</button>
+                    </div>
+                </div>
+            </div>
+        </a>
+        `;
+
+        container.innerHTML += card;
+    
+        
+
+                
+            });
+           
+            
+            console.log(data);
+          //  Update the accommodations list in the DOM
+            //You would typically re-render the accommodations here
+           
+            
+        } else {
+            alert('Failed ');
+        }
+         
+  
+    }
+
+
+
+
+
+
+
+
     </script>
 
 

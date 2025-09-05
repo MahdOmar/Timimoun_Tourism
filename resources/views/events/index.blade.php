@@ -100,25 +100,25 @@
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-6 text-dark">Popular Categories</h2>
             <div class="flex flex-wrap gap-4">
-                <button class="category-filter active px-6 py-2 bg-primary text-white rounded-full font-medium">
+                <button class="category-filter active px-6 py-2 bg-primary border border-gray-300 text-white rounded-full font-medium" onclick="sort(this)">
                     All Events
                 </button>
-                <button class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium">
+                <button id="Festival" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-music mr-2"></i>Festival
                 </button>
-                <button class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium">
+                <button id="Concert" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-theater-masks mr-2"></i>Concert
                 </button>
-                <button class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium">
+                <button id="Cultural" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-chalkboard-teacher mr-2"></i>Cultural
                 </button>
-                <button class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium">
+                <button id="Exihbition" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-utensils mr-2"></i>Exihbition
                 </button>
-                <button class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium">
+                <button  id="Sports" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-running mr-2"></i>Sports
                 </button>
-                <button class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium">
+                <button id="Other" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-microphone mr-2"></i>Other
                 </button>
             </div>
@@ -127,7 +127,7 @@
         <!-- Main Content -->
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Filters Sidebar -->
-            <div class="w-full lg:w-1/4">
+            {{-- <div class="w-full lg:w-1/4">
                 <div class="bg-white p-6 rounded-xl shadow-lg sticky top-4">
                     <h2 class="text-xl font-bold mb-6 text-dark">Filters</h2>
                     
@@ -221,26 +221,25 @@
                         Reset Filters
                     </button>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Event Listings -->
-            <div class="w-full lg:w-3/4">
+            <div class="w-full " id="app" data-locale="{{ app()->getLocale() }}">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-dark">128 Events Found</h2>
+                    <h2 class="text-2xl font-bold text-dark" id="total">{{ count($events ) }} Events Found</h2>
                     <div class="flex items-center">
                         <span class="text-gray-600 mr-3">Sort by:</span>
-                        <select class="border border-gray-300 rounded-lg px-4 py-2">
-                            <option>Date: Soonest First</option>
-                            <option>Date: Latest First</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                            <option>Most Popular</option>
+                        <select class="border border-gray-300 rounded-lg px-4 py-2" id="sort-select" onchange="sort()">
+                            <option value="soonest">Date: Soonest First</option>
+                            <option value="latest">Date: Latest First</option>
+                            <option value="lowtohigh">Price: Low to High</option>
+                            <option value="hightolow">Price: High to Low</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Event Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div id="events-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                     <!-- Event Card 1 -->
                     @foreach ($events as $event)
                         <a href="{{ route('event.show',$event->id) }}"> <div class="event-card bg-white rounded-xl shadow-md overflow-hidden">
@@ -286,23 +285,7 @@
                    
                 </div>
 
-                <!-- Pagination -->
-                <div class="flex justify-center mt-12">
-                    <nav class="flex items-center space-x-2">
-                        <a href="#" class="px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                        <a href="#" class="px-4 py-2 text-white bg-primary rounded-lg font-semibold">1</a>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">2</a>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">3</a>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">4</a>
-                        <span class="px-2 py-2 text-gray-500">...</span>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">10</a>
-                        <a href="#" class="px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </nav>
-                </div>
+               
             </div>
         </div>
     </main>
@@ -322,3 +305,104 @@
     </section>
 
 @endsection
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/dayjs.min.js" integrity="sha512-FwNWaxyfy2XlEINoSnZh1JQ5TRRtGow0D6XcmAWmYCRgvqOUTnzCxPc9uF35u5ZEpirk1uhlPVA19tflhvnW1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+      async function sort(type){
+
+        if(!type){
+            type = document.querySelector('.category-filter.bg-primary');
+        }
+      
+     
+  
+        const category =type.textContent.replace(/\s+/g, '');
+         let sort = document.getElementById("sort-select").value;
+        
+         const response = await fetch(`/events/`+category+`/`+sort, {
+            method: 'get',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white', 'active');
+                btn.classList.add('bg-white');
+            });
+            type.classList.remove('bg-white',);
+            type.classList.add('bg-primary','text-white');
+            const data = await response.json();
+            const container = document.getElementById('events-list');
+             const total = document.getElementById('total');
+             total.textContent = data.length + ' Events Found';
+            console.log(data);
+           const locale = document.getElementById('app').dataset.locale;
+            console.log(locale);
+            container.innerHTML = '';
+            if(data.length == 0){
+                container.innerHTML = '<p class="text-gray-600">No events found in this category.</p>';
+                return;
+            }
+            
+
+           data.forEach(event => {
+           const card = `
+                <a href="/events/${event.id}">
+                  <div class="event-card bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="relative">
+                            <img src="/storage/${event.main_image}" 
+                                 alt="${event.name[locale]}" class="w-full h-48 object-cover">
+                            <div class="date-badge">
+                                <div class="text-sm">${dayjs(event.start_date).format('MMM')}</div>
+                                <div class="text-lg">${dayjs(event.start_date).format('DD')}</div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-music mr-1"></i> ${event.category}
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold mb-2">${event.name[locale]}</h3>
+                            <p class="text-gray-600 mb-4">${event.description[locale]}</p>
+                            <div class="flex items-center text-gray-500 mb-4">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span class="mr-4">${event.address[locale]}</span>
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>7:00 PM</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-2xl font-bold text-primary">
+                                        ${event.price == 0 ? 'Free' : event.price}
+                                    </span>
+                                    <span class="text-gray-600">/person</span>
+                                </div>
+                                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+                                    Get Tickets
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </a>`;
+
+                container.innerHTML += card;
+        
+
+                
+           });
+           
+            
+            console.log(data);
+          //  Update the accommodations list in the DOM
+            //You would typically re-render the accommodations here
+           
+            
+        } else {
+            alert('Failed ');
+        }
+         
+  
+    }
+
+</script>

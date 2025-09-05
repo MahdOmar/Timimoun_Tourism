@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rental;
 use App\Models\RentalImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class RentalController extends Controller
@@ -225,5 +226,80 @@ public function allRentals()
        ->get();
     return view('rentals.details', compact([  'rental', 'related' ]));
   }
+
+public function filterRentals($category,$filter)
+  {
+     $query = Rental::query();
+
+   
+    
+     if ($category === 'All') {
+          
+            if ($filter === 'Rating') {
+            $query->leftJoin('reviews', function ($join) {
+                $join->on('rentals.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', Rental::class);
+            })
+            ->select('rentals.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating'))
+            ->groupBy('rentals.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('avg_rating')
+            ->get();
+            
+    error_log($query->get());
+ 
+             
+          } elseif ($filter === 'Newest') {
+            $query->orderBy('created_at','desc');
+          } 
+          elseif ($filter === 'Price') {
+              $query->orderBy('price', 'desc');
+          }
+
+          else{
+             $query->latest();
+          }
+            $rentals = $query->with('reviews')->get();
+            return response()->json($rentals);
+
+        }
+
+        if(strtolower($category) == "cars")
+        {
+          $query->with('reviews')->where('type', 'light_car')->orWhere('type', '4x4_car');
+
+        }
+        else{
+            $query->with('reviews')->where('type',strtolower($category) );
+        }
+
+
+
+         
+          
+        
+
+         if ($filter === 'Rating') {
+           
+           $query->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating','desc');
+             
+
+             
+          } elseif ($filter === 'Price') {
+              $query->orderBy('price', 'desc');
+          }
+          
+    
+
+    error_log('++');
+      $rentals = $query->get();
+      
+
+      return response()->json($rentals);
+  }
+
+
+
+
 
 }

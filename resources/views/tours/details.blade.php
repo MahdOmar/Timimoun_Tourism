@@ -25,7 +25,7 @@
          <span class="flex items-center">
                             <i class="fas fa-star text-yellow-400 mr-1"></i>
                             <span>{{round($tour->averageRating())  }} ({{ count($tour->reviews) }} reviews)</span>
-                        </span>
+          </span>
         <p class="text-gray-600 text-lg leading-relaxed mb-6">
           {{ $tour->getTranslation('description', app()->getLocale()) }}
         </p>

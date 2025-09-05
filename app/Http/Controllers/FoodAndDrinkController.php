@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FoodAndDrink;
 use App\Models\FoodAndDrinkImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class FoodAndDrinkController extends Controller
@@ -223,6 +224,83 @@ public function allFood(){
    $related = FoodAndDrink::latest()->get();
 
     return view('food.details', compact(['food', 'related']));
+  }
+
+    public function filterFood($category,$filter)
+  {
+     $query = FoodAndDrink::query();
+
+   
+    
+     if ($category === 'All') {
+          
+            if ($filter === 'Rating') {
+            $query->leftJoin('reviews', function ($join) {
+                $join->on('food_and_drinks.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', FoodAndDrink::class);
+            })
+            ->select('food_and_drinks.*', DB::raw('COALESCE(AVG(reviews.rating), 0 as avg_rating'))
+            ->groupBy('food_and_drinks.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('avg_rating')
+            ->get();
+            
+    error_log($query->get());
+ 
+             
+          } elseif ($filter === 'Price: High to Low') {
+
+             
+              $query->orderBy('max_price', 'desc');
+              
+             
+          }elseif ($filter === 'Price: Low to High') {
+          $query->orderBy('min_price', 'asc');
+          }
+          else{
+             $query->latest();
+          }
+           
+          $food = $query->with('reviews')->get();
+            return response()->json($food);
+
+        }
+
+        
+
+          $query->with('reviews')->where('type', strtolower($category));
+
+         
+          
+        
+
+         if ($filter === 'Rating') {
+           
+           $query->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating','desc');
+             
+
+            
+ 
+         }elseif ($filter === 'Price: High to Low') {
+
+             
+              $query->orderBy('max_price', 'desc');
+              
+             
+          }elseif ($filter === 'Price: Low to High') {
+          $query->orderBy('min_price', 'asc');
+          }
+          else{
+             $query->latest();
+          }
+          
+    
+
+    error_log('++');
+      $food = $query->get();
+      
+
+      return response()->json($food);
   }
 
 

@@ -221,6 +221,66 @@ public function allEvents(){
     return view('events.details', compact('event'));
   }
 
+  public function filterEvents($category,$sort)
+  {
+    
+      
+        if ($category === 'AllEvents') {
+             $query = Event::query();
+        
+             if($sort === 'soonest') {
+              $query->orderBy('start_date', 'asc');
+          } elseif ($sort === 'latest') {
+              $query->orderBy('start_date', 'desc');
+          } elseif ($sort === 'lowtohigh') {
+              $query->orderBy('price', 'asc');
+          } elseif ($sort === 'hightolow') {
+              $query->orderBy('price', 'desc');
+          }
+            $events = $query->get();
+            return response()->json($events);
+
+        }
+
+
+        
+            $query = Event::query();
+     
+          $query->where('category', strtolower($category));
+
+          error_log('Filtering events by category: ' . $category . ' with sort: ' . $sort);
+
+          if($sort === 'soonest') {
+              $query->orderBy('start_date', 'asc');
+          } elseif ($sort === 'latest') {
+              $query->orderBy('start_date', 'desc');
+          } elseif ($sort === 'lowtohigh') {
+              $query->orderBy('price', 'asc');
+          } elseif ($sort === 'hightolow') {
+              $query->orderBy('price', 'desc');
+          }
+    
+
+    //   if ($request->filled('start_date')) {
+    //       $query->whereDate('start_date', '>=', $request->start_date);
+    //   }
+
+    //   if ($request->filled('end_date')) {
+    //       $query->whereDate('end_date', '<=', $request->end_date);
+    //   }
+
+    //   if ($request->filled('price_min')) {
+    //       $query->where('price', '>=', $request->price_min);
+    //   }
+
+    //   if ($request->filled('price_max')) {
+    //       $query->where('price', '<=', $request->price_max);
+    //   }
+
+      $events = $query->get();
+
+      return response()->json($events);
+  }
 
 
 

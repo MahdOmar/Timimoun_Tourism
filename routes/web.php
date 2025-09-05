@@ -47,6 +47,7 @@ Route::group(['prefix' => 'dashboard'], function () {
 // accommodations routes
 
 Route::get('/accommodations', [AccommodationController::class, 'allAccommodations'])->name('accommodations.all');
+// Route::get('/accommodations/filter', [AccommodationController::class, 'filterAccommodations'])->name('accommodations.filter');
 
 
 // services routes
@@ -136,8 +137,19 @@ Route::delete('/travelagency/{id}/gallery/{imageId}/remove', [TravelController::
 Route::delete('/crafts/{id}/remove-main-image', [CraftController::class, 'removeMainImage'])->name('craft.remove-main-image');
 Route::delete('/crafts/{id}/gallery/{imageId}/remove', [CraftController::class, 'removeGalleryImage'])->name('craft.remove-gallery-image');
 
-Route::delete('/rentals/{id}/remove-main-image', [RentalController::class, 'removeMainImage'])->name('craft.remove-main-image');
-Route::delete('/rentals/{id}/gallery/{imageId}/remove', [RentalController::class, 'removeGalleryImage'])->name('craft.remove-gallery-image');
+Route::delete('/rentals/{id}/remove-main-image', [RentalController::class, 'removeMainImage'])->name('rental.remove-main-image');
+Route::delete('/rentals/{id}/gallery/{imageId}/remove', [RentalController::class, 'removeGalleryImage'])->name('rental.remove-gallery-image');
+
+Route::get('/accommodations/filter', [AccommodationController::class, 'sort'])->name('accommodation.sort');
+Route::get('/events/{category}/{sort}', [EventlController::class, 'filterEvents'])->name('event.filter');
+Route::get('/sites/{category}/{filter}', [SiteController::class, 'filterSites'])->name('site.filter');
+Route::get('/food/{category}/{filter}', [FoodAndDrinkController::class, 'filterFood'])->name('food.filter');
+Route::get('/tours/sort/filter', [TourController::class, 'filterTour'])->name('tour.filter');
+Route::get('/rentals/{category}/{filter}', [RentalController::class, 'filterRentals'])->name('rental.filter');
+Route::get('/crafts/{category}/{filter}', [CraftController::class, 'filterCrafts'])->name('craft.filter');
+
+
+
 
 
 

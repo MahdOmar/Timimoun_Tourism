@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TravelAgency;
 use App\Models\TravelAgencyImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TravelController extends Controller
@@ -203,7 +204,21 @@ public function removeGalleryImage($id, $imageId)
 
 
 public function allTravels(){
-    $travels = TravelAgency::latest()->get();
+   $query = TravelAgency::query();
+
+
+      $query->leftJoin('reviews', function ($join) {
+                $join->on('travel_agencies.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', TravelAgency::class);
+            })
+            ->select('travel_agencies.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating'))
+            ->groupBy('travel_agencies.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('avg_rating')
+            ->get();
+            
+    $travels = $query->get();
+ 
     return view('travel.index', compact('travels')); 
   }
 

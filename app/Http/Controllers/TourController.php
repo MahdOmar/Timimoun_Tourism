@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Tour;
 use App\Models\TourImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
+use function Laravel\Prompts\error;
 
 class TourController extends Controller
 {
@@ -229,7 +232,90 @@ public function removeGalleryImage($id, $imageId)
   }
 
   public function showTour($id){
-   $tour = Tour::findOrFail($id);
+   $tour = Tour::with('reviews')->findOrFail($id);
     return view('tours.details', compact('tour'));
   }
+
+  public function filterTour(Request $request)
+  {
+   $query = Tour::query();
+
+    if ($request->category =="all") {
+        
+        $query->withAvg('reviews', 'rating')->latest();
+    }
+    else{
+         $query->withAvg('reviews', 'rating')->where('category',$request->category);
+    }
+    if($request->duration ==">3"){
+        $query->where('duration_days','>=', 4);
+
+    }
+    elseif($request->duration !="any"){
+        $query->where('duration_days',$request->duration);
+
+    }
+   
+
+           
+
+  
+
+    if ($request->price == "10000") {
+        
+
+        $query->where('price' ,'<=',10000);
+    }
+    elseif($request->price == "10000-15000")
+    {
+        $query->whereBetween('price',[10000,15000]);
+    }
+    elseif($request->price == "15000-20000")
+    {
+        $query->whereBetween('price',[15000,20000]);
+    }
+    elseif($request->price == ">20000")
+    {
+        $query->where('price','>',20000);
+    }
+ 
+     
+
+    if ($request->sort == "Newest") {
+        
+        $query->orderBy('created_at', "desc");
+        
+        
+    }
+    elseif($request->sort == "Rating")
+    {
+          $query->leftJoin('reviews', function ($join) {
+                $join->on('tours.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', Tour::class);
+            })
+            ->select('tours.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating'))
+            ->groupBy('tours.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('avg_rating')
+            ->get();
+
+    }
+     
+
+    $tours = $query->with('reviews')->get();
+
+    return response()->json([
+     
+        'tours' => $tours
+    ]);
+
+
+
+
+
+
+
+
+
+  } 
 }

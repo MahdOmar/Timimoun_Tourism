@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Site;
 use App\Models\SiteImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
+use function Laravel\Prompts\error;
 
 class SiteController extends Controller
 {
@@ -221,6 +224,82 @@ public function removeGalleryImage($id, $imageId)
 
     return view('sites.details', compact(['site', 'relatedSites']));
   }
+
+  public function filterSites($category,$filter)
+  {
+     $query = Site::query();
+
+   
+    
+     if ($category === 'All') {
+          
+            if ($filter === 'Rating') {
+            $query->leftJoin('reviews', function ($join) {
+                $join->on('sites.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', Site::class);
+            })
+            ->select('sites.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating'))
+            ->groupBy('sites.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('avg_rating')
+            ->get();
+            
+    error_log($query->get());
+ 
+             
+          } elseif ($filter === 'Recommended') {
+              
+             $query->leftJoin('reviews', function ($join) {
+                $join->on('sites.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', Site::class);
+            })
+            ->select('sites.*', DB::raw('COUNT(reviews.rating) as avg_rating'))
+            ->groupBy('sites.id')
+            ->havingRaw('COUNT(reviews.rating) >= 1')
+            ->orderByDesc('avg_rating')
+            ->get();
+          }elseif ($filter === 'New') {
+            $query->orderBy('created_at','desc');
+          }
+          else{
+             $query->latest();
+          }
+            $sites = $query->with('reviews')->get();
+            return response()->json($sites);
+
+        }
+
+
+          $query->with('reviews')->where('type', strtolower($category));
+
+         
+          
+        
+
+         if ($filter === 'Rating') {
+           
+           $query->withAvg('reviews', 'rating')->orderBy('reviews_avg_rating','desc');
+             
+
+            
+ 
+             
+          } elseif ($filter === 'High to low') {
+              $query->orderBy('price', 'desc');
+          }
+          
+    
+
+    error_log('++');
+      $sites = $query->get();
+      
+
+      return response()->json($sites);
+  }
+
+
+
+
 
 
 }

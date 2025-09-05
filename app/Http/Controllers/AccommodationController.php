@@ -238,30 +238,112 @@ public function removeGalleryImage($id, $imageId)
     
  }
 
-  public function Filter(Request $request)
+  public function filterAccommodations(Request $request)
  {
-    $accommodations = Accommodation::all();
+    $query = Accommodation::query();
 
-    // Apply filters if any
+    // Price filter
+    if ($request->has('price')) {
+        $query->where('min_price', '<=', $request->price);
+    }
+
+    // Star rating filter
+    if ($request->has('stars')) {
+        $query->whereIn('stars', $request->stars);
+    }
+
+    // Property type filter
     if ($request->has('type')) {
-        $accommodations = $accommodations->where('type', $request->input('type'));
+        $query->whereIn('type', $request->type);
     }
 
-    if ($request->has('prices')) {
-        $prices = $request->input('prices');
-        if (in_array('under_5000', $prices)) {
-            $accommodations = $accommodations->where('price_range', '<', 5000);
-        }
-        if (in_array('5000_10000', $prices)) {
-            $accommodations = $accommodations->whereBetween('price_range', [5000, 10000]);
-        }
-        if (in_array('10000_20000', $prices)) {
-            $accommodations = $accommodations->whereBetween('price_range', [10000, 20000]);
+    // Amenities filter (assuming amenities is a JSON/array column)
+    if ($request->has('amenities')) {
+        foreach ($request->amenities as $amenity) {
+            $query->whereJsonContains('amenities', $amenity);
         }
     }
+
+    $accommodations = $query->paginate(10);
 
     return view('hotels.index', compact('accommodations'));
     
  }
+
+  public function sort(Request $request)
+  {
+
+
+
+$query = Accommodation::query();
+
+    if ($request->price) {
+        
+        $query->withAvg('reviews', 'rating')->where('min_price', '<=', $request->price);
+    }
+
+           
+
+  
+
+    if ($request->stars) {
+        
+ $stars = (array) $request->input('stars');
+        $query->whereIn('stars',  $stars);
+    }
+ 
+     
+
+    if ($request->type) {
+           $type = (array) $request->input('type');
+        $query->whereIn('type', $type);
+        
+        
+    }
+     
+
+
+    if ($request->amenities) {
+        $query->whereJsonContains('amenities', $request->amenities);
+    }
+
+
+
+    if ($request->sort == 'lowtohigh') {
+        $query->orderBy('min_price', 'asc');
+    } elseif ($request->sort == 'hightolow') {
+        $query->orderBy('min_price', 'desc');
+    } elseif ($request->sort == 'rating') {
+       // $query->withAvg('reviews', 'rating')
+        
+       $query-> orderBy('reviews_avg_rating', 'desc');
+       $accommodations = $query->get()->whereNotNull('reviews_avg_rating');
+
+    return response()->json([
+     
+        'accommodations' => $accommodations
+    ]);
+    }
+    else {
+        $query->latest();
+    }
+
+    $accommodations = $query->get();
+
+    return response()->json([
+     
+        'accommodations' => $accommodations
+    ]);
+
+
+
+
+
+
+
+
+  } 
+
+
 
 }
