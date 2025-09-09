@@ -258,7 +258,7 @@ public function allCrafts()
             $query->orderBy('created_at','desc');
           } 
           elseif ($filter === 'Price') {
-              $query->orderBy('price', 'desc');
+              $query->orderBy('min_price', 'asc');
           }
 
           else{

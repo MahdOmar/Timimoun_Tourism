@@ -12,21 +12,33 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TravelController;
-use App\Models\FoodAndDrink;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 Route::get('/', HomeController::class . '@index')->name('home');
 
 // Dashboard routes
 
-Route::get('/dashboarde', function () {
-    return view('dashboard.stats.index');
-
-})->name('dashboarde');
 
 
 
-Route::group(['prefix' => 'dashboard'], function () {
+
+Route::group([
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' =>  ['web']
+    ], function () {
+
+        Route::get('/', HomeController::class . '@index')->name('home');
+        Route::get('/dashboarde', function () {
+            return view('dashboard.stats.index');
+
+        })->name('dashboarde');
+
+        Route::get('/presentation', function () {
+                return view('presentation.index');
+
+            })->name('presentation');
 
    Route::resource('accommodation', AccommodationController::class);
    Route::resource('foodanddrink', FoodAndDrinkController::class);
@@ -38,13 +50,6 @@ Route::group(['prefix' => 'dashboard'], function () {
    Route::resource('rental', RentalController::class);
    Route::resource('review', ReviewController::class);
 
-
-
-
-
-});
-
-// accommodations routes
 
 Route::get('/accommodations', [AccommodationController::class, 'allAccommodations'])->name('accommodations.all');
 // Route::get('/accommodations/filter', [AccommodationController::class, 'filterAccommodations'])->name('accommodations.filter');
@@ -148,6 +153,13 @@ Route::get('/tours/sort/filter', [TourController::class, 'filterTour'])->name('t
 Route::get('/rentals/{category}/{filter}', [RentalController::class, 'filterRentals'])->name('rental.filter');
 Route::get('/crafts/{category}/{filter}', [CraftController::class, 'filterCrafts'])->name('craft.filter');
 
+
+
+
+
+});
+
+// accommodations routes
 
 
 

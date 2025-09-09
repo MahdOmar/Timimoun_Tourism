@@ -38,10 +38,10 @@
    <img src="{{ asset('./images/oasis.jpg') }}" alt="" class="absolute top-0 left-0 h-full w-full object-cover animate-zoom-in-out">  --}}
   <div class="relative z-30 mx-auto max-w-screen-xl flex gap-20">
     <div class="w-3/3">
-      <span class="text-orange-600 uppercase font-medium mb-4 block text-center animate-left-right ">EXPLORE. DISCOVER. TRAVEL</span>
-      <h1 class="text-7xl text-white font-extrabold mb-4 animate-left-right text-center">Discover the Magic of Timimoun</h1>
+      <span class="text-orange-600 uppercase font-medium mb-4 block text-center animate-left-right ">{{ __('messages.EXPLORE. DISCOVER. TRAVEL') }}</span>
+      <h1 class="text-7xl text-white font-extrabold mb-4 animate-left-right text-center">{{ __('messages.DMT') }}</h1>
       <br>
-      <span class="text-orange-600 uppercase font-medium mb-4 block text-center animate-left-right">Explore the heart of the Sahara and its rich culture </span>
+      <span class="text-orange-600 uppercase font-medium mb-4 block text-center animate-left-right">{{ __('messages.ETS') }}</span>
       
 
       <div class="flex items-center gap-3 text-white my-6 text-4xl justify-center">
@@ -52,14 +52,14 @@
         <span>....</span>
       </div>
       <p class="text-slate-200 animate-left-right">
-        The Red Oasis is a very beautiful city. It is characterized by its Islamic architectural character. The city of Timimoune, or the bride of the desert, as its visitors call it, is characterized by a unique urban and architectural character. This prompted French researchers during the colonial era to classify it on the basis that it was one of the most wonderful oases...
+        {{ __('messages.DES_TIMIMOUN') }}
       </p>
       <div class="flex gap-8 mt-10 justify-center animate-right-left">
         <button class="text-white h-12 bg-orange-700 w-44">
-          Read More
+          {{ __('messages.BTN_READMORE') }}
         </button>
         <button class="text-white h-12 bg-blue-500 w-44">
-          See all offert
+          {{ __('messages.BTN_SEEOFFERT') }}
         </button>
       </div>
     </div>
@@ -67,9 +67,65 @@
   </div>
 </div>
 
-<section class="bg-white py-20" data-aos="fade-up">
+  <section class="py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-accent mb-4"> {{ __('messages.Description_title') }}</h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg mb-6">
+                       {{ __('messages.Description_text1') }}
+                    </p>
+                    <p class="text-lg mb-8">
+                        {{ __('messages.Description_text2') }}
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                            <i class="fas fa-sun text-2xl text-primary mb-2"></i>
+                            <p class="font-semibold">{{ __('messages.Sunny_days') }}</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center">
+                            <i class="fas fa-history text-2xl text-primary mb-2"></i>
+                            <p class="font-semibold">{{ __('messages.Rich_history') }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="rounded-lg overflow-hidden shadow-2xl">
+                        <img src="{{ asset('./images/archi.jpg') }}" alt="Timimoun architecture" class="w-full h-96 object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-primary text-white p-6 rounded-lg shadow-lg">
+                        <p class="font-heading text-2xl">"{{ __('messages.Magazine_phrase') }}"</p>
+                        <p class="text-sm">- Travel Magazine</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+<section id="gallery" class="py-16 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">{{ __('messages.photo_gallery') }}</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <img src="/images/gal-1.jpg" class="w-full h-48 md:h-56 object-cover rounded-xl" alt="">
+      <img src="/images/gal-2.jpg" class="w-full h-48 md:h-56 object-cover rounded-xl" alt="">
+      <img src="/images/gal-3.jpg" class="w-full h-48 md:h-56 object-cover rounded-xl" alt="">
+      <img src="/images/gal-4.jpg" class="w-full h-48 md:h-56 object-cover rounded-xl" alt="">
+      <img src="/images/gal-5.jpg" class="w-full h-48 md:h-56 object-cover rounded-xl" alt="">
+      <img src="/images/gal-6.jpg" class="w-full h-48 md:h-56 object-cover rounded-xl" alt="">
+    </div>
+  </div>
+</section>
+
+
+
+{{-- <section class="bg-white py-20" data-aos="fade-up">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Services</h2>
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">  {{ __('messages.services_title') }}</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Service Card -->
@@ -80,8 +136,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Personalized Matching</h3>
-        <p class="text-gray-600 text-sm">Our unique matching system lets you find just the tour you want for your next holiday.</p>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.service1_title') }}</h3>
+        <p class="text-gray-600 text-sm"> {{ __('messages.service1_text') }}</p>
       </div>
 
       <!-- Service Card -->
@@ -92,8 +148,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3zM5.5 22l1.5-5.5 4.5-1.5 4.5 1.5 1.5 5.5-6-2-6 2z" />
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Wide Variety of Tours</h3>
-        <p class="text-gray-600 text-sm">We offer a wide variety of personally picked tours with destinations all over the globe.</p>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.service2_title') }}</h3>
+        <p class="text-gray-600 text-sm">{{ __('messages.service2_text') }}</p>
       </div>
 
       <!-- Service Card -->
@@ -104,8 +160,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4l2.09 6.26L20 12l-5.91 1.74L12 20l-2.09-6.26L4 12l5.91-1.74L12 4z" />
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Highly Qualified Service</h3>
-        <p class="text-gray-600 text-sm">Our tour managers are qualified, skilled, and friendly to bring you the best service.</p>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.service3_title') }}</h3>
+        <p class="text-gray-600 text-sm">{{ __('messages.service3_text') }}</p>
       </div>
 
       <!-- Service Card -->
@@ -116,8 +172,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8a6 6 0 00-12 0v4a4 4 0 004 4h4a4 4 0 004-4V8z" />
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">24/7 Support</h3>
-        <p class="text-gray-600 text-sm">You can always get professional support from our staff 24/7 and ask any question you have.</p>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.service4_title') }}</h3>
+        <p class="text-gray-600 text-sm">{{ __('messages.service4_text') }}</p>
       </div>
 
       <!-- Service Card -->
@@ -128,8 +184,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16M4 6h16M4 18h16" />
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Handpicked Hotels</h3>
-        <p class="text-gray-600 text-sm">Our team offers only the best selection of affordable and luxury hotels to our clients.</p>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.service5_title') }}</h3>
+        <p class="text-gray-600 text-sm">{{ __('messages.service5_text') }}</p>
       </div>
 
       <!-- Service Card -->
@@ -140,25 +196,25 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7l10 10M7 17L17 7" />
           </svg>
         </div>
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">Best Price Guarantee</h3>
-        <p class="text-gray-600 text-sm">If you find tours that are cheaper than ours, we will compensate the difference.</p>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ __('messages.service6_title') }}</h3>
+        <p class="text-gray-600 text-sm">{{ __('messages.service6_text') }}</p>
       </div>
     </div>
   </div>
-</section>
+</section> --}}
 
 
 <div class="bg-white   " data-aos="fade-up">
-  <div class="main  py-20 bg-gray-200 w-full mx-auto text-white">
+  <div class="main  py-20 bg-gray-100 w-full mx-auto text-white">
     <div class="popular  ">
       <header class="flex flex-col items-center mb-24 text-center">
-        <span class="block text-orange-500 font-medium mb-2 text-center">POPULAR DESTINATION</span>
-        <h2 class="font-extrabold text-5xl text-center text-orange-500 ">TOP DESTINATIONS</h2>
+        <span class="block text-orange-500 font-medium mb-2 text-center">{{ __('messages.Destinations_subtitle') }}</span>
+        <h2 class="font-extrabold text-5xl text-center text-orange-500 ">{{ __('messages.Destinations_title') }}</h2>
       </header>
       <div class="list grid grid-cols-4 gap-4 mx-10">
         
         @foreach ($sites as $site)
-          <div class="shadow-md hover:shadow-lg transition-all relative bg-white border border-solid border-white">
+          {{-- <div class="shadow-md hover:shadow-lg transition-all relative bg-white border border-solid border-white">
           <a href="{{ route('site.show', $site->id) }}">
           <div class="bg-white min-h-80 ">
             <div class="overflow-hidden h-80">
@@ -172,9 +228,23 @@
             <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ Str::upper($site->name )}}</h3>
             <span class="text-sky-700">{{ Str::upper($site->address) }}</span>
           </div></a>
-        </div>
-            
+        </div> --}}
+             <div class="group relative overflow-hidden rounded-2xl shadow-lg">
+                    <div class="h-80 overflow-hidden">
+                        <img src="{{ asset('storage/'.$site->main_image) }}" alt="Red architecture" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <h3 class="text-2xl font-heading font-bold mb-2">{{   $site->getTranslation('name', app()->getLocale()) }}</h3>
+                            <p>{{   $site->getTranslation('description', app()->getLocale()) }}</p>
+                        </div>
+                    </div>
+                </div>
         @endforeach
+
+       
+
+        
       
 
         {{-- <div class="shadow-md hover:shadow-lg transition-all relative">
@@ -307,7 +377,7 @@
      
     </div>
     <a href="{{ route('sites.all') }}"> <button class="text-white h-12 bg-orange-500 w-60 mx-auto block mt-14 hover:bg-sky-600 transition-all">
-        Explore More
+       {{ __('messages.BTN_EXPLOREMORE') }}
       </button> </a>
   </div>
 </div>
@@ -369,7 +439,7 @@
 
  <section class="py-20 bg-white" data-aos="fade-up">
   <div class="max-w-7xl mx-auto px-6">
-    <h2 class="font-extrabold text-5xl text-center text-orange-500 mb-12">Local Crafts</h2>
+    <h2 class="font-extrabold text-5xl text-center text-accent mb-12"> {{ __('messages.Crafts_title') }}</h2>
 
     <div class="relative">
       <!-- Carousel Container -->
@@ -409,73 +479,14 @@
 
 
 
-<div class="bg-gray-200 " >
+<div class="bg-gray-100 " >
   <div class="main max-w-screen-7xl  py-24"  >
   <div class="popular">
     <header class="flex flex-col items-center mb-24">
-      <span class="block text-orange-500 font-medium mb-2">WHERE TO STAY</span>
-      <h2 class="font-extrabold text-5xl text-orange-500">POPULAR HOTELS / CAMPINGS</h2>
+      <span class="block text-orange-500 font-medium mb-2">{{ __('messages.Where to Stay') }}</span>
+      <h2 class="font-extrabold text-5xl text-orange-500">{{ __('messages.Accommodations_title') }}</h2>
     </header>
-    {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-8 m-4 " data-aos="fade-up">
-    @foreach ($accommodations as $accommodation)
-        <div class="group bg-gray-900 shadow-md hover:shadow-lg rounded-lg overflow-hidden transition">
-            <div class="grid grid-cols-1 sm:grid-cols-2">
-                <!-- Image -->
-                <div class="relative h-64 sm:h-80">
-                    <div class="absolute bg-rose-500 py-1.5 px-4 mt-4 ml-4 text-white rounded-md shadow">
-                        <span class="font-bold text-lg">{{ $accommodation->price_range }} DA</span>
-                        <span class="text-xs text-stone-200">/ person</span>
-                    </div>
-                    <img src="{{ asset('storage/'.$accommodation->main_image) }}" 
-                         alt="{{ $accommodation->name }}" 
-                         class="w-full h-full object-cover">
-                    <div class="bg-sky-500 py-2 px-4 absolute w-full bottom-0">
-                        <div class="flex justify-between text-xs text-white">
-                            <span class="flex items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                7/24
-                            </span>
-                            <span class="flex items-center gap-1 border-l border-white pl-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                Timimoun
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Content -->
-                <div class="p-6 relative">
-                    <a href="{{ route('accommodation.show',$accommodation->id) }}" class="absolute inset-0"></a>
-                    <h2 class="font-bold text-xl text-slate-100 mb-4 group-hover:text-rose-600">
-                        {{ $accommodation->name }}
-                    </h2>
-                    <p class="flex justify-between mb-4">
-                        <span class="text-xs text-slate-100">(17 reviews)</span>
-                        <span class="flex gap-1">
-                            @for ($i = 0; $i < 5; $i++)
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="{{ $i < 4 ? 'orange' : 'gray' }}" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.5l2.125 5.111 5.518.442-4.204 3.602 1.285 5.385-4.725-2.885-4.725 2.885 1.285-5.385-4.204-3.602 5.518-.442L11.48 3.5z"/>
-                                </svg>
-                            @endfor
-                        </span>
-                    </p>
-                    <h3 class="text-slate-700 text-sm font-medium mb-3">
-                        <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full capitalize">
-                            {{ $accommodation->type }}
-                        </span>
-                    </h3>
-                    <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">
-                        {{ ucfirst($accommodation->description) }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    @endforeach
-</div> --}}
+   
 
   <div class="max-w-7xl w-full  mx-auto    overflow-hidden ">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 m-4 w-full " data-aos="fade-up">
@@ -525,10 +536,10 @@
                 <!-- Footer -->
                 <div class="flex justify-between items-center">
                     <div class="text-sm text-gray-500">
-                        <span class="font-medium text-gray-700">{{ $accommodation->stars }} </span>Stars
+                        <span class="font-medium text-gray-700">{{ $accommodation->stars }} </span>{{ __('messages.stars') }}
                     </div>
                     <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
-                        Book Now
+                        {{ __('messages.book') }}
                     </button>
                 </div>
             </div>
@@ -539,16 +550,71 @@
    
   </div>
    <a href="{{ route("accommodations.all") }}"><button class="text-white h-12 bg-orange-500 w-60 mx-auto block mt-14 hover:bg-sky-600 transition-all">
-      See More
+       {{ __('messages.seemore') }}
     </button>
     </a>
 
 </div>
 
+  <section class="bg-white py-20 px-4 md:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold text-accent mb-4">{{ __('messages.adventures_title') }}</h2>
+                <div class="w-20 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <div class="flex items-start mb-8">
+                        <div class="bg-primary p-4 rounded-full mr-6">
+                            <i class="fas fa-camel text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">{{ __('messages.adventures_subtitle1') }}</h3>
+                            <p class="text-lg">{{ __('messages.adventures_description1') }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start mb-8">
+                        <div class="bg-primary p-4 rounded-full mr-6">
+                            <i class="fas fa-hiking text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">{{ __('messages.adventures_subtitle2') }}</h3>
+                            <p class="text-lg">{{ __('messages.adventures_description2') }}.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-primary p-4 rounded-full mr-6">
+                            <i class="fas fa-star text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-2">{{ __('messages.adventures_subtitle3') }}</h3>
+                            <p class="text-lg">{{ __('messages.adventures_description3') }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="{{ asset('./images/ksar_draa.jpg') }}" alt="Desert adventure" class="w-full h-96 object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
 
 {{--  Tours Section --}}
-<section class="bg-gray-50 py-20">
-  <div class="max-w-8xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+<section class="bg-gray-100 py-20">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
 
     <!-- Left side: Gallery-style cards -->
     <div class="grid sm:grid-cols-2 gap-6">
@@ -578,23 +644,64 @@
 
     <!-- Right side: Description -->
     <div class=" flex flex-col justify-center px-6">
-  <h2 class="text-3xl font-bold mb-6 text-orange-900">Desert Tours</h2>
+  <h2 class="text-3xl font-bold mb-6 text-orange-900"> {{ __('messages.tours_title') }}</h2>
   <p class="text-gray-700 leading-relaxed text-lg">
-    Discover the timeless beauty of the Sahara with our exclusive desert tours. 
-    Whether you’re seeking a thrilling camel ride across golden dunes, 
-    a peaceful evening under a star-filled sky, or the warmth of 
-    traditional desert hospitality, our tours are carefully designed 
-    to give you a once-in-a-lifetime experience.  
+   {{ __('messages.tours_description1') }}
     <br><br>
-    You’ll visit breathtaking landscapes, ancient caravan routes, and 
-    remote villages where local traditions are still alive. Each tour 
-    offers the perfect balance of adventure, culture, and relaxation, 
-    making it ideal for families, couples, or solo travelers. 
-    Join us to create unforgettable memories in the heart of the desert. 
+   {{ __('messages.tours_description2') }} 
   </p>
 
   </div>
 </section>
+
+
+<!-- Cultural Highlights -->
+    <section class="py-20 px-4 md:px-8 bg-white text-dark">
+        <div class="max-w-6xl mx-auto ">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-heading font-bold mb-4"> {{ __('messages.cultural_title') }} </h2>
+                <div class="w-24 h-1 bg-sahara-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center ">
+                <div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-lg backdrop-blur-sm card-hover">
+                            <i class="fas fa-utensils text-3xl text-sahara-gold mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.cultural_subtitle') }}</h3>
+                            <p>{{ __('messages.cultural_description1') }}</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg backdrop-blur-sm card-hover">
+                            <i class="fas fa-music text-3xl text-sahara-gold mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.cultural_subtitle1') }}</h3>
+                            <p>{{ __('messages.cultural_description2') }}</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg backdrop-blur-sm card-hover">
+                            <i class="fas fa-hands text-3xl text-sahara-gold mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.cultural_subtitle2') }}</h3>
+                            <p>{{ __('messages.cultural_description3') }}</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg backdrop-blur-sm card-hover">
+                            <i class="fas fa-camera text-3xl text-sahara-gold mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.cultural_subtitle3') }}</h3>
+                            <p>{{ __('messages.cultural_description4') }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div >
+                    <h3 class="text-3xl font-heading font-bold mb-6 ">{{ __('messages.cultural_subtitle4') }}</h3>
+                    <p class="text-lg mb-6">
+                       {{ __('messages.cultural_description5') }}
+                    </p>
+                    <p class="text-lg">
+                       {{ __('messages.cultural_description6') }}
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 
@@ -604,24 +711,23 @@
 
 {{-- Events section --}}
 
-<section class="bg-gray-200 py-20">
+<section class="bg-gray-100 py-20">
   <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
 
     <!-- LEFT: Text Description -->
     <div class="flex flex-col justify-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-red-900">Local Events</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-accent">{{ __('messages.events_title') }}</h2>
       <p class="text-gray-700 leading-relaxed text-lg">
-        Timimoun is not only about breathtaking landscapes—it’s also a land of vibrant traditions and unforgettable celebrations.  
-        Throughout the year, our city hosts a wide variety of events, from colorful cultural festivals and traditional music performances to artisanal fairs and spiritual gatherings.  
+        {{ __('messages.events_description1') }}
       </p>
       <p class="text-gray-700 leading-relaxed text-lg mt-4">
-        These events are the perfect opportunity to immerse yourself in the rhythm of local life, discover ancient customs that have been passed down for generations, and connect with the warm spirit of the community.  
-        Whether you’re enjoying the sound of desert drums, joining a caravan-inspired parade, or tasting local specialties at a lively souk, each event offers a unique glimpse into the soul of the Sahara.  
+        {{ __('messages.events_description2') }}
       </p>
       <p class="text-gray-700 leading-relaxed text-lg mt-4">
-        Come experience the magic—every season brings something new to celebrate!
+         {{ __('messages.events_description3') }}
       </p>
     </div>
+
 
     <!-- RIGHT: Event Cards -->
     <div class="grid grid-cols-2 gap-6">
@@ -652,147 +758,68 @@
   </div>
 </section>
 
- {{--  Food and Drinks Section --}}
-<section class="bg-gray-100 py-20" data-aos="fade-up">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="font-extrabold text-5xl text-center text-orange-500 my-10">Local Food & Drinks</h2>
 
-    <div class=" grid grid-cols-2 gap-4">
-      @foreach($foodAndDrinks as $item)
-      {{-- <div class="flex w-[500px] bg-white shadow-sm border border-gray-200 font-sans">
-    <!-- Image Section (Left) -->
-    <div class="w-1/2 bg-gray-200 flex items-center justify-center">
-        <!-- Replace with your actual image -->
-                  <img src="{{ asset('storage/' . $item->main_image) }}" class=" object-cover">
 
-    </div>
 
-    <!-- Info Section (Right) -->
-    <div class="w-1/2 p-8 text-center bg-gray-900 text-white">
-        <!-- Restaurant Name -->
-        <div class="text-3xl font-bold tracking-tight mb-1">YOUR RESTAURANT</div>
-        
-        <!-- Tagline -->
-        <div class="text-base font-light mb-6">{{ $item->getTranslation('name', app()->getLocale()) }}</div>
-        
-        <!-- Contact Info -->
-        <div class="text-sm space-y-2 font-medium">
-            <div>resto@gmail.com</div>
-            <div>{{ $item->getTranslation('name', app()->getLocale()) }}</div>
-            <div>{{ $item->getTranslation('address', app()->getLocale()) }}</div>
-            <div>US20260-0010</div>
-            <div class="mt-4">+0123456789</div>
+
+
+
+<!--!-- Local Food & Drinks -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-orange-600 mb-12">
+      Local Food & Drinks
+    </h2>
+
+    <div class="grid gap-8 md:grid-cols-2">
+      <!-- Food Card -->
+      @foreach ($foodAndDrinks as $item)
+          <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
+        <img src="{{ asset('storage/' . $item->main_image) }}" alt="Traditional Couscous" class="w-full h-60 object-cover">
+        <div class="p-6 text-left">
+          <h3 class="text-xl font-semibold flex items-center gap-2">
+            {{ $item->getTranslation('name', app()->getLocale()) }}
+          </h3>
+          <p class="text-sm text-gray-500">{{ $item->type }}</p>
+          <p class="mt-2 text-gray-700">{{ $item->email }}
+            </li></p>
+          <p class="text-gray-700">{{ $item->getTranslation('description', app()->getLocale()) }}</p>
+          <p class="text-gray-700">{{ $item->phone }}</p>
         </div>
-        
-        <!-- Photo Credit -->
-        <div class="mt-8 text-xs">PHOTO@KING</div>
-    </div>
-</div> --}}
-
- <a href="{{ route('food.show',$item->id) }}"><div class="relative max-w-4xl mx-auto rounded-lg shadow-lg flex overflow-hidden bg-[#1a1a1a]">
-
-    <!-- Top-left orange corner -->
-    <div class="absolute top-0 left-0 w-14 h-14 bg-orange-500 rotate-45 origin-top-left z-20"></div>
-
-    <!-- Bottom-right orange corner -->
-    <div class="absolute bottom-0 right-0 w-14 h-14 bg-orange-500 rotate-45 origin-bottom-right z-20"></div>
-
-    <!-- Left Image Section -->
-    <div class="relative w-1/2">
-        <img src="{{ asset('storage/' . $item->main_image) }}" alt="Pizza" class="w-full h-full object-cover">
-
-        <!-- Blend effect -->
-        <div class="absolute inset-0 bg-black bg-opacity-10 mix-blend-multiply"></div>
-
-        <!-- Optional shadow gradient -->
-        <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
-    </div>
-
-    <!-- Right Content Section -->
-    <div class="w-1/2 p-8 text-white flex flex-col justify-center space-y-4">
-
-        <!-- Logo/Title -->
-        <div class="flex items-center gap-3">
-            <div class="text-3xl text-orange-500">🍕</div>
-            <div>
-                <h2 class="text-xl font-bold">{{ $item->getTranslation('name', app()->getLocale()) }}</h2>
-                <p class="text-xs text-gray-300">{{ $item->type }}</p>
-            </div>
-        </div>
-
-        <!-- Contact Info -->
-        <ul class="space-y-3 text-sm">
-            <li class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-orange-500"><!-- email icon --></svg> resto@gmail.com
-            </li>
-            <li class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-orange-500"><!-- globe icon --></svg> www.restoyoursite.com
-            </li>
-            <li class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-orange-500"><!-- location icon --></svg> {{ $item->getTranslation('address', app()->getLocale()) }}
-            </li>
-            <li class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-orange-500"><!-- phone icon --></svg> +0 123 456 789
-            </li>
-        </ul>
-
-    </div>
-</div></a>
-
-
-
-        
+      </div>
       @endforeach
+      
+
+     
     </div>
   </div>
 </section>
 
 
+<!-- Travel Agencies -->
+<section class="py-16 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold text-orange-600 mb-12">
+      Travel Agencies
+    </h2>
 
-{{-- Travel Agencies Section --}}
-
-<section class="bg-gray-200 py-20">
-  <div class="max-w-7xl mx-auto px-4">
-   <h2 class="font-extrabold text-5xl text-center text-orange-500 my-10">Travel Agencies</h2>
-
-    <div class="grid sm:grid-cols-1 md:grid-cols-6 gap-6">
-      @foreach($travels as $agency)
-        <div class="bg-gray-50 border border-gray-200 rounded-xl  flex gap-4 shadow hover:shadow-md transition"
-       >
-
-          {{-- Optional Logo --}}
-          @if($agency->main_image)
-            <a href="{{ route('travel.show',$agency->id) }}"><img src="{{ asset('storage/' . $agency->main_image) }}"
-                 class="w-full h-full object-contain rounded-md border" alt="Agency Logo"></a>
-          @else
-            <div class="w-20 h-20 bg-gray-200 rounded-md flex items-center justify-center text-gray-500 text-sm">
-              No Logo
-            </div>
-          @endif
-
-          {{-- Info --}}
-          {{-- <div class="flex-1">
-            <h3 class="text-xl font-semibold text-gray-800">
-              {{ $agency->getTranslation('name', app()->getLocale()) }}
-            </h3>
-
-            <div class="text-sm text-gray-600 mt-2 space-y-1">
-              @if($agency->address)
-                <p><i class="fa-solid fa-location-dot text-orange-500 mr-1"></i> {{ $agency->address }}</p>
-              @endif
-              @if($agency->phone)
-                <p><i class="fa-solid fa-phone text-orange-500 mr-1"></i> {{ $agency->phone }}</p>
-              @endif
-              @if($agency->email)
-                <p><i class="fa-solid fa-envelope text-orange-500 mr-1"></i> {{ $agency->email }}</p>
-              @endif
-            </div>
-          </div> --}}
+    <div class="grid gap-8 md:grid-cols-3">
+      @foreach ($travels as $item)
+        <div class="bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
+        <img src="{{ asset('storage/' . $item->main_image) }}" alt="{{ $item->getTranslation('name', app()->getLocale()) }}" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h3 class="text-lg font-semibold">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
+          <p class="text-gray-600 mt-2">{{ $item->getTranslation('description', app()->getLocale()) }}</p>
         </div>
+      </div>
+          
       @endforeach
+    
+
     </div>
   </div>
 </section>
+
 
 
 
@@ -819,6 +846,74 @@
     </div>
   </div>
 </section> --}}
+
+
+
+<!-- Experiences -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">  {{ __('messages.experiance_title') }}</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="rounded-2xl border bg-white p-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
+            <!-- Icon -->
+            <svg class="w-6 h-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7" />
+            </svg>
+          </div>
+          <h3 class="font-semibold">{{ __('messages.experiance_subtitle') }}</h3>
+        </div>
+        <p class="mt-3 text-gray-600">{{ __('messages.experiance_description1') }}</p>
+      </div>
+
+      <div class="rounded-2xl border bg-white p-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 13V7a2 2 0 00-2-2h-3l-2-2H9L7 5H4a2 2 0 00-2 2v6" />
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M1 13h22M6 16h.01M10 16h.01M14 16h.01M18 16h.01" />
+            </svg>
+          </div>
+          <h3 class="font-semibold">{{ __('messages.experiance_subtitle1') }}</h3>
+        </div>
+        <p class="mt-3 text-gray-600">{{ __('messages.experiance_description2') }}</p>
+      </div>
+
+      <div class="rounded-2xl border bg-white p-6">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8c2.21 0 4-1.79 4-4S14.21 0 12 0 8 1.79 8 4s1.79 4 4 4zM6 22v-2a4 4 0 014-4h4a4 4 0 014 4v2" />
+            </svg>
+          </div>
+          <h3 class="font-semibold">{{ __('messages.experiance_subtitle2') }}</h3>
+        </div>
+        <p class="mt-3 text-gray-600">{{ __('messages.experiance_description3') }}</p>
+      </div>
+
+       
+      <div class="rounded-2xl border bg-white p-6">
+        <div class="text-sm text-orange-600 font-semibold">{{ __('messages.experiance_subtitle3') }}</div>
+        <h3 class="mt-2 font-semibold">{{ __('messages.experiance_subsubtitle') }}</h3>
+        <p class="mt-2 text-gray-600">{{ __('messages.experiance_description4') }}</p>
+      </div>
+      <div class="rounded-2xl border bg-white p-6">
+        <div class="text-sm text-orange-600 font-semibold">{{ __('messages.experiance_subtitle4') }}</div>
+        <h3 class="mt-2 font-semibold">{{ __('messages.experiance_subsubtitle1') }}</h3>
+        <p class="mt-2 text-gray-600">{{ __('messages.experiance_description5') }}</p>
+      </div>
+      <div class="rounded-2xl border bg-white p-6">
+        <div class="text-sm text-orange-600 font-semibold">{{ __('messages.experiance_subtitle5') }}</div>
+        <h3 class="mt-2 font-semibold">{{ __('messages.experiance_subsubtitle2') }}</h3>
+        <p class="mt-2 text-gray-600">{{ __('messages.experiance_description6') }}</p>
+      </div>
+
+
+
+   
+  </div>
+</section>
 
 
 
