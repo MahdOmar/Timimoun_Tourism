@@ -195,7 +195,7 @@
         const html = `
       <a href="/craft/${item.id}">
         <div class="craft-card bg-white rounded-lg overflow-hidden shadow-md cursor-pointer relative">
-          <div class="h-60 bg-cover bg-center relative" style="background-image: url('storage/${item.main_image}');">
+          <div class="h-60 bg-cover bg-center relative" style="background-image: url('{{ asset('storage/${item.main_image}') }}');">
             <div class="info-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-white p-4">
               <h3 class="text-lg font-bold text-center">${item.name[locale]}</h3>
               <p class="text-primary font-bold text-lg mt-2">${item.min_price}</p>

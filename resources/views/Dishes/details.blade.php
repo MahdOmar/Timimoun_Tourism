@@ -37,20 +37,10 @@
                 <section class="mb-8">
                     <h2 class="text-3xl font-bold mb-4 text-orange-500">About {{ $food->getTranslation('name', app()->getLocale()) }}</h2>
                     <p class="text-lg mb-4 leading-relaxed">
-                        Gusto Italiano brings the authentic taste of Italy to the heart of the city. Founded in 2005 by Master Chef Antonio Rossi, our restaurant combines traditional recipes with modern culinary techniques to create an unforgettable dining experience.
+                       {{ $food->getTranslation('description', app()->getLocale()) }}
                     </p>
-                    <p class="text-lg mb-4 leading-relaxed">
-                        Our ingredients are sourced directly from Italy and local organic farms, ensuring the highest quality and freshness in every dish. The warm, inviting atmosphere makes Gusto Italiano the perfect place for romantic dinners, family gatherings, and business meetings.
-                    </p>
-                    <div class="bg-accent p-6 rounded-xl mt-6">
-                        <h3 class="text-xl font-semibold mb-2 text-orange-500">Specialties</h3>
-                        <ul class="list-disc list-inside">
-                            <li>Handmade pasta with truffle sauce</li>
-                            <li>Wood-fired Neapolitan pizza</li>
-                            <li>Osso Buco alla Milanese</li>
-                            <li>Tiramisu made from secret family recipe</li>
-                        </ul>
-                    </div>
+                 
+                  
                 </section>
 
                 <!-- Gallery Section -->
@@ -111,7 +101,7 @@
                 </div> --}}
 
                 <!-- Contact Info -->
-                <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                {{-- <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
                     <h3 class="text-2xl font-bold mb-4 text-orange-500">Contact Information</h3>
                     <div class="space-y-4">
                         <div class="flex items-start">
@@ -145,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Price Range -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
@@ -153,7 +143,7 @@
                     <div class="mb-4">
                         <div class="flex justify-between mb-2">
                             <span class="text-gray-700">Price Range</span>
-                            <span class="text-gray-700">{{ $food->min_price }} - {{ $food->max_price }} DA</span>
+                            <span class="text-gray-700">{{ $food->minPrice() }} - {{ $food->maxPrice() }} DA</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2.5">
                             <div class="bg-primary h-2.5 rounded-full" style="width: 45%"></div>
@@ -161,18 +151,53 @@
                     </div>
                    
                     <div class="mt-6 bg-secondary p-4 rounded-lg">
-                        <p class="text-dark font-semibold">Average meal: {{ (($food->min_price + $food->max_price) /2) - 300  }} - {{ (($food->min_price + $food->max_price) /2) + 300  }} per person</p>
+                        <p class="text-dark font-semibold">Average meal: {{ round($food->averagePrice()) }} DA </p>
                     </div>
                 </div>
             </div>
         </div>
+
+           <!-- Related Sites -->
+      @if(isset($food->restaurants) && $food->restaurants->count() > 0)
+        <h2 class="text-2xl font-semibold text-gray-800 mt-12 mb-6">Providers</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          @foreach($food->restaurants as $related)
+            <a href="{{ route('food.show', $related->id) }}" class="group block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+              <div class="h-40">
+                <img src="{{ asset('storage/'.$related->main_image) }}" 
+                     alt="{{ $related->getTranslation('name', app()->getLocale()) }}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition">
+              </div>
+              <div class="p-4">
+                 <h3 class="font-semibold text-gray-800 group-hover:text-indigo-600 truncate">
+                   {{ $related->getTranslation('name', app()->getLocale()) }}
+                </h3>
+                
+                <h4 class=" text-gray-800 group-hover:text-indigo-600 truncate">
+                 Includes
+                </h4>
+                <p class="text-sm text-gray-500 mt-1 truncate">
+                  {{   $related->pivot->getTranslation('includes', app()->getLocale()) }}
+                </p>
+                <div class="card-price">
+                  {{ $related->pivot->price }} DA
+                </div>
+              </div>
+            </a>
+          @endforeach
+        </div>
+      @endif
+
+
     </main>
 
-    @if (count($food->reviews) > 0)
-          <!-- Reviews -->
+    @if ($food->reviews->count() > 0)
+       <!-- Reviews -->
    <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
+           @if ($food->reviews->count() > 0)
+               <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
+           @endif 
             @foreach ($food->reviews as $item)
                  
             <div class="bg-white rounded-xl shadow-md p-6 mb-6">
@@ -197,16 +222,16 @@
            
             
            
-            <div class="text-center mt-8">
+            {{-- <div class="text-center mt-8">
                 <button class="px-6 py-3 border-2 border-primary text-primary rounded-full font-medium hover:bg-primary hover:text-white transition">
                     Load More Reviews
                 </button>
-            </div>
+            </div> --}}
         </div>
     </section>
-
     @endif
-    
+     
+
   
     
 

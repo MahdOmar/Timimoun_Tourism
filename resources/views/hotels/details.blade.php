@@ -2,164 +2,6 @@
 
 @section('content')
 
-{{-- 
-
-<div class="bg-gray-100">
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex flex-wrap -mx-4">
-      <!-- Product Images -->
-      <div class="w-full md:w-1/2 px-4 mb-8 ">
-       
-         <img src=" {{ asset('storage/'.$accommodation->main_image) }} " alt="Product"
-                    class="w-full h-[500px] rounded-lg shadow-md mb-4 object-cover" id="mainImage"  >
-            
-       
-       
-        <div class="flex gap-4 py-4 justify-center overflow-x-auto">
-          <img src=" {{ asset('storage/'.$accommodation->main_image) }} " alt="Thumbnail 1"
-                    class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300 w-full h-auto" onclick="changeImage(this.src)">
-           @foreach ($accommodation->gallery as $item)
-          <img src="{{ asset('storage/'.$item->path) }}" alt="Thumbnail 1"
-                        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300 w-full h-auto"
-                        onclick="changeImage(this.src)">
-
-        @endforeach
-        </div>
-        
-      </div>
-
-      <!-- Hotel Details -->
-      <div class="w-full md:w-1/2 px-4 bg-white rounded-lg shadow overflow-hidden py-4">
-        <h2 class="text-3xl font-bold mb-2">{{ $accommodation->getTranslation('name', app()->getLocale()) }}</h2>
-        <p class="text-gray-600 mb-4">{{ $accommodation->type }}</p>
-        <div class="mb-4">
-          <span class="text-2xl font-bold mr-2">{{ $accommodation->min_price }} - {{ $accommodation->max_price }} DA </span>
-           <span class="text-gray-500 line-through">{{ $accommodation->max_price }}</span> --}}
-      {{--  </div>
-        <div class="flex items-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="size-6 text-yellow-500">
-            <path fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-              clip-rule="evenodd" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="size-6 text-yellow-500">
-            <path fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-              clip-rule="evenodd" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="size-6 text-yellow-500">
-            <path fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-              clip-rule="evenodd" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="size-6 text-yellow-500">
-            <path fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-              clip-rule="evenodd" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-            class="size-6 text-yellow-500">
-            <path fill-rule="evenodd"
-              d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-              clip-rule="evenodd" />
-          </svg>
-          <span class="ml-2 text-gray-600">4.5 (120 reviews)</span>
-        </div>
-        <p class="text-gray-700 mb-6">{{ $accommodation->getTranslation('description', app()->getLocale()) }}</p>
-
-       
-
-       
-
-      
-        <div>
-          <h3 class="text-lg font-semibold mb-2">Key Features:</h3>
-          <ul class="list-disc list-inside text-gray-700">
-            @foreach ($accommodation->amenities as $item)
-            <li>{{ $item }}</li>
-                
-            @endforeach
-            
-            
-          </ul>
-        </div>
-        <!-- Contact Info + Map Below -->
-    <div class="grid md:grid-cols-2 gap-6 mt-10">
-      
-      <!-- Contact Info -->
-      <div class="bg-white rounded-lg shadow-lg p-5">
-        <h3 class="text-lg font-semibold mb-3 ">Contact Information</h3>
-        <ul class="text-gray-700 text-sm space-y-2">
-          @if($accommodation->phone)
-            <li>📞 <a href="tel:{{ $accommodation->phone }}" class="hover:underline">{{ $accommodation->phone }}</a></li>
-          @endif
-          @if($accommodation->email)
-            <li>📧 <a href="mailto:{{ $accommodation->email }}" class="hover:underline">{{ $accommodation->email }}</a></li>
-          @endif
-          @if($accommodation->website)
-            <li>🌐 <a href="{{ $accommodation->website }}" target="_blank" class="text-indigo-600 hover:underline">Visit Website</a></li>
-          @endif
-        </ul>
-      </div>
-
-      <!-- Map -->
-      @if($accommodation->latitude && $accommodation->longitude)
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <h3 class="text-lg font-semibold p-4">Location</h3>
-        <iframe 
-          width="100%" 
-          height="250" 
-          frameborder="0" 
-          style="border:0"
-          src="https://www.google.com/maps?q={{ $accommodation->latitude }},{{ $accommodation->longitude }}&hl=en&z=14&output=embed"
-          allowfullscreen>
-        </iframe>
-      </div>
-      @endif
-
-    </div>
-  </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Related Accommodations -->
-    @if(isset($relatedAccommodations) && $relatedAccommodations->count() > 0)
-    <div class="mt-12 px-6 py-6 bg-white rounded-xl shadow m-4">
-      <h2 class="text-2xl font-bold mb-6">Related Accommodations</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        @foreach($relatedAccommodations as $related)
-          <a href="{{ route('accommodations.show', $related->id) }}" 
-             class="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-            <img src="{{ asset('storage/'.$related->main_image) }}" 
-                 alt="{{ $related->getTranslation('name', app()->getLocale()) }}"
-                 class="w-full h-40 object-cover">
-            <div class="p-4">
-              <h3 class="font-semibold text-gray-800">
-                {{ $related->getTranslation('name', app()->getLocale()) }}
-              </h3>
-              <p class="text-sm text-gray-600 capitalize">{{ $related->type }}</p>
-              <p class="text-indigo-600 font-bold mt-2">{{ $related->min_price }} - {{ $related->max_price }} DA</p>
-            </div>
-          </a>
-        @endforeach
-      </div>
-    </div>
-    @endif
-  
-
-  <script>
-    function changeImage(src) {
-     
-            document.getElementById('mainImage').src = src;
-        }
-  </script>
-</div> --}}
-
 
   <main class="max-w-7xl mx-auto px-4 py-8">
         <!-- Hotel Header -->
@@ -274,7 +116,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               @foreach ($accommodation->amenities as $item)
                   
-              @if ($item == 'Pool')
+              @if ($item == 'pool')
               <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-water"></i>
@@ -285,10 +127,10 @@
                 @elseif ($item == 'wifi')
                   <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
-                        <i class="fas fa-utensils"></i>
+                        <i class="fas fa-wifi"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Fine Dining</h3>
-                    <p class="text-gray-600">5 restaurants offering international and local cuisine</p>
+                    <h3 class="text-xl font-semibold mb-2">Free Wifi</h3>
+                    <p class="text-gray-600">High speed Wifi Available 24/7</p>
                 </div>
 
                  @elseif ($item == 'restaurant')
@@ -298,7 +140,7 @@
                         <i class="fas fa-utensils"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Fine Dining</h3>
-                    <p class="text-gray-600">5 restaurants offering international and local cuisine</p>
+                    <p class="text-gray-600"> restaurant offering international and local cuisine</p>
                 </div>
 
                   @elseif ($item == 'spa')
@@ -327,7 +169,7 @@
 
                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
-                        <i class="fas fa-dumbbell"></i>
+                        <i class="fas fa-square-parking"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Parking</h3>
                     <p class="text-gray-600">24/7 Parking with professional sécurity</p>
@@ -417,70 +259,6 @@
             </div>
         </section>
 
-        <!-- Testimonials -->
-        {{-- <section class="mb-16">
-            <h2 class="text-3xl font-bold text-dark mb-2 text-center heading-font">Guest Reviews</h2>
-            <p class="text-gray-600 text-center mb-8">What our guests say about their stay</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="testimonial-card p-6 text-white">
-                    <div class="flex items-center mb-4">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBvcnRyYWl0fGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60" 
-                             alt="Guest" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-semibold">Michael Johnson</h4>
-                            <p class="text-blue-100">Stayed 5 nights</p>
-                        </div>
-                    </div>
-                    <p class="italic">"The most breathtaking hotel I've ever stayed at. The service was impeccable and the views were absolutely stunning. We'll definitely be returning next year!"</p>
-                    <div class="flex text-yellow-300 mt-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBvcnRyYWl0fGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60" 
-                             alt="Guest" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-semibold">Sarah Williams</h4>
-                            <p class="text-gray-600">Honeymoon Stay</p>
-                        </div>
-                    </div>
-                    <p class="italic text-gray-700">"Our honeymoon was absolutely perfect thanks to Luxury Heights. The staff went above and beyond to make our stay special. The private dinner on the beach was magical!"</p>
-                    <div class="flex text-yellow-400 mt-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=200&q=60" 
-                             alt="Guest" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-semibold">Robert Chen</h4>
-                            <p class="text-gray-600">Family Vacation</p>
-                        </div>
-                    </div>
-                    <p class="italic text-gray-700">"We traveled with our two young children and the hotel was extremely accommodating. The family suite was spacious and the kids loved the children's pool and activities."</p>
-                    <div class="flex text-yellow-400 mt-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
 
         <!-- Location & Contact -->
         <section class="mb-16">
@@ -533,7 +311,161 @@
                                 <p class="text-gray-600">Open 24 hours</p>
                             </div>
                         </div>
+
+                       
                     </div>
+                     <!-- Modal -->
+<div x-data="{ open: false }">
+    <!-- Reservation Button -->
+    <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4" @click="open = true" class="px-4 py-2 bg-blue-600 text-white rounded-lg"">
+                            <i class="fas fa-calendar-check mr-2"></i>Book Now
+                        </button>
+
+    <!-- Reservation Modal -->
+    <div x-show="open"
+         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+         x-cloak>
+        <div @click.away="open = false"
+             class="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6">
+
+            <div class="bg-gradient-to-r from-primary to-secondary p-6 text-white relative">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold flex items-center">
+                        <i class="fas fa-hotel mr-3"></i>
+                        Hotel Reservation Request
+                    </h2>
+                    <button class="text-white hover:text-gray-200 transition-colors "@click="open = false">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-blue-100 mt-2">Book your stay at {{  $accommodation->getTranslation('name', app()->getLocale()) }}</p>
+                
+              
+            </div>
+            
+            <!-- Modal Body -->
+            <form action="{{ route('accommodations.reservation')}}" method="POST" enctype="multipart/form-data">
+              @csrf
+            <div class="p-6">
+              
+              <input type="text" name="hotel_email" value="{{ $accommodation->email }}" hidden>
+
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-primary"></i>
+                            Name
+                        </label>
+                        <div class="relative">
+                            <input type="text" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your name" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fa-solid fa-envelope mr-2 text-primary"></i>
+                            Email
+                        </label>
+                        <div class="relative">
+                            <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your email" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-phone mr-2 text-primary"></i>
+                            Phone
+                        </label>
+                        <div class="relative">
+                            <input type="text" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your phone" required>
+                        </div>
+                    </div>
+                     <div class="mb-6">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-users mr-2 text-primary"></i>
+                        Guests
+                    </label>
+                  
+                    <input type="number" name="guests" min="1" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 2" required>
+
+                    
+                </div>
+                </div>
+
+
+
+                <!-- Dates Selection -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-primary"></i>
+                            Check-in
+                        </label>
+                        <div class="relative">
+                            <input type="date" name="checkin" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" id="checkin" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-check mr-2 text-primary"></i>
+                            Check-out
+                        </label>
+                        <div class="relative">
+                            <input type="date" name="checkout" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"  id="checkout" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Guests Selection -->
+               
+                
+                <!-- Room Type -->
+                <div class="mb-6">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-bed mr-2 text-primary"></i>
+                        Room Type
+                    </label>
+                    <div class="relative">
+                        <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition appearance-none" name="room_type">
+                            <option selected value="Standard Room">Standard Room</option>
+                            <option value="Deluxe Room">Deluxe Room</option>
+                            <option value="Suite">Suite</option>
+                           
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Special Requests -->
+                <div class="mb-4">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-concierge-bell mr-2 text-primary"></i>
+                        Special Requests
+                    </label>
+                    <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" name="message" rows="2" placeholder="Any special requests?"></textarea>
+                </div>
+              
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-between">
+                 <button type="button" @click="open = false"
+                            class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
+                        Cancel
+                    </button>
+                <button type="submit" class="px-5 py-2 rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors flex items-center">
+                    <i class="fas fa-check mr-2"></i>
+                    Confirm Booking
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
                 </div>
                 
                 <div class="bg-gray-200 rounded-xl shadow-md overflow-hidden">
@@ -544,6 +476,8 @@
         </section>
     </main>
  
+@if ($accommodation->reviews->count() > 0)
+    
 
 <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
@@ -579,6 +513,8 @@
             </div>
         </div>
     </section>
+
+    @endif
 
   
     
@@ -655,6 +591,11 @@
 
 
 
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
 <script>
   // ⭐ Star Rating Script
   const stars = document.querySelectorAll('#starRating .star');
@@ -669,5 +610,45 @@
       });
     });
   });
+
+
+
+  function openLinkModal(dishId) {
+
+  
+    const modal = document.getElementById('linkModal');
+    document.getElementById('dish_id').value = dishId;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeLinkModal() {
+    const modal = document.getElementById('linkModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+$( document ).ready(function() {
+    const checkin = document.getElementById('checkin');
+  const checkout = document.getElementById('checkout');
+
+  // Set today's date as minimum for check-in
+  const today = new Date().toISOString().split('T')[0];
+  checkin.setAttribute('min', today);
+
+  // When check-in changes, update check-out's min
+  checkin.addEventListener('change', function () {
+    checkout.value = ""; // reset checkout if before checkin
+    checkout.setAttribute('min', this.value);
+  });
+
+  
+});
+
+
+
+
+
+
 </script>
 @endsection

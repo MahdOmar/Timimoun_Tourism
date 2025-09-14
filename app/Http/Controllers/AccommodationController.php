@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Accommodation;
 use App\Models\AccommodationImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 use function Laravel\Prompts\error;
@@ -343,6 +344,46 @@ $query = Accommodation::query();
 
 
   } 
+
+
+  public function reservation(Request $request)
+  {
+    $data = $request->validate([
+            'hotel_email' => 'required|email',
+            'name'        => 'required|string|max:255',
+            'email'       => 'required|email',
+            'phone'       => 'nullable|string',
+            'checkin'    => 'required|date|after:today',
+            'checkout'   => 'required|date|after:check_in',
+            'guests'      => 'required|integer|min:1',
+            'room_type'   => 'nullable|string',
+            'message'     => 'nullable|string',
+        ]);
+
+
+      
+        // Send email directly to hotel
+          Mail::send([], [], function ($message) use ($data) {
+            $message->to($data['hotel_email'])
+                ->subject('New Reservation Request')
+                ->from(config('mail.from.address'), config('mail.from.name'))
+                ->html("
+            <h2>New Reservation Request</h2>
+            <p><strong>Name:</strong> {$data['name']}</p>
+            <p><strong>Email:</strong> {$data['email']}</p>
+             <p><strong>Phone:</strong> {$data['phone']}</p>
+            <p><strong>Guests:</strong> {$data['guests']}</p>
+            <p><strong>Check-in:</strong> {$data['checkin']}</p>
+            <p><strong>Check-out:</strong> {$data['checkout']}</p>
+            <p><strong>Room Type:</strong> {$data['room_type']}</p>
+            <p><strong>Message:</strong> {$data['message']}</p>
+        ");
+        });
+
+        return back()->with('success', 'Your reservation request has been sent!');
+    }
+
+  
 
 
 

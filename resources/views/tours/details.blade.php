@@ -45,6 +45,8 @@
         </div>
 
         <div class="mb-6">
+          <h3 class="text-lg font-semibold mb-3 ">Stops: {{ $tour->stops}} Destinations</h3>
+           
         <h3 class="text-lg font-semibold mb-3 ">What includes ?</h3>
 
        
@@ -83,13 +85,136 @@
       </div>
 
       <!-- CTA -->
-      <div class="flex gap-4">
-        <a href="#" class="bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition">
-          Book Now
-        </a>
-        <a href="" class="px-6 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 transition">
-          Back to Tours
-        </a>
+      <div class="">
+                <!-- Modal -->
+<div x-data="{ open: false }">
+    <!-- Reservation Button -->
+    <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4" @click="open = true" class="px-4 py-2 bg-blue-600 text-white rounded-lg"">
+                            <i class="fas fa-calendar-check mr-2"></i>Book Now
+     </button>
+
+    <!-- Reservation Modal -->
+    <div x-show="open"
+         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+         x-cloak>
+        <div @click.away="open = false"
+             class="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6">
+
+            <div class="bg-gradient-to-r from-primary to-secondary p-6 text-white relative">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold flex items-center">
+                        <i class="fas fa-hotel mr-3"></i>
+                        Tour Reservation Request
+                    </h2>
+                    <button class="text-white hover:text-gray-200 transition-colors "@click="open = false">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-blue-100 mt-2">Book your Tour with {{  $tour->getTranslation('name', app()->getLocale()) }}</p>
+                
+              
+            </div>
+            
+            <!-- Modal Body -->
+            <form action="{{ route('tour.reservation') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+            <div class="p-6">
+              
+              <input type="text" name="tour_email" value="{{ $tour->email }}" hidden>
+              <input type="text" name="tour_name" value="{{  $tour->getTranslation('name', app()->getLocale()) }}" hidden>
+
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-primary"></i>
+                            Name
+                        </label>
+                        <div class="relative">
+                            <input type="text" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your name" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fa-solid fa-envelope mr-2 text-primary"></i>
+                            Email
+                        </label>
+                        <div class="relative">
+                            <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your email" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-phone mr-2 text-primary"></i>
+                            Phone
+                        </label>
+                        <div class="relative">
+                            <input type="text" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your phone" required>
+                        </div>
+                    </div>
+                     <div class="mb-6">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-users mr-2 text-primary"></i>
+                        Guests
+                    </label>
+                  
+                    <input type="number" name="guests" min="1" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 2" required>
+
+                    
+                </div>
+                </div>
+
+
+
+                <!-- Dates Selection -->
+                <div class=" mb-4">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-primary"></i>
+                           Date
+                        </label>
+                        <div class="relative">
+                            <input type="date" name="date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" id="checkin" required>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+              
+               
+                
+              
+                
+                <!-- Special Requests -->
+                <div class="mb-4">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-concierge-bell mr-2 text-primary"></i>
+                        Special Requests
+                    </label>
+                    <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" name="message" rows="2" placeholder="Any special requests?"></textarea>
+                </div>
+              
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-between">
+                 <button type="button" @click="open = false"
+                            class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
+                        Cancel
+                    </button>
+                <button type="submit" class="px-5 py-2 rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors flex items-center">
+                    <i class="fas fa-check mr-2"></i>
+                    Confirm Booking
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+       
       </div>
     </div>
   </div>
@@ -130,14 +255,15 @@
   </div>
   @endif --}}
 
-  <div id="map" class="w-full h-96 rounded-lg shadow-md mt-6"></div>
+  {{-- <div id="map" class="w-full h-96 rounded-lg shadow-md mt-6"></div> --}}
 
 
 
 
 </section>
 
- <section class=" py-8">
+@if ($tour->reviews && count($tour->reviews) > 0)
+     <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
             @foreach ($tour->reviews as $item)
@@ -171,6 +297,8 @@
             </div>
         </div>
     </section>
+@endif
+
 
   
     
@@ -262,6 +390,7 @@
 </script>
 
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -281,7 +410,7 @@
         // Add routing control
         L.Routing.control({
             waypoints: [
-                L.latLng(s_lat, s_lng),       // accommodation
+                L.latLng(s_lat, s_lng),       // tour
                 L.latLng(e_lat, e_lng) // related site
             ],
             routeWhileDragging: true,
@@ -291,4 +420,15 @@
         }).addTo(map);
 
     });
+
+    $( document ).ready(function() {
+    const checkin = document.getElementById('checkin');
+
+  // Set today's date as minimum for check-in
+  const today = new Date().toISOString().split('T')[0];
+  checkin.setAttribute('min', today);
+
+  
+  
+});
 </script>

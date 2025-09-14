@@ -193,6 +193,15 @@
                         </li>
 
                          <li>
+                            <a href="{{ route('traditionaldish.index') }}" class="flex items-center py-3 px-4  rounded-lg transition-colors group {{ request()->is('dashboard/foodanddrink*') 
+                            ? 'bg-blue-700 text-white' 
+                            : 'text-blue-200 hover:bg-blue-700' }}">
+                                <i class="fas fa-building mr-3"></i>
+                                Dishes
+                            </a>
+                        </li>
+
+                         <li>
                             <a href="{{ route('travelagency.index') }}" class="flex items-center py-3 px-4  rounded-lg transition-colors group {{ request()->is('dashboard/travelagency*') 
                             ? 'bg-blue-700 text-white' 
                             : 'text-blue-200 hover:bg-blue-700' }}">

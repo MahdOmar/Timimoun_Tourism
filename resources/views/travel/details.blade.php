@@ -222,7 +222,8 @@
         </div>
     </main>
 
-      <!-- Reviews -->
+    @if ($travel->reviews->count() > 0)
+         <!-- Reviews -->
   <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
@@ -257,6 +258,8 @@
             </div>
         </div>
     </section>
+    @endif
+   
 
   
     

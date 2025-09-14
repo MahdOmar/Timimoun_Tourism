@@ -567,7 +567,7 @@
                 <div>
                     <div class="flex items-start mb-8">
                         <div class="bg-primary p-4 rounded-full mr-6">
-                            <i class="fas fa-camel text-white text-2xl"></i>
+                            <i class="fas fa-horse text-white text-2xl"></i>
                         </div>
                         <div>
                             <h3 class="text-2xl font-semibold mb-2">{{ __('messages.adventures_subtitle1') }}</h3>

@@ -247,7 +247,7 @@ async function sort(category,filter) {
            const html = `
       <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
         <div class="relative">
-          <img src="storage/${item.main_image}" 
+          <img src="{{ asset('storage/${item.main_image}') }}" 
                alt="${item.name[locale]}" class="w-full h-48 object-cover">
           <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-2 py-1 rounded">${item.type}</span>
           <span class="absolute top-4 right-4 bg-white text-gray-800 text-xs px-2 py-1 rounded font-medium">${item.price} / ${item.unit}</span>
@@ -263,7 +263,7 @@ async function sort(category,filter) {
               <span class="font-medium">${Math.round(getAverageRating(item.reviews))}</span>
               <span class="text-gray-500 ml-1">(${item.reviews.length} reviews)</span>
             </div>
-            <a href="/rentals/${item.id}">
+            <a href="/rental/${item.id}">
               <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
                 View Details
               </button>

@@ -164,7 +164,8 @@
 
     
      @endif
-    <section class=" py-8">
+     @if (count($craft->reviews) > 0)
+          <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
             @foreach ($craft->reviews as $item)
@@ -199,6 +200,8 @@
         </div>
     </section>
 
+     @endif
+   
   
     
 

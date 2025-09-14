@@ -3,7 +3,7 @@
 @section('content')
 
  <div class="container mx-auto px-4 py-8">
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col lg:flex-row gap-8 relative">
             <!-- Left Column - Images & Details -->
             <div class="lg:w-2/3">
                 <!-- Main Image -->
@@ -43,7 +43,17 @@
                             <span class="font-medium">{{ round($rental->averageRating()) }}</span>
                             <span class="text-gray-500 ml-1">({{ count($rental->reviews) }} reviews)</span>
                         </div>
+
+                        
                     </div>
+
+                     <div class="flex items-center mr-6">
+                            
+                            <div class="absolute top-4 left-4 bg-yellow-500 text-black px-3 py-1 font-semibold rounded-md">
+                              <i class="fas fa-money-bill text-dark mr-2"></i>
+                          {{ $rental->price }} DA
+                        </div>
+                        </div>
 
                   
 
@@ -74,8 +84,8 @@
             <!-- Reviews -->
     
 </div>
- 
-<section class=" py-8">
+ @if ($rental->reviews->count() > 0)
+     <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
             @foreach ($rental->reviews as $item)
@@ -109,6 +119,8 @@
             </div>
         </div>
     </section>
+ @endif
+
 
   
     

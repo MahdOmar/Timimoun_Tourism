@@ -1,14 +1,19 @@
 <?php
 
 return [
+
+  // Landing Page Translations
     'HOME' => 'HOME',
     'Where to Stay' => 'Where to Stay',
     'Things to Do' => 'Things to Do',
-    'EVENTS' => 'EVENEMENTS',
+    'EVENTS' => 'EVENTS',
     'SITES' => 'SITES',
     'Food & Drink' => 'Food & Drink',
+    'Restaurants' => 'RESTAURANTS & CAFES',
+    'DISHES' => 'Traditional Dishes',
     'Travel Agencies' => 'Travel Agencies',
     'Tours' => 'Tours',
+    'Crafts' => 'Crafts',
     'Rentals' => 'Rentals',
     'Essential Services' => 'Essential Services',
     'CRAFTS' => 'CRAFTS',
@@ -151,7 +156,27 @@ return [
         'footer_crafts' => 'Crafts',
         'footer_rentals' => 'Rentals',
 
-    
+
+// END Landing Page Translations
+
+// Accommodation index Translation
+
+  'accommodation_index_title' => 'Find Your Perfect Stay',
+  'accommodation_index_subtitle' => 'Discover the best hotels around the world with our curated selection',
+  'accommodation_index_filter' => 'Filter',
+  'accommodation_index_sort' => 'Sort by',
+  'accommodation_index_default' => 'Default',
+  'accommodation_index_low' => 'Price: Low to High',
+  'accommodation_index_high' => 'Price: High to Low',
+  'accommodation_index_rating' => 'Rating',
+  'accommodation_index_found' => 'Accommodations Found',
+  'accommodation_index_price_range' => 'Price Range',
+  'accommodation_index_star' => 'Star Rating',
+  'accommodation_index_type' => 'Property Type',
+  'accommodation_index_amenities' => 'Amenities',
+  'accommodation_index_apply_filter' => 'Apply Filters',
+  'accommodation_index_reset_filter' => 'Reset Filters',
+
 
       
       

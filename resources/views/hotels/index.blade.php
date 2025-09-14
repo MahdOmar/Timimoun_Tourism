@@ -2,100 +2,7 @@
 
 @section('content')
 
-{{-- <div>
-<!-- Hotel Listings Page -->
-<div class="max-w-9xl mx-auto px-4 py-10">
-    <form method="GET" action="" class="flex flex-col lg:flex-row gap-8">
-      @csrf
 
-        <!-- Sidebar Filters -->
-        <aside class="w-full lg:w-1/4 bg-white border rounded-lg p-5 shadow">
-            <h2 class="text-xl font-semibold mb-4 text-indigo-700">Filter Your Stay</h2>
-
-           <!-- Category Filter -->
-    <div class="mb-6">
-        <h3 class="font-medium text-gray-800 mb-3">Category</h3>
-        <div class="space-y-2 text-sm text-gray-600">
-            @foreach(['hotel', 'guest-house', 'mini-villa', 'campsite'] as $category)
-                <label class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                           name="categories[]" 
-                           value="{{ $category }}" 
-                           {{ in_array($category, request()->categories ?? []) ? 'checked' : '' }}
-                           class="accent-indigo-600 rounded">
-                    <span class="capitalize">{{ str_replace('-', ' ', $category) }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    <!-- Price Filter -->
-    <div>
-        <h3 class="font-medium text-gray-800 mb-3">Price Range</h3>
-        <div class="space-y-2 text-sm text-gray-600">
-            @foreach([
-                'under_5000' => 'Under 5000 DA',
-                '5000_10000' => '5000 - 10000 DA',
-                '10000_20000' => '10000 - 20000 DA',
-            ] as $value => $label)
-                <label class="flex items-center space-x-2">
-                    <input type="checkbox" 
-                           name="prices[]" 
-                           value="{{ $value }}" 
-                           {{ in_array($value, request()->prices ?? []) ? 'checked' : '' }}
-                           class="accent-indigo-600 rounded">
-                    <span>{{ $label }}</span>
-                </label>
-            @endforeach
-        </div>
-    </div>
-
-    <button type="submit" class="mt-6 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
-        Apply Filters
-    </button>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="w-full lg:w-3/4">
-            <!-- Sort Bar -->
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Where to Stay</h2>
-                <div class="flex items-center space-x-2">
-                    <label for="sort" class="text-sm text-gray-600">Sort by:</label>
-                    <select id="sort" name="sort" class="border-gray-300 rounded-md text-sm">
-                        <option value="">Default</option>
-                        <option value="price_asc">Price: Low to High</option>
-                        <option value="price_desc">Price: High to Low</option>
-                        <option value="rating">Top Rated</option>
-                    </select>
-                    <button type="submit" class="text-sm text-indigo-600 hover:underline">Apply</button>
-                </div>
-            </div>
-
-            <!-- Hotel Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-             
-                
-                @foreach ($accommodations as $item)
-                <div class="bg-white border rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-                        <img src="{{ asset('storage/'.$item->main_image) }}" alt="" class="w-full h-96 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-semibold text-gray-800">{{ $item->getTranslation('name', app()->getLocale()) }}</h3>
-                            <p class="text-sm text-gray-500 mt-1"><span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium px-3 py-1 rounded-full">
-          <i class="fas fa-map-marker-alt mr-1"></i> {{ $item->type }}
-        </span>  • ${{  $item->price_range}}/night</p>
-                            <a href="{{ route("accommodation.show",$item->id) }}" class="mt-3 inline-block text-sm text-indigo-600 hover:underline">View Details</a>
-                        </div>
-                    </div>
-                    
-                @endforeach
-
-
-
-            </div>
-        </main>
-    </form>
-</div> --}}
 
   <main class="container mx-auto px-4 py-8">
         <!-- Hero Section -->
@@ -105,8 +12,8 @@
                      alt="Luxury Hotels" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-80"></div>
                 <div class="absolute bottom-8 left-8 text-white max-w-2xl">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Find Your Perfect Stay</h1>
-                    <p class="text-xl mb-6">Discover the best hotels around the world with our curated selection</p>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ __('messages.accommodation_index_title') }}</h1>
+                    <p class="text-xl mb-6">{{ __('messages.accommodation_index_subtitle') }}</p>
                     <div class="flex">
                         <input type="text" placeholder="Search by city, hotel, or destination" class="px-6 py-3 rounded-l-lg w-full text-gray-800">
                         <button class="bg-primary hover:bg-blue-700 px-6 py-3 rounded-r-lg text-white font-semibold">
@@ -122,11 +29,11 @@
             <!-- Filters Sidebar -->
            <div class="w-full lg:w-1/4">
     {{-- <form action="{{ route('accommodations.filter') }}" method="GET" class="bg-white p-6 rounded-xl shadow-lg sticky top-4"> --}}
-        <h2 class="text-xl font-bold mb-6 text-dark">Filters</h2>
+        <h2 class="text-xl font-bold mb-6 text-dark">{{ __('messages.accommodation_index_filter') }}</h2>
 
         <!-- Price Range -->
         <div class="mb-8">
-            <h3 class="font-semibold mb-4">Price Range</h3>
+            <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_price_range') }}</h3>
             <input type="range" 
                    name="price" 
                    id="price-range"
@@ -146,7 +53,7 @@
 
         <!-- Star Rating -->
         <div class="mb-8">
-            <h3 class="font-semibold mb-4">Star Rating</h3>
+            <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_star') }}</h3>
             <div class="space-y-2 star-rating">
                 @for ($i = 5; $i >= 3; $i--)
                     <div class="flex items-center">
@@ -168,8 +75,8 @@
 
         <!-- Property Type -->
         <div class="mb-8">
-            <h3 class="font-semibold mb-4">Property Type</h3>
-            @foreach (['hotel', 'resort', 'villa', 'apartment'] as $type)
+            <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_type') }}</h3>
+            @foreach (['hotel', 'campiste', 'villa', 'guest_house'] as $type)
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="type[]" 
@@ -184,7 +91,7 @@
 
         <!-- Amenities -->
         <div class="mb-8">
-            <h3 class="font-semibold mb-4">Amenities</h3>
+            <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_amenities') }}</h3>
             @foreach (['wifi' => 'Free WiFi', 'pool' => 'Swimming Pool', 'spa' => 'Spa', 'breakfast' => 'Breakfast Included', 'gym' => 'Fitness Center'] as $key => $label)
                 <div class="flex items-center">
                     <input type="checkbox" 
@@ -199,11 +106,11 @@
         </div>
 
          <button type="button" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-blue-700" onclick="sort()">
-            Apply Filters
+           {{ __('messages.accommodation_index_apply_filter') }}
         </button>
         <a href="{{ route('accommodations.all') }}" 
            class="block w-full mt-3 border border-gray-300 text-gray-700 py-3 rounded-lg font-semibold text-center hover:bg-gray-100">
-            Reset Filters
+           {{ __('messages.accommodation_index_reset_filter') }}
         </a> 
    
 </div>
@@ -212,14 +119,14 @@
             <!-- Hotel Listings -->
             <div class="w-full lg:w-3/4" id="app" data-locale="{{ app()->getLocale() }}">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 id="total" class="text-2xl font-bold text-dark">{{ count($accommodations) }} Hotels Found</h2>
+                    <h2 id="total" class="text-2xl font-bold text-dark">{{ count($accommodations) }}  {{ __('messages.accommodation_index_found') }}</h2>
                     <div class="flex items-center">
-                        <span class="text-gray-600 mr-3">Sort by:</span>
+                        <span class="text-gray-600 mr-3">  {{ __('messages.accommodation_index_sort') }}</span>
                         <select class="border border-gray-300 rounded-lg px-4 py-2" id="sort-select" >
-                            <option value="default" selected>Default</option>
-                            <option value="lowtohigh">Price: Low to High</option>
-                            <option value="hightolow">Price: High to Low</option>
-                            <option value="rating">Rating</option>
+                            <option value="default" selected>  {{ __('messages.accommodation_index_default') }}</option>
+                            <option value="lowtohigh">  {{ __('messages.accommodation_index_low') }}</option>
+                            <option value="hightolow"> {{ __('messages.accommodation_index_high') }}</option>
+                            <option value="rating">  {{ __('messages.accommodation_index_rating') }}</option>
                            
                         </select>
                     </div>
@@ -384,7 +291,7 @@ amenities.forEach(s => params.append('amenities[]', s));
         }
 
         container.innerHTML += `
-            <a href="/dashboard/accommodation/${accommodation.id}">
+            <a href="/accommodation/${accommodation.id}">
                 <div class="hotel-card bg-white rounded-xl shadow-md overflow-hidden">
                     <div class="relative">
                         <img src="/storage/${accommodation.main_image}" 

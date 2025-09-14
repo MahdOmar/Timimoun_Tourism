@@ -6,6 +6,7 @@ use App\Models\Tour;
 use App\Models\TourImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 use function Laravel\Prompts\error;
@@ -318,4 +319,38 @@ public function removeGalleryImage($id, $imageId)
 
 
   } 
+
+   public function reservation(Request $request)
+  {
+    $data = $request->validate([
+            'tour_email' => 'required|email',
+            'name'        => 'required|string|max:255',
+            'tour_name'        => 'required|string|max:255',
+            'email'       => 'required|email',
+            'phone'       => 'nullable|string',
+            'date'    => 'required|date|after:today',
+            'guests'      => 'required|integer|min:1',
+            'message'     => 'nullable|string',
+        ]);
+
+
+      
+        // Send email directly to hotel
+          Mail::send([], [], function ($message) use ($data) {
+            $message->to($data['tour_email'])
+                ->subject('New Reservation Request')
+                ->from(config('mail.from.address'), config('mail.from.name'))
+                ->html("
+            <h2>New Reservation Request for {$data['tour_name']} </h2>
+            <p><strong>Name:</strong> {$data['name']}</p>
+            <p><strong>Email:</strong> {$data['email']}</p>
+             <p><strong>Phone:</strong> {$data['phone']}</p>
+            <p><strong>Guests:</strong> {$data['guests']}</p>
+            <p><strong>Date:</strong> {$data['date']}</p>
+            <p><strong>Message:</strong> {$data['message']}</p>
+        ");
+        });
+
+        return back()->with('success', 'Your reservation request has been sent!');
+    }
 }

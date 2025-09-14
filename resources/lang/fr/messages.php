@@ -5,8 +5,12 @@ return [
     'Where to Stay' => 'Où loger',
     'Things to Do' => 'Choses à faire',
     'Food & Drink' => 'RESTAURANT & BOISSONS',
+    'Restaurants' => 'RESTAURANTS & CAFÉS',
+    'DISHES' => 'Plats Traditionnels',
     'Travel Agencies' => 'AGENCES DE VOYAGES',
     'Tours' => 'CIRCUIT',
+    'Crafts' => 'Artisanat',
+
     'Rentals' => 'LOCATION',
     'Essential Services' => 'SERVICES D\'EMERGENCES',
     'CRAFTS' => 'ARTISANATS',
@@ -132,6 +136,31 @@ return [
         'footer_rentals' => 'Locations',
 
 
+// END Landing Page Translations
+
+// Accommodation index Translation
+
+  'accommodation_index_title' => 'Trouvez votre séjour idéal',
+  'accommodation_index_subtitle' => 'Découvrez les meilleurs hôtels du monde grâce à notre sélection rigoureusement choisie',
+  'accommodation_index_filter' => 'Filtre',
+  'accommodation_index_sort' => 'Trier par',
+  'accommodation_index_default' => 'Défaut',
+  'accommodation_index_low' => 'Prix ​​: du plus bas au plus élevé',
+  'accommodation_index_high' => 'Prix ​​: du plus élevé au plus bas',
+  'accommodation_index_rating' => 'Notation',
+  'accommodation_index_found' => 'Hébergements trouvés',
+  'accommodation_index_price_range' => 'Plage de prix',
+  'accommodation_index_star' => 'Évaluation en étoiles',
+  'accommodation_index_type' => 'Type de propriété',
+  'accommodation_index_amenities' => 'Équipements',
+  'accommodation_index_apply_filter' => 'Appliquer les filtres',
+  'accommodation_index_reset_filter' => 'Réinitialiser les filtres',
+
+      
+      
+
+     
+     
 
 
 

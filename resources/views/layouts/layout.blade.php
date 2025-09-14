@@ -141,13 +141,37 @@
          
    
         </div>
-      <a href="{{ route('food.all') }}" class="text-white uppercase relative pr-6">{{ __('messages.Food & Drink') }}
+
+
+        <div x-data="{ open: false }" class="relative uppercase">
+          <button @click="open = !open" class="text-white focus:outline-none uppercase">
+            {{ __('messages.Food & Drink') }}
+          </button>
+          
+          
+          <div x-show="open" @click.away="open = false"
+               x-transition
+               class="absolute bg-white border rounded shadow-md py-2 mt-2 w-64 z-50">
+              <a href="{{ route('food.all') }}" class="block px-4 py-2 hover:bg-gray-100">{{ __('messages.Restaurants') }}</a>
         
       </a>
+            <a href="{{ route('traditionaldish.all') }}" class="block px-4 py-2 hover:bg-gray-100">{{ __('messages.DISHES') }}</a>
+          
+          </div>
+         
+   
+        </div>
+     
+
+      
       <a href="{{ route('travel.all') }}" class="text-white uppercase relative pr-6">{{ __('messages.Travel Agencies') }}
        
       </a>
       <a href="{{ route('tours.all') }}" class="text-white uppercase relative pr-6">{{ __('messages.Tours') }}
+        
+      </a>
+
+       <a href="{{ route('crafts.all') }}" class="text-white uppercase relative pr-6">{{ __('messages.Crafts') }}
         
       </a>
 

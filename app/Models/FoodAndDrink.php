@@ -34,4 +34,11 @@ class FoodAndDrink extends Model
     {
         return $this->reviews()->avg('rating');
     }
+
+      public function traditionalDishes()
+    {
+        return $this->belongsToMany(TraditionalDish::class, 'providers_traditional_dish')
+                    ->withPivot(['price','includes'])
+                    ->withTimestamps();
+    }
 }

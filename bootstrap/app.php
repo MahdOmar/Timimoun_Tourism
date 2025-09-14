@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
            $middleware->group('web', [
+                    \Illuminate\Session\Middleware\StartSession::class,
+
+           \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
         \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,

@@ -11,7 +11,9 @@ use App\Http\Controllers\RentalController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TourController;
+use App\Http\Controllers\TraditionalDishController;
 use App\Http\Controllers\TravelController;
+use App\Models\TraditionalDish;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -26,7 +28,7 @@ Route::get('/', HomeController::class . '@index')->name('home');
 
 Route::group([
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' =>  ['web']
+        'middleware' =>  'web'
     ], function () {
 
         Route::get('/', HomeController::class . '@index')->name('home');
@@ -49,9 +51,14 @@ Route::group([
    Route::resource('craft', CraftController::class);
    Route::resource('rental', RentalController::class);
    Route::resource('review', ReviewController::class);
+   Route::resource('traditionaldish', TraditionalDishController::class);
+   Route::post('/traditionaldish/link', [TraditionalDishController::class, 'link'])->name('traditionaldish.link');
+   Route::delete('/traditional-dishes/{dish}/restaurants/{restaurant}', [TraditionalDishController::class, 'delink'])->name('traditionaldish.delink');
+
 
 
 Route::get('/accommodations', [AccommodationController::class, 'allAccommodations'])->name('accommodations.all');
+Route::post('/accommodations/reservation/send', [AccommodationController::class, 'reservation'])->name('accommodations.reservation');
 // Route::get('/accommodations/filter', [AccommodationController::class, 'filterAccommodations'])->name('accommodations.filter');
 
 
@@ -71,6 +78,8 @@ Route::get('/sites/{id}', [SiteController::class, 'showSite'])->name('site.show'
 // tours routes
 Route::get('/tours', [TourController::class, 'allTours'])->name('tours.all');
 Route::get('/tours/{id}', [TourController::class, 'showTour'])->name('tour.show');
+Route::post('/tours/reservation/send', [TourController::class, 'reservation'])->name('tour.reservation');
+
 
 
 
@@ -83,17 +92,21 @@ Route::get('/events/{id}', [EventlController::class, 'showEvent'])->name('event.
 Route::get('/food', [FoodAndDrinkController::class, 'allFood'])->name('food.all');
 Route::get('/food/{id}', [FoodAndDrinkController::class, 'showFood'])->name('food.show');
 
+// TraditionaDishes routes
+Route::get('/traditional_dishes', [TraditionalDishController::class, 'allDishes'])->name('traditionaldish.all');
+Route::get('/traditional_dishes/{id}', [TraditionalDishController::class, 'showDish'])->name('traditionaldish.show');
+
 // Travel Agency routes
 Route::get('/travels', [TravelController::class, 'allTravels'])->name('travel.all');
 Route::get('/travel/{id}', [TravelController::class, 'showTravel'])->name('travel.show');
 
 //crafts routes
 Route::get('/crafts', [CraftController::class, 'allCrafts'])->name('crafts.all');
-Route::get('/craft/{id}', [CraftController::class, 'showCraft'])->name('craft.show');
+Route::get('/crafts/{id}', [CraftController::class, 'showCraft'])->name('craft.show');
 
 //rentals routes
 Route::get('/rentals', [RentalController::class, 'allRentals'])->name('rentals.all');
-Route::get('/rental/{id}', [RentalController::class, 'showRental'])->name('rental.show');
+Route::get('/rentals/{id}', [RentalController::class, 'showRental'])->name('rental.show');
 
 
 
@@ -144,6 +157,9 @@ Route::delete('/crafts/{id}/gallery/{imageId}/remove', [CraftController::class, 
 
 Route::delete('/rentals/{id}/remove-main-image', [RentalController::class, 'removeMainImage'])->name('rental.remove-main-image');
 Route::delete('/rentals/{id}/gallery/{imageId}/remove', [RentalController::class, 'removeGalleryImage'])->name('rental.remove-gallery-image');
+
+Route::delete('/traditionaldish/{id}/remove-main-image', [TraditionalDishController::class, 'removeMainImage'])->name('rental.remove-main-image');
+Route::delete('/traditionaldish/{id}/gallery/{imageId}/remove', [TraditionalDishController::class, 'removeGalleryImage'])->name('rental.remove-gallery-image');
 
 Route::get('/accommodations/filter', [AccommodationController::class, 'sort'])->name('accommodation.sort');
 Route::get('/events/{category}/{sort}', [EventlController::class, 'filterEvents'])->name('event.filter');
