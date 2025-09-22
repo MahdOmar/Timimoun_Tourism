@@ -41,17 +41,10 @@
         <div class="floating-shape shape-2"></div>
         
         <div class="container mx-auto px-4 relative">
-            <h1 class="page-title">Find Your Travel Agency</h1>
-            <p class="page-subtitle">Discover the best travel agencies to plan your next adventure</p>
+            <h1 class="page-title">{{ __('messages.travel.title') }}</h1>
+            <p class="page-subtitle">{{ __('messages.travel.subtitle') }}</p>
             
-            <div class="search-container">
-                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
-                    <input type="text" placeholder="Search agencies, destinations, or specialties..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
-                    <button class="bg-accent hover:bg-amber-600 px-8 py-4 text-white font-semibold">
-                        <i class="fas fa-search mr-2"></i>Search
-                    </button>
-                </div>
-            </div>
+           
         </div>
     </header>
 
@@ -114,7 +107,7 @@
 
     <!-- Results Header -->
     <div class="results-header">
-        <div class="results-count">Showing 8 of 42 agencies</div>
+        <div class="results-count">{{ count($travels) }} {{ __('messages.travel.elements_found') }}</div>
         <div class="view-options">
             <button class="view-option active">
                 <i class="fas fa-th-large"></i>
@@ -163,20 +156,20 @@
                 <div class="agency-stats">
                     <div class="stat">
                         <span class="stat-value">12+</span>
-                        <span class="stat-label">Years</span>
+                        <span class="stat-label">{{ __('messages.travel.year') }}</span>
                     </div>
                     <div class="stat">
                         <span class="stat-value">54</span>
-                        <span class="stat-label">Countries</span>
+                        <span class="stat-label">{{ __('messages.travel.countries') }}</span>
                     </div>
                     <div class="stat">
                         <span class="stat-value">5K+</span>
-                        <span class="stat-label">Travelers</span>
+                        <span class="stat-label">{{ __('messages.travel.travlers') }}</span>
                     </div>
                 </div>
                 
                 <div class="card-footer">
-                    <div class="card-button">View Details</div>
+                    <div class="card-button">{{ __('messages.travel.btn') }}</div>
                 </div>
             </div>
         </div></a>

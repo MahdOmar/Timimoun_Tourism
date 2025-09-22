@@ -18,11 +18,11 @@
                         </span>
                         <span class="flex items-center">
                             <i class="fas fa-map-marker-alt text-accent mr-1"></i>
-                            <span>Worldwide Destinations</span>
+                            <span>{{ __('messages.travel.details.world') }}</span>
                         </span>
                         <span class="flex items-center">
                             <i class="fas fa-award text-green-400 mr-1"></i>
-                            <span>Travel Excellence {{ date('Y') }}</span>
+                            <span>{{ __('messages.travel.details.travels') }} {{ date('Y') }}</span>
                         </span>
                     </div>
                 </div>
@@ -35,13 +35,11 @@
             <div class="w-full lg:w-8/12">
                 <!-- About Section -->
                 <section class="mb-8">
-                    <h2 class="text-3xl font-bold mb-4 text-dark">About Wanderlust Travels</h2>
+                    <h2 class="text-3xl font-bold mb-4 text-dark">{{ __('messages.food.details.about') }}{{ $travel->getTranslation('name', app()->getLocale()) }}</h2>
                     <p class="text-lg mb-4 leading-relaxed">
-                        Wanderlust Travels has been creating unforgettable travel experiences since 2008. We specialize in crafting personalized journeys that combine luxury, adventure, and cultural immersion. Our team of travel experts has explored every corner of the globe, bringing you insider knowledge and exclusive access.
+                        {{ $travel->getTranslation('description', app()->getLocale()) }}
                     </p>
-                    <p class="text-lg mb-4 leading-relaxed">
-                        We believe that travel has the power to transform lives, broaden perspectives, and create lasting memories. Whether you're seeking a relaxing beach getaway, an adventurous trek through mountains, or a deep cultural immersion, we design trips that exceed expectations.
-                    </p>
+                   
                     {{-- <div class="bg-accent p-6 rounded-xl mt-6">
                         <h3 class="text-xl font-semibold mb-2 text-dark">Our Specialties</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -114,7 +112,7 @@
 
                 <!-- Gallery Section -->
                 <section class="mb-8">
-                    <h2 class="text-3xl font-bold mb-6 text-dark">Travel Gallery</h2>
+                    <h2 class="text-3xl font-bold mb-6 text-dark">Travel {{ __('messages.travel.details.gallery') }}</h2>
                     <div class="gallery-grid">
                       @foreach ($travel->gallery as $item)
                            <div class="gallery-item rounded-xl overflow-hidden">
@@ -134,26 +132,26 @@
 
                 <!-- Contact Info -->
                 <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-                    <h3 class="text-2xl font-bold mb-4 text-dark">Contact Information</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-dark">{{ __('messages.travel.details.contact') }}</h3>
                     <div class="space-y-4">
                         <div class="flex items-start">
                             <i class="fas fa-map-marker-alt text-primary mt-1 mr-4"></i>
                             <div>
-                                <h4 class="font-semibold">Address</h4>
+                                <h4 class="font-semibold">{{ __('messages.travel.details.address') }}</h4>
                                 <p class="text-gray-700">{{ $travel->getTranslation('address', app()->getLocale()) }}</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-phone text-primary mt-1 mr-4"></i>
                             <div>
-                                <h4 class="font-semibold">Phone</h4>
+                                <h4 class="font-semibold">{{ __('messages.travel.details.phone') }}</h4>
                                 <p class="text-gray-700">{{ $travel->phone }}</p>
                             </div>
                         </div>
                         <div class="flex items-start">
                             <i class="fas fa-envelope text-primary mt-1 mr-4"></i>
                             <div>
-                                <h4 class="font-semibold">Email</h4>
+                                <h4 class="font-semibold">{{ __('messages.travel.details.email') }}</h4>
                                 <p class="text-gray-700">{{ $travel->email }}</p>
                             </div>
                           
@@ -162,7 +160,7 @@
                           <div class="flex items-start">
                             <i class="fas fa-envelope text-primary mt-1 mr-4"></i>
                             <div>
-                                <h4 class="font-semibold">Website</h4>
+                                <h4 class="font-semibold">{{ __('messages.travel.details.website') }}</h4>
                                 <a href="{{ $travel->website }}" class="text-gray-700">{{ $travel->website }}</a>
                             </div>
                               </div>
@@ -226,13 +224,14 @@
          <!-- Reviews -->
   <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
+             <h2 class="text-2xl font-bold text-neutral mb-6">{{ __('messages.reviews.title') }}</h2>
             @foreach ($travel->reviews as $item)
+                 
                  
             <div class="bg-white rounded-xl shadow-md p-6 mb-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-neutral">By {{ $item->name }}</h3>
+                        <h3 class="text-lg font-semibold text-neutral">{{ __('messages.reviews.By') }} {{ $item->name }}</h3>
 
                         <div class="flex text-yellow-400 mt-1">
                           @for( $i=0; $i < $item->rating; $i++ )
@@ -241,13 +240,15 @@
                             @endfor
                         </div>
                     </div>
-                    <span class="text-gray-500 text-sm mt-2 md:mt-0">On {{ $item->created_at->format('d-M-Y') }}</span>
+                    <span class="text-gray-500 text-sm mt-2 md:mt-0">{{ __('messages.reviews.On') }} {{ $item->created_at->format('d-M-Y') }}</span>
                 </div>
                 <p class="text-gray-700">
                     {{ $item->comment }}
                 </p>
             </div>
             @endforeach
+           
+           
            
             
            
@@ -266,7 +267,7 @@
 
 <section class="py-16 bg-gray-50">
   <div class="max-w-3xl mx-auto px-6">
-    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">Leave a Review</h2>
+    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">{{ __('messages.reviews.title2') }}</h2>
 
     <form action="{{ route('review.store') }}" method="POST" class="bg-white shadow-xl rounded-2xl p-8 space-y-6">
       @csrf
@@ -276,7 +277,7 @@
       
       <!-- Name -->
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+        <label for="name" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.name') }}</label>
         <input type="text" id="name" name="name" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="John Doe">
@@ -284,7 +285,7 @@
 
       <!-- Email -->
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+        <label for="email" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.email') }}</label>
         <input type="email" id="email" name="email" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="johndoe@email.com">
@@ -292,7 +293,7 @@
 
       <!-- Star Rating -->
       <div>
-        <label class="block text-sm font-medium text-gray-700">Your Rating</label>
+        <label class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.rating') }}</label>
         <div class="flex items-center mt-2 space-x-2" id="starRating">
           <!-- Stars will be interactive -->
           <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
@@ -317,7 +318,7 @@
 
       <!-- Review -->
       <div>
-        <label for="review" class="block text-sm font-medium text-gray-700">Your Review</label>
+        <label for="review" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.text') }}</label>
         <textarea id="review" name="comment" rows="4" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="Share your experience..."></textarea>
@@ -327,8 +328,8 @@
       <div class="text-center">
         <button type="submit"
           class="w-full bg-orange-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-orange-600 transition">
-          Submit Review
-        </button>
+        {{ __('messages.reviews.submit') }}     
+         </button>
       </div>
     </form>
   </div>

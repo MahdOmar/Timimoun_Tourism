@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Accommodation;
 use App\Models\AccommodationImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
@@ -316,9 +317,23 @@ $query = Accommodation::query();
         $query->orderBy('min_price', 'desc');
     } elseif ($request->sort == 'rating') {
        // $query->withAvg('reviews', 'rating')
+
+       $query->leftJoin('reviews', function ($join) {
+                $join->on('accommodations.id', '=', 'reviews.reviewable_id')
+                    ->where('reviews.reviewable_type', Accommodation::class);
+            })
+            ->select('accommodations.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as reviews_avg_rating'))
+            ->groupBy('accommodations.id')
+            ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
+            ->orderByDesc('reviews_avg_rating')
+            ->get();
+
+
+
+
         
-       $query-> orderBy('reviews_avg_rating', 'desc');
-       $accommodations = $query->get()->whereNotNull('reviews_avg_rating');
+    //    $query-> orderBy('reviews_avg_rating', 'desc');
+        $accommodations = $query->get();
 
     return response()->json([
      

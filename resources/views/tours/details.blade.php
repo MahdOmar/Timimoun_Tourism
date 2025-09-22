@@ -33,7 +33,7 @@
         <!-- Duration + Type -->
         <div class="flex items-center gap-6 mb-6">
           <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
-            Duration: {{ $tour->duration_days }} days / {{ $tour->duration_nights }} nights
+            {{ __('messages.tour.details.duration') }}: {{ $tour->duration_days }} days / {{ $tour->duration_nights }} nights
           </span>
          
            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium capitalize">
@@ -45,9 +45,9 @@
         </div>
 
         <div class="mb-6">
-          <h3 class="text-lg font-semibold mb-3 ">Stops: {{ $tour->stops}} Destinations</h3>
+          <h3 class="text-lg font-semibold mb-3 ">{{ __('messages.tour.details.stops') }}: {{ $tour->stops}} Destinations</h3>
            
-        <h3 class="text-lg font-semibold mb-3 ">What includes ?</h3>
+        <h3 class="text-lg font-semibold mb-3 ">{{ __('messages.tour.details.includes') }}</h3>
 
        
         
@@ -67,9 +67,9 @@
           <span class="ml-2 text-sm text-gray-500">(24 reviews)</span>
         </div> --}}
        <div class="mb-6">
-        <h3 class="text-lg font-semibold mb-3 ">Contact Information</h3>
+        <h3 class="text-lg font-semibold mb-3 ">{{ __('messages.tour.details.contact') }}</h3>
 
-        <p class="text-sm text-gray-600 mb-2">For assistance booking and info, you can contact:</p>
+        <p class="text-sm text-gray-600 mb-2">{{ __('messages.tour.details.text') }}</p>
         <ul class="text-gray-700 text-sm space-y-2">
           @if($tour->phone)
             <li>📞 <a href="tel:{{ $tour->phone }}" class="hover:underline">{{ $tour->phone }}</a></li>
@@ -77,9 +77,7 @@
           @if($tour->email)
             <li>📧 <a href="mailto:{{ $tour->email }}" class="hover:underline">{{ $tour->email }}</a></li>
           @endif
-          @if($tour->website)
-            <li>🌐 <a href="{{ $tour->website }}" target="_blank" class="text-indigo-600 hover:underline">Visit Website</a></li>
-          @endif
+        
         </ul>
       </div>
       </div>
@@ -90,7 +88,7 @@
 <div x-data="{ open: false }">
     <!-- Reservation Button -->
     <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4" @click="open = true" class="px-4 py-2 bg-blue-600 text-white rounded-lg"">
-                            <i class="fas fa-calendar-check mr-2"></i>Book Now
+                            <i class="fas fa-calendar-check mr-2"></i>{{ __('messages.tour.details.book_now') }}
      </button>
 
     <!-- Reservation Modal -->
@@ -104,13 +102,13 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold flex items-center">
                         <i class="fas fa-hotel mr-3"></i>
-                        Tour Reservation Request
+                        {{ __('messages.tour.details.book.title') }}
                     </h2>
                     <button class="text-white hover:text-gray-200 transition-colors "@click="open = false">
                         <i class="fas fa-times text-lg"></i>
                     </button>
                 </div>
-                <p class="text-sm text-blue-100 mt-2">Book your Tour with {{  $tour->getTranslation('name', app()->getLocale()) }}</p>
+                <p class="text-sm text-blue-100 mt-2"> {{ __('messages.tour.details.book.subtitle') }} {{  $tour->getTranslation('name', app()->getLocale()) }}</p>
                 
               
             </div>
@@ -127,7 +125,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                            Name
+                            {{ __('messages.tour.details.book.name') }}
                         </label>
                         <div class="relative">
                             <input type="text" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your name" required>
@@ -136,7 +134,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fa-solid fa-envelope mr-2 text-primary"></i>
-                            Email
+                             {{ __('messages.tour.details.book.email') }}
                         </label>
                         <div class="relative">
                             <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your email" required>
@@ -149,7 +147,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-phone mr-2 text-primary"></i>
-                            Phone
+                             {{ __('messages.tour.details.book.phone') }}
                         </label>
                         <div class="relative">
                             <input type="text" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your phone" required>
@@ -158,7 +156,7 @@
                      <div class="mb-6">
                     <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                         <i class="fas fa-users mr-2 text-primary"></i>
-                        Guests
+                         {{ __('messages.tour.details.book.guests') }}
                     </label>
                   
                     <input type="number" name="guests" min="1" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 2" required>
@@ -174,7 +172,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                           Date
+                           {{ __('messages.tour.details.book.date') }}
                         </label>
                         <div class="relative">
                             <input type="date" name="date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" id="checkin" required>
@@ -192,7 +190,7 @@
                 <div class="mb-4">
                     <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                         <i class="fas fa-concierge-bell mr-2 text-primary"></i>
-                        Special Requests
+                       {{ __('messages.tour.details.book.message') }}
                     </label>
                     <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" name="message" rows="2" placeholder="Any special requests?"></textarea>
                 </div>
@@ -203,11 +201,11 @@
             <div class="bg-gray-50 px-6 py-4 flex justify-between">
                  <button type="button" @click="open = false"
                             class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
-                        Cancel
+                       {{ __('messages.tour.details.book.cancel') }}
                     </button>
                 <button type="submit" class="px-5 py-2 rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors flex items-center">
                     <i class="fas fa-check mr-2"></i>
-                    Confirm Booking
+                   {{ __('messages.tour.details.book.confirm') }}
                 </button>
             </div>
             </form>
@@ -222,7 +220,7 @@
   <!-- Gallery -->
   @if($tour->gallery && count($tour->gallery) > 0)
   <div class="mt-12">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Gallery</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ __('messages.tour.details.gallery') }}</h2>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       @foreach($tour->gallery as $image)
         <img src="{{ asset('storage/' . $image->path) }}" 
@@ -265,13 +263,13 @@
 @if ($tour->reviews && count($tour->reviews) > 0)
      <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
+            <h2 class="text-2xl font-bold text-neutral mb-6">{{ __('messages.reviews.title') }}</h2>
             @foreach ($tour->reviews as $item)
                  
             <div class="bg-white rounded-xl shadow-md p-6 mb-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-neutral">By {{ $item->name }}</h3>
+                        <h3 class="text-lg font-semibold text-neutral">{{ __('messages.reviews.By') }} {{ $item->name }}</h3>
 
                         <div class="flex text-yellow-400 mt-1">
                           @for( $i=0; $i < $item->rating; $i++ )
@@ -280,7 +278,7 @@
                             @endfor
                         </div>
                     </div>
-                    <span class="text-gray-500 text-sm mt-2 md:mt-0">On {{ $item->created_at->format('d-M-Y') }}</span>
+                    <span class="text-gray-500 text-sm mt-2 md:mt-0">{{ __('messages.reviews.On') }} {{ $item->created_at->format('d-M-Y') }}</span>
                 </div>
                 <p class="text-gray-700">
                     {{ $item->comment }}
@@ -302,10 +300,9 @@
 
   
     
-
 <section class="py-16 bg-gray-50">
   <div class="max-w-3xl mx-auto px-6">
-    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">Leave a Review</h2>
+    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">{{ __('messages.reviews.title2') }}</h2>
 
     <form action="{{ route('review.store') }}" method="POST" class="bg-white shadow-xl rounded-2xl p-8 space-y-6">
       @csrf
@@ -315,7 +312,7 @@
       
       <!-- Name -->
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+        <label for="name" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.name') }}</label>
         <input type="text" id="name" name="name" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="John Doe">
@@ -323,7 +320,7 @@
 
       <!-- Email -->
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+        <label for="email" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.email') }}</label>
         <input type="email" id="email" name="email" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="johndoe@email.com">
@@ -331,7 +328,7 @@
 
       <!-- Star Rating -->
       <div>
-        <label class="block text-sm font-medium text-gray-700">Your Rating</label>
+        <label class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.rating') }}</label>
         <div class="flex items-center mt-2 space-x-2" id="starRating">
           <!-- Stars will be interactive -->
           <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
@@ -356,22 +353,23 @@
 
       <!-- Review -->
       <div>
-        <label for="review" class="block text-sm font-medium text-gray-700">Your Review</label>
+        <label for="review" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.text') }}</label>
         <textarea id="review" name="comment" rows="4" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
-          placeholder="Share your experience..."></textarea>
+          placeholder=" {{ __('messages.reviews.message') }}"></textarea>
       </div>
 
       <!-- Submit -->
       <div class="text-center">
         <button type="submit"
           class="w-full bg-orange-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-orange-600 transition">
-          Submit Review
+         {{ __('messages.reviews.submit') }}
         </button>
       </div>
     </form>
   </div>
 </section>
+
 
 <script>
   // ⭐ Star Rating Script

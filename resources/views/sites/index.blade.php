@@ -45,8 +45,8 @@
         <div class="floating-shape shape-2"></div>
         
         <div class="container mx-auto px-4 relative">
-            <h1 class="page-title">Discover Beautiful Destinations</h1>
-            <p class="page-subtitle">Explore the world's most breathtaking places and create unforgettable memories</p>
+            <h1 class="page-title">{{ __('messages.site.title') }}</h1>
+            <p class="page-subtitle">{{ __('messages.site.subtitle') }}</p>
             
             <div class="search-container">
                 <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
@@ -67,7 +67,7 @@
                 <div class="category-icon">
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <div class="category-name " >All</div>
+                <div class="category-name " >{{ __('messages.site.categories.all') }}</div>
             </div>
 
 
@@ -75,42 +75,42 @@
                 <div class="category-icon">
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <div class="category-name " >Monument</div>
+                <div class="category-name " >{{ __('messages.site.categories.monument') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-mountain"></i>
                 </div>
-                <div class="category-name" >Museum</div>
+                <div class="category-name" >{{ __('messages.site.categories.museum') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-city"></i>
                 </div>
-                <div class="category-name" >Natural</div>
+                <div class="category-name" >{{ __('messages.site.categories.natural') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-monument"></i>
                 </div>
-                <div class="category-name" >Historical</div>
+                <div class="category-name" >{{ __('messages.site.categories.historical') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-hiking"></i>
                 </div>
-                <div class="category-name">Religious</div>
+                <div class="category-name">{{ __('messages.site.categories.religious') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-tree"></i>
                 </div>
-                <div class="category-name">Other</div>
+                <div class="category-name">{{ __('messages.site.categories.other') }}</div>
             </div>
             
           
@@ -118,19 +118,19 @@
     </div>
 
     <!-- Main Content -->
-    <h2 class="section-title">Featured Destinations</h2>
+    <h2 class="section-title">{{ __('messages.site.categories.featured_destinations') }}</h2>
     
     <div class="view-options">
-        <div class="view-option active" >All</div>
-        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >New</div>
-        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >Rating</div>
-        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >Recommended</div>
+        <div class="view-option active" >{{ __('messages.site.view.all') }}</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >{{ __('messages.site.view.new') }}</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >{{ __('messages.site.view.rating') }}</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >{{ __('messages.site.view.recommended') }}</div>
     </div>
     
     <div class="results-header" id="app" data-locale="{{ app()->getLocale() }}">
-        <div class="results-count" id="total">{{ count($sites) }} Destinations found</div>
+        <div class="results-count" id="total">{{ count($sites) }} {{ __('messages.site.destinations_found') }}</div>
         <div class="filter-button">
-            <i class="fas fa-filter mr-2"></i>Filters
+            <i class="fas fa-filter mr-2"></i>{{ __('messages.site.filters') }}
         </div>
     </div>
 
@@ -171,12 +171,12 @@
                 </div>
                 
                 <div class="card-footer">
-                    <div class="card-price"> @if ($item->price == 0) Free
+                    <div class="card-price"> @if ($item->price == 0) {{ __('messages.site.card.price') }}
                       
                     @else
                       {{ $item->price }}
                     @endif </div>
-                    <button class="card-button">Explore</button>
+                    <button class="card-button">{{ __('messages.site.card.explore') }}</button>
                 </div>
             </div>
         </div></a>

@@ -53,7 +53,7 @@
                 <option value="hotel" {{ $accommodation->type === 'hotel' ? 'selected' : '' }}>Hotel</option>
                 <option value="guest_house" {{ $accommodation->type === 'guest_house' ? 'selected' : '' }}>Guest House</option>
                 <option value="villa" {{ $accommodation->type === 'villa' ? 'selected' : '' }}> Villa</option>
-                <option value="camping" {{ $accommodation->type === 'camping' ? 'selected' : '' }}>Camping</option>
+                <option value="campsite" {{ $accommodation->type === 'campsite' ? 'selected' : '' }}>Campiste</option>
       </select>
     </div>
 

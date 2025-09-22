@@ -9,8 +9,8 @@
         <div class="floating-shape shape-2"></div>
         
         <div class="container mx-auto px-4 relative">
-            <h1 class="page-title">Discover Amazing Traditional Dishes</h1>
-            <p class="page-subtitle">Explore the finest dining experiences from around the world</p>
+            <h1 class="page-title">{{ __('messages.food.traditional.title') }}</h1>
+            <p class="page-subtitle">{{ __('messages.food.traditional.subtitle') }}</p>
             
             <div class="search-container">
                 <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
@@ -26,14 +26,14 @@
  
 
     <!-- Main Content -->
-    <h2 class="section-title">Featured Traditional Dishes</h2>
+    <h2 class="section-title">{{ __('messages.food.traditional.subtitle2') }}</h2>
     
    
     
     <div class="results-header"  id="app" data-locale="{{ app()->getLocale() }}">
-        <div class="results-count" id="total"> {{ count($food) }} Elements Found</div>
+        <div class="results-count" id="total"> {{ count($food) }} {{ __('messages.food.elements_found') }}</div>
         <div class="filter-button">
-            <i class="fas fa-filter mr-2"></i>Filters
+            <i class="fas fa-filter mr-2"></i>{{ __('messages.food.filters') }}
         </div>
     </div>
 
@@ -68,7 +68,7 @@
                 
                 <div class="card-footer">
                   
-                   <a href=""></a> <button class="card-button">Details</button>
+                   <a href=""></a> <button class="card-button">{{ __('messages.food.btn') }}</button>
                 </div>
             </div>
         </div></a>

@@ -155,9 +155,570 @@ return [
   'accommodation_index_amenities' => 'Équipements',
   'accommodation_index_apply_filter' => 'Appliquer les filtres',
   'accommodation_index_reset_filter' => 'Réinitialiser les filtres',
+  'accommodation_index_wifi' => 'WiFi Gratuit',
+  'accommodation_index_pool' => 'Picine',
+  'accommodation_index_spa' => 'Spa',
+  'accommodation_index_breakfast' => 'Petit-déjeuner inclus',
+  'accommodation_index_gym' => 'Salle de sport',
+    'accommodation_index_night' => 'nuité',
+
+
+
+
+    'accommodation_details_Algeria' => 'Algerie',
+    'accommodation_details_collection' => ' Collection Exclusive ',
+    'accommodation_details_about' => 'À propos de',
+    'accommodation_details_gallery' => 'Galerie de photos',
+    'accommodation_details_gallery_title' => 'Faites une visite visuelle de notre complexe de luxe',
+
+
+
+      'accommodation' => [
+        'features' => [
+            'title' => 'Équipements de l’hôtel',
+            'subtitle' => 'Découvrez un luxe et un confort inégalés',
+        ],
+    ],
+
+    'amenities' => [
+        'pool' => [
+            'title' => 'Piscines à débordement',
+            'text'  => 'Trois piscines à débordement offrant des vues panoramiques',
+        ],
+        'wifi' => [
+            'title' => 'Wifi Gratuit',
+            'text'  => 'Wifi à haut débit disponible 24h/24',
+        ],
+        'restaurant' => [
+            'title' => 'Restauration',
+            'text'  => 'Restaurant proposant une cuisine internationale et locale',
+        ],
+        'spa' => [
+            'title' => 'Spa de luxe',
+            'text'  => 'Spa primé avec des soins traditionnels',
+        ],
+        'gym' => [
+            'title' => 'Centre de remise en forme',
+            'text'  => 'Centre de remise en forme 24h/24 avec coachs professionnels',
+        ],
+        'parking' => [
+            'title' => 'Parking',
+            'text'  => 'Parking 24h/24 avec sécurité professionnelle',
+        ],
 
       
+    ],
+
+      'contact' => [
+            'subtitle' => 'Localisation et contact',
+            'description' => 'Trouvez-nous et contactez-nous',
+            'title' => 'Informations de contact',
+            'address' => 'Adresse',
+            'phone'   => 'Téléphone',
+            'email'   => 'Email',
+            'desk'    => 'Réception',
+            'desk_hours' => 'Ouvert 24h/24',
+        ],
+
+          "reviews" => [
+            'title' => 'Avis des clients',
+            'By' => 'Par',
+            'On' => 'Le',
+            'title2' => 'Laisser un Avis',
+            'name' => 'Votre Nom',
+            'email' => 'Votre Email',
+            'rating' => 'Votre Notation',
+            'text' => 'Votre Avis',
+            'message' => 'Partagez votre expérience...',
+            'submit' => 'Soumettre l\'Avis',
+
+
+            
+        ],
+
+    'reservation_title'   => 'Demande de réservation d’hôtel',
+    'reservation_subtitle' => 'Réservez votre séjour au',
+    'reservation_error'   => 'Un problème est survenu lors de l’envoi de votre réservation. Veuillez réessayer.',
+
+    'checkin_after'  => 'La date d’arrivée doit être postérieure à aujourd’hui.',
+    'checkout_after' => 'La date de départ doit être postérieure à la date d’arrivée.',
+
+    'fields' => [
+       'book'  => 'Réserver maintenant',
+        'name'       => 'Nom',
+        'email'      => 'E-mail',
+        'phone'      => 'Téléphone',
+        'guests'     => 'Voyageurs',
+        'checkin'    => 'Arrivée',
+        'checkout'   => 'Départ',
+        'room_type'  => 'Type de chambre',
+        'message'    => 'Demandes spéciales',
+        'confirm'    => 'Confirmer la réservation',
+        'cancel'     => 'Annuler',
+    ],
+
+
+  // Event index Translation
+
+
+    // Section événements
+    'events' => [
+        'title'       => 'Découvrez des événements incroyables',
+        'subtitle'    => 'Trouvez et participez à des événements qui correspondent à vos centres d’intérêt. Des concerts aux conférences, nous avons tout.',
+        'search_placeholder' => 'Rechercher des événements, artistes ou catégories...',
+        'all_cities'  => 'Toutes les villes',
+        'search_btn'  => 'Rechercher',
+
+        // Catégories
+    'categories' => [
+        'title'       => 'Catégories populaires',
+        'all'         => 'Tous les événements',
+        'festival'    => 'Festival',
+        'concert'     => 'Concert',
+        'cultural'    => 'Culturel',
+        'exhibition'  => 'Exposition',
+        'sports'      => 'Sports',
+        'other'       => 'Autre',
+    ],
+     'filtre' => [
+      'events_found' => 'Événements trouvés',
+        'title'       => 'Trier par',
+        'option1'     => 'Date : la plus proche d’abord',
+        'option2'    => 'Date : du plus récent au plus ancien',
+        'option3'     => 'Prix : du plus bas au plus élevé',
+        'option4'    => 'Prix : du plus élevé au plus bas',
+     
+    ],
+    
+     'card' => [
+      'person' => 'personne',
+        'btn'       => 'Voir Détails',
+       
+     
+    ],
+
+     'details' => [
+        'title'       => 'À propos de l\'événement',
+        'event_passed'   => 'L\'événement est passé',
+        'days'   => 'Jours restants',
+        'hours'   => 'Il reste quelques heures',
+        'start'   => 'Bientôt ',
+        'price'      => 'Gratuit',
+        'highlights'=> 'Mise en évidence',
+        'event_info'=> 'Informations sur l\'événement',
+        'start_date'=> 'Date de début',
+        'end_date'=> 'Date de fin',
+        'location'  => 'Emplacement',
+        'category'  => 'Catégorie',
+        'back'      => 'Retour aux événements',
+        
+
+        
+
+    ],
+    ],
+
+      'site' => [
+    'title' =>  'Découvrez de magnifiques destinations',
+    'subtitle' =>  'Explorez les plus beaux endroits du monde et créez des souvenirs inoubliables',
+    
+
+   // Categories
+    'categories' => [
+        'all' => 'Tous',
+        'monument' => 'Monument',
+        'museum' => 'Musée',
+        'natural' => 'Naturel',
+        'historical' => 'Historique',
+        'religious' => 'Religieux',
+        'other' => 'Autre',
+       'featured_destinations' => 'Destinations à la Une',
+
+    ],
+    
+
+    // View options
+    'view' => [
+        'all' => 'Tous',
+        'new' => 'Nouveau',
+        'rating' => 'Évaluation',
+        'recommended' => 'Recommandé',
+    ],
+
+    // Results
+    'destinations_found' => ' destinations trouvées',
+    'filters' => 'Filtres',
+
+     'card' => [
+        'price' => 'Gratuit',
+        'explore' => 'Explorer',
+    ],
+
+     'details' => [
+        
+        'gallery' => 'Galerie',
+        'information' => 'Informations sur le Site',
+        'category' => 'Categorie',
+        'time' => 'Meilleur moment pour visiter',
+        'entry' => 'Entrée',
+        'amenities' => 'Equipements',
+        'help' => 'Besoin d\'aide?',
+        'text' => 'Pour obtenir de l\aide, vous pouvez contacter :',
+        'office' => 'Office de tourisme',
+        'related' => 'Sites connexes',
+       
+    ],
+
+
+
+  ],
+
+   'food' => [
+   // Header
+   'restaurants_title' => 'Découvrez des restaurants incroyables',
+    'restaurants_subtitle' => 'Explorez les meilleures expériences gastronomiques du monde entier',
+    'search_placeholder_food' => 'Recherchez des restaurants, cuisines ou emplacements...',
+    'search_button' => 'Rechercher',
+
+    // Categories
+    'food_categories' => [
+        'all' => 'Tous',
+        'restaurant' => 'Restaurant',
+        'snack' => 'Snack',
+        'traditional' => 'Traditionnel',
+        'cafe' => 'Café',
+    ],
+
+    // Section
+    'featured_restaurants' => 'Restaurants à la Une',
+
+    // View options
+    'view' => [
+        'all' => 'Tous',
+        'price_low' => 'Prix : du plus bas au plus élevé',
+        'price_high' => 'Prix : du plus élevé au plus bas',
+        'rating' => 'Évaluation',
+    ],
+
+    // Results
+    'elements_found' => ' Eléments trouvés',
+    'filters' => 'Filtres',
+    'btn' => 'Détails',
+
+
+      'details' => [
+        'about' => 'À propos du ',
+        'gallery' => 'Gallerie',
+        'contact' => 'Coordonnées',
+        'hours' => 'Horaires d\'ouverture',
+        'days' => 'Samedi - Jeudi : 11h30 - 23h00',
+        'friday' => 'Vendredi : 20h00 - 23h00',
+        'address' => 'Adresse',
+        'phone' => 'Téléphone',
+        'email' => 'Email',
+        'price' => 'Gamme de prix ',
+        'meal' => 'Prix moyen d\'un repas',
+        'person' => 'par personne',
       
+       
+
+      ],
+
+    
+    'traditional' => [
+        'title' => 'Découvrez de délicieux plats traditionnels ',
+        'subtitle' => 'Explorez les meilleures expériences culinaires du monde entier',
+        'subtitle2' => 'Plats traditionnels à l\'honneur',
+  
+
+         'details' => [
+         'about' => 'À propos du ',
+        'gallery' => 'Gallerie',
+        'providers' => 'Fournisseures',
+        'includes' => 'Inclus',
+        
+       
+
+   ],
+      
+       
+
+    ]
+
+
+
+  ],
+
+  'travel' => [
+   // Header
+    'title' => 'Trouvez votre agence de voyages',
+    'subtitle' => 'Découvrez les meilleures agences de voyages pour planifier votre prochaine aventure',
+    
+
+
+    // Results
+    'elements_found' => 'Agences trouvées',
+    'year' => 'Années',
+    'travlers' => 'Voyageurs', 
+    'countries' => 'Pays ',
+   
+    'btn' => 'Voir Détails',
+
+   'details' => [
+         'world' => 'Destinations mondiales',
+        'travels' => 'Excellence du voyage ',
+        'about' => 'À propos de',
+        'gallery' => 'Gallerie',
+        'contact' => 'Coordonnées',
+        'address' => 'Adresse',
+        'phone' => 'Téléphone',
+        'email' => 'Email',
+        'website' => 'Site Web',
+        
+      
+       
+
+   ],
+
+    
+
+  ],
+
+  'tour' => [
+    // Tours Header
+    'title' => 'Découvrez des circuits incroyables',
+    'subtitle' => 'Explorez le monde avec nos circuits et expériences d\'aventure soigneusement sélectionnés',
+    'elements_found' => ' Circuits trouvés',
+   
+    // Filters
+    'filters' => [
+        'tour_type' => 'Type de circuit',
+        'duration' => 'Durée',
+        'price_range' => 'Fourchette de prix',
+        'sort_by' => 'Trier par',
+        'apply' => 'Appliquer les filtres',
+    ],
+
+    // Tour Type options
+    'tour_types' => [
+        'all' => 'Tous les types de circuits',
+        'cars' => '4x4',
+        'quads' => 'Quads',
+        'camels' => 'Chameaux',
+    ],
+
+    // Duration options
+    'duration_options' => [
+        'any' => 'Toute durée',
+        '1' => '01 jour',
+        '2' => '02 jours',
+        '3' => '03 jours',
+        'more' => '04 jours et plus',
+    ],
+
+    // Price options
+    'price_options' => [
+        'all' => 'Tout prix',
+        'under_10000' => 'Moins de 10000',
+        '10000_15000' => '10000 - 15000',
+        '15000_20000' => '15000 - 20000',
+        'over_20000' => 'Plus de 20000',
+    ],
+
+    // Sort options
+    'sort_options' => [
+        'default' => 'Défaut',
+        'newest' => 'Nouveautés',
+        'rating' => 'Notation',
+    ],
+
+    'card' => [
+        
+        'days' => 'jours',
+        'btn' => 'Voir Circuit',
+    ],
+
+    
+    'details' => [
+        
+        'gallery' => 'Gallerie de Circuit',
+        'includes' => 'Que comprend l’offre ?',    
+        'duration' => 'durée',
+        'stops' => 'Arrêts',
+        'book_now' => 'Réservez maintenant',
+        'contact' => 'Coordonnées',
+        'text' => 'Pour toute aide à la réservation et information, vous pouvez contacter:',
+        'book'=> [
+          'title' => 'Demande de réservation de Circuit',
+          'subtitle' => 'Réservez votre Circuit avec',
+
+        'name'       => 'Nom',
+        'email'      => 'E-mail',
+        'phone'      => 'Téléphone',
+        'guests'     => 'Voyageurs',
+        'date'       => 'Date',
+        'message'    => 'Demandes spéciales',
+        'confirm'    => 'Confirmer la réservation',
+        'cancel'     => 'Annuler',
+
+        ],
+        
+    ],
+   
+
+
+      
+  ],
+
+
+  'craft' => [
+
+        'title' => 'Découvrez l\'artisanat local',
+        'subtitle' => 'Faits main avec passion, tradition et créativité. Explorez des pièces uniques créées par les artisans de votre communauté.',
+        'explore_button' => 'Explorer la collection',
+        'meet_button' => 'Rencontrer les artisans',
+
+        // Category Filter
+        'browse_category' => 'Parcourir par catégorie',
+        'categories' => [
+            'all' => 'Tout',
+            'pottery' => 'Poterie',
+            'textiles' => 'Textiles',
+            'woodwork' => 'Menuiserie',
+            'jewelry' => 'Bijoux',
+            'leather' => 'Cuir',
+            'metalwork' => 'Métal',
+        ],
+
+        // Sort Options
+        'sort' => [
+            'default' => 'Défaut',
+            'newest' => 'Nouveautés',
+            'rating' => 'Notation',
+            'price' => 'Prix',
+        ],
+
+         'details' => [
+            'location' => 'Emplacement',
+            'artisan' => 'Emplacement du studio artisanal',
+            'address' => 'Adresse',
+            'contact' => 'Contact',
+            'opening_hours' => 'Horaires d\'ouverture',
+            'days' => 'Samedi - Jeudi : 09h00 - 19h00',
+            'friday' => 'Vendredi : Fermé',
+             'related' => 'Vous pourriez aussi aimer',
+
+        ]
+
+
+  ],
+
+   'rental' => [
+        'title' => 'Trouvez votre location idéale',
+        'subtitle' => 'Découvrez les meilleures voitures, quads, maisons et appartements à louer',
+        'search_placeholder' => 'Que cherchez-vous ?',
+        'location_placeholder' => 'Emplacement',
+        'search_button' => 'Rechercher',
+
+        // Categories
+        'browse_category' => 'Parcourir par catégorie',
+        'categories' => [
+            'all' => 'Tout',
+            'cars' => 'Voitures',
+            'quad' => 'Quad',
+            'house' => 'Maison',
+            'apartment' => 'Appartement',
+        ],
+
+        // Featured Listings
+        'featured_listings' => 'Annonces en vedette',
+        'sort_by' => 'Trier par',
+
+        // Sort Options
+        'sort' => [
+            'default' => 'Défaut',
+            'newest' => 'Nouveautés',
+            'rating' => 'Notation',
+            'price' => 'Prix',
+        ],
+
+         'card' => [
+          'day' => 'Jour',
+          'btn' => 'Voir Détails',
+          'hour' => 'Heure',
+         ],
+
+         
+
+    'how_it_works' => 'Comment ça marche',
+    'step1_title' => 'Trouvez la location idéale',
+    'step1_desc'  => 'Parcourez des milliers d\'annonces pour trouver la voiture, le quad, la maison ou l\'appartement parfait.',
+
+    'step2_title' => 'Réservez en ligne',
+    'step2_desc'  => 'Réservez votre location en quelques clics. Paiement sécurisé et confirmation instantanée.',
+
+    'step3_title' => 'Profitez de votre location',
+    'step3_desc'  => 'Récupérez votre location ou vos clés. Profitez de votre expérience en toute tranquillité.',
+
+     'details' => [
+
+      'ammenties' => 'Équipements',
+      'contact' => 'Coordonnées',
+    ]
+
+
+    ],
+
+    'service' => [
+
+  // Hero
+    'services_hero_title' => 'Services essentiels pour les voyageurs',
+    'services_hero_sub'   => 'Trouvez des postes de police, hôpitaux, pharmacies et autres services essentiels près de chez vous',
+    'search_placeholder'  => 'Rechercher des services...',
+    'downtown'            => 'Centre-ville',
+
+    // Service list
+    'hospital_name' => 'Hôpital Général de la Ville',
+    'hospital_desc' => 'Services d\'urgence disponibles 24h/24 et 7j/7',
+
+    'pharmacy_name' => 'Pharmacie Centrale',
+    'pharmacy_desc' => 'Ouverte jusqu\'à 22h00 aujourd\'hui',
+
+    'police_name' => 'Commissariat du Centre-Ville',
+    'police_desc' => 'Services d\'urgence 24h/24',
+
+    'urgent_care_name' => 'Centre de Soins d\'Urgence',
+    'urgent_care_desc' => 'Ouvert jusqu\'à 23h00 aujourd\'hui',
+
+    // Map section
+    'service_locations' => 'Emplacements des services',
+    'your_location'     => 'Votre position',
+
+    // Emergency contacts
+    'emergency_contacts' => 'Contacts d\'urgence',
+    'police'    => 'Police',
+    'ambulance' => 'Ambulance',
+    'fire'      => 'Pompiers',
+
+    // Postes, Banks and ATMs
+    'postes_banks_atms' => 'POSTES, BANQUES ET DAB',
+    'postes' => 'Postes',
+    'banks'  => 'Banques',
+    'atms'   => 'DAB',
+    'office' => 'Bureaux',
+    'agency' => 'Agences',
+    'atm'    => 'DABs',
+
+    // Doctors and pharmacies
+    'doctors_pharmacies'   => 'Médecins et Pharmacies',
+    'general_doctors'      => 'Médecin Généraliste',
+    'specialist_doctors'   => 'Médecins Spécialistes',
+    'pharmacy'             => 'Pharmacie',
+    'doctor'               => 'Médecins',
+    'specialist'           => 'Spécialistes',
+    'store'            => 'Magasins',
+
+    ]
 
      
      

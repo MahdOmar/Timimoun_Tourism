@@ -3,12 +3,9 @@
 @section('content')
  <section class="bg-gradient-to-r from-primary to-secondary text-white py-16">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Local Craftsmanship</h1>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">Handmade with passion, tradition, and creativity. Explore unique pieces from local artisans in your community.</p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <button class="bg-white text-primary px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition">Explore Collection</button>
-                <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:bg-opacity-10 transition">Meet Artisans</button>
-            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ __('messages.craft.title') }}</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">{{ __('messages.craft.subtitle') }}</p>
+         
         </div>
     </section>
 
@@ -16,22 +13,22 @@
     <section class="py-8 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex flex-wrap justify-between items-center">
-                <h2 class="text-xl font-bold text-neutral mb-4 md:mb-0">Browse by Category</h2>
+                <h2 class="text-xl font-bold text-neutral mb-4 md:mb-0">{{ __('messages.craft.browse_category') }}</h2>
                 <div class="flex flex-wrap gap-2 category">
-                    <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium">All</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">Pottery</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">Textiles</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">Woodwork</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">Jewelry</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">Leather</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">Metalwork</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium">{{ __('messages.craft.categories.all') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.pottery') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.textiles') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.woodwork') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.jewelry') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.leather') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.metalwork') }}</button>
                     <div class="filter-group "  id="app" data-locale="{{ app()->getLocale() }}">
                
                      <select class="filter-select" id="sort">
-                    <option value="Default">Default</option>
-                    <option value="Newest">Newest</option>
-                    <option value="Rating">Rating</option>
-                    <option value="Price">Price</option>
+                    <option value="Default">{{ __('messages.craft.sort.default') }}</option>
+                    <option value="Newest">{{ __('messages.craft.sort.newest') }}</option>
+                    <option value="Rating">{{ __('messages.craft.sort.rating') }}</option>
+                    <option value="Price">{{ __('messages.craft.sort.price') }}</option>
                    
                 </select>
             </div>
@@ -193,7 +190,7 @@
 
             data.forEach(item => {
         const html = `
-      <a href="/craft/${item.id}">
+      <a href="/crafts/${item.id}">
         <div class="craft-card bg-white rounded-lg overflow-hidden shadow-md cursor-pointer relative">
           <div class="h-60 bg-cover bg-center relative" style="background-image: url('{{ asset('storage/${item.main_image}') }}');">
             <div class="info-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-white p-4">

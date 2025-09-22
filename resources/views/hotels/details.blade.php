@@ -20,88 +20,24 @@
                             </span>
                             <span class="flex items-center">
                                 <i class="fas fa-map-marker-alt text-blue-300 mr-1"></i>
-                                <span>Algeria, Timimoun</span>
+                                <span> {{ __('messages.accommodation_details_Algeria') }}, Timimoun</span>
                             </span>
                             <span class="flex items-center">
                                 <i class="fas fa-award text-green-400 mr-1"></i>
-                                <span>Luxury Collection</span>
+                                <span>{{ __('messages.accommodation_details_collection') }}</span>
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            {{-- <div class="lg:w-1/3">
-                <div class="bg-white p-8 rounded-2xl shadow-lg h-full">
-                    <div class="text-center mb-6">
-                        <span class="text-4xl font-bold text-primary">$299</span>
-                        <span class="text-gray-600">/ night</span>
-                    </div>
-                    
-                    <form class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-gray-700 mb-2">Check-in</label>
-                                <input type="date" class="w-full p-3 border border-gray-300 rounded-lg">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 mb-2">Check-out</label>
-                                <input type="date" class="w-full p-3 border border-gray-300 rounded-lg">
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-2">Guests</label>
-                            <select class="w-full p-3 border border-gray-300 rounded-lg">
-                                <option>1 Adult</option>
-                                <option>2 Adults</option>
-                                <option>2 Adults, 1 Child</option>
-                                <option>2 Adults, 2 Children</option>
-                                <option>3+ Adults</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-gray-700 mb-2">Room Type</label>
-                            <select class="w-full p-3 border border-gray-300 rounded-lg">
-                                <option>Ocean View Room</option>
-                                <option>Beachfront Villa</option>
-                                <option>Presidential Suite</option>
-                                <option>Family Suite</option>
-                            </select>
-                        </div>
-                        
-                        <div class="pt-4 border-t border-gray-200">
-                            <div class="flex justify-between mb-2">
-                                <span class="text-gray-600">$299 x 5 nights</span>
-                                <span class="font-semibold">$1,495</span>
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span class="text-gray-600">Service fee</span>
-                                <span class="font-semibold">$49</span>
-                            </div>
-                            <div class="flex justify-between mb-2">
-                                <span class="text-gray-600">Taxes</span>
-                                <span class="font-semibold">$112</span>
-                            </div>
-                            <div class="flex justify-between font-bold text-lg pt-2 border-t border-gray-200">
-                                <span>Total</span>
-                                <span>$1,656</span>
-                            </div>
-                        </div>
-                        
-                        <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4">
-                            <i class="fas fa-calendar-check mr-2"></i>Book Now
-                        </button>
-                    </form>
-                </div>
-            </div> --}}
+         
         </div>
 
         <!-- Hotel Description -->
         <section class="mb-16">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-orange-500 mb-6 heading-font">About {{ $accommodation->getTranslation('name', app()->getLocale()) }}</h2>
+                <h2 class="text-3xl font-bold text-orange-500 mb-6 heading-font">{{ __('messages.accommodation_details_about') }} {{ $accommodation->getTranslation('name', app()->getLocale()) }}</h2>
                 <p class="text-lg text-gray-700 mb-8">
                    {{ $accommodation->getTranslation('description', app()->getLocale()) }}
                 </p>
@@ -109,81 +45,99 @@
         </section>
 
         <!-- Key Features -->
-        <section class="mb-16">
-            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">Hotel Features</h2>
-            <p class="text-gray-600 text-center mb-12">Experience unparalleled luxury and comfort</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              @foreach ($accommodation->amenities as $item)
-                  
-              @if ($item == 'pool')
-              <div class="bg-white p-6 rounded-xl shadow-md text-center">
+       <section class="mb-16">
+    <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">
+        {{ __('messages.accommodation.features.title') }}
+    </h2>
+    <p class="text-gray-600 text-center mb-12">
+        {{ __('messages.accommodation.features.subtitle') }}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        @foreach ($accommodation->amenities as $item)
+
+            @if ($item == 'pool')
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-water"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Infinity Pools</h3>
-                    <p class="text-gray-600">Three stunning infinity pools with panoramic ocean views</p>
+                    <h3 class="text-xl font-semibold mb-2">
+                        {{ __('messages.amenities.pool.title') }}
+                    </h3>
+                    <p class="text-gray-600">
+                        {{ __('messages.amenities.pool.text') }}
+                    </p>
                 </div>
-                @elseif ($item == 'wifi')
-                  <div class="bg-white p-6 rounded-xl shadow-md text-center">
+
+            @elseif ($item == 'wifi')
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-wifi"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Free Wifi</h3>
-                    <p class="text-gray-600">High speed Wifi Available 24/7</p>
+                    <h3 class="text-xl font-semibold mb-2">
+                        {{ __('messages.amenities.wifi.title') }}
+                    </h3>
+                    <p class="text-gray-600">
+                        {{ __('messages.amenities.wifi.text') }}
+                    </p>
                 </div>
 
-                 @elseif ($item == 'restaurant')
-
+            @elseif ($item == 'restaurant')
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Fine Dining</h3>
-                    <p class="text-gray-600"> restaurant offering international and local cuisine</p>
+                    <h3 class="text-xl font-semibold mb-2">
+                        {{ __('messages.amenities.restaurant.title') }}
+                    </h3>
+                    <p class="text-gray-600">
+                        {{ __('messages.amenities.restaurant.text') }}
+                    </p>
                 </div>
 
-                  @elseif ($item == 'spa')
-
-   
+            @elseif ($item == 'spa')
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-spa"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Luxury Spa</h3>
-                    <p class="text-gray-600">Award-winning spa with traditional treatments</p>
+                    <h3 class="text-xl font-semibold mb-2">
+                        {{ __('messages.amenities.spa.title') }}
+                    </h3>
+                    <p class="text-gray-600">
+                        {{ __('messages.amenities.spa.text') }}
+                    </p>
                 </div>
-                
 
-                   @elseif ($item == 'gym')
-
+            @elseif ($item == 'gym')
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-dumbbell"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Fitness Center</h3>
-                    <p class="text-gray-600">24/7 fitness center with professional trainers</p>
+                    <h3 class="text-xl font-semibold mb-2">
+                        {{ __('messages.amenities.gym.title') }}
+                    </h3>
+                    <p class="text-gray-600">
+                        {{ __('messages.amenities.gym.text') }}
+                    </p>
                 </div>
 
-                   @elseif ($item == 'parking')
-
-                   <div class="bg-white p-6 rounded-xl shadow-md text-center">
+            @elseif ($item == 'parking')
+                <div class="bg-white p-6 rounded-xl shadow-md text-center">
                     <div class="amenity-icon mx-auto mb-4">
                         <i class="fas fa-square-parking"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Parking</h3>
-                    <p class="text-gray-600">24/7 Parking with professional sécurity</p>
+                    <h3 class="text-xl font-semibold mb-2">
+                        {{ __('messages.amenities.parking.title') }}
+                    </h3>
+                    <p class="text-gray-600">
+                        {{ __('messages.amenities.parking.text') }}
+                    </p>
                 </div>
-                
-              @endif
-                
-                
-              
-             
-                
-                 @endforeach
-            </div>
-        </section>
+            @endif
+
+        @endforeach
+    </div>
+</section>
 
         {{-- <!-- Rooms & Suites -->
         <section class="mb-16">
@@ -243,8 +197,8 @@
 
         <!-- Gallery Section -->
         <section class="mb-16">
-            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">Hotel Gallery</h2>
-            <p class="text-gray-600 text-center mb-8">Take a visual tour of our luxury resort</p>
+            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">{{ __('messages.accommodation_details_gallery') }}</h2>
+            <p class="text-gray-600 text-center mb-8">{{ __('messages.accommodation_details_gallery_title') }}</p>
             
             <div class="gallery-grid">
               @foreach ($accommodation->gallery as $item)
@@ -262,12 +216,12 @@
 
         <!-- Location & Contact -->
         <section class="mb-16">
-            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">Location & Contact</h2>
-            <p class="text-gray-600 text-center mb-8">Find us and get in touch</p>
+            <h2 class="text-3xl font-bold text-orange-500 mb-2 text-center heading-font">  {{ __('messages.contact.subtitle') }}</h2>
+            <p class="text-gray-600 text-center mb-8"> {{ __('messages.contact.description') }}</p>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-xl shadow-md">
-                    <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                    <h3 class="text-2xl font-semibold mb-6">{{ __('messages.contact.title') }}</h3>
                     
                     <div class="space-y-6">
                         <div class="flex items-start">
@@ -275,7 +229,7 @@
                                 <i class="fas fa-map-marker-alt text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Address</h4>
+                                <h4 class="font-semibold">{{ __('messages.contact.address') }}</h4>
                                 <p class="text-gray-600">{{ $accommodation->getTranslation('address', app()->getLocale()) }}</p>
                             </div>
                         </div>
@@ -285,7 +239,7 @@
                                 <i class="fas fa-phone text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Phone</h4>
+                                <h4 class="font-semibold">{{ __('messages.contact.phone') }}</h4>
                                 <p class="text-gray-600">{{ $accommodation->phone }}</p>
                                
                             </div>
@@ -296,7 +250,7 @@
                                 <i class="fas fa-envelope text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Email</h4>
+                                <h4 class="font-semibold">{{ __('messages.contact.email') }}</h4>
                                 <p class="text-gray-600">{{ $accommodation->email }}</p>
                                 
                             </div>
@@ -307,8 +261,8 @@
                                 <i class="fas fa-clock text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold">Front Desk</h4>
-                                <p class="text-gray-600">Open 24 hours</p>
+                                <h4 class="font-semibold">{{ __('messages.contact.desk') }}</h4>
+                                <p class="text-gray-600">{{ __('messages.contact.desk_hours') }}</p>
                             </div>
                         </div>
 
@@ -318,7 +272,7 @@
 <div x-data="{ open: false }">
     <!-- Reservation Button -->
     <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4" @click="open = true" class="px-4 py-2 bg-blue-600 text-white rounded-lg"">
-                            <i class="fas fa-calendar-check mr-2"></i>Book Now
+                            <i class="fas fa-calendar-check mr-2"></i>{{ __('messages.fields.book') }}
                         </button>
 
     <!-- Reservation Modal -->
@@ -332,13 +286,13 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-xl font-semibold flex items-center">
                         <i class="fas fa-hotel mr-3"></i>
-                        Hotel Reservation Request
+                       {{ __('messages.reservation_title') }}
                     </h2>
                     <button class="text-white hover:text-gray-200 transition-colors "@click="open = false">
                         <i class="fas fa-times text-lg"></i>
                     </button>
                 </div>
-                <p class="text-sm text-blue-100 mt-2">Book your stay at {{  $accommodation->getTranslation('name', app()->getLocale()) }}</p>
+                <p class="text-sm text-blue-100 mt-2"> {{ __('messages.reservation_subtitle') }} {{  $accommodation->getTranslation('name', app()->getLocale()) }}</p>
                 
               
             </div>
@@ -354,7 +308,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                            Name
+                             {{ __('messages.fields.name') }}
                         </label>
                         <div class="relative">
                             <input type="text" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your name" required>
@@ -363,7 +317,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fa-solid fa-envelope mr-2 text-primary"></i>
-                            Email
+                            {{ __('messages.fields.email') }}
                         </label>
                         <div class="relative">
                             <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your email" required>
@@ -376,7 +330,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-phone mr-2 text-primary"></i>
-                            Phone
+                            {{ __('messages.fields.phone') }}
                         </label>
                         <div class="relative">
                             <input type="text" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your phone" required>
@@ -385,7 +339,7 @@
                      <div class="mb-6">
                     <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                         <i class="fas fa-users mr-2 text-primary"></i>
-                        Guests
+                        {{ __('messages.fields.guests') }}
                     </label>
                   
                     <input type="number" name="guests" min="1" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 2" required>
@@ -401,7 +355,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-calendar-day mr-2 text-primary"></i>
-                            Check-in
+                             {{ __('messages.fields.checkin') }}
                         </label>
                         <div class="relative">
                             <input type="date" name="checkin" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" id="checkin" required>
@@ -410,7 +364,7 @@
                     <div>
                         <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                             <i class="fas fa-calendar-check mr-2 text-primary"></i>
-                            Check-out
+                             {{ __('messages.fields.checkout') }}
                         </label>
                         <div class="relative">
                             <input type="date" name="checkout" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition"  id="checkout" required>
@@ -425,7 +379,8 @@
                 <div class="mb-6">
                     <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                         <i class="fas fa-bed mr-2 text-primary"></i>
-                        Room Type
+                             {{ __('messages.fields.room_type') }}
+
                     </label>
                     <div class="relative">
                         <select class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition appearance-none" name="room_type">
@@ -444,7 +399,7 @@
                 <div class="mb-4">
                     <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
                         <i class="fas fa-concierge-bell mr-2 text-primary"></i>
-                        Special Requests
+                       {{ __('messages.fields.message') }}
                     </label>
                     <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" name="message" rows="2" placeholder="Any special requests?"></textarea>
                 </div>
@@ -455,11 +410,11 @@
             <div class="bg-gray-50 px-6 py-4 flex justify-between">
                  <button type="button" @click="open = false"
                             class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
-                        Cancel
+                         {{ __('messages.fields.cancel') }}
                     </button>
                 <button type="submit" class="px-5 py-2 rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors flex items-center">
                     <i class="fas fa-check mr-2"></i>
-                    Confirm Booking
+                   {{ __('messages.fields.confirm') }}
                 </button>
             </div>
             </form>
@@ -481,13 +436,13 @@
 
 <section class=" py-8">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-neutral mb-6">Customer Reviews</h2>
+            <h2 class="text-2xl font-bold text-neutral mb-6">{{ __('messages.reviews.title') }}</h2>
             @foreach ($accommodation->reviews as $item)
                  
             <div class="bg-white rounded-xl shadow-md p-6 mb-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-neutral">By {{ $item->name }}</h3>
+                        <h3 class="text-lg font-semibold text-neutral">{{ __('messages.reviews.By') }} {{ $item->name }}</h3>
 
                         <div class="flex text-yellow-400 mt-1">
                           @for( $i=0; $i < $item->rating; $i++ )
@@ -496,7 +451,7 @@
                             @endfor
                         </div>
                     </div>
-                    <span class="text-gray-500 text-sm mt-2 md:mt-0">On {{ $item->created_at->format('d-M-Y') }}</span>
+                    <span class="text-gray-500 text-sm mt-2 md:mt-0">{{ __('messages.reviews.On') }} {{ $item->created_at->format('d-M-Y') }}</span>
                 </div>
                 <p class="text-gray-700">
                     {{ $item->comment }}
@@ -521,7 +476,7 @@
 
 <section class="py-16 bg-gray-50">
   <div class="max-w-3xl mx-auto px-6">
-    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">Leave a Review</h2>
+    <h2 class="text-3xl font-extrabold text-center text-orange-500 mb-10">{{ __('messages.reviews.title2') }}</h2>
 
     <form action="{{ route('review.store') }}" method="POST" class="bg-white shadow-xl rounded-2xl p-8 space-y-6">
       @csrf
@@ -531,7 +486,7 @@
       
       <!-- Name -->
       <div>
-        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+        <label for="name" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.name') }}</label>
         <input type="text" id="name" name="name" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="John Doe">
@@ -539,7 +494,7 @@
 
       <!-- Email -->
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+        <label for="email" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.email') }}</label>
         <input type="email" id="email" name="email" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
           placeholder="johndoe@email.com">
@@ -547,7 +502,7 @@
 
       <!-- Star Rating -->
       <div>
-        <label class="block text-sm font-medium text-gray-700">Your Rating</label>
+        <label class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.rating') }}</label>
         <div class="flex items-center mt-2 space-x-2" id="starRating">
           <!-- Stars will be interactive -->
           <button type="button" class="star text-gray-300 hover:text-orange-500 transition">
@@ -572,17 +527,17 @@
 
       <!-- Review -->
       <div>
-        <label for="review" class="block text-sm font-medium text-gray-700">Your Review</label>
+        <label for="review" class="block text-sm font-medium text-gray-700">{{ __('messages.reviews.text') }}</label>
         <textarea id="review" name="comment" rows="4" required
           class="mt-2 w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" 
-          placeholder="Share your experience..."></textarea>
+          placeholder=" {{ __('messages.reviews.message') }}"></textarea>
       </div>
 
       <!-- Submit -->
       <div class="text-center">
         <button type="submit"
           class="w-full bg-orange-500 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-orange-600 transition">
-          Submit Review
+         {{ __('messages.reviews.submit') }}
         </button>
       </div>
     </form>

@@ -86,17 +86,9 @@
         <div class="floating-shape shape-2"></div>
         
         <div class="container mx-auto px-4 relative">
-            <h1 class="page-title">Discover Amazing Restaurants</h1>
-            <p class="page-subtitle">Explore the finest dining experiences from around the world</p>
-            
-            <div class="search-container">
-                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
-                    <input type="text" placeholder="Search restaurants, cuisines, or locations..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
-                    <button class="bg-secondary hover:bg-orange-700 px-8 py-4 text-white font-semibold">
-                        <i class="fas fa-search mr-2"></i>Search
-                    </button>
-                </div>
-            </div>
+            <h1 class="page-title">{{ __('messages.food.restaurants_title') }}</h1>
+            <p class="page-subtitle">{{ __('messages.food.restaurants_subtitle') }}</p>
+           
         </div>
     </header>
 
@@ -107,7 +99,7 @@
                 <div class="category-icon">
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <div class="category-name " >All</div>
+                <div class="category-name " >{{ __('messages.food.food_categories.all') }}</div>
             </div>
 
 
@@ -115,21 +107,21 @@
                 <div class="category-icon">
                     <i class="fas fa-utensils"></i>
                 </div>
-                <div class="category-name">Restaurant</div>
+                <div class="category-name">{{ __('messages.food.food_categories.restaurant') }}</div>
             </div>
             
             <div class="category-item">
                 <div class="category-icon">
                     <i class="fas fa-pizza-slice"></i>
                 </div>
-                <div class="category-name">Snack</div>
+                <div class="category-name">{{ __('messages.food.food_categories.snack') }}</div>
             </div>
            
             <div class="category-item">
                 <div class="category-icon">
                     <i class="fas fa-fish"></i>
                 </div>
-                <div class="category-name">Traditional</div>
+                <div class="category-name">{{ __('messages.food.food_categories.traditional') }}</div>
             </div>
             
            
@@ -138,7 +130,7 @@
                 <div class="category-icon">
                     <i class="fas fa-mug-hot"></i>
                 </div>
-                <div class="category-name">Cafe</div>
+                <div class="category-name">{{ __('messages.food.food_categories.cafe') }}</div>
             </div>
             
           
@@ -146,19 +138,19 @@
     </div>
 
     <!-- Main Content -->
-    <h2 class="section-title">Featured Restaurants</h2>
+    <h2 class="section-title">{{ __('messages.food.featured_restaurants') }}</h2>
     
     <div class="view-options">
-        <div class="view-option active">All</div>
-        <div class="view-option hover:bg-primary hover:text-white">Price: Low to High</div>
-        <div class="view-option hover:bg-primary hover:text-white">Price: High to Low</div>
-        <div class="view-option hover:bg-primary hover:text-white">Rating</div>
+        <div class="view-option active">{{ __('messages.food.view.all') }}</div>
+        <div class="view-option hover:bg-primary hover:text-white">{{ __('messages.food.view.price_low') }}</div>
+        <div class="view-option hover:bg-primary hover:text-white">{{ __('messages.food.view.price_high') }}</div>
+        <div class="view-option hover:bg-primary hover:text-white">{{ __('messages.food.view.rating') }}</div>
     </div>
     
     <div class="results-header"  id="app" data-locale="{{ app()->getLocale() }}">
-        <div class="results-count" id="total"> {{ count($food) }} Elements Found</div>
+        <div class="results-count" id="total"> {{ count($food) }} {{ __('messages.food.elements_found') }}</div>
         <div class="filter-button">
-            <i class="fas fa-filter mr-2"></i>Filters
+            <i class="fas fa-filter mr-2"></i>{{ __('messages.food.filters') }}
         </div>
     </div>
 
@@ -201,7 +193,7 @@
                 
                 <div class="card-footer">
                     <div class="card-price">{{ $item->min_price }} - {{ $item->max_price }} DA</div>
-                    <button class="card-button">Reserve</button>
+                    <button class="card-button">{{ __('messages.food.btn') }}</button>
                 </div>
             </div>
         </div></a>
@@ -358,7 +350,7 @@
 
         // Card HTML
         const card = `
-        <a href="/foods/${item.id}">
+        <a href="/food/${item.id}">
             <div class="restaurant-card-1">
                 <div class="card-image">
                     <img src="/storage/${item.main_image}" 

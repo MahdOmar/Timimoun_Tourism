@@ -14,12 +14,12 @@
                 <div class="absolute bottom-8 left-8 text-white max-w-2xl">
                     <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ __('messages.accommodation_index_title') }}</h1>
                     <p class="text-xl mb-6">{{ __('messages.accommodation_index_subtitle') }}</p>
-                    <div class="flex">
+                    {{-- <div class="flex">
                         <input type="text" placeholder="Search by city, hotel, or destination" class="px-6 py-3 rounded-l-lg w-full text-gray-800">
                         <button class="bg-primary hover:bg-blue-700 px-6 py-3 rounded-r-lg text-white font-semibold">
                             <i class="fas fa-search"></i>
                         </button>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
@@ -76,7 +76,7 @@
         <!-- Property Type -->
         <div class="mb-8">
             <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_type') }}</h3>
-            @foreach (['hotel', 'campiste', 'villa', 'guest_house'] as $type)
+            @foreach (['hotel', 'campsite', 'villa', 'guest_house'] as $type)
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="type[]" 
@@ -92,7 +92,7 @@
         <!-- Amenities -->
         <div class="mb-8">
             <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_amenities') }}</h3>
-            @foreach (['wifi' => 'Free WiFi', 'pool' => 'Swimming Pool', 'spa' => 'Spa', 'breakfast' => 'Breakfast Included', 'gym' => 'Fitness Center'] as $key => $label)
+            @foreach (['wifi' =>  __('messages.accommodation_index_wifi'), 'pool' => __('messages.accommodation_index_pool'), 'spa' => 'Spa', 'breakfast' => __('messages.accommodation_index_breakfast'), 'gym' => __('messages.accommodation_index_gym')] as $key => $label)
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="amenities[]" 
@@ -171,7 +171,7 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <span class="text-2xl font-bold text-primary">{{ $accommodation->min_price }}</span>
-                                    <span class="text-gray-600">/night</span>
+                                    <span class="text-gray-600">/{{ __('messages.accommodation_index_night') }}</span>
                                 </div>
                                
                             </div>
@@ -201,19 +201,19 @@
         </div>
     </main>
 
-    <!-- Newsletter Section -->
+    {{-- <!-- Newsletter Section -->
     <section class="bg-primary text-white py-12 mt-16">
         <div class="container mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">Get Exclusive Hotel Deals</h2>
-            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and receive special offers, discounts, and updates on the best hotels around the world.</p>
-            <div class="flex flex-col sm:flex-row justify-center max-w-2xl mx-auto">
+            {{-- <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and receive special offers, discounts, and updates on the best hotels around the world.</p> --}}
+            {{-- <div class="flex flex-col sm:flex-row justify-center max-w-2xl mx-auto">
                 <input type="email" placeholder="Your email address" class="px-6 py-3 rounded-l-lg sm:rounded-r-none rounded-r-lg sm:w-2/3 text-gray-800">
                 <button class="bg-secondary hover:bg-green-600 px-6 py-3 rounded-r-lg sm:rounded-l-none rounded-l-lg mt-2 sm:mt-0 sm:w-1/3 font-semibold">
                     Subscribe
                 </button>
-            </div>
+            </div> 
         </div>
-    </section>
+    </section> --}}
  
 
 

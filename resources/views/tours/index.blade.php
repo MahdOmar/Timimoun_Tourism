@@ -83,17 +83,10 @@
 
  <header class="page-header">
         <div class="container mx-auto px-4 relative">
-            <h1 class="page-title">Discover Amazing Tours</h1>
-            <p class="page-subtitle">Explore the world with our carefully curated adventure tours and experiences</p>
+            <h1 class="page-title">{{ __('messages.tour.title') }}</h1>
+            <p class="page-subtitle">{{ __('messages.tour.subtitle') }}</p>
             
-            <div class="search-container">
-                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
-                    <input type="text" placeholder="Search destinations, tours, or activities..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
-                    <button class="bg-secondary hover:bg-orange-600 px-8 py-4 text-white font-semibold">
-                        <i class="fas fa-search mr-2"></i>Search
-                    </button>
-                </div>
-            </div>
+            
         </div>
     </header>
 
@@ -103,51 +96,51 @@
             
             
             <div class="filter-group">
-                <label class="filter-label">Tour Type</label>
+                <label class="filter-label">{{ __('messages.tour.filters.tour_type') }}</label>
                 <select class="filter-select" id="category">
-                    <option value="all">All Tour Types</option>
-                    <option value="cars"> 4x4 Cars</option>
-                    <option value="quads">Quads</option>
-                    <option value="camels">Camels</option>
+                    <option value="all">{{ __('messages.tour.tour_types.all') }}</option>
+                    <option value="cars">{{ __('messages.tour.tour_types.cars') }}</option>
+                    <option value="quads">{{ __('messages.tour.tour_types.quads') }}</option>
+                    <option value="camels">{{ __('messages.tour.tour_types.camels') }}</option>
                   
                 </select>
             </div>
             
             <div class="filter-group">
-                <label class="filter-label">Duration</label>
+                <label class="filter-label">{{ __('messages.tour.filters.duration') }}</label>
                 <select class="filter-select" id="duration">
-                    <option value="any">Any Duration</option>
-                    <option value="1">01 Day</option>
-                    <option value="2">02 Days</option>
-                    <option value="3">03 Days</option>
-                    <option value=">3"> 04 Days and more</option>
+                    <option value="any">{{ __('messages.tour.duration_options.any') }}</option>
+                    <option value="1">{{ __('messages.tour.duration_options.1') }}</option>
+                    <option value="2">{{ __('messages.tour.duration_options.2') }}</option>
+                    <option value="3">{{ __('messages.tour.duration_options.3') }}</option>
+                    <option value=">3"> {{ __('messages.tour.duration_options.more') }}</option>
                 </select>
             </div>
             
             <div class="filter-group">
-                <label class="filter-label">Price Range</label>
+                <label class="filter-label">{{ __('messages.tour.filters.price_range') }}</label>
                 <select class="filter-select" id="price">
-                    <option value="all">Any Price</option>
-                    <option value="10000">Under 10000</option>
-                    <option value="10000-15000">10000 - 15000</option>
-                    <option value="15000-20000">15000 - 20000</option>
-                    <option value=">20000">Over 20000</option>
+                    <option value="all">{{ __('messages.tour.price_options.all') }}</option>
+                    <option value="10000">{{ __('messages.tour.price_options.under_10000') }}</option>
+                    <option value="10000-15000">{{ __('messages.tour.price_options.10000_15000') }}</option>
+                    <option value="15000-20000">{{ __('messages.tour.price_options.15000_20000') }}</option>
+                    <option value=">20000">{{ __('messages.tour.price_options.over_20000') }}</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label class="filter-label">Sort By</label>
+                <label class="filter-label">{{ __('messages.tour.filters.sort_by') }}</label>
                 <select class="filter-select" id="sort">
-                    <option value="default">Default</option>
-                    <option value="Newest">Newest</option>
-                    <option value="Rating">Rating</option>
+                    <option value="default">{{ __('messages.tour.sort_options.default') }}</option>
+                    <option value="Newest">{{ __('messages.tour.sort_options.newest') }}</option>
+                    <option value="Rating">{{ __('messages.tour.sort_options.rating') }}</option>
                    
                 </select>
             </div>
             
             <div class="filter-group flex items-end">
                 <button type="button" class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-semibold" onclick="sort()">
-                    Apply Filters
+                   {{ __('messages.tour.filters.apply') }}
                 </button>
             </div>
         </div>
@@ -155,7 +148,7 @@
 
     <!-- Results Header -->
     <div class="results-header" id="app" data-locale="{{ app()->getLocale() }}">
-        <div class="results-count" id="total">Showing 24 of 128 tours</div>
+        <div class="results-count" id="total">{{ count($tours) }}{{ __('messages.tour.elements_found') }}</div>
         <div class="view-options">
             <button class="view-option active">
                 <i class="fas fa-th-large"></i>
@@ -199,9 +192,9 @@
                 <div class="tour-meta">
                     <div class="tour-duration">
                         <i class="far fa-clock mr-2"></i>
-                        <span>{{ $item->duration_days }} Days</span>
+                        <span>{{ $item->duration_days }} {{ __('messages.tour.card.days') }}</span>
                     </div>
-                    <button class="tour-button">View Tour</button>
+                    <button class="tour-button">{{ __('messages.tour.card.btn') }}</button>
                 </div>
             </div>
         </div></a>

@@ -82,9 +82,9 @@ class CraftController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Craft $craft)
+    public function edit(string $id)
     {
-        $craft = Craft::with('gallery')->findOrFail($craft->id);
+        $craft = Craft::with('gallery')->findOrFail($id);
         return view('dashboard.crafts.edit', compact('craft'));
     }
 

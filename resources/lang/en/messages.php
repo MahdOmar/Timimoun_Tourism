@@ -176,13 +176,563 @@ return [
   'accommodation_index_amenities' => 'Amenities',
   'accommodation_index_apply_filter' => 'Apply Filters',
   'accommodation_index_reset_filter' => 'Reset Filters',
+  'accommodation_index_wifi' => 'Free WiFi',
+  'accommodation_index_pool' => 'Swimming Pool',
+  'accommodation_index_spa' => 'Spa',
+  'accommodation_index_breakfast' => 'Breakfast Included',
+  'accommodation_index_gym' => 'Fitness Center',
+  'accommodation_index_night' => 'night',
+  // 'accommodation_index_footer_title' => 'Get Exclusive Hotel Deals',
+  // 'accommodation_index_footer_subtitle' => 'Subscribe to our newsletter and receive special offers, discounts, and updates on the best hotels around the world.',
+  // 'accommodation_index_night' => 'night',
+  
 
 
-      
-      
+  //Accommodation show Translation
 
+ 'accommodation_details_Algeria' => 'Algeria',
+ 'accommodation_details_collection' => 'Luxury Collection',
+  'accommodation_details_about' => 'About',
+  'accommodation_details_gallery' => 'Accommodation Gallery',
+  'accommodation_details_gallery_title' => 'Take a visual tour of our luxury resort',
+
+  'accommodation' => [
+        'features' => [
+            'title' => 'Hotel Features',
+            'subtitle' => 'Experience unparalleled luxury and comfort',
+        ],
+    ],
+
+    'amenities' => [
+        'pool' => [
+            'title' => 'Infinity Pools',
+            'text'  => 'Three stunning infinity pools with panoramic ocean views',
+        ],
+        'wifi' => [
+            'title' => 'Free Wifi',
+            'text'  => 'High speed Wifi available 24/7',
+        ],
+        'restaurant' => [
+            'title' => 'Fine Dining',
+            'text'  => 'Restaurant offering international and local cuisine',
+        ],
+        'spa' => [
+            'title' => 'Luxury Spa',
+            'text'  => 'Award-winning spa with traditional treatments',
+        ],
+        'gym' => [
+            'title' => 'Fitness Center',
+            'text'  => '24/7 fitness center with professional trainers',
+        ],
+        'parking' => [
+            'title' => 'Parking',
+            'text'  => '24/7 parking with professional security',
+        ],
+
+         
+    ],
+
+    'contact' => [
+            'subtitle' => 'Location & Contact',
+            'description' => 'Find us and get in touch',
+            'title' => 'Contact Information',
+            'address' => 'Address',
+            'phone'   => 'Phone',
+            'email'   => 'Email',
+            'desk'    => 'Front Desk',
+            'desk_hours' => 'Open 24 hours',
+        ],
+
+      "reviews" => [
+            'title' => 'Customer Reviews',
+            'By' => 'By',
+            'On' => 'On',
+            'title2' => 'Leave a Review',
+            'name' => 'Your Name',
+            'email' => 'Your Email',
+            'rating' => 'Your Rating',
+            'text' => 'Your Review',
+            'message' => 'Share your experience...',
+            'submit' => 'Submit Review',
+            
+        ],
+
+    'reservation_title'   => 'Hotel Reservation Request',
+    'reservation_subtitle' => 'Book your stay at',
+   
+
+    ''  => 'The check-in date must be after today.',
+
+    'fields' => [
+       'book'  => 'Book Now',
+        'name'       => 'Name',
+        'email'      => 'Email',
+        'phone'      => 'Phone',
+        'guests'     => 'Guests',
+        'checkin'    => 'Check-in',
+        'checkout'   => 'Check-out',
+        'room_type'  => 'Room Type',
+        'message'    => 'Special Requests',
+        'confirm'    => 'Confirm Booking',
+        'cancel'     => 'Cancel',
+    ],
+    
+
+  // Event index Translation
+
+         // Events Section
+    'events' => [
+        'title'       => 'Discover Amazing Events',
+        'subtitle'    => 'Find and attend events that match your interests. From concerts to conferences, we have it all.',
+        'search_placeholder' => 'Search events, artists, or categories...',
+        'all_cities'  => 'All Cities',
+        'search_btn'  => 'Search',
+         // Categories
+    'categories' => [
+        'title'       => 'Popular Categories',
+        'all'         => 'All Events',
+        'festival'    => 'Festival',
+        'concert'     => 'Concert',
+        'cultural'    => 'Cultural',
+        'exhibition'  => 'Exhibition',
+        'sports'      => 'Sports',
+        'other'       => 'Other',
+    ],
+
+    'filtre' => [
+      'events_found' => 'Events Found',
+        'title'       => 'Sort by',
+        'option1'     => 'Date: Soonest First',
+        'option2'    => 'Date: Latest First',
+        'option3'     => 'Price: Low to High',
+        'option4'    => 'Price: High to Low',
      
+    ],
+    'card' => [
+      'person' => 'person',
+        'btn'       => 'See Details',
+       
      
+    ],
+
+    'details' => [
+        'title'       => 'About the Event',
+        'event_passed'   => 'Event has passed',
+        'days'   => 'days left',
+        'hours'   => 'Few hours left',
+        'start'   => 'Starting soon!',
+        'price'      => 'Free',
+        'highlights'=> 'Highlights',
+        'event_info'=> 'Event Information',
+        'start_date'=> 'Start Date',
+        'end_date'=> 'End Date',
+        'location'  => 'Location',
+        'category'  => 'Category',
+        'back'      => 'Back to Events',
+        
+
+        
+
+    ],
+    ],
+
+
+    //SITE INDEX TRANSLATION
+
+     'site' => [
+    'title' => 'Discover Beautiful Destinations',
+    'subtitle' => 'Explore the world\'s most breathtaking places and create unforgettable memories',
+    
+
+    // Categories
+    'categories' => [
+        'all' => 'All',
+        'monument' => 'Monument',
+        'museum' => 'Museum',
+        'natural' => 'Natural',
+        'historical' => 'Historical',
+        'religious' => 'Religious',
+        'other' => 'Other',
+        'featured_destinations' => 'Featured Destinations',
+    ],
+
+    
+
+    // View options
+    'view' => [
+        'all' => 'All',
+        'new' => 'New',
+        'rating' => 'Rating',
+        'recommended' => 'Recommended',
+    ],
+
+    // Results
+    'destinations_found' => ' Destinations found',
+    'filters' => 'Filters',
+
+    'card' => [
+        'price' => 'Free',
+        'explore' => 'Explore',
+    ],
+
+    'details' => [
+        
+        'gallery' => 'Gallery',
+        'information' => 'Site Information',
+        'category' => 'Category',
+        'time' => 'Best time to visit',
+        'entry' => 'Entry',
+        'amenities' => 'Amenities',
+        'help' => 'Need Help?',
+        'text' => 'For assistance, you can contact:',
+        'office' => 'Tourism Office',
+        'related' => 'Related Sites',
+       
+    ],
+  ],
+
+  'food' => [
+   // Header
+    'restaurants_title' => 'Discover Amazing Restaurants',
+    'restaurants_subtitle' => 'Explore the finest dining experiences from around the world',
+    'search_placeholder_food' => 'Search restaurants, cuisines, or locations...',
+    'search_button' => 'Search',
+
+    // Categories
+    'food_categories' => [
+        'all' => 'All',
+        'restaurant' => 'Restaurant',
+        'snack' => 'Snack',
+        'traditional' => 'Traditional',
+        'cafe' => 'Cafe',
+    ],
+
+    // Section
+    'featured_restaurants' => 'Featured Restaurants',
+
+    // View options
+    'view' => [
+        'all' => 'All',
+        'price_low' => 'Price: Low to High',
+        'price_high' => 'Price: High to Low',
+        'rating' => 'Rating',
+    ],
+
+    // Results
+    'elements_found' => 'Elements Found',
+    'filters' => 'Filters',
+    'btn' => 'Details',
+
+   'details' => [
+         'about' => 'About ',
+        'gallery' => 'Gallery',
+        'contact' => 'Contact Information',
+        'hours' => 'Opening Hours',
+        'days' => 'Saturday - Thursday : 11h30 - 23h00',
+        'friday' => 'Friday : 20h00 - 23h00',
+        'address' => 'Address',
+        'phone' => 'Phone',
+        'email' => 'Email',
+        'price' => 'Price Range ',
+        'meal' => 'Average meal',
+        'person' => 'per person',
+      
+       
+
+   ],
+
+    'traditional' => [
+        'title' => 'Discover Amazing Traditional Dishes ',
+        'subtitle' => 'Explore the finest dining experiences from around the world',
+        'subtitle2' => 'Featured Traditional Dishes',
+  
+
+         'details' => [
+         'about' => 'About ',
+        'gallery' => 'Gallery',
+        'providers' => 'Providers',
+        'includes' => 'Includes',
+        
+       
+
+   ],
+
+   
+      
+       
+
+    ]
+
+
+    
+
+  ],
+
+   'travel' => [
+   // Header
+    'title' => 'Find Your Travel Agency',
+    'subtitle' => 'Discover the best travel agencies to plan your next adventure',
+    
+
+
+    // Results
+    'elements_found' => 'Agencies Found',
+    'year' => 'Years',
+    'travlers' => 'Travelers', 
+    'countries' => 'Countries ',
+   
+    'btn' => 'View Details',
+
+   'details' => [
+        'world' => 'Worldwide Destinations',
+        'travels' => 'Travel Excellence ',
+         'about' => 'About ',
+        'gallery' => 'Gallery',
+        'contact' => 'Contact Information',
+        'address' => 'Address',
+        'phone' => 'Phone',
+        'email' => 'Email',
+        'website' => 'Website ',
+        
+      
+       
+
+   ],
+
+    
+
+  ],
+   
+
+    'tour' => [
+    // Header
+    'title' => 'Discover Amazing Tours',
+    'subtitle' => 'Explore the world with our carefully curated adventure tours and experiences',
+    'elements_found' => ' Tours Found',
+  
+
+    // Filters
+    'filters' => [
+        'tour_type' => 'Tour Type',
+        'duration' => 'Duration',
+        'price_range' => 'Price Range',
+        'sort_by' => 'Sort By',
+        'apply' => 'Apply Filters',
+    ],
+
+    // Tour Type options
+    'tour_types' => [
+        'all' => 'All Tour Types',
+        'cars' => '4x4 Cars',
+        'quads' => 'Quads',
+        'camels' => 'Camels',
+    ],
+
+    // Duration options
+    'duration_options' => [
+        'any' => 'Any Duration',
+        '1' => '01 Day',
+        '2' => '02 Days',
+        '3' => '03 Days',
+        'more' => '04 Days and more',
+    ],
+
+    // Price options
+    'price_options' => [
+        'all' => 'Any Price',
+        'under_10000' => 'Under 10000',
+        '10000_15000' => '10000 - 15000',
+        '15000_20000' => '15000 - 20000',
+        'over_20000' => 'Over 20000',
+    ],
+
+    // Sort options
+    'sort_options' => [
+        'default' => 'Default',
+        'newest' => 'Newest',
+        'rating' => 'Rating',
+    ],
+
+     'card' => [
+        
+        'days' => 'days',
+        'btn' => 'View Tour',
+    ],
+
+    'details' => [
+        
+        'gallery' => 'Tour Gallery',
+        'includes' => 'What Includes ?',    
+        'duration' => 'Duration',
+        'stops' => 'Stops',
+        'book_now' => 'Book Now',
+        'contact' => 'Contact Information',
+        'text' => 'For assistance booking and info, you can contact:',
+        'book'=> [
+          'title' => 'Tour Reservation Request',
+          'subtitle' => 'Book your Tour with',
+
+        'name'       => 'Name',
+        'email'      => 'Email',
+        'phone'      => 'Phone',
+        'guests'     => 'Guests',
+        'date'       => 'Date',
+        'message'    => 'Special Requests',
+        'confirm'    => 'Confirmn Booking',
+        'cancel'     => 'Cancel',
+
+        ],
+    ],
+      
+
+  ],
+     
+  'craft' => [
+
+     'title' => 'Discover Local Craftsmanship',
+        'subtitle' => 'Handmade with passion, tradition, and creativity. Explore unique pieces from local artisans in your community.',
+        'explore_button' => 'Explore Collection',
+        'meet_button' => 'Meet Artisans',
+
+        // Category Filter
+        'browse_category' => 'Browse by Category',
+        'categories' => [
+            'all' => 'All',
+            'pottery' => 'Pottery',
+            'textiles' => 'Textiles',
+            'woodwork' => 'Woodwork',
+            'jewelry' => 'Jewelry',
+            'leather' => 'Leather',
+            'metalwork' => 'Metalwork',
+        ],
+
+        // Sort Options
+        'sort' => [
+            'default' => 'Default',
+            'newest' => 'Newest',
+            'rating' => 'Rating',
+            'price' => 'Price',
+        ],
+
+        'details' => [
+            'location' => 'Location',
+            'artisan' => 'Artisan Studio Location',
+            'address' => 'Address',
+            'contact' => 'Contact',
+            'opening_hours' => 'Opening Hours',
+            'days' => 'Saturday - Thursday : 09h00 - 19h00',
+            'friday' => 'Friday : Closed',
+            'related' => 'You May Also Like',
+
+        ]
+
+
+
+  ],
+
+   'rental' => [
+        'title' => 'Find Your Perfect Rental',
+        'subtitle' => 'Discover the best cars, quads, houses, and apartments for rent',
+        
+
+        // Categories
+        'browse_category' => 'Browse by Category',
+        'categories' => [
+            'all' => 'All',
+            'cars' => 'Cars',
+            'quad' => 'Quad',
+            'house' => 'House',
+            'apartment' => 'Apartment',
+        ],
+
+        // Featured Listings
+        'featured_listings' => 'Featured Listings',
+        'sort_by' => 'Sort by',
+
+        // Sort Options
+        'sort' => [
+            'default' => 'Default',
+            'newest' => 'Newest',
+            'rating' => 'Rating',
+            'price' => 'Price',
+        ],
+
+        'card' => [
+          'day' => 'Day',
+          'btn' => 'View Details',
+          'hour' => 'hour',
+        ],
+
+    'how_it_works' => 'How It Works',
+    'step1_title' => 'Find the Perfect Rental',
+    'step1_desc'  => 'Browse through thousands of listings to find the perfect car, quad, house, or apartment.',
+
+    'step2_title' => 'Book Online',
+    'step2_desc'  => 'Book your rental with a few clicks. Secure payment and instant confirmation.',
+
+    'step3_title' => 'Enjoy Your Rental',
+    'step3_desc'  => 'Pick up your rental or get the keys. Enjoy your experience with peace of mind.',
+
+
+    'details' => [
+
+      'ammenties' => 'Amenities',
+      'contact' => 'Contact Information',
+    ]
+
+
+
+
+    ],
+
+    'service' => [
+       // Hero
+    'services_hero_title' => 'Essential Services for Travelers',
+    'services_hero_sub'   => 'Find police stations, hospitals, pharmacies and other essential services near your location',
+    'search_placeholder'  => 'Search for services...',
+    'downtown'            => 'Downtown',
+
+    // Service list
+    'hospital_name' => 'City General Hospital',
+    'hospital_desc' => '24/7 emergency services available',
+
+    'pharmacy_name' => 'Central Pharmacy',
+    'pharmacy_desc' => 'Open until 10:00 PM today',
+
+    'police_name' => 'Downtown Police Station',
+    'police_desc' => '24/7 emergency services',
+
+    'urgent_care_name' => 'Urgent Care Center',
+    'urgent_care_desc' => 'Open until 11:00 PM today',
+
+    // Map section
+    'service_locations' => 'Service Locations',
+    'your_location'     => 'Your location',
+
+    // Emergency contacts
+    'emergency_contacts' => 'Emergency Contacts',
+    'police'    => 'Police',
+    'ambulance' => 'Ambulance',
+    'fire'      => 'Fire Department',
+
+    // Postes, Banks and ATMs
+    'postes_banks_atms' => 'POSTES, BANKS AND ATMs',
+    'postes' => 'Postes',
+    'banks'  => 'Banks',
+    'atms'   => 'ATMs',
+    'office' => 'Offices',
+    'agency' => 'Agencies',
+    'atm'    => 'ATMs',
+
+    // Doctors and pharmacies
+    'doctors_pharmacies'   => 'Doctors and Pharmacies',
+    'general_doctors'      => 'General Practitioner',
+    'specialist_doctors'   => 'Specialist Doctors',
+    'pharmacy'             => 'Pharmacy',
+    'doctor'               => 'Doctors',
+    'specialist'           => 'Specialists',
+    'store'            => 'Stores',
+    ]
 
 
 
