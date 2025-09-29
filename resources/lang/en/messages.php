@@ -3,6 +3,7 @@
 return [
 
   // Landing Page Translations
+    'site_address' => "Timimoun, Algeria",
     'HOME' => 'HOME',
     'Where to Stay' => 'Where to Stay',
     'Things to Do' => 'Things to Do',
@@ -15,6 +16,7 @@ return [
     'Tours' => 'Tours',
     'Crafts' => 'Crafts',
     'Rentals' => 'Rentals',
+    'Timimoun' => 'Timimoun',
     'Essential Services' => 'Essential Services',
     'CRAFTS' => 'CRAFTS',
     'EXPLORE. DISCOVER. TRAVEL' => 'EXPLORE. DISCOVER. TRAVEL',
@@ -66,6 +68,8 @@ return [
      'stars' => 'Stars',
       'book' => 'Book Now',
       'seemore' => 'See more',
+      'person' => 'person',
+      'DA' => 'DA',
 
       'adventures_title' => 'Adventure Awaits',
       'adventures_subtitle1' => 'Camel Trekking',
@@ -177,11 +181,20 @@ return [
   'accommodation_index_apply_filter' => 'Apply Filters',
   'accommodation_index_reset_filter' => 'Reset Filters',
   'accommodation_index_wifi' => 'Free WiFi',
+  'accommodation_index_restaurant' => 'Restaurant',
+  'accommodation_index_air_conditioning' => 'Air_conditioning',
+  'accommodation_index_parking' => 'Parking',
+
   'accommodation_index_pool' => 'Swimming Pool',
   'accommodation_index_spa' => 'Spa',
   'accommodation_index_breakfast' => 'Breakfast Included',
   'accommodation_index_gym' => 'Fitness Center',
   'accommodation_index_night' => 'night',
+  'up_to' => 'Up to',
+  'hotel' => 'Hotel',
+  'villa' => 'Villa',
+  'campiste' => 'Campiste',
+  'guest_house' => 'Guest House',
   // 'accommodation_index_footer_title' => 'Get Exclusive Hotel Deals',
   // 'accommodation_index_footer_subtitle' => 'Subscribe to our newsletter and receive special offers, discounts, and updates on the best hotels around the world.',
   // 'accommodation_index_night' => 'night',
@@ -191,10 +204,13 @@ return [
   //Accommodation show Translation
 
  'accommodation_details_Algeria' => 'Algeria',
+ 'accommodation_details_Timimoun' => 'Timimoun',
+
  'accommodation_details_collection' => 'Luxury Collection',
   'accommodation_details_about' => 'About',
   'accommodation_details_gallery' => 'Accommodation Gallery',
   'accommodation_details_gallery_title' => 'Take a visual tour of our luxury resort',
+  'review' => 'reviews',
 
   'accommodation' => [
         'features' => [
@@ -388,6 +404,7 @@ return [
         'office' => 'Tourism Office',
         'related' => 'Related Sites',
        
+       
     ],
   ],
 
@@ -493,6 +510,25 @@ return [
         'phone' => 'Phone',
         'email' => 'Email',
         'website' => 'Website ',
+        'services' => [
+    'title' => 'Our Services',
+    'flight' => [
+        'title' => 'Flight Bookings',
+        'text'  => 'We secure the best routes and prices with premium airlines worldwide.',
+    ],
+    'accommodation' => [
+        'title' => 'Accommodation',
+        'text'  => 'From boutique hotels to luxury resorts, we have partnerships with the finest properties.',
+    ],
+    'itineraries' => [
+        'title' => 'Custom Itineraries',
+        'text'  => 'Tailor-made travel plans designed around your interests and preferences.',
+    ],
+    'transportation' => [
+        'title' => 'Transportation',
+        'text'  => 'Private transfers, travel cars, and chauffeur services for seamless travel.',
+    ],
+],
         
       
        
@@ -586,7 +622,49 @@ return [
       
 
   ],
+
+
+  'tour_details' => [
+    'title' => 'Gourara Tour',
+    'review' => 'Review 0.4',
+    'featured' => 'Featured Trip',
+    'hero_title' => 'Gourara Exploration Trip',
+    'hero_sub' => 'Discover the beauty of the desert and oases on an unforgettable journey through the enchanting Gourara region',
+
+    'price_title' => 'Trip Price',
+    'price_note' => 'All-inclusive price per person in a group of 4',
+
+    'gallery' => 'Photo Gallery',
+
+    'details' => 'Details',
+    'car_title' => '4×4 Vehicles',
+    'car_sub' => 'Suitable for all types of roads',
+    'duration' => 'Days / Nights',
+    'price_info' => 'Price includes fuel and professional driver',
+
+    'program_title' => 'What’s Included?',
+    'accommodation' => 'Accommodation',
+    'accommodation_sub' => '4-star hotels with breakfast',
+    'transport' => 'Transport',
+    'transport_sub' => 'Air-conditioned 4x4 vehicles with professional drivers',
+    'meals' => 'Meals',
+    'meals_sub' => '3 main meals daily (breakfast, lunch, dinner)',
+    'activities' => 'Activities',
+    'activities_sub' => 'Sightseeing tours and visits to major landmarks',
+
+    'contact_title' => 'Contact Information',
+    'contact_desc' => 'For assistance or more information, please contact us via:',
+    'phone' => 'Phone',
+    'phone_hours' => 'Available from 8 AM to 10 PM',
+    'email' => 'Email',
+    'email_reply' => 'Response within 24 hours',
+    'customer_service' => 'Customer service available for any inquiries or trip bookings',
+],
      
+
+
+
+
   'craft' => [
 
      'title' => 'Discover Local Craftsmanship',
@@ -617,6 +695,7 @@ return [
         'details' => [
             'location' => 'Location',
             'artisan' => 'Artisan Studio Location',
+            'description' => 'Description',
             'address' => 'Address',
             'contact' => 'Contact',
             'opening_hours' => 'Opening Hours',
@@ -633,6 +712,7 @@ return [
    'rental' => [
         'title' => 'Find Your Perfect Rental',
         'subtitle' => 'Discover the best cars, quads, houses, and apartments for rent',
+        'listing' => 'Listings',
         
 
         // Categories
@@ -640,6 +720,7 @@ return [
         'categories' => [
             'all' => 'All',
             'cars' => 'Cars',
+            '4x4_cars' =>'4x4_cars',
             'quad' => 'Quad',
             'house' => 'House',
             'apartment' => 'Apartment',
@@ -678,6 +759,17 @@ return [
 
       'ammenties' => 'Amenities',
       'contact' => 'Contact Information',
+       'description' => 'Description',
+       'furnished' => 'Furnished',
+        'air_conditioning' => 'Air_conditioning',
+        'heating' => 'Heating',
+        'pool' => 'Pool',
+        'wifi' => 'Wifi',
+        'kitchen' => 'Kitchen',
+        'garage' => 'Garage',
+        'tv' => 'Tv',
+        'washing_machine' => 'Washing Machine',
+        'garden' =>'Garden'
     ]
 
 
@@ -732,11 +824,232 @@ return [
     'doctor'               => 'Doctors',
     'specialist'           => 'Specialists',
     'store'            => 'Stores',
-    ]
+    ],
 
 
+    'map' => [
+    'hospital_name' => 'City General Hospital',
+    'hospital_desc' => '24/7 emergency services available',
+
+    'police_name' => 'Police Station',
+    'police_desc' => '24/7 emergency services',
+
+    'ambulance_name' => 'Ambulance',
+    'ambulance_desc' => '24/7 emergency services',
+
+    'pharmacy_name' => 'Pharmacy',
+    'pharmacy_desc' => 'Open until 11:00 PM',
+],
+
+ 'map2' => [
+        'main_poste' => [
+            'title' => 'Main Poste + ATM',
+            'schedule' => 'From Saturday to Thursday',
+            'hours' => 'Open until 18:00',
+            'atm' => 'ATM available 24/7',
+        ],
+        'bna' => [
+            'title' => 'BNA + ATM',
+            'schedule' => 'From Sunday to Thursday',
+            'hours' => 'Open until 15:00',
+            'atm' => 'ATM available 24/7',
+        ],
+
+        'badr' => [
+            'title' => 'BADR + ATM',
+            'schedule' => 'From Sunday to Thursday',
+            'hours' => 'Open until 15:00',
+            'atm' => 'ATM available 24/7',
+        ],
+
+
+        'bdl' => [
+            'title' => 'BDL + ATM',
+            'schedule' => 'From Sunday to Thursday',
+            'hours' => 'Open until 15:00',
+            'atm' => 'ATM available 24/7',
+        ],
+
+        'bea' => [
+            'title' => 'BEA + ATM',
+            'schedule' => 'From Sunday to Thursday',
+            'hours' => 'Open until 15:00',
+            'atm' => 'ATM available 24/7',
+        ],
+        'post_office1' => [
+            'title' => 'Post Office',
+            'schedule' => 'From Saturday to Thursday',
+            'hours' => 'Open until 18:00',
+             'atm' => 'ATM available 24/7',
+        ],
+
+         'post_office2' => [
+            'title' => 'Post Office',
+            'schedule' => 'From Saturday to Thursday',
+            'hours' => 'Open until 18:00',
+             'atm' => 'ATM available 24/7',
+        ],
+
+         'post_office3' => [
+            'title' => 'Post Office',
+            'schedule' => 'From Saturday to Thursday',
+            'hours' => 'Open until 18:00',
+             'atm' => 'ATM available 24/7',
+        ],
+
+
+
+    ],
+
+    'map3' => [
+        'doctors' => [
+    'kabach' => [
+        'title'    => 'Dr KABACH',
+        'specialty'=> 'General Practitioner',
+        'schedule' => 'From Saturday to Thursday',
+        'hours'    => 'Open until 16:00',
+    ],
+    'smahi' => [
+        'title'    => 'Dr SMAHI',
+        'specialty'=> 'General Practitioner',
+        'schedule' => 'From Saturday to Thursday',
+        'hours'    => 'Open until 16:00',
+    ],
+    'menaouer' => [
+        'title'    => 'Dr MENAOUER',
+        'specialty'=> 'Internal Medicine Specialist',
+        'schedule' => 'From Saturday to Thursday',
+        'hours'    => 'Open until 16:00',
+    ],
+    'daouelhadj' => [
+        'title'    => 'Dr DAOUELHADJ',
+        'specialty'=> 'Cardiologist',
+        'schedule' => 'From Saturday to Thursday',
+        'hours'    => 'Open until 16:00',
+    ],
+    'necira' => [
+        'title'    => 'Dr NECIRA',
+        'specialty'=> 'Gynecologist',
+        'schedule' => 'From Saturday to Thursday',
+        'hours'    => 'Open until 16:00',
+    ],
+    'karimi' => [
+        'title'    => 'Dr KARIMI',
+        'specialty'=> 'General Practitioner',
+        'schedule' => 'From Saturday to Thursday',
+        'hours'    => 'Open until 16:00',
+    ],
+],
+
+'pharmacies' => [
+    'gachouch' => [
+        'title' => 'Pharmacy Gachouch',
+        'hours' => 'Open until 23:00',
+    ],
+    'bakri' => [
+        'title' => 'Pharmacy',
+        'hours' => 'Open until 23:00',
+    ],
+    'djoudi' => [
+        'title' => 'Pharmacy Djoudi',
+        'hours' => 'Open until 23:00',
+    ],
+
+    'hospital' => [
+        'title' => 'Pharmacy Hospital',
+        'hours' => 'Open until 23:00',
+    ],
+],
+
+],
+'guide_timimoun' => 'Your Guide in Timimoun',
+'transportation_info' => 'Transportation Services', 
 
     
+ 'flights_to_timimoun' => 'Flights to Timimoun',
+    'weekly_program_air_algerie' => 'Weekly program of Air Algérie flights to Timimoun',
+    'day' => 'Day',
+    'route' => 'Route',
+    'departure' => 'Departure',
+    'arrival' => 'Arrival',
+    
+    'flight' => [
+        'saturday' => [
+            'route' => 'Algiers - Timimoun',
+            'departure' => '08:00',
+            'arrival' => '10:30',
+            'departure_timimoun' => '11:10',
+            'arrival_algeirs' => '12:30',
+        ],
+        'sunday' => [
+            'route' => 'Algiers - Timimoun',
+            'departure' => '23:10',
+            'arrival' => '00:30',
+            'departure_timimoun' => '01:35',
+            'arrival_algeirs' => '03:00',
+        ],
+        'monday' => [
+            'route' => 'Algiers - Timimoun',
+            'departure' => '15:30',
+            'arrival' => '16:50',
+             'departure_timimoun' => '17:35',
+            'arrival_algeirs' => '19:10',
+        ],
+        'tuesday' => [
+            'route' => 'Algiers - Timimoun',
+            'departure' => '21:00',
+            'arrival' => '22:30',
+            'departure_timimoun' => '23:10',
+            'arrival_algeirs' => '00:30',
+        ],
+        'wednesday' => [
+            'route' => 'Algiers - Timimoun',
+            'route2' => 'Oran - Timimoun',
+            'departure' => '21:00',
+            'arrival' => '22:30',
+            'departure2' => '10:30',
+            'arrival2' => '12:50',
+            'departure_timimoun' => '23:00',
+            'arrival_algeirs' => '00:30',
+            'departure2_timimoun' => '13:35',
+            'arrival_oran' => '15:15',
+        ],
+        'thursday' => [
+            'route' => 'Algiers - Timimoun',
+            'departure' => '15:30',
+            'arrival' => '17:00',
+             'departure_timimoun' => '17:35',
+            'arrival_algeirs' => '19:10',
+            
+        ],
+        'friday' => [
+            'route' => 'Oran - Timimoun',
+            'departure' => '08:00',
+            'arrival' => '10:00',
+            'departure_timimoun' => '10:40',
+            'arrival_oran' => '12:15',
+        ],
+    ],
+
+    'saturday'   => 'Saturday',
+'sunday'     => 'Sunday',
+'monday'     => 'Monday',
+'tuesday'    => 'Tuesday',
+'wednesday'  => 'Wednesday',
+'thursday'   => 'Thursday',
+'friday'     => 'Friday',
+
+'service_transportation' => [
+'transportation' => 'Transportation Locations',
+'airport' => 'Timimoun Airport ',
+'bus_station' => 'Timimoun Bus + Taxi Station (Inter-States) ',
+'bus_station2' => 'Timimoun Bus Station (Intra-State) ',
+'air_algerie' => 'Air Algérie Office ',
+'air_algerie_open' => 'From Sunday to Thursday : 08h00 - 12h00 and 14h00 - 15h30 ',
+
+
+],
+
  
 
 

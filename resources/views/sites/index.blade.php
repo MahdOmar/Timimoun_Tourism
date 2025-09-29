@@ -48,14 +48,7 @@
             <h1 class="page-title">{{ __('messages.site.title') }}</h1>
             <p class="page-subtitle">{{ __('messages.site.subtitle') }}</p>
             
-            <div class="search-container">
-                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
-                    <input type="text" placeholder="Search destinations, landmarks, or experiences..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
-                    <button class="bg-secondary hover:bg-blue-600 px-8 py-4 text-white font-semibold">
-                        <i class="fas fa-search mr-2"></i>Search
-                    </button>
-                </div>
-            </div>
+           
         </div>
     </header>
 
@@ -67,50 +60,50 @@
                 <div class="category-icon">
                     <i class="fas fa-umbrella-beach"></i>
                 </div>
-                <div class="category-name " >{{ __('messages.site.categories.all') }}</div>
+                <div class="category-name " data-name="All">{{ __('messages.site.categories.all') }}</div>
             </div>
 
 
             <div class="category-item " >
                 <div class="category-icon">
-                    <i class="fas fa-umbrella-beach"></i>
-                </div>
-                <div class="category-name " >{{ __('messages.site.categories.monument') }}</div>
-            </div>
-            
-            <div class="category-item" >
-                <div class="category-icon">
-                    <i class="fas fa-mountain"></i>
-                </div>
-                <div class="category-name" >{{ __('messages.site.categories.museum') }}</div>
-            </div>
-            
-            <div class="category-item" >
-                <div class="category-icon">
-                    <i class="fas fa-city"></i>
-                </div>
-                <div class="category-name" >{{ __('messages.site.categories.natural') }}</div>
-            </div>
-            
-            <div class="category-item" >
-                <div class="category-icon">
                     <i class="fas fa-monument"></i>
                 </div>
-                <div class="category-name" >{{ __('messages.site.categories.historical') }}</div>
+                <div class="category-name "  data-name="monument">{{ __('messages.site.categories.monument') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
-                    <i class="fas fa-hiking"></i>
+                   <i class="fa-solid fa-building-columns"></i>
                 </div>
-                <div class="category-name">{{ __('messages.site.categories.religious') }}</div>
+                <div class="category-name"  data-name="museum" >{{ __('messages.site.categories.museum') }}</div>
+            </div>
+            
+            <div class="category-item" >
+                <div class="category-icon">
+                     <i class="fas fa-hiking"></i>
+                </div>
+                <div class="category-name"  data-name="natural" >{{ __('messages.site.categories.natural') }}</div>
+            </div>
+            
+            <div class="category-item" >
+                <div class="category-icon">
+                   <i class="fa-solid fa-landmark-dome"></i>
+                </div>
+                <div class="category-name"  data-name="historical" >{{ __('messages.site.categories.historical') }}</div>
+            </div>
+            
+            <div class="category-item" >
+                <div class="category-icon">
+                   <i class="fa-solid fa-mosque"></i>
+                </div>
+                <div class="category-name"  data-name="religious">{{ __('messages.site.categories.religious') }}</div>
             </div>
             
             <div class="category-item" >
                 <div class="category-icon">
                     <i class="fas fa-tree"></i>
                 </div>
-                <div class="category-name">{{ __('messages.site.categories.other') }}</div>
+                <div class="category-name" data-name="other">{{ __('messages.site.categories.other') }}</div>
             </div>
             
           
@@ -121,10 +114,10 @@
     <h2 class="section-title">{{ __('messages.site.categories.featured_destinations') }}</h2>
     
     <div class="view-options">
-        <div class="view-option active" >{{ __('messages.site.view.all') }}</div>
-        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >{{ __('messages.site.view.new') }}</div>
-        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >{{ __('messages.site.view.rating') }}</div>
-        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" >{{ __('messages.site.view.recommended') }}</div>
+        <div class="view-option active" data-name="All">{{ __('messages.site.view.all') }}</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white" data-name="New" >{{ __('messages.site.view.new') }}</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white"  data-name="Rating">{{ __('messages.site.view.rating') }}</div>
+        <div class="view-option cursor-pointor hover:bg-primary hover:text-white"  data-name="Recommended">{{ __('messages.site.view.recommended') }}</div>
     </div>
     
     <div class="results-header" id="app" data-locale="{{ app()->getLocale() }}">
@@ -144,7 +137,26 @@
                 <img src="{{ asset('storage/' . $item->main_image) }}" 
                      alt="Bali Beach" class="w-full h-full object-cover">
                 <div class="card-badge">
-                    <span class="tag tag-beach">{{ $item->type }}</span>
+                    <span class="tag tag-beach ">
+                        @if ($item->type == 'monument')
+                            {{ __('messages.site.categories.monument') }}
+                            
+                        @elseif($item->type =='museum')
+                            {{ __('messages.site.categories.museum') }}
+                        @elseif($item->type =='natural')
+                            {{ __('messages.site.categories.natural') }}
+                        @elseif($item->type =='historical')
+                            {{ __('messages.site.categories.historical') }}
+                        @elseif($item->type =='religious')
+                            {{ __('messages.site.categories.religious') }}
+                        @elseif($item->type =='other')
+                            {{ __('messages.site.categories.other') }}
+                            
+                        @endif
+
+
+
+                    </span>
                    
                 </div>
                 <div class="card-wishlist">
@@ -167,7 +179,7 @@
                            
                            
                         </div>
-                        <span class="text-gray-600">({{ count($item->reviews) }} reviews)</span>
+                        <span class="text-gray-600">({{ count($item->reviews) }} {{ __('messages.review') }})</span>
                 </div>
                 
                 <div class="card-footer">
@@ -186,24 +198,26 @@
        
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        <div class="pagination-button">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-        <div class="pagination-button active">1</div>
-        <div class="pagination-button">2</div>
-        <div class="pagination-button">3</div>
-        <div class="pagination-button">4</div>
-        <div class="pagination-button">5</div>
-        <div class="pagination-button">
-            <i class="fas fa-chevron-right"></i>
-        </div>
-    </div>
+  
 
 
 
 @endsection('content')  
+
+<script>
+  
+    const btn = @json(__('messages.site.card.explore'));
+    const free =  @json(     __('messages.site.card.price')  );
+    const review = @json(     __('messages.review')  );
+    const monument =  @json(     __('messages.site.categories.monument')  );
+    const museum =  @json(     __('messages.site.categories.museum')  );
+    const natural =  @json(     __('messages.site.categories.natural')  );
+    const historical =  @json(     __('messages.site.categories.historical')  );
+    const religious =  @json(     __('messages.site.categories.religious')  );
+    const other =  @json(     __('messages.events.categories.other')  );
+    const site =  @json(     __('messages.site.destinations_found')  );
+   
+</script>
 
  <script>
         // Simple animation for cards when they come into view
@@ -259,10 +273,11 @@
         item.classList.add('active');
 
         // Example: get the category name
-         category = item.querySelector('.category-name').textContent.trim();
-         filter = document.querySelector('.view-option.active').textContent.trim();
+         category = item.querySelector('.category-name').dataset.name;
+         filter = document.querySelector('.view-option.active').dataset.name;
         
           sort(category,filter);
+          
         
     });
 
@@ -280,9 +295,13 @@
         // Set clicked one active
         option.classList.add('active');
 
-          filter = option.textContent.trim();
-          category = document.querySelector('.category-item.active').textContent.trim();
+          filter = option.dataset.name;
+          category = document.querySelector('.category-item.active .category-name').dataset.name;
           sort(category,filter);
+          console.log(category,filter);
+          
+         
+          
        
         });
 
@@ -316,7 +335,7 @@
             const data = await response.json();
             const container = document.getElementById('destinations');
             const total = document.getElementById('total');
-             total.textContent = data.length + ' Destinations Found';
+             total.textContent = data.length + ' '+ site;
             console.log(data);
            const locale = document.getElementById('app').dataset.locale;
             console.log(locale);
@@ -328,6 +347,42 @@
             
 
             data.forEach(item => {
+
+      if(item.type == 'monument')
+        {
+            category = monument ;
+        }
+        else if(item.type == 'museum' )
+        {
+            category = museum;
+        }
+
+         else if(item.type == 'natural')
+        {
+            category = natural;
+        }
+
+         else if(item.type == 'historical')
+        {
+            category = historical;
+        }
+
+         else if(item.type == 'religious')
+        {
+            category = religious;
+        }
+
+      
+        else{
+             category = Other;
+        }
+
+
+
+
+
+
+
            const card = `
                     <a href="/sites/${item.id}">
                         <div class="destination-card">
@@ -335,7 +390,7 @@
                                 <img src="/storage/${item.main_image}" 
                                      alt="${item.name.en}" class="w-full h-full object-cover">
                                 <div class="card-badge">
-                                    <span class="tag tag-beach">${item.type}</span>
+                                    <span class="tag tag-beach">${category}</span>
                                 </div>
                                 <div class="card-wishlist">
                                     <i class="fas fa-heart"></i>
@@ -353,14 +408,14 @@
                                     <div class="flex text-yellow-400 mr-2">
                                         ${'<i class="fas fa-star"></i>'.repeat(Math.round(getAverageRating(item.reviews)))}
                                     </div>
-                                    <span class="text-gray-600">(${item.reviews.length} reviews)</span>
+                                    <span class="text-gray-600">(${item.reviews.length} ${review})</span>
                                 </div>
                                 
                                 <div class="card-footer">
                                     <div class="card-price">
-                                       Free
+                                      ${free}
                                     </div>
-                                    <button class="card-button">Explore</button>
+                                    <button class="card-button">${btn}</button>
                                 </div>
                             </div>
                         </div>

@@ -68,6 +68,10 @@ Route::get('/services', function () {
     return view('Services.index');
 });
 
+Route::get('/flights', function () {
+    return view('transport.index');
+})->name('flights.index');
+
 // sites routes
 
 Route::get('/sites', [SiteController::class, 'allSites'])->name('sites.all');

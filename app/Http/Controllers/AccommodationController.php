@@ -256,6 +256,7 @@ public function removeGalleryImage($id, $imageId)
 
     // Property type filter
     if ($request->has('type')) {
+        error_log('*//////////////////////* yes');
         $query->whereIn('type', $request->type);
     }
 
@@ -267,6 +268,7 @@ public function removeGalleryImage($id, $imageId)
     }
 
     $accommodations = $query->paginate(10);
+
 
     return view('hotels.index', compact('accommodations'));
     
@@ -297,8 +299,10 @@ $query = Accommodation::query();
      
 
     if ($request->type) {
+        error_log('*///////////////*////////////// yes ');
            $type = (array) $request->input('type');
         $query->whereIn('type', $type);
+         error_log($type[0]);
         
         
     }
@@ -341,7 +345,9 @@ $query = Accommodation::query();
     ]);
     }
     else {
+        error_log('here');
         $query->latest();
+        error_log($query->get());
     }
 
     $accommodations = $query->get();

@@ -39,15 +39,15 @@
                    id="price-range"
                    min="{{ round($accommodations->isNotEmpty() ? $accommodations->min('min_price') : 3000 ) }}"
                    max="{{ round($accommodations->isNotEmpty() ? $accommodations->max('max_price') : 15000) }}"
-                   value="{{ request('price', $accommodations->isNotEmpty() ? $accommodations->max('max_price') : 1000) }}"
+                   value="{{ request('price', $accommodations->isNotEmpty() ? $accommodations->max('max_price')/2 : 10000) }}"
                    class="price-range w-full mb-4"
-                   onchange="document.getElementById('price-value').textContent = 'Up to ' + this.value + ' DA'">
+                   onchange="document.getElementById('price-value').textContent = '{{ __('messages.up_to') }} ' + this.value + ' {{ __('messages.DA') }}'">
             <div class="flex justify-between text-gray-600">
                 <span>{{ round($accommodations->isNotEmpty() ? $accommodations->min('min_price') : 3000 ) }}</span>
                 <span>{{ round($accommodations->isNotEmpty() ? $accommodations->max('max_price') : 15000) }}</span>
             </div>
             <div class="mt-2 text-center font-medium text-primary" id="price-value">
-                Up to {{ request('price', round($accommodations->max('max_price'))) }} DA
+                {{ __('messages.up_to') }} {{ request('price', round($accommodations->max('max_price'))) }}{{ __('messages.DA') }}
             </div>
         </div>
 
@@ -76,15 +76,15 @@
         <!-- Property Type -->
         <div class="mb-8">
             <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_type') }}</h3>
-            @foreach (['hotel', 'campsite', 'villa', 'guest_house'] as $type)
+            @foreach (['hotel' => __('messages.hotel') , 'campsite' => __('messages.campiste'), 'villa' => __('messages.villa'), 'guest_house' => __('messages.guest_house')] as $key => $label)
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="type[]" 
-                           value="{{ $type }}" 
-                           id="{{ $type }}" 
+                           value="{{ $key }}" 
+                           id="{{ $label }}" 
                            class="checkbox h-5 w-5 text-primary rounded"
-                           {{ in_array($type, request()->get('type', [])) ? 'checked' : '' }}>
-                    <label for="{{ $type }}" class="ml-2 text-gray-700 capitalize">{{ $type }}</label>
+                           {{ in_array($label, request()->get('type', [])) ? 'checked' : '' }}>
+                    <label for="{{ $label }}" class="ml-2 text-gray-700 capitalize">{{ $label }}</label>
                 </div>
             @endforeach
         </div>
@@ -92,7 +92,7 @@
         <!-- Amenities -->
         <div class="mb-8">
             <h3 class="font-semibold mb-4">{{ __('messages.accommodation_index_amenities') }}</h3>
-            @foreach (['wifi' =>  __('messages.accommodation_index_wifi'), 'pool' => __('messages.accommodation_index_pool'), 'spa' => 'Spa', 'breakfast' => __('messages.accommodation_index_breakfast'), 'gym' => __('messages.accommodation_index_gym')] as $key => $label)
+            @foreach (['wifi' =>  __('messages.accommodation_index_wifi'), 'pool' => __('messages.accommodation_index_pool'), 'spa' =>  __('messages.accommodation_index_spa'), 'breakfast' => __('messages.accommodation_index_breakfast'), 'gym' => __('messages.accommodation_index_gym')] as $key => $label)
                 <div class="flex items-center">
                     <input type="checkbox" 
                            name="amenities[]" 
@@ -145,7 +145,7 @@
                                 {{ round($accommodation->averageRating()) }}
                             </div>
                             <div class="absolute top-4 left-4 bg-white text-primary text-sm font-semibold px-3 py-1 rounded-full">
-                                <i class="fas fa-map-marker-alt mr-1"></i> Timimoun
+                                <i class="fas fa-map-marker-alt mr-1"></i> {{ __('messages.accommodation_details_Timimoun') }}
                             </div>
                         </div>
                         <div class="p-5">
@@ -158,10 +158,26 @@
                                     @endfor
                                 </div>
                             </div>
-                            <p class="text-gray-600 mb-4">{{ $accommodation->getTranslation('description', app()->getLocale()) }}</p>
+                            <p class="text-gray-600 mb-4"> {{Str::limit ($accommodation->getTranslation('description', app()->getLocale()),35,'...') }} </p>
                             <div class="flex flex-wrap items-center text-gray-500 mb-4">
                               @foreach ($accommodation->amenities as $item)
-                                   <span class="tag tag-beach ">{{ $item }}</span>
+                                   <span class="tag tag-beach ">@if ( $item == 'wifi')
+                                   {{ __('messages.accommodation_index_wifi') }}
+                                   @elseif( $item == 'pool')
+                                   {{ __('messages.accommodation_index_pool') }}    
+                                   @elseif ($item == 'restaurant')
+                                   {{ __('messages.accommodation_index_restaurant') }}
+                                   @elseif ($item == 'breakfast')
+                                   {{ __('messages.accommodation_index_breakfast') }} 
+                                   @elseif ($item == 'air_conditioning')
+                                   {{ __('messages.accommodation_index_air_conditioning') }} 
+                                     @elseif ($item == 'parking')
+                                   {{ __('messages.accommodation_index_parking') }} 
+                                    @elseif ($item == 'spa')
+                                   {{ __('messages.accommodation_index_spa') }}  
+                                   @else
+                                        {{ __('messages.accommodation_index_gym') }}  
+                                   @endif</span>
                               @endforeach
                                 
                                
@@ -180,23 +196,7 @@
                 @endforeach
                 </div>
 
-                <!-- Pagination -->
-                <div class="flex justify-center mt-12">
-                    <nav class="flex items-center space-x-2">
-                        <a href="#" class="px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                        <a href="#" class="px-4 py-2 text-white bg-primary rounded-lg font-semibold">1</a>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">2</a>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">3</a>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">4</a>
-                        <span class="px-2 py-2 text-gray-500">...</span>
-                        <a href="#" class="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100">10</a>
-                        <a href="#" class="px-4 py-2 text-gray-500 rounded-lg hover:bg-gray-100">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </nav>
-                </div>
+               
             </div>
         </div>
     </main>
@@ -220,6 +220,26 @@
 </div>
 
 @endsection
+
+<script>
+    const timimoun = @json(__('messages.accommodation_details_Timimoun'));
+    const night = @json(__('messages.accommodation_index_night'));
+    const wifi =  @json( __('messages.accommodation_index_wifi') );
+    const pool =  @json( __('messages.accommodation_index_pool') );
+    const restaurant =  @json( __('messages.accommodation_index_restaurant') );
+    const breakfast =  @json( __('messages.accommodation_index_breakfast') );
+    const air_conditioning =  @json( __('messages.accommodation_index_air_conditioning') );
+    const parking =  @json( __('messages.accommodation_index_parking') );
+    const spa =  @json( __('messages.accommodation_index_spa') );
+    const gym =  @json( __('messages.accommodation_index_gym') );
+    const hotels = @json( __('messages.accommodation_index_found') );
+
+    
+                                
+
+</script>
+
+
 @verbatim
 <script>
     async function sort(){
@@ -268,7 +288,7 @@ amenities.forEach(s => params.append('amenities[]', s));
             const data = await response.json();
             const container = document.getElementById('accommodations-list');
             const total = document.getElementById('total');
-            total.textContent = data.accommodations.length + ' Hotels Found';
+            total.textContent = data.accommodations.length +' ' +hotels;
             console.log(data);
            const locale = document.getElementById('app').dataset.locale;
             console.log(locale);
@@ -286,10 +306,34 @@ amenities.forEach(s => params.append('amenities[]', s));
         let amenities = "";
         if (accommodation.amenities) {
             accommodation.amenities.forEach(item => {
-                amenities += `<span class="tag tag-beach">${item}</span>`;
+              if ( item == 'wifi')
+              {
+                 amenities += `<span class="tag tag-beach">${wifi}</span>`;
+              }
+                                  
+          else if( item == 'pool'){
+            amenities += `<span class="tag tag-beach">${pool}</span>`;
+          }
+                                      
+         else if (item == 'restaurant')
+             amenities += `<span class="tag tag-beach">${restaurant}</span>`;                                  
+        else if (item == 'breakfast')
+                                   amenities += `<span class="tag tag-beach">${breakfast}</span>`; 
+                                  else if (item == 'air_conditioning')
+                                    amenities += `<span class="tag tag-beach">${air_conditioning}</span>`; 
+                                     else if (item == 'parking')
+                                   amenities += `<span class="tag tag-beach">${parking}</span>`;
+                                    else if (item == 'spa')
+                                   amenities += `<span class="tag tag-beach">${spa}</span>`;
+                                   else
+                amenities += `<span class="tag tag-beach">${gym}</span>`;
             });
+
+            
         }
 
+       
+    
         container.innerHTML += `
             <a href="/accommodation/${accommodation.id}">
                 <div class="hotel-card bg-white rounded-xl shadow-md overflow-hidden">
@@ -300,7 +344,7 @@ amenities.forEach(s => params.append('amenities[]', s));
                             ${Math.round(accommodation.reviews_avg_rating ?? 0)}
                         </div>
                         <div class="absolute top-4 left-4 bg-white text-primary text-sm font-semibold px-3 py-1 rounded-full">
-                            <i class="fas fa-map-marker-alt mr-1"></i> Timimoun
+                            <i class="fas fa-map-marker-alt mr-1"></i> ${ timimoun }
                         </div>
                     </div>
                     <div class="p-5">
@@ -308,14 +352,14 @@ amenities.forEach(s => params.append('amenities[]', s));
                             <h3 class="text-xl font-bold">${accommodation.name[locale]}</h3>
                             <div class="flex">${stars}</div>
                         </div>
-                        <p class="text-gray-600 mb-4">${accommodation.description[locale] ?? ""}</p>
+                        <p class="text-gray-600 mb-4">${accommodation.description[locale].substring(0,35)}</p>
                         <div class="flex flex-wrap items-center text-gray-500 mb-4">
                             ${amenities}
                         </div>
                         <div class="flex justify-between items-center">
                             <div>
                                 <span class="text-2xl font-bold text-primary">${accommodation.min_price}</span>
-                                <span class="text-gray-600">/night</span>
+                                <span class="text-gray-600">/${ night }</span>
                             </div>
                         </div>
                     </div>

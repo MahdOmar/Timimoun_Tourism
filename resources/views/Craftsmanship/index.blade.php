@@ -15,13 +15,13 @@
             <div class="flex flex-wrap justify-between items-center">
                 <h2 class="text-xl font-bold text-neutral mb-4 md:mb-0">{{ __('messages.craft.browse_category') }}</h2>
                 <div class="flex flex-wrap gap-2 category">
-                    <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium">{{ __('messages.craft.categories.all') }}</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.pottery') }}</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.textiles') }}</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.woodwork') }}</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.jewelry') }}</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.leather') }}</button>
-                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition">{{ __('messages.craft.categories.metalwork') }}</button>
+                    <button class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium" data-name="All">{{ __('messages.craft.categories.all') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition" data-name="pottery">{{ __('messages.craft.categories.pottery') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition" data-name="textiles">{{ __('messages.craft.categories.textiles') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition" data-name="woodwork">{{ __('messages.craft.categories.woodwork') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition" data-name="jewelry">{{ __('messages.craft.categories.jewelry') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition" data-name="leather">{{ __('messages.craft.categories.leather') }}</button>
+                    <button class="px-4 py-2 bg-light text-neutral rounded-full text-sm font-medium hover:bg-primary hover:text-white transition" data-name="metalwork">{{ __('messages.craft.categories.metalwork') }}</button>
                     <div class="filter-group "  id="app" data-locale="{{ app()->getLocale() }}">
                
                      <select class="filter-select" id="sort">
@@ -53,7 +53,7 @@
                     <div class="h-60 bg-cover bg-center relative" style="background-image: url('{{ asset('storage/'.$item->main_image) }}');">
                         <div class="info-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-white p-4">
                             <h3 class="text-lg font-bold text-center">{{ ucfirst($item->getTranslation('name', app()->getLocale())) }}</h3>
-                            <p class="text-primary font-bold text-lg mt-2">{{ $item->min_price}}</p>
+                            <p class="text-primary font-bold text-lg mt-2">{{ $item->min_price}} {{ __('messages.DA') }}</p>
                             <p class="text-sm text-center mt-2"></p>
                         </div>
                     </div>
@@ -63,12 +63,12 @@
                  @if (round($item->averageRating()) > 0)
               <i class="fas fa-star text-yellow-400 mr-1"></i>
              
-              <span class="font-medium"> 
+              <span class="font-medium m-1"> 
                    {{ round($item->averageRating())   }}
               @else
                     @endif
               </span>
-              <span class="text-gray-500 ml-1">({{ count($item->reviews) }} reviews)</span>
+              <span class="text-gray-500 ml-1">({{ count($item->reviews) }} {{ __('messages.review') }})</span>
             
             </div>
                     </div>
@@ -96,6 +96,21 @@
 @endsection
 
 <script>
+  
+ 
+    const da =  @json(     __('messages.DA')  );
+    const review = @json(     __('messages.review')  );
+    const monument =  @json(     __('messages.site.categories.monument')  );
+    const museum =  @json(     __('messages.site.categories.museum')  );
+    const natural =  @json(     __('messages.site.categories.natural')  );
+    const historical =  @json(     __('messages.site.categories.historical')  );
+    const religious =  @json(     __('messages.site.categories.religious')  );
+    const other =  @json(     __('messages.events.categories.other')  );
+    const site =  @json(     __('messages.site.destinations_found')  );
+   
+</script>
+
+<script>
      document.addEventListener('DOMContentLoaded', function() {
          const grid = document.querySelector('.category');
         let  category = null
@@ -120,9 +135,10 @@
         item.classList.add('bg-primary','text-white');
 
         // Example: get the category name
-         category = item.textContent.trim();
+         category = item.dataset.name;
          filter = document.getElementById('sort').value;
         sort(category,filter)
+        console.log(category,filter);
         
              
 
@@ -134,9 +150,10 @@
           viewOptions.addEventListener('change',()=> {
 
             filter = viewOptions.value;
-           category = grid.querySelector('.category .bg-primary').textContent.trim();
+           category = grid.querySelector('.category .bg-primary ').dataset.name;
 
                     sort(category,filter)
+                    
 
                
 
@@ -195,7 +212,7 @@
           <div class="h-60 bg-cover bg-center relative" style="background-image: url('{{ asset('storage/${item.main_image}') }}');">
             <div class="info-overlay absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center text-white p-4">
               <h3 class="text-lg font-bold text-center">${item.name[locale]}</h3>
-              <p class="text-primary font-bold text-lg mt-2">${item.min_price}</p>
+              <p class="text-primary font-bold text-lg mt-2">${item.min_price} ${da}</p>
               <p class="text-sm text-center mt-2"></p>
             </div>
           </div>
@@ -204,7 +221,7 @@
              <div class="flex items-center ">
               <i class="fas fa-star text-yellow-400 mr-1"></i>
               <span class="font-medium">${Math.round(getAverageRating(item.reviews))}</span>
-              <span class="text-gray-500 ml-1">(${item.reviews.length} reviews)</span>
+              <span class="text-gray-500 m-1">(${item.reviews.length} ${review})</span>
             </div>
           </div>
           

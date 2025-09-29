@@ -21,40 +21,40 @@
                     
                     <i class="fa-solid fa-border-all text-blue-600 text-2xl"></i>
                 </div>
-                <h3 class="font-semibold text-lg mb-2">{{ __('messages.rental.categories.all') }}</h3>
-                <p class="text-gray-600 text-sm">1,240 listings</p>
+                <h3 class="font-semibold text-lg mb-2" data-name="All">{{ __('messages.rental.categories.all') }}</h3>
+                <p class="text-gray-600 text-sm">1,240 {{ __('messages.rental.listing') }}</p>
             </div>
 
             <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow cursor-pointer type-item ">
                 <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-car text-blue-600 text-2xl"></i>
                 </div>
-                <h3 class="font-semibold text-lg mb-2">{{ __('messages.rental.categories.cars') }}</h3>
-                <p class="text-gray-600 text-sm">1,240 listings</p>
+                <h3 class="font-semibold text-lg mb-2" data-name="cars">{{ __('messages.rental.categories.cars') }}</h3>
+                <p class="text-gray-600 text-sm">1,240 {{ __('messages.rental.listing') }}</p>
             </div>
             
             <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow cursor-pointer type-item">
                 <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-motorcycle text-green-600 text-2xl"></i>
                 </div>
-                <h3 class="font-semibold text-lg mb-2">{{ __('messages.rental.categories.quad') }}</h3>
-                <p class="text-gray-600 text-sm">580 listings</p>
+                <h3 class="font-semibold text-lg mb-2" data-name="quad">{{ __('messages.rental.categories.quad') }}</h3>
+                <p class="text-gray-600 text-sm">580 {{ __('messages.rental.listing') }}</p>
             </div>
             
             <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow cursor-pointer type-item">
                 <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-home text-purple-600 text-2xl"></i>
                 </div>
-                <h3 class="font-semibold text-lg mb-2">{{ __('messages.rental.categories.house') }}</h3>
-                <p class="text-gray-600 text-sm">890 listings</p>
+                <h3 class="font-semibold text-lg mb-2" data-name="house">{{ __('messages.rental.categories.house') }}</h3>
+                <p class="text-gray-600 text-sm">890 {{ __('messages.rental.listing') }}</p>
             </div>
             
             <div class="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow cursor-pointer type-item">
                 <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                     <i class="fas fa-building text-red-600 text-2xl"></i>
                 </div>
-                <h3 class="font-semibold text-lg mb-2">{{ __('messages.rental.categories.apartment') }}</h3>
-                <p class="text-gray-600 text-sm">1,520 listings</p>
+                <h3 class="font-semibold text-lg mb-2" data-name="apartment">{{ __('messages.rental.categories.apartment') }}</h3>
+                <p class="text-gray-600 text-sm">1,520 {{ __('messages.rental.listing') }}</p>
             </div>
         </div>
     </div>
@@ -92,7 +92,22 @@
                     <div class="relative">
                         <img src="{{ asset('storage/' . $item->main_image) }}" 
                              alt="Luxury Car" class="w-full h-48 object-cover">
-                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-2 py-1 rounded"> {{ $item->type }}</span>
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-2 py-1 rounded"> 
+                             
+                            @if ($item->type == '4x4_car')
+                            {{ __('messages.rental.categories.4x4_cars') }}
+                             @elseif( $item->type == 'light_car')
+                            {{ __('messages.rental.categories.cars') }}
+                                
+                            @elseif( $item->type == 'quad')
+                            {{ __('messages.rental.categories.quad') }}
+                            @elseif($item->type == 'apartment')
+                            {{ __('messages.rental.categories.apartment') }}
+                            @elseif ($item->type == 'house')
+                             {{ __('messages.rental.categories.house') }}
+                                
+                            @endif
+                        </span>
                         <span class="absolute top-4 right-4 bg-white text-gray-800 text-xs px-2 py-1 rounded font-medium">{{ $item->price }} / @if (  $item->unit == 'day')
                             {{ __('messages.rental.card.day') }}
                             @elseif (  $item->unit == 'hour')
@@ -107,7 +122,7 @@
                             <div class="flex items-center">
                                 <i class="fas fa-star text-yellow-400 mr-1"></i>
                                 <span class="font-medium">{{ round($item->averageRating()) }}</span>
-                                <span class="text-gray-500 ml-1">({{ count($item->reviews) }} reviews)</span>
+                                <span class="text-gray-500 m-2">({{ count($item->reviews) }} {{ __('messages.review') }})</span>
                             </div>
                            <a href="{{ route('rental.show',$item->id) }}"> <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
                                {{ __('messages.rental.card.btn') }}</a>
@@ -151,7 +166,23 @@
             </div>
         </div>
     </div>
-@endsection('content')  
+@endsection('content') 
+
+<script>
+  
+    const btn = @json(__('messages.rental.card.btn'));
+    const day =  @json(     __('messages.rental.card.day')  );
+    const night =  @json(     __('messages.rental.card.hour')  );
+    const da = @json(     __('messages.DA')  );
+    const review = @json(     __('messages.review')  );
+    const cars=  @json(     __('messages.rental.categories.4x4_cars')  );
+    const light_cars =  @json(     __('messages.rental.categories.light_cars')  );
+    const quad =  @json(     __('messages.rental.categories.quad')  );
+    const house =  @json(     __('messages.rental.categories.house')  );
+    const appartement =  @json(     __('messages.rental.categories.apartment')  );
+    const rentals =  @json(     __('messages.site.destinations_found')  );
+   
+</script>
 
  <script>
         
@@ -176,9 +207,11 @@
         item.classList.add('active');
 
         // Example: get the category name
-         category = item.querySelector('h3').textContent.trim();
+         category = item.querySelector('h3').dataset.name;
          filter = document.getElementById('sort').value;
         sort(category,filter)
+        console.log(category);
+        
         
 
         
@@ -189,9 +222,10 @@
           viewOptions.addEventListener('change',()=> {
 
             filter = viewOptions.value;
-           category = grid.querySelector('.type-item.active h3').textContent.trim();
+           category = grid.querySelector('.type-item.active h3').dataset.name;
 
                     sort(category,filter)
+                    console.log(category);
 
 
           })
@@ -243,13 +277,52 @@ async function sort(category,filter) {
             
 
             data.forEach(item => {
+
+                 if(item.type == '4x4_car')
+        {
+            category = cars ;
+        }
+        else if(item.type == 'light_car' )
+        {
+            category = light_cars;
+        }
+
+         else if(item.type == 'quad')
+        {
+            category = quad;
+        }
+
+         else if(item.type == 'house')
+        {
+            category = house;
+        }
+
+         else if(item.type == 'apartment')
+        {
+            category = appartement;
+        }
+
+        if(item.unit == "day")
+        {
+            var duration= day;
+        }
+        else {
+            var duration= night;
+        }
+
+   
+
+
+
+
+
            const html = `
       <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
         <div class="relative">
           <img src="{{ asset('storage/${item.main_image}') }}" 
                alt="${item.name[locale]}" class="w-full h-48 object-cover">
-          <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-2 py-1 rounded">${item.type}</span>
-          <span class="absolute top-4 right-4 bg-white text-gray-800 text-xs px-2 py-1 rounded font-medium">${item.price} / ${item.unit}</span>
+          <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs px-2 py-1 rounded">${category}</span>
+          <span class="absolute top-4 right-4 bg-white text-gray-800 text-xs px-2 py-1 rounded font-medium">${item.price} ${da} / ${duration}</span>
         </div>
         <div class="p-6">
           <h3 class="font-bold text-xl mb-2">${item.name[locale]}</h3>
@@ -260,11 +333,11 @@ async function sort(category,filter) {
             <div class="flex items-center">
               <i class="fas fa-star text-yellow-400 mr-1"></i>
               <span class="font-medium">${Math.round(getAverageRating(item.reviews))}</span>
-              <span class="text-gray-500 ml-1">(${item.reviews.length} reviews)</span>
+              <span class="text-gray-500 m-1">(${item.reviews.length} ${review})</span>
             </div>
             <a href="/rentals/${item.id}">
               <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
-                View Details
+               ${btn}
               </button>
             </a>
           </div>

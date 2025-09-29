@@ -1,6 +1,8 @@
 <?php
 
 return [
+ 'site_address' => "Timimoun, Algérie",
+
     'HOME' => 'Acceuil',
     'Where to Stay' => 'Où loger',
     'Things to Do' => 'Choses à faire',
@@ -10,6 +12,8 @@ return [
     'Travel Agencies' => 'AGENCES DE VOYAGES',
     'Tours' => 'CIRCUIT',
     'Crafts' => 'Artisanat',
+    'Timimoun' => 'Timimoun',
+
 
     'Rentals' => 'LOCATION',
     'Essential Services' => 'SERVICES D\'EMERGENCES',
@@ -61,6 +65,8 @@ return [
     'stars' => 'Etoiles',
     'book' => 'Réserver maintenant',
     'seemore' => 'Voir plus',
+    'person' => 'personne',
+    'DA' => 'DA',
 
 
       'adventures_title' => 'L\'aventure vous attend',
@@ -156,16 +162,29 @@ return [
   'accommodation_index_apply_filter' => 'Appliquer les filtres',
   'accommodation_index_reset_filter' => 'Réinitialiser les filtres',
   'accommodation_index_wifi' => 'WiFi Gratuit',
+  'accommodation_index_restaurant' => 'Restaurant',
+  'accommodation_index_air_conditioning' => 'Climatiseur',
+  'accommodation_index_parking' => 'Parking',
+
   'accommodation_index_pool' => 'Picine',
   'accommodation_index_spa' => 'Spa',
   'accommodation_index_breakfast' => 'Petit-déjeuner inclus',
   'accommodation_index_gym' => 'Salle de sport',
-    'accommodation_index_night' => 'nuité',
+  'accommodation_index_night' => 'nuité',
+  'up_to' => 'Jusqu\'à',
+  'hotel' => 'Hotel',
+  'villa' => 'Villa',
+  'campiste' => 'Camping',
+  'guest_house' => 'Maison d\'hôtes',
 
 
 
 
     'accommodation_details_Algeria' => 'Algerie',
+    'accommodation_details_Timimoun' => 'Timimoun',
+    'review' => 'Avis',
+
+
     'accommodation_details_collection' => ' Collection Exclusive ',
     'accommodation_details_about' => 'À propos de',
     'accommodation_details_gallery' => 'Galerie de photos',
@@ -474,7 +493,25 @@ return [
         'phone' => 'Téléphone',
         'email' => 'Email',
         'website' => 'Site Web',
-        
+        'services' => [
+    'title' => 'Nos Services',
+    'flight' => [
+        'title' => 'Réservations de Vols',
+        'text'  => 'Nous garantissons les meilleurs itinéraires et prix avec des compagnies aériennes de premier choix.',
+    ],
+    'accommodation' => [
+        'title' => 'Hébergement',
+        'text'  => 'Des hôtels boutiques aux complexes de luxe, nous collaborons avec les meilleures propriétés.',
+    ],
+    'itineraries' => [
+        'title' => 'Itinéraires Personnalisés',
+        'text'  => 'Des plans de voyage sur mesure conçus selon vos intérêts et préférences.',
+    ],
+    'transportation' => [
+        'title' => 'Transport',
+        'text'  => 'Transferts privés, voitures de voyage et services de chauffeur pour un voyage sans souci.',
+    ],
+],
       
        
 
@@ -570,6 +607,45 @@ return [
       
   ],
 
+    'tour_details' => [
+   'title' => 'Gourara Tour',
+    'review' => 'Avis 0.4',
+    'featured' => 'Voyage spécial',
+    'hero_title' => 'Excursion d’exploration de la Gourara',
+    'hero_sub' => 'Découvrez la beauté du désert et des oasis dans un voyage inoubliable à travers la région de la Gourara',
+
+    'price_title' => 'Prix du voyage',
+    'price_note' => 'Prix par personne pour un groupe de 4 personnes',
+
+    'gallery' => 'Galerie photos',
+
+    'details' => 'Détails',
+    'car_title' => 'Véhicules 4×4',
+    'car_sub' => 'Adaptés à tous types de routes',
+    'duration' => 'Jours / Nuits',
+    'price_info' => 'Le prix inclut le carburant et le chauffeur professionnel',
+
+    'program_title' => 'Que comprend le programme ?',
+    'accommodation' => 'Hébergement',
+    'accommodation_sub' => 'Hôtels 4 étoiles avec petit-déjeuner',
+    'transport' => 'Transports',
+    'transport_sub' => 'Véhicules 4x4 climatisés avec chauffeurs professionnels',
+    'meals' => 'Repas',
+    'meals_sub' => '3 repas principaux par jour (petit-déjeuner, déjeuner, dîner)',
+    'activities' => 'Activités',
+    'activities_sub' => 'Excursions et visites des principaux sites touristiques',
+
+    'contact_title' => 'Informations de contact',
+    'contact_desc' => 'Pour obtenir de l’aide ou plus d’informations, veuillez nous contacter via :',
+    'phone' => 'Téléphone',
+    'phone_hours' => 'Disponible de 8h à 22h',
+    'email' => 'Email',
+    'email_reply' => 'Réponse sous 24 heures',
+    'customer_service' => 'Le service client est disponible pour toute question ou réservation de voyage',
+],
+     
+
+
 
   'craft' => [
 
@@ -607,6 +683,7 @@ return [
             'days' => 'Samedi - Jeudi : 09h00 - 19h00',
             'friday' => 'Vendredi : Fermé',
              'related' => 'Vous pourriez aussi aimer',
+             'description' => 'Description',
 
         ]
 
@@ -616,15 +693,14 @@ return [
    'rental' => [
         'title' => 'Trouvez votre location idéale',
         'subtitle' => 'Découvrez les meilleures voitures, quads, maisons et appartements à louer',
-        'search_placeholder' => 'Que cherchez-vous ?',
-        'location_placeholder' => 'Emplacement',
-        'search_button' => 'Rechercher',
+         'listing' => 'Annonces',
 
         // Categories
         'browse_category' => 'Parcourir par catégorie',
         'categories' => [
             'all' => 'Tout',
             'cars' => 'Voitures',
+             '4x4_cars' =>'Voitures 4x4 ',
             'quad' => 'Quad',
             'house' => 'Maison',
             'apartment' => 'Appartement',
@@ -664,6 +740,17 @@ return [
 
       'ammenties' => 'Équipements',
       'contact' => 'Coordonnées',
+      'description' => 'Description',
+      'furnished' => 'Meublée',
+        'air_conditioning' => 'Climatisation',
+        'heating' => 'Chauffage',
+        'pool' => 'Piscine',
+        'wifi' => 'Wifi',
+        'kitchen' => 'Cuisine',
+        'garage' => 'Garage',
+        'tv' => 'Tv',
+        'washing_machine' => 'Machine à Laver',
+        'garden' =>'Jardin'
     ]
 
 
@@ -718,10 +805,235 @@ return [
     'specialist'           => 'Spécialistes',
     'store'            => 'Magasins',
 
-    ]
+    ],
+
+    'map' => [
+    'hospital_name' => 'Hôpital Général',
+    'hospital_desc' => 'Urgences disponibles 24/7',
+
+    'police_name' => 'Commissariat de Police',
+    'police_desc' => 'Services d’urgence 24/7',
+
+    'ambulance_name' => 'Ambulance',
+    'ambulance_desc' => 'Services d’urgence 24/7',
+
+    'polyclinic1' => 'Polyclinique Publique Macine + Urgences',
+    'polyclinic1_desc' => '24/7',
+
+    'polyclinic2' => 'Polyclinique Publique Sidi Ohtman',
+    'polyclinic2_desc' => 'Ouverte jusqu’à 16h00',
+
+    'polyclinic3' => 'Polyclinique Publique 50',
+    'polyclinic3_desc' => 'Ouverte jusqu’à 16h00',
+
+    'polyclinic4' => 'Polyclinique Privée IBN RUSHD',
+    'polyclinic4_desc' => 'Ouverte jusqu’à 16h00',
+],
+
+'map2' => [
+        'main_poste' => [
+            'title' => 'Poste Centrale + DAB',
+            'schedule' => 'Du samedi au jeudi',
+            'hours' => 'Ouvert jusqu\'à 18h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+        'bna' => [
+            'title' => 'BNA + DAB',
+            'schedule' => 'Du dimanche au jeudi',
+            'hours' => 'Ouvert jusqu\'à 15h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+        'badr' => [
+            'title' => 'BADR + DAB',
+            'schedule' => 'Du dimanche au jeudi',
+            'hours' => 'Ouvert jusqu\'à 15h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+
+        'bdl' => [
+            'title' => 'BDL + DAB',
+            'schedule' => 'Du dimanche au jeudi',
+            'hours' => 'Ouvert jusqu\'à 15h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+
+         'bea' => [
+            'title' => 'BEA + DAB',
+            'schedule' => 'Du dimanche au jeudi',
+            'hours' => 'Ouvert jusqu\'à 15h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+        'post_office1' => [
+            'title' => 'Bureau Post',
+            'schedule' => 'Du samedi au jeudi',
+            'hours' => 'Ouvert jusqu\'à 18h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+
+         'post_office2' => [
+            'title' => 'Bureau Post',
+            'schedule' => 'Du samedi au jeudi',
+            'hours' => 'Ouvert jusqu\'à 18h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+
+         'post_office3' => [
+            'title' => 'Bureau Post',
+             'schedule' => 'Du samedi au jeudi',
+            'hours' => 'Ouvert jusqu\'à 18h00',
+            'atm' => 'DAB disponible 24/7',
+        ],
+
+    ],
+
+    'map3' =>[
+        'doctors' => [
+    'kabach' => [
+        'title'    => 'Dr KABACH',
+        'specialty'=> 'Médecin généraliste',
+        'schedule' => 'Du samedi au jeudi',
+        'hours'    => 'Ouvert jusqu\'à 16h00',
+    ],
+    'smahi' => [
+        'title'    => 'Dr SMAHI',
+        'specialty'=> 'Médecin généraliste',
+        'schedule' => 'Du samedi au jeudi',
+        'hours'    => 'Ouvert jusqu\'à 16h00',
+    ],
+    'menaouer' => [
+        'title'    => 'Dr MENAOUER',
+        'specialty'=> 'Spécialiste en médecine interne',
+        'schedule' => 'Du samedi au jeudi',
+        'hours'    => 'Ouvert jusqu\'à 16h00',
+    ],
+    'daouelhadj' => [
+        'title'    => 'Dr DAOUELHADJ',
+        'specialty'=> 'Cardiologue',
+        'schedule' => 'Du samedi au jeudi',
+        'hours'    => 'Ouvert jusqu\'à 16h00',
+    ],
+    'necira' => [
+        'title'    => 'Dr NECIRA',
+        'specialty'=> 'Gynécologue',
+        'schedule' => 'Du samedi au jeudi',
+        'hours'    => 'Ouvert jusqu\'à 16h00',
+    ],
+    'karimi' => [
+        'title'    => 'Dr KARIMI',
+        'specialty'=> 'Médecin généraliste',
+        'schedule' => 'Du samedi au jeudi',
+        'hours'    => 'Ouvert jusqu\'à 16h00',
+    ],
+],
+
+'pharmacies' => [
+    'gachouch' => [
+        'title' => 'Pharmacie Gachouch',
+        'hours' => 'Ouverte jusqu\'à 23h00',
+    ],
+    'bakri' => [
+        'title' => 'Pharmacie',
+        'hours' => 'Ouverte jusqu\'à 23h00',
+    ],
+    'djoudi' => [
+        'title' => 'Pharmacie Djoudi',
+        'hours' => 'Ouverte jusqu\'à 23h00',
+    ],
+
+     'hospital' => [
+        'title' => 'Pharmacie Hopital',
+        'hours' => 'Ouverte jusqu\'à 23h00',
+    ],
+],
+
+],
+
+'guide_timimoun' => 'Votre guide à Timimoun',
+'transportation_info' => ' Services de Transport ' ,
+
+'flights_to_timimoun' => 'Vols vers Timimoun',
+'weekly_program_air_algerie' => 'Programme hebdomadaire des vols Air Algérie vers Timimoun',
+'day' => 'Jour',
+'route' => 'Trajet',
+'departure' => 'Départ',
+'arrival' => 'Arrivée',
+
+'flight' => [
+    'saturday' => [
+        'route' => 'Alger - Timimoun',
+        'departure' => '08:00',
+        'arrival' => '10:30',
+        'departure_timimoun' => '11:10',
+        'arrival_algeirs' => '12:30',
+    ],
+    'sunday' => [
+        'route' => 'Alger - Timimoun',
+        'departure' => '23:10',
+        'arrival' => '12:30',
+        'departure_timimoun' => '01:35',
+        'arrival_algeirs' => '03:00',
+    ],
+    'monday' => [
+        'route' => 'Alger - Timimoun',
+        'departure' => '15:30',
+        'arrival' => '16:50',
+        'departure_timimoun' => '17:35',
+         'arrival_algeirs' => '19:10',
+        
+    ],
+    'tuesday' => [
+        'route' => 'Alger - Timimoun',
+        'departure' => '14:00',
+        'arrival' => '16:30',
+        'departure_timimoun' => '23:10',
+        'arrival_algeirs' => '00:30',
+    ],
+    'wednesday' => [
+        'route' => 'Alger - Timimoun',
+        'route2' => 'Oran - Timimoun',
+          'departure' => '21:00',
+            'arrival' => '22:30',
+            'departure2' => '10:30',
+            'arrival2' => '12:50',
+            'departure_timimoun' => '23:00',
+            'arrival_algeirs' => '00:30',
+            'departure2_timimoun' => '13:35',
+            'arrival_oran' => '15:15',
+    ],
+    'thursday' => [
+        'route' => 'Alger - Timimoun',
+        'departure' => '15:30',
+        'arrival' => '17:00',
+        'departure_timimoun' => '17:35',
+        'arrival_algeirs' => '19:10',
+    ],
+    'friday' => [
+        'route' => 'Oran - Timimoun',
+        'departure' => '08:00',
+         'arrival' => '10:00',
+        'departure_timimoun' => '10:40',
+        'arrival_oran' => '12:15',
+    ],
+],
+
+'saturday' => 'Samedi',
+'sunday' => 'Dimanche',
+'monday' => 'Lundi',
+'tuesday' => 'Mardi',
+'wednesday' => 'Mercredi',
+'thursday' => 'Jeudi',
+'friday' => 'Vendredi',
+
+'service_transportation' => [
+'transportation' => 'Transportation Locations',
+'airport' => 'Aéroport de Timimoun',
+'bus_station' => 'Gare routière + Taxi Timimoun (Inter-Wilaya)',
+'bus_station2' => 'Gare Routière Timimoun (Inter-Communes)',
+'air_algerie' => 'Agence Air Algérie  ',
+'air_algerie_open' => 'De Dimanche à Jeudi : 08h00 - 12h00 / 14h00 - 15h30',
 
      
-     
+],
 
 
 

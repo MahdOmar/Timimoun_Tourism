@@ -36,14 +36,31 @@
                            
                            
                         </div>
-                        <span class="text-gray-600">({{ count($craft->reviews) }} reviews)</span>
+                        <span class="text-gray-600">({{ count($craft->reviews) }} {{ __('messages.review') }})</span>
                     </div>
-                    <p class="text-2xl font-bold text-green-500 mb-6">{{ ucfirst($craft->category )}} </p>
+                    <p class="text-2xl font-bold text-green-500 mb-6">
+                      @if ($craft->category == 'textiles')
+                        {{ __('messages.craft.categories.textile') }}
+                      @elseif ($craft->category == 'pottery')
+                        {{ __('messages.craft.categories.pottery') }}
+                      @elseif ($craft->category == 'woodwork')
+                        {{ __('messages.craft.categories.woodwork') }}
+                      @elseif ($craft->category == 'metalwork')
+                        {{ __('messages.craft.categories.metalwork') }}
+                      @elseif ($craft->category == 'leather')
+                        {{ __('messages.craft.categories.leather') }}
+                      @elseif ($craft->category == 'jewelry')
+                        {{ __('messages.craft.categories.jewelry') }}
+
+                      
+
+                          
+                      @endif </p>
                     
-                    <p class="text-2xl font-bold text-primary mb-6">{{ $craft->min_price }} - {{ $craft->max_price }} DA</p>
+                    <p class="text-2xl font-bold text-primary mb-6">{{ $craft->min_price }} - {{ $craft->max_price }} {{ __('messages.DA') }}</p>
                     
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral mb-2">Description</h3>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">{{ __('messages.craft.details.description') }}</h3>
                         <p class="text-gray-700">
                             {{ ucfirst($craft->getTranslation('description', app()->getLocale())) }}
                         </p>

@@ -454,18 +454,7 @@
             transform: scale(1.1);
         }
         
-        .card-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 6px 12px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            font-size: 0.875rem;
-            z-index: 10;
-        }
+       
         
         .card-content {
             padding: 24px;
@@ -825,11 +814,11 @@
         .tag {
             display: inline-block;
             padding: 4px 10px;
+          
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 8px;
+          
         }
         
         .tag-beach {
@@ -1010,7 +999,7 @@
             left: 16px;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
-            padding: 6px 12px;
+           padding: 0px;
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             font-size: 0.875rem;
@@ -1056,7 +1045,7 @@
         .card-price {
             font-weight: 700;
             font-size: 1.25rem;
-            color: #DC2626;
+            color: green;
         }
         
         .card-button {
@@ -1388,15 +1377,7 @@
             color: white;
         }
         
-        .tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
+       
         
         .tag-italian {
             background: rgba(220, 38, 38, 0.15);
@@ -1490,18 +1471,7 @@
             transform: scale(1.1);
         }
         
-        .card-badge {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 6px 12px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            font-size: 0.875rem;
-            z-index: 10;
-        }
+        
         
         .card-content {
             padding: 24px;
@@ -1683,15 +1653,7 @@
             border-color: #2563EB;
         }
         
-        .tag {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
+       
         
         .tag-adventure {
             background: rgba(37, 99, 235, 0.15);

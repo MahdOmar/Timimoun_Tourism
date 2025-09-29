@@ -11,16 +11,16 @@
                     <img src="{{ asset('storage/'.$accommodation->main_image) }}" 
                          alt="Luxury Heights Hotel" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                    <div class="absolute bottom-8 left-8 text-white">
+                    <div class="absolute bottom-8 left-8 rtl:right-8 text-white">
                         <h1 class="text-4xl md:text-5xl font-bold mb-2 heading-font ">{{ $accommodation->getTranslation('name', app()->getLocale()) }}</h1>
                         <div class="flex items-center space-x-4">
                             <span class="flex items-center">
                                 <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                <span>{{ round($accommodation->averageRating()) }} ({{ count($accommodation->reviews) }} reviews)</span>
+                                <span>{{ round($accommodation->averageRating()) }} ({{ count($accommodation->reviews) }} {{ __('messages.review') }})</span>
                             </span>
                             <span class="flex items-center">
                                 <i class="fas fa-map-marker-alt text-blue-300 mr-1"></i>
-                                <span> {{ __('messages.accommodation_details_Algeria') }}, Timimoun</span>
+                                <span> {{ __('messages.accommodation_details_Algeria') }}, {{ __('messages.accommodation_details_Timimoun') }}</span>
                             </span>
                             <span class="flex items-center">
                                 <i class="fas fa-award text-green-400 mr-1"></i>

@@ -9,19 +9,7 @@
             <div class="p-12 text-center">
                 <h1 class="text-4xl md:text-5xl font-bold mb-4"> {{ __('messages.events.title') }}</h1>
                 <p class="text-xl mb-8 max-w-2xl mx-auto"> {{ __('messages.events.subtitle') }}</p>
-                <div class="flex flex-col sm:flex-row justify-center max-w-2xl mx-auto">
-                    <input type="text" placeholder="Search events, artists, or categories..." class="px-6 py-3 rounded-l-lg sm:rounded-r-none rounded-r-lg sm:w-2/3 text-gray-800">
-                    <select class="px-4 py-3 bg-white text-gray-800 sm:rounded-none sm:w-1/4">
-                        <option>All Cities</option>
-                        <option>New York</option>
-                        <option>Los Angeles</option>
-                        <option>Chicago</option>
-                        <option>Miami</option>
-                    </select>
-                    <button class="bg-accent hover:bg-amber-600 px-6 py-3 rounded-r-lg sm:rounded-l-none rounded-l-lg mt-2 sm:mt-0 sm:w-1/4 font-semibold">
-                        <i class="fas fa-search mr-2"></i>Search
-                    </button>
-                </div>
+                
             </div>
         </section>
 
@@ -29,25 +17,25 @@
         <section class="mb-8">
             <h2 class="text-2xl font-bold mb-6 text-dark">{{ __('messages.events.categories.title') }}</h2>
             <div class="flex flex-wrap gap-4">
-                <button class="category-filter active px-6 py-2 bg-primary border border-gray-300 text-white rounded-full font-medium" onclick="sort(this)">
+                <button class="category-filter  active px-6 py-2 bg-primary border border-gray-300 text-white rounded-full font-medium" onclick="sort(this)" data-name = "AllEvents">
                    {{ __('messages.events.categories.all') }}
                 </button>
-                <button id="Festival" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
+                <button id="Festival" data-name = "festival" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-music mr-2"></i>{{ __('messages.events.categories.festival') }}
                 </button>
-                <button id="Concert" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
+                <button id="Concert" data-name ='concert' class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-theater-masks mr-2"></i>{{ __('messages.events.categories.concert') }}
                 </button>
-                <button id="Cultural" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
+                <button id="Cultural" data-name ='cultural' class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-chalkboard-teacher mr-2"></i>{{ __('messages.events.categories.cultural') }}
                 </button>
-                <button id="Exihbition" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
+                <button id="Exihbition" data-name ='exihbition' class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-utensils mr-2"></i>{{ __('messages.events.categories.exhibition') }}
                 </button>
-                <button  id="Sports" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
+                <button  id="Sports" data-name ='sports' class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-running mr-2"></i>{{ __('messages.events.categories.sports') }}
                 </button>
-                <button id="Other" class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
+                <button id="Other" data-name ='other' class="category-filter px-6 py-2 bg-white border border-gray-300 rounded-full font-medium" onclick="sort(this)">
                     <i class="fas fa-microphone mr-2"></i>{{ __('messages.events.categories.other') }}
                 </button>
             </div>
@@ -84,7 +72,23 @@
                                 <div class="text-lg">{{ \Carbon\Carbon::parse($event->start_date)->format('d')}}</div>
                             </div>
                             <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
-                                <i class="fas fa-music mr-1"></i> {{ $event->category }}
+                                <i class="fas fa-music mr-1"></i>
+                                @if ($event->category == 'festival')
+                                    {{ __('messages.events.categories.festival') }}
+                                    
+                                @elseif($event->category == 'concert')
+                                {{ __('messages.events.categories.concert') }}
+                                @elseif($event->category == 'cultural')
+                                {{ __('messages.events.categories.cultural') }}
+                                @elseif($event->category == 'exhibition')
+                                {{ __('messages.events.categories.exhibition') }}
+                                @elseif($event->category == 'sports')
+                                {{ __('messages.events.categories.sports') }}
+                                @elseif($event->category == 'other')
+                                {{ __('messages.events.categories.other') }}
+                                    
+                                @endif
+                                 
                             </div>
                         </div>
                         <div class="p-5">
@@ -99,12 +103,12 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <span class="text-2xl font-bold text-primary">@if ($event->price == 0)
-                                        Free
+                                         {{ __('messages.site.card.price') }}
                                         
                                     @else
                                         {{ $event->price }}
                                     @endif</span>
-                                    <span class="text-gray-600">/ {{ __('messages.events.card.person') }}</span>
+                                 @if ($event->price > 0)   <span class="text-gray-600">/ {{ __('messages.events.card.person') }}</span>@endif
                                 </div>
                                 <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-purple-700">
                                     {{ __('messages.events.card.btn') }}
@@ -123,32 +127,53 @@
         </div>
     </main>
 
-    <!-- Newsletter Section -->
-    <section class="bg-primary text-white py-12 mt-16">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Never Miss an Event Again</h2>
-            <p class="text-purple-100 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter and get updates on the best events in your city.</p>
-            <div class="flex flex-col sm:flex-row justify-center max-w-2xl mx-auto">
-                <input type="email" placeholder="Your email address" class="px-6 py-3 rounded-l-lg sm:rounded-r-none rounded-r-lg sm:w-2/3 text-gray-800">
-                <button class="bg-accent hover:bg-amber-600 px-6 py-3 rounded-r-lg sm:rounded-l-none rounded-l-lg mt-2 sm:mt-0 sm:w-1/3 font-semibold">
-                    Subscribe
-                </button>
-            </div>
-        </div>
-    </section>
+  
 
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.18/dayjs.min.js" integrity="sha512-FwNWaxyfy2XlEINoSnZh1JQ5TRRtGow0D6XcmAWmYCRgvqOUTnzCxPc9uF35u5ZEpirk1uhlPVA19tflhvnW1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  
+    const btn = @json(__('messages.events.card.btn'));
+    const person =  @json( __('messages.events.card.person') );
+    const free =  @json(     __('messages.site.card.price')  );
+    const Festival =  @json(     __('messages.events.categories.festival')  );
+    const Concert =  @json(     __('messages.events.categories.concert')  );
+    const Cultural =  @json(     __('messages.events.categories.cultural')  );
+    const Exhibition =  @json(     __('messages.events.categories.exhibition')  );
+    const Sports =  @json(     __('messages.events.categories.sports')  );
+    const Other =  @json(     __('messages.events.categories.other')  );
+    const events = @json(     __('messages.events.filtre.events_found')  );
+
+        
+
+
+
+  
+
+    
+                                
+
+</script>
+
+
+
 <script>
       async function sort(type){
 
+          const locale = document.getElementById('app').dataset.locale;
         if(!type){
             type = document.querySelector('.category-filter.bg-primary');
         }
+
+        console.log(type.dataset.name);
       
      
   
-        const category =type.textContent.replace(/\s+/g, '');
+        var category =type.dataset.name;
+       
+
+
          let sort = document.getElementById("sort-select").value;
         
          const response = await fetch(`/events/`+category+`/`+sort, {
@@ -169,9 +194,9 @@
             const data = await response.json();
             const container = document.getElementById('events-list');
              const total = document.getElementById('total');
-             total.textContent = data.length + ' Events Found';
+             total.textContent = data.length + ' '+ events;
             console.log(data);
-           const locale = document.getElementById('app').dataset.locale;
+         
             console.log(locale);
             container.innerHTML = '';
             if(data.length == 0){
@@ -181,6 +206,38 @@
             
 
            data.forEach(event => {
+
+            if(event.category == 'festival')
+        {
+            category = Festival ;
+        }
+        else if(event.category == 'concert' )
+        {
+            category = Concert;
+        }
+
+         else if(event.category == 'cultural')
+        {
+            category = Cultural;
+        }
+
+         else if(event.category == 'exhibition')
+        {
+            category = Exhibition;
+        }
+
+         else if(event.category == 'sports')
+        {
+            category = Sports;
+        }
+
+      
+        else{
+             category = Other;
+        }
+
+
+
            const card = `
                 <a href="/events/${event.id}">
                   <div class="event-card bg-white rounded-xl shadow-md overflow-hidden">
@@ -192,7 +249,7 @@
                                 <div class="text-lg">${dayjs(event.start_date).format('DD')}</div>
                             </div>
                             <div class="absolute top-4 right-4 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
-                                <i class="fas fa-music mr-1"></i> ${event.category}
+                                <i class="fas fa-music mr-1"></i> ${category}
                             </div>
                         </div>
                         <div class="p-5">
@@ -207,12 +264,12 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <span class="text-2xl font-bold text-primary">
-                                        ${event.price == 0 ? 'Free' : event.price}
+                                        ${event.price == 0 ? free : event.price}
                                     </span>
-                                    <span class="text-gray-600">/person</span>
+                                    <span class="text-gray-600">/${person}</span>
                                 </div>
                                 <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-purple-700">
-                                    Get Tickets
+                                    ${btn}
                                 </button>
                             </div>
                         </div>

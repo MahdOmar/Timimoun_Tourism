@@ -9,20 +9,30 @@
                 <img src="{{ asset('storage/' . $food->main_image) }}" 
                      alt="Gusto Italiano Restaurant" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
-                <div class="absolute bottom-8 left-8 text-white">
+                <div class="absolute bottom-8 left-8 rtl:right-8 text-white">
                     <h1 class="text-4xl md:text-5xl font-bold mb-2 text-orange-500">{{ $food->getTranslation('name', app()->getLocale()) }}</h1>
                     <div class="flex items-center space-x-4">
                         <span class="flex items-center">
                             <i class="fas fa-star text-yellow-400 mr-1"></i>
-                            <span>{{ round($food->averageRating()) }} ({{ count($food->reviews) }} reviews)</span>
+                            <span>{{ round($food->averageRating()) }} ({{ count($food->reviews) }}  {{ __('messages.review') }} )</span>
                         </span>
                         <span class="flex items-center">
                             <i class="fas fa-tag text-primary mr-1"></i>
-                            <span>{{ $food->type}}</span>
+                            <span> @if ($food->type == 'restaurant')
+                            {{ __('messages.food.food_categories.restaurant') }}
+                            
+                        @elseif(($food->type == 'snack')) 
+                            {{ __('messages.food.food_categories.snack') }} 
+                           @elseif(($food->type == 'traditional')) 
+                            {{ __('messages.food.food_categories.traditional') }}
+                            @elseif(($food->type == 'cafe')) 
+                            {{ __('messages.food.food_categories.cafe') }}
+                             
+                        @endif</span>
                         </span>
                         <span class="flex items-center">
                             <i class="fas fa-dollar-sign text-green-500 mr-1"></i>
-                            <span>DA</span>
+                            <span>{{ $food->min_price }} - {{ $food->max_price }} {{ __('messages.DA') }}</span>
                         </span>
                     </div>
                 </div>
@@ -143,7 +153,7 @@
                     <div class="mb-4">
                         <div class="flex justify-between mb-2">
                             <span class="text-gray-700">{{ __('messages.food.details.price') }}</span>
-                            <span class="text-gray-700">{{ $food->min_price }} - {{ $food->max_price }} DA</span>
+                            <span class="text-gray-700">{{ $food->min_price }} - {{ $food->max_price }} {{ __('messages.DA') }}</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2.5">
                             <div class="bg-primary h-2.5 rounded-full" style="width: 45%"></div>

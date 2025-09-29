@@ -261,6 +261,14 @@
        
         
         var map = L.map('map').setView([29.26008881814599, 0.2285530930399549], 13);
+
+        const translations = @json(__('messages.map'));
+
+
+
+
+
+
         
         // Add tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -269,24 +277,37 @@
         
         // Add markers for demonstration
         L.marker([29.256246912996673, 0.2338650094604732]).addTo(map)
-            .bindPopup('<strong>City General Hospital</strong><br>24/7 emergency services')
-            .openPopup();
+            .bindPopup(`<strong>${translations.hospital_name}</strong><br>${translations.hospital_desc}`)
+          
         
         L.marker([29.265813016869632, 0.2333187140967738]).addTo(map)
-            .bindPopup('<strong>Police Station</strong><br>24/7 emergency services')
-            .openPopup();
-        
+            .bindPopup(`<strong>${translations.police_name}</strong><br>${translations.police_desc}`)
+           
         L.marker([29.275295189038157, 0.2401809883871802]).addTo(map)
-            .bindPopup('<strong>Ambulence</strong><br>24/7 emergency services')
-            .openPopup();
+            .bindPopup(`<strong>${translations.ambulance_name}</strong><br>${translations.ambulance_desc}`)
         
-        L.marker([29.257373309227653, 0.23214867945993878]).addTo(map)
-            .bindPopup('<strong>Pharmacy</strong><br>Open until 11:00 PM')
+         L.marker([29.274127487868174, 0.2401809883871802]).addTo(map)
+            .bindPopup(`<strong>${translations.polyclinic1}</strong><br>${translations.polyclinic1_desc}`)
+            
+         L.marker([29.26158350298545, 0.22758058829847277]).addTo(map)
+            .bindPopup(`<strong>${translations.polyclinic2}</strong><br>${translations.polyclinic2_desc}`)
+            
+         L.marker([29.23964487421098,0.2185679672416457]).addTo(map)
+            .bindPopup(`<strong>${translations.polyclinic3}</strong><br>${translations.polyclinic3_desc}`)
+            
+          L.marker([29.258466730809538, 0.2289947779451181]).addTo(map)
+            .bindPopup(`<strong>${translations.polyclinic4}</strong><br>${translations.polyclinic4_desc}`)   
+
+           
+        
+       
            
 
 
             
         var map2 = L.map('map2').setView([29.26008881814599, 0.2285530930399549], 13);
+
+          const mapTranslations2 = @json(__('messages.map2'));
         
         // Add tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -295,37 +316,40 @@
         
         // Add markers for demonstration
         L.marker([29.26015828127157, 0.2287773917465265]).addTo(map2)
-            .bindPopup('<strong>Main Poste + ATM</strong><br> From Saturday to Thursday <br> Open until 18:00 <br> ATM available 24/7')
+            .bindPopup(`<strong>${mapTranslations2.main_poste.title} + ATM</strong><br> ${mapTranslations2.main_poste.schedule} <br> ${mapTranslations2.main_poste.hours} <br> ${mapTranslations2.main_poste.atm}`)
             
         
         L.marker([29.26014190138587, 0.2281712125214895]).addTo(map2)
-            .bindPopup('<strong>BNA + ATM</strong><br>From Sunday to Thursday <br> Open until 15:00 <br> ATM available 24/7')
+            .bindPopup(`<strong>${mapTranslations2.bna.title}</strong><br>${mapTranslations2.bna.schedule} <br> ${mapTranslations2.bna.hours}<br> ${mapTranslations2.bna.atm}`)
            
         
         L.marker([29.262225513289444, 0.229614818478226652]).addTo(map2)
-            .bindPopup('<strong>BDL + ATM</strong><br>From Sunday to Thursday <br> Open until 15:00 <br> ATM available 24/7')
-           
+             .bindPopup(`<strong>${mapTranslations2.bdl.title}</strong><br>${mapTranslations2.bdl.schedule} <br> ${mapTranslations2.bdl.hours}<br> ${mapTranslations2.bdl.atm}`)
         
         L.marker([29.264983998861695, 0.2339384759752733]).addTo(map2)
-            .bindPopup('<strong>BADR + ATM</strong><br>From Sunday to Thursday <br> Open until 15:00 <br> ATM available 24/7')
+             .bindPopup(`<strong>${mapTranslations2.badr.title}</strong><br>${mapTranslations2.badr.schedule} <br> ${mapTranslations2.badr.hours}<br> ${mapTranslations2.badr.atm}`)
 
          L.marker([29.25904325091708, 0.22895275076276675]).addTo(map2)
-            .bindPopup('<strong>BEA + ATM</strong><br>From Sunday to Thursday <br> Open until 15:00 <br> ATM available 24/7')    
-            
+             .bindPopup(`<strong>${mapTranslations2.bea.title}</strong><br>${mapTranslations2.bea.schedule} <br> ${mapTranslations2.bea.hours}<br> ${mapTranslations2.bea.atm}`)
+
          L.marker([29.26410400638427, 0.23632222086488916]).addTo(map2)
-            .bindPopup('<strong>Poste Office + ATM</strong> <br>  Saturday to Thursday <br> Open until 16:00 <br> ATM available 24/7') 
+             .bindPopup(`<strong>${mapTranslations2.post_office1.title}</strong><br>${mapTranslations2.post_office1.schedule} <br> ${mapTranslations2.post_office1.hours}<br> ${mapTranslations2.post_office1.atm}`)
+
             
          L.marker([29.270636043183135, 0.2366308103804145]).addTo(map2)
-            .bindPopup('<strong>Poste Office + ATM </strong><br> Saturday to Thursday <br> Open until 16:00 <br> ATM available 24/7') 
+            .bindPopup(`<strong>${mapTranslations2.post_office2.title}</strong><br>${mapTranslations2.post_office2.schedule} <br> ${mapTranslations2.post_office2.hours}<br> ${mapTranslations2.post_office2.atm}`)
             
          L.marker([29.253385453923894, 0.22768267514482787]).addTo(map2)
-            .bindPopup('<strong>Poste Office + ATM</strong> <br>  Saturday to Thursday <br> Open until 16:00 <br> ATM available 24/7')
+             .bindPopup(`<strong>${mapTranslations2.post_office3.title}</strong><br>${mapTranslations2.post_office3.schedule} <br> ${mapTranslations2.post_office3.hours}<br> ${mapTranslations2.post_office3.atm}`)
             
     
 
 
 
              var map3 = L.map('map3').setView([29.26008881814599, 0.2285530930399549], 13);
+             const mapTranslations3 = @json(__('messages.map3'));
+
+
         
         // Add tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -334,35 +358,37 @@
         
         // Add markers for demonstration
         L.marker([29.26341764766776, 0.2305582038686992]).addTo(map3)
-            .bindPopup('<strong>Dr KABACH </strong><br> General Practitioner<br> From Saturday to Thursday <br> Open until 16:00 <br>')
+            .bindPopup(`<strong>${mapTranslations3.doctors.kabach.title} </strong><br> ${mapTranslations3.doctors.kabach.specialty}<br>${mapTranslations3.doctors.kabach.schedule} <br> ${mapTranslations3.doctors.kabach.hours} <br>`)
             
         
         L.marker([29.257845038097972, 0.237949118178328]).addTo(map3)
-            .bindPopup('<strong>Dr SMAHI </strong><br> General Practitioner<br> From Saturday to Thursday <br> Open until 16:00 <br>')
-           
+         .bindPopup(`<strong>${mapTranslations3.doctors.smahi.title} </strong><br> ${mapTranslations3.doctors.smahi.specialty}<br>${mapTranslations3.doctors.smahi.schedule} <br> ${mapTranslations3.doctors.smahi.hours} <br>`)
         
         L.marker([29.26000746710055, 0.23080779090679407]).addTo(map3)
-            .bindPopup('<strong>Dr MENAOUER </strong><br> Internal Medicine Specialist<br> From Saturday to Thursday <br> Open until 16:00 <br>')
+            .bindPopup(`<strong>${mapTranslations3.doctors.menaouer.title} </strong><br> ${mapTranslations3.doctors.menaouer.specialty}<br>${mapTranslations3.doctors.menaouer.schedule} <br> ${mapTranslations3.doctors.menaouer.hours} <br>`)
            
         
         L.marker([29.25395347043828, 0.22390907434572754]).addTo(map3)
-            .bindPopup('<strong>Dr Daouelhadj </strong><br> Cardiologist<br> From Saturday to Thursday <br> Open until 16:00 <br>')
+          .bindPopup(`<strong>${mapTranslations3.doctors.daouelhadj.title} </strong><br> ${mapTranslations3.doctors.daouelhadj.specialty}<br>${mapTranslations3.doctors.daouelhadj.schedule} <br> ${mapTranslations3.doctors.daouelhadj.hours} <br>`)
 
          L.marker([29.270402756966895, 0.241184581384931]).addTo(map3)
-            .bindPopup('<strong>Dr Necira </strong><br> Gynecologist<br> From Saturday to Thursday <br> Open until 16:00 <br>')    
-            
+            .bindPopup(`<strong>${mapTranslations3.doctors.necira.title} </strong><br> ${mapTranslations3.doctors.necira.specialty}<br>${mapTranslations3.doctors.necira.schedule} <br> ${mapTranslations3.doctors.necira.hours} <br>`)
+
          L.marker([29.2719364021746, 0.236882735507053]).addTo(map3)
-            .bindPopup('<strong>Dr KARIMI </strong><br>General Practitioner<br> From Saturday to Thursday <br> Open until 16:00 <br>') 
-            
+           .bindPopup(`<strong>${mapTranslations3.doctors.karimi.title} </strong><br> ${mapTranslations3.doctors.karimi.specialty}<br>${mapTranslations3.doctors.karimi.schedule} <br> ${mapTranslations3.doctors.karimi.hours} <br>`)
+
          L.marker([29.26545451888424, 0.23588248363577985]).addTo(map3)
-            .bindPopup('<strong>Pharmacy Gachouch</strong> <br> Open until 23:00 ') 
+          .bindPopup(`<strong>${mapTranslations3.pharmacies.gachouch.title} </strong><br> ${mapTranslations3.pharmacies.gachouch.hours}`)
             
-         L.marker([29.253385453923894, 0.22768267514482787]).addTo(map3)
-            .bindPopup('<strong>Pharmacy</strong> <br> Open until 23:00 ')
+         L.marker([29.257297065614015, 0.231522621771879]).addTo(map3)
+          .bindPopup(`<strong>${mapTranslations3.pharmacies.bakri.title} </strong><br> ${mapTranslations3.pharmacies.bakri.hours}`)
 
                 
          L.marker([29.262396370074043, 0.24191955746371366]).addTo(map3)
-            .bindPopup('<strong>Pharmacy Djoudi</strong> <br> Open until 23:00 ')
+          .bindPopup(`<strong>${mapTranslations3.pharmacies.djoudi.title} </strong><br> ${mapTranslations3.pharmacies.djoudi.hours}`)
+
+        L.marker([29.255617483783013, 0.2312946927161544]).addTo(map3)
+          .bindPopup(`<strong>${mapTranslations3.pharmacies.hospital.title} </strong><br> ${mapTranslations3.pharmacies.hospital.hours}`)
             
             
         

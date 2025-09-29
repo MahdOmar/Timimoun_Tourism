@@ -41,7 +41,7 @@
                         <div class="flex items-center">
                             <i class="fas fa-star text-yellow-400 mr-1"></i>
                             <span class="font-medium">{{ round($rental->averageRating()) }}</span>
-                            <span class="text-gray-500 ml-1">({{ count($rental->reviews) }} reviews)</span>
+                            <span class="text-gray-500 ml-1">({{ count($rental->reviews) }} {{ __('messages.review') }})</span>
                         </div>
 
                         
@@ -51,14 +51,20 @@
                             
                             <div class="absolute top-4 left-4 bg-yellow-500 text-black px-3 py-1 font-semibold rounded-md">
                               <i class="fas fa-money-bill text-dark mr-2"></i>
-                          {{ $rental->price }} DA
+                          {{ $rental->price }} {{ __('messages.DA') }} / @if ($rental->unit == 'day')
+                              {{ __('messages.rental.card.day') }}
+                              
+                          @else
+                           {{ __('messages.rental.card.hour') }}
+                              
+                          @endif
                         </div>
                         </div>
 
                   
 
                     <div class="border-t border-gray-200 pt-6">
-                        <h3 class="text-xl font-semibold mb-4">Description</h3>
+                        <h3 class="text-xl font-semibold mb-4">  {{ __('messages.rental.details.description') }}</h3>
                         <p class="text-gray-600 mb-4">
                             {{ $rental->getTranslation('description', app()->getLocale()) }}
                         </p>
@@ -66,13 +72,40 @@
                 </div>
 
                 <!-- Amenities -->
+                @if ($rental->amenities && count($rental->amenities) > 0)
+                    
+                
                 <div class="bg-white rounded-xl shadow-md p-6 mb-8">
                     <h3 class="text-xl font-semibold mb-6">{{ __('messages.rental.details.ammenties') }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       @foreach ($rental->amenities as $item)
                            <div class="flex items-center">
                             
-                            <span class="text-gray-700">{{ $item }}</span>
+                            <span class="text-gray-700">
+                              @if ($item == 'furnished')
+                              {{ __('messages.rental.details.furnished') }}
+                                
+                            @elseif($item == 'air_conditioning')
+                            {{ __('messages.rental.details.air_conditioning') }}
+                            @elseif($item == 'heating')
+                            {{ __('messages.rental.details.heating') }}
+                            @elseif($item == 'wifi')
+                            {{ __('messages.rental.details.wifi') }}
+                            @elseif($item == 'kitchen')
+                            {{ __('messages.rental.details.kitchen') }}
+                            @elseif($item == 'garage')
+                            {{ __('messages.rental.details.parking') }}
+                            @elseif($item == 'pool')
+                            {{ __('messages.rental.details.pool') }}
+                            @elseif($item == 'tv')
+                            {{ __('messages.rental.details.tv') }}
+                            @elseif($item == 'washing_machine')
+                            {{ __('messages.rental.details.washing_machine') }}
+                            @elseif($item == 'garden')
+                            {{ __('messages.rental.details.garden') }}
+
+                                
+                            @endif</span>
                         </div>
                       @endforeach
                        
@@ -80,17 +113,17 @@
                        
                     </div>
                 </div>
-
+              @endif
                 <!-- Contact Info -->
                 <div class="bg-white rounded-xl shadow-md p-6 mb-8">
                     <h3 class="text-xl font-semibold mb-6">{{ __('messages.rental.details.contact') }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <ul class="text-gray-700 text-sm space-y-2">
           @if($rental->phone)
-            <li>📞 {{ $rental->phone }}</li>
+            <li><i class="fa-solid fa-phone"></i> {{ $rental->phone }}</li>
           @endif
           @if($rental->email)
-            <li>📧 {{ $rental->email }}</li>
+          <i class="fa-solid fa-envelope"></i> {{ $rental->email }}</li>
           @endif
         
         </ul>

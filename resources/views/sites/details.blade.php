@@ -32,7 +32,7 @@
         <div class="flex items-center">
                 <i class="fas fa-star text-yellow-400 mr-1"></i>
                    <span class="font-medium">{{ round($site->averageRating()) }}</span>
-                      <span class="text-gray-500 ml-1">({{ count($site->reviews) }} reviews)</span>
+                      <span class="text-gray-500 ml-1">({{ count($site->reviews) }} {{ __('messages.review') }})</span>
           </div>
 
       <!-- Description -->
@@ -101,10 +101,30 @@
       <div class="bg-white shadow rounded-lg p-6">
         <h3 class="text-lg font-semibold text-gray-800 mb-4">{{ __('messages.site.details.information') }}</h3>
         <ul class="space-y-3 text-gray-700 text-sm">
-          <li><strong>{{ __('messages.site.details.category') }}:</strong> {{ $site->type }}</li>
-          <li><strong>{{ __('messages.site.details.time') }}:</strong> Morning & Sunset</li>
-          <li><strong>{{ __('messages.site.details.entry') }}:</strong> Free</li>
-          <li><strong>{{ __('messages.site.details.amenities') }}:</strong>
+          <li><strong>{{ __('messages.site.details.category') }}:</strong>   @if ($site->type == 'monument')
+                            {{ __('messages.site.categories.monument') }}
+                            
+                        @elseif($item->type =='museum')
+                            {{ __('messages.site.categories.museum') }}
+                        @elseif($item->type =='natural')
+                            {{ __('messages.site.categories.natural') }}
+                        @elseif($item->type =='historical')
+                            {{ __('messages.site.categories.historical') }}
+                        @elseif($item->type =='religious')
+                            {{ __('messages.site.categories.religious') }}
+                        @elseif($item->type =='other')
+                            {{ __('messages.site.categories.other') }}
+                            
+                        @endif</li>
+          <li><strong>{{ __('messages.site.details.time') }}:</strong> {{ $site->getTranslation('opening_hours', app()->getLocale()) }}</li>
+          <li><strong>{{ __('messages.site.details.entry') }}:</strong>@if ($site->price == 0) {{ __('messages.site.card.price') }}
+                      
+                    @else
+                      {{ $item->price }}
+                    @endif </li>
+
+                @if ($site->amenities && count($site->amenities) > 0)
+                 <li><strong>{{ __('messages.site.details.amenities') }}:</strong>
             @foreach ($site->amenities as $item)
               <span class="inline-block bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full mr-1 mb-1">
                 {{ $item }}
@@ -112,6 +132,9 @@
                 
             @endforeach
           </li>
+                    
+                @endif    
+         
         </ul>
       </div>
 

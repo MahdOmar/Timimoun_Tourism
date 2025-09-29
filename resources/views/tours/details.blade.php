@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-<section class="max-w-7xl mx-auto px-4 py-12">
+{{-- <section class="max-w-7xl mx-auto px-4 py-12">
   <!-- Tour Main Info -->
   <div class="grid md:grid-cols-2 gap-8">
     
@@ -55,17 +55,7 @@
         
       </div>
 
-        <!-- Reviews -->
-        {{-- <div class="flex items-center mb-6">
-          <div class="flex text-yellow-400">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
-            <svg class="w-5 h-5 fill-current text-gray-300" viewBox="0 0 20 20"><path d="M9.049 2.927c..."/></svg>
-          </div>
-          <span class="ml-2 text-sm text-gray-500">(24 reviews)</span>
-        </div> --}}
+        
        <div class="mb-6">
         <h3 class="text-lg font-semibold mb-3 ">{{ __('messages.tour.details.contact') }}</h3>
 
@@ -253,12 +243,300 @@
   </div>
   @endif --}}
 
-  {{-- <div id="map" class="w-full h-96 rounded-lg shadow-md mt-6"></div> --}}
+  {{-- <div id="map" class="w-full h-96 rounded-lg shadow-md mt-6"></div> 
 
 
 
 
-</section>
+</section> --}}
+
+
+  <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-600 to-teal-500 text-white py-6 px-4 shadow-lg">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold">{{ $tour->getTranslation('name', app()->getLocale()) }}</h1>
+                    <div class="tour-rating">
+                        <i class="fas fa-star text-yellow-400 mr-1"></i>
+                        <span>{{ round($tour->averageRating()) }} ({{ count($tour->reviews) }} {{ __('messages.review') }})</span>
+                    </div>
+                </div>
+                <div class="text-sm bg-blue-800 bg-opacity-40 px-3 py-1 rounded-full m-2">
+                    <span class="text-yellow-300">★</span> {{ __('messages.tour_details.featured') }}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Image Section -->
+    <section class="relative h-96 w-full overflow-hidden">
+        <img src="{{ asset('storage/'.$tour->main_image) }}" 
+             alt="صورة رئيسية للرحلة - جبال قورارة" 
+             class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div class="text-center text-white px-4">
+                <h2 class="text-4xl font-bold mb-4">{{ $tour->getTranslation('name', app()->getLocale()) }}</h2>
+                <p class="text-xl max-w-2xl">{{ __('messages.tour_details.hero_sub') }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Price Section -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-700 mb-2">{{ __('messages.tour_details.price_title') }}</h2>
+            <div class="text-4xl font-bold text-blue-600 mb-4"> {{ number_format($tour->price, 0) }} {{ __('messages.DA') }}</div>
+            <p class="text-gray-600">{{ __('messages.tour_details.price_note') }}</p>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">{{ __('messages.tour_details.gallery') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              @foreach ($tour->gallery as $item)
+                   <div class="overflow-hidden rounded-lg gallery-image cursor-pointer">
+                    <img src="{{ asset('storage/'.$item->path)  }}" 
+                         alt="منظر الصحراء في قورارة" 
+                         class="w-full h-48 object-cover">
+                </div>
+              @endforeach
+               
+                
+               
+               
+            </div>
+        </section>
+
+        <!-- Car Details -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">{{ __('messages.tour_details.details') }} </h2>
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                  @if ($tour->category == "cars") 
+                  <i class="fas fa-car text-2xl text-blue-500 mr-3"></i>
+                    <div>
+                        <h3 class="font-bold text-lg">{{ __('messages.tour_details.car_title') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.tour_details.car_sub') }}</p>
+                    </div>
+                      
+                  @else
+                      
+                  @endif
+                    
+                </div>
+                <div class="text-right">
+                    <p class="font-bold text-lg">{{ $tour->duration_days }} {{ __('messages.tour_details.days') }}/ {{ $tour->duration_nights }} {{ __('messages.tour_details.nights') }}</p>
+                   
+                </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <p class="text-blue-700"><i class="fas fa-info-circle mr-2"></i>{{ __('messages.tour_details.price_info') }}</p>
+            </div>
+        </section>
+
+       
+
+        <!-- What's Included -->
+        <section class="bg-white rounded-xl shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">{{ __('messages.tour_details.program_title') }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 text-xl mt-1 ml-2"></i>
+                    <div>
+                        <h3 class="font-bold">{{ __('messages.tour_details.accommodation') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.tour_details.accommodation_sub') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 text-xl mt-1 ml-2"></i>
+                    <div>
+                        <h3 class="font-bold">{{ __('messages.tour_details.transport') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.tour_details.transport_sub') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 text-xl mt-1 ml-2"></i>
+                    <div>
+                        <h3 class="font-bold">{{ __('messages.tour_details.meals') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.tour_details.meals_sub') }}</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-green-500 text-xl mt-1 ml-2"></i>
+                    <div>
+                        <h3 class="font-bold">{{ __('messages.tour_details.activities') }}</h3>
+                        <p class="text-gray-600">{{ __('messages.tour_details.activities_sub') }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Information -->
+        <section class="bg-white rounded-xl shadow-md p-6">
+            <h2 class="text-2xl font-bold text-gray-700 mb-4 border-b pb-2"> {{ __('messages.tour_details.contact_title') }}</h2>
+            <p class="text-gray-700 mb-6">{{ __('messages.tour_details.contact_desc') }}</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-phone-alt text-blue-600 text-xl ml-3"></i>
+                        <h3 class="font-bold text-lg">{{ __('messages.tour_details.phone') }}</h3>
+                    </div>
+                    <p class="text-blue-700 font-medium text-lg">{{ $tour->phone }}</p>
+                    <p class="text-gray-600 text-sm">{{ __('messages.tour_details.phone_hours') }}</p>
+                </div>
+                
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-envelope text-green-600 text-xl ml-3"></i>
+                        <h3 class="font-bold text-lg">{{ __('messages.tour_details.email') }}</h3>
+                    </div>
+                    <p class="text-green-700 font-medium text-lg">{{ $tour->email }}</p>
+                    <p class="text-gray-600 text-sm">{{ __('messages.tour_details.email_reply') }}</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 bg-gray-50 p-4 rounded-lg">
+                <p class="text-gray-700"><i class="fas fa-headset text-gray-500 ml-2"></i>{{ __('messages.tour_details.customer_service') }} </p>
+            </div>
+            <div class="">
+                <!-- Modal -->
+<div x-data="{ open: false }">
+    <!-- Reservation Button -->
+    <button class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition duration-300 mt-4" @click="open = true" class="px-4 py-2 bg-blue-600 text-white rounded-lg"">
+                            <i class="fas fa-calendar-check mr-2"></i>{{ __('messages.tour.details.book_now') }}
+     </button>
+
+    <!-- Reservation Modal -->
+    <div x-show="open"
+         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+         x-cloak>
+        <div @click.away="open = false"
+             class="bg-white rounded-lg shadow-lg w-full max-w-5xl p-6">
+
+            <div class="bg-gradient-to-r from-primary to-secondary p-6 text-white relative">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold flex items-center">
+                        <i class="fas fa-hotel mr-3"></i>
+                        {{ __('messages.tour.details.book.title') }}
+                    </h2>
+                    <button class="text-white hover:text-gray-200 transition-colors "@click="open = false">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-blue-100 mt-2"> {{ __('messages.tour.details.book.subtitle') }} {{  $tour->getTranslation('name', app()->getLocale()) }}</p>
+                
+              
+            </div>
+            
+            <!-- Modal Body -->
+            <form action="{{ route('tour.reservation') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+            <div class="p-6">
+              
+              <input type="text" name="tour_email" value="{{ $tour->email }}" hidden>
+              <input type="text" name="tour_name" value="{{  $tour->getTranslation('name', app()->getLocale()) }}" hidden>
+
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-primary"></i>
+                            {{ __('messages.tour.details.book.name') }}
+                        </label>
+                        <div class="relative">
+                            <input type="text" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your name" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fa-solid fa-envelope mr-2 text-primary"></i>
+                             {{ __('messages.tour.details.book.email') }}
+                        </label>
+                        <div class="relative">
+                            <input type="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your email" required>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-phone mr-2 text-primary"></i>
+                             {{ __('messages.tour.details.book.phone') }}
+                        </label>
+                        <div class="relative">
+                            <input type="text" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Your phone" required>
+                        </div>
+                    </div>
+                     <div class="mb-6">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-users mr-2 text-primary"></i>
+                         {{ __('messages.tour.details.book.guests') }}
+                    </label>
+                  
+                    <input type="number" name="guests" min="1" class="w-full border-gray-300 rounded-lg shadow-sm mt-1" placeholder="e.g. 2" required>
+
+                    
+                </div>
+                </div>
+
+
+
+                <!-- Dates Selection -->
+                <div class=" mb-4">
+                    <div>
+                        <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                            <i class="fas fa-calendar-day mr-2 text-primary"></i>
+                           {{ __('messages.tour.details.book.date') }}
+                        </label>
+                        <div class="relative">
+                            <input type="date" name="date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" id="checkin" required>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+              
+               
+                
+              
+                
+                <!-- Special Requests -->
+                <div class="mb-4">
+                    <label class=" text-sm font-medium text-gray-700 mb-2 flex items-center">
+                        <i class="fas fa-concierge-bell mr-2 text-primary"></i>
+                       {{ __('messages.tour.details.book.message') }}
+                    </label>
+                    <textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" name="message" rows="2" placeholder="Any special requests?"></textarea>
+                </div>
+              
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="bg-gray-50 px-6 py-4 flex justify-between">
+                 <button type="button" @click="open = false"
+                            class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400">
+                       {{ __('messages.tour.details.book.cancel') }}
+                    </button>
+                <button type="submit" class="px-5 py-2 rounded-lg bg-primary text-white hover:bg-blue-700 transition-colors flex items-center">
+                    <i class="fas fa-check mr-2"></i>
+                   {{ __('messages.tour.details.book.confirm') }}
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+       
+      </div>
+    </div>
+  </div>
+        </section>
+    </main>
+
 
 @if ($tour->reviews && count($tour->reviews) > 0)
      <section class=" py-8">

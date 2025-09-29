@@ -11,15 +11,7 @@
         <div class="container mx-auto px-4 relative">
             <h1 class="page-title">{{ __('messages.food.traditional.title') }}</h1>
             <p class="page-subtitle">{{ __('messages.food.traditional.subtitle') }}</p>
-            
-            <div class="search-container">
-                <div class="flex bg-white rounded-full shadow-lg overflow-hidden">
-                    <input type="text" placeholder="Search restaurants, cuisines, or locations..." class="flex-grow px-6 py-4 text-gray-800 focus:outline-none">
-                    <button class="bg-secondary hover:bg-orange-700 px-8 py-4 text-white font-semibold">
-                        <i class="fas fa-search mr-2"></i>Search
-                    </button>
-                </div>
-            </div>
+         
         </div>
     </header>
 
@@ -38,7 +30,7 @@
     </div>
 
     <!-- Style 1: Rounded cards with badges -->
-    <h3 class="card-style-title">Rounded Cards</h3>
+  
     <div class="grid-container" id="food">
         <!-- Restaurant Card 1 -->
         @foreach ($food as $item)
@@ -63,7 +55,7 @@
                            
                            
                         </div>
-                        <span class="text-gray-600">({{ count($item->reviews) }} reviews)</span>
+                        <span class="text-gray-600">({{ count($item->reviews) }} {{ __('messages.review') }})</span>
                 </div>
                 
                 <div class="card-footer">
@@ -79,21 +71,7 @@
         
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination">
-        <div class="pagination-button">
-            <i class="fas fa-chevron-left"></i>
-        </div>
-        <div class="pagination-button active">1</div>
-        <div class="pagination-button">2</div>
-        <div class="pagination-button">3</div>
-        <div class="pagination-button">4</div>
-        <div class="pagination-button">5</div>
-        <div class="pagination-button">
-            <i class="fas fa-chevron-right"></i>
-        </div>
-    </div>
-
+   
     <script>
         // Simple animation for cards when they come into view
         document.addEventListener('DOMContentLoaded', function() {

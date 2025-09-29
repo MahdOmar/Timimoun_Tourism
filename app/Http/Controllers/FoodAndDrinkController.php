@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+use function Laravel\Prompts\error;
+
 class FoodAndDrinkController extends Controller
 {
     /**
@@ -235,17 +237,20 @@ public function allFood(){
      if ($category === 'All') {
           
             if ($filter === 'Rating') {
+                              
+
             $query->leftJoin('reviews', function ($join) {
                 $join->on('food_and_drinks.id', '=', 'reviews.reviewable_id')
                     ->where('reviews.reviewable_type', FoodAndDrink::class);
             })
-            ->select('food_and_drinks.*', DB::raw('COALESCE(AVG(reviews.rating), 0 as avg_rating'))
+            ->select('food_and_drinks.*', DB::raw('COALESCE(AVG(reviews.rating), 0) as avg_rating'))
             ->groupBy('food_and_drinks.id')
             ->havingRaw('COALESCE(AVG(reviews.rating), 0) >= 0')
             ->orderByDesc('avg_rating')
             ->get();
+
+
             
-    error_log($query->get());
  
              
           } elseif ($filter === 'Price: High to Low') {

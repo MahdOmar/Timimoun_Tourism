@@ -244,7 +244,7 @@ public function removeGalleryImage($id, $imageId)
             ->orderByDesc('avg_rating')
             ->get();
             
-    error_log($query->get());
+            error_log($query->get());
  
              
           } elseif ($filter === 'Recommended') {

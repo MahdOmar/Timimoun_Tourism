@@ -9,12 +9,12 @@
                 <img src="{{ asset('storage/' . $travel->main_image) }}" 
                      alt="Wanderlust Travels" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80"></div>
-                <div class="absolute bottom-8 left-8 text-white">
+                <div class="absolute bottom-8 left-8 rtl:right-8 text-white">
                     <h1 class="text-4xl md:text-5xl font-bold mb-2">{{ $travel->getTranslation('name', app()->getLocale()) }}</h1>
                     <div class="flex items-center space-x-4">
                         <span class="flex items-center">
                             <i class="fas fa-star text-yellow-400 mr-1"></i>
-                            <span>{{round($travel->averageRating())  }} ({{ count($travel->reviews) }} reviews)</span>
+                            <span>{{round($travel->averageRating())  }} ({{ count($travel->reviews) }} {{ __('messages.review') }} )</span>
                         </span>
                         <span class="flex items-center">
                             <i class="fas fa-map-marker-alt text-accent mr-1"></i>
@@ -35,7 +35,7 @@
             <div class="w-full lg:w-8/12">
                 <!-- About Section -->
                 <section class="mb-8">
-                    <h2 class="text-3xl font-bold mb-4 text-dark">{{ __('messages.food.details.about') }}{{ $travel->getTranslation('name', app()->getLocale()) }}</h2>
+                    <h2 class="text-3xl font-bold mb-4 text-dark">{{ __('messages.travel.details.about') }} {{ $travel->getTranslation('name', app()->getLocale()) }}</h2>
                     <p class="text-lg mb-4 leading-relaxed">
                         {{ $travel->getTranslation('description', app()->getLocale()) }}
                     </p>
@@ -76,43 +76,43 @@
                 </section>
 
                 <!-- Services Section -->
-                {{-- <section class="mb-8">
-                    <h2 class="text-3xl font-bold mb-6 text-dark">Our Services</h2>
+                <section class="mb-8">
+                    <h2 class="text-3xl font-bold mb-6 text-dark">{{ __('messages.travel.details.services.title') }}</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-white p-6 rounded-xl shadow-md">
                             <div class="text-primary text-3xl mb-4">
                                 <i class="fas fa-plane"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Flight Bookings</h3>
-                            <p class="text-gray-700">We secure the best routes and prices with premium airlines worldwide.</p>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.travel.details.services.flight.title') }}</h3>
+                            <p class="text-gray-700">{{ __('messages.travel.details.services.flight.text') }}</p>
                         </div>
                         <div class="bg-white p-6 rounded-xl shadow-md">
                             <div class="text-primary text-3xl mb-4">
                                 <i class="fas fa-hotel"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Accommodation</h3>
-                            <p class="text-gray-700">From boutique hotels to luxury resorts, we have partnerships with the finest properties.</p>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.travel.details.services.accommodation.title') }}</h3>
+                            <p class="text-gray-700">{{ __('messages.travel.details.services.accommodation.text') }}</p>
                         </div>
                         <div class="bg-white p-6 rounded-xl shadow-md">
                             <div class="text-primary text-3xl mb-4">
                                 <i class="fas fa-route"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Custom Itineraries</h3>
-                            <p class="text-gray-700">Tailor-made travel plans designed around your interests and preferences.</p>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.travel.details.services.itineraries.title') }}</h3>
+                            <p class="text-gray-700">{{ __('messages.travel.details.services.itineraries.text') }}</p>
                         </div>
                         <div class="bg-white p-6 rounded-xl shadow-md">
                             <div class="text-primary text-3xl mb-4">
                                 <i class="fas fa-car"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-2">Transportation</h3>
-                            <p class="text-gray-700">Private transfers, travel cars, and chauffeur services for seamless travel.</p>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('messages.travel.details.services.transportation.title') }}</h3>
+                            <p class="text-gray-700">{{ __('messages.travel.details.services.transportation.text') }}</p>
                         </div>
                     </div>
-                </section> --}}
+                </section> 
 
                 <!-- Gallery Section -->
                 <section class="mb-8">
-                    <h2 class="text-3xl font-bold mb-6 text-dark">Travel {{ __('messages.travel.details.gallery') }}</h2>
+                    <h2 class="text-3xl font-bold mb-6 text-dark">{{ __('messages.travel.details.gallery') }}</h2>
                     <div class="gallery-grid">
                       @foreach ($travel->gallery as $item)
                            <div class="gallery-item rounded-xl overflow-hidden">

@@ -55,19 +55,19 @@
         {{ __('messages.DES_TIMIMOUN') }}
       </p>
       <div class="flex gap-8 mt-10 justify-center animate-right-left">
-        <button class="text-white h-12 bg-orange-700 w-44">
+      <a href="#about">  <button class="text-white h-12 bg-orange-700 w-44">
           {{ __('messages.BTN_READMORE') }}
-        </button>
-        <button class="text-white h-12 bg-blue-500 w-44">
+        </button></a>
+      <a href="#offre"> <button class="text-white h-12 bg-blue-500 w-44">
           {{ __('messages.BTN_SEEOFFERT') }}
-        </button>
+        </button></a> 
       </div>
     </div>
     
   </div>
 </div>
 
-  <section class="py-20 px-4 md:px-8">
+  <section class="py-20 px-4 md:px-8" id="about">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-heading font-bold text-accent mb-4"> {{ __('messages.Description_title') }}</h2>
@@ -504,8 +504,8 @@
                 <!-- Header -->
                 <div class="flex justify-between items-start mb-4">
                     <div>
-                        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wider">{{ $accommodation->min_price }} DA / person</div>
-                        <h2 class="text-xl font-bold text-gray-800 mt-1">{{ $accommodation->name  }}</h2>
+                        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wider">{{ $accommodation->min_price }}  {{ __('messages.DA') }} /  {{ __('messages.person') }}</div>
+                        <h2 class="text-xl font-bold text-gray-800 mt-1"> {{ $accommodation->getTranslation('name', app()->getLocale()) }}</h2>
                     </div>
                     <div class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">4.2/5</div>
                 </div>
@@ -524,13 +524,13 @@
                 
                 <!-- Hotel Description -->
                 <p class="text-gray-600 text-sm mb-5">
-                    {{ $accommodation->description }} 
+                    {{Str::limit ($accommodation->getTranslation('description', app()->getLocale()),35,'...') }} 
                 </p>
                 
                 <!-- Location -->
                 <div class="flex items-center text-sm text-gray-700 mb-6">
                     <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
-                    <span>{{ $accommodation->address }} </span>
+                    <span>{{ $accommodation->getTranslation('address', app()->getLocale()) }} </span>
                 </div>
                 
                 <!-- Footer -->
@@ -635,7 +635,7 @@
             </p>
             <a href="{{ route('tour.show', $tour->id) }}" 
                class="mt-4 inline-block px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 transition">
-              Explore
+              {{ __('messages.BTN_EXPLOREMORE') }}
             </a>
           </div>
         </div>
@@ -768,15 +768,15 @@
 <section class="py-16 bg-white">
   <div class="max-w-7xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold text-orange-600 mb-12">
-      Local Food & Drinks
+       {{ __('messages.food_title') }}
     </h2>
 
     <div class="grid gap-8 md:grid-cols-2">
       <!-- Food Card -->
       @foreach ($foodAndDrinks as $item)
-          <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
+          <div class="bg-white  rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition">
         <img src="{{ asset('storage/' . $item->main_image) }}" alt="Traditional Couscous" class="w-full h-60 object-cover">
-        <div class="p-6 text-left">
+        <div class="p-6 text-left rtl:text-right">
           <h3 class="text-xl font-semibold flex items-center gap-2">
             {{ $item->getTranslation('name', app()->getLocale()) }}
           </h3>
@@ -800,7 +800,7 @@
 <section class="py-16 bg-gray-100">
   <div class="max-w-7xl mx-auto px-6 text-center">
     <h2 class="text-4xl font-bold text-orange-600 mb-12">
-      Travel Agencies
+      {{ __('messages.travel_title') }}
     </h2>
 
     <div class="grid gap-8 md:grid-cols-3">
@@ -850,7 +850,7 @@
 
 
 <!-- Experiences -->
-<section class="py-16 bg-gray-50">
+<section class="py-16 bg-gray-50" id="offre" data-aos="fade-up">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">  {{ __('messages.experiance_title') }}</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

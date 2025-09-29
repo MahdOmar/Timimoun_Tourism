@@ -15,17 +15,17 @@
       <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-lg"></div>
       
       <!-- Event Title Overlay -->
-      <div class="absolute bottom-6 left-6 text-white">
+      <div class="absolute bottom-6 left-6 rtl:right-6 text-white">
         <h1 class="text-4xl font-extrabold drop-shadow-lg mb-2">
           {{ $event->getTranslation('name', app()->getLocale()) }}
         </h1>
-        <p class="text-lg opacity-90">{{ $event->location ?? 'Timimoun, Algeria' }}</p>
+        <p class="text-lg opacity-90">{{ __('messages.accommodation_details_Algeria') }}, {{ __('messages.accommodation_details_Timimoun') }}</p>
       </div>
 
       <!-- Date Box -->
-      <div class="absolute top-6 right-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg text-center">
+      <div class="absolute top-6 ltr:right-6 rtl:left-6 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg text-center">
         <div class="text-2xl font-bold">{{ \Carbon\Carbon::parse($event->start_date)->format('d') }}</div>
-        <div class="uppercase">{{ \Carbon\Carbon::parse($event->start_date)->format('M Y') }}</div>
+        <div class="uppercase">{{ \Carbon\Carbon::parse($event->start_date)->locale(app()->getLocale())->translatedFormat('M Y') }}</div>
       </div>
     </div>
 
@@ -48,7 +48,7 @@
         </div>
          <span class="flex items-center">
                                 <i class="fas fa-star text-yellow-400 mr-1"></i>
-                                <span>{{ round($event->averageRating()) }} ({{ count($event->reviews) }} reviews)</span>
+                                <span>{{ round($event->averageRating()) }} ({{ count($event->reviews) }} {{ __('messages.review') }})</span>
           </span>
         
         <p class="text-gray-600 leading-relaxed mb-6 mt-2">
@@ -91,9 +91,9 @@
       <div class="bg-white shadow-md rounded-lg p-6">
         <h3 class="text-xl font-bold text-gray-800 mb-4">{{ __('messages.events.details.event_info') }}</h3>
         <ul class="space-y-3 text-gray-700">
-          <li><strong>{{ __('messages.events.details.start_date') }}:</strong> {{ \Carbon\Carbon::parse($event->start_date)->format('l, d M Y H:i') }}</li>
-           <li><strong>{{ __('messages.events.details.end_date') }}:</strong> {{ \Carbon\Carbon::parse($event->end_date)->format('l, d M Y H:i') }}</li>
-          <li><strong>{{ __('messages.events.details.location') }}:</strong> {{ $event->getTranslation('address', app()->getLocale()).' Timimoun, Algeria' ?? 'Timimoun, Algeria' }}</li>
+          <li><strong>{{ __('messages.events.details.start_date') }}:</strong> {{ \Carbon\Carbon::parse($event->start_date)->locale(app()->getLocale())->translatedFormat('l, d M Y H:i') }}</li>
+           <li><strong>{{ __('messages.events.details.end_date') }}:</strong> {{ \Carbon\Carbon::parse($event->end_date)->locale(app()->getLocale())->translatedFormat('l, d M Y H:i') }}</li>
+          <li><strong>{{ __('messages.events.details.location') }}:</strong> {{ $event->getTranslation('address', app()->getLocale()). __('messages.accommodation_details_Algeria'). ','. __('messages.accommodation_details_Timimoun')  ??  __('messages.accommodation_details_Algeria') . ','.  __('messages.accommodation_details_Timimoun')  }}</li>
           <li><strong>{{ __('messages.events.details.category') }}:</strong> {{ $event->category ?? 'Festival' }}</li>
         </ul>
 
